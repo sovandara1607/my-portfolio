@@ -1,25 +1,49 @@
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ExternalLink, Github, Pin } from "lucide-react"
+import Link from "next/link"
 
 const projects = [
   {
     title: "Track Your Fitness",
-    description:
-      "Fitness tracking app focused on usability, performance, and clean UI. Built with modern technologies for a seamless user experience.",
+    description: "Fitness tracking app focused on usability, performance, and clean UI.",
     tech: ["TypeScript", "React Native", "Expo"],
     pinned: true,
     github: "#",
     demo: "#",
+    caseStudy: "/projects/fitness-app",
+    filename: "fitness-app.tsx",
+    code: [
+      { text: "const FitnessApp = () => {", color: "text-primary" },
+      { text: "  const features = [", color: "text-foreground" },
+      { text: '    "workout-tracking",', color: "text-muted-foreground" },
+      { text: '    "progress-analytics",', color: "text-muted-foreground" },
+      { text: '    "social-challenges"', color: "text-muted-foreground" },
+      { text: "  ];", color: "text-foreground" },
+      { text: "", color: "text-foreground" },
+      { text: "  return <App features={features} />;", color: "text-foreground" },
+      { text: "};", color: "text-primary" },
+    ],
   },
   {
     title: "ESP32 Web Server",
-    description:
-      "Web-based controller to manage ESP32 hardware outputs via WiFi. Emphasis on IoT, networking, and practical engineering.",
+    description: "Web-based controller to manage ESP32 hardware outputs via WiFi.",
     tech: ["C++", "ESP32", "Web Server"],
     pinned: false,
     github: "#",
     demo: "#",
+    caseStudy: "/projects/esp32-server",
+    filename: "esp32_server.cpp",
+    code: [
+      { text: "void setup() {", color: "text-primary" },
+      { text: "  WiFi.begin(ssid, pass);", color: "text-foreground" },
+      { text: "  server.on(\"/\", handleRoot);", color: "text-foreground" },
+      { text: "  server.on(\"/gpio\", handleGPIO);", color: "text-foreground" },
+      { text: "  server.begin();", color: "text-foreground" },
+      { text: "", color: "text-foreground" },
+      { text: "  // Ready for connections", color: "text-muted-foreground" },
+      { text: '  Serial.println("Server OK");', color: "text-foreground" },
+      { text: "}", color: "text-primary" },
+    ],
   },
 ]
 
@@ -36,55 +60,75 @@ export function ProjectsSection() {
           {projects.map((project, index) => (
             <div
               key={index}
-              className="group bg-card border border-border rounded-xl overflow-hidden glow-cyan-hover transition-all duration-300"
+              className="group relative"
             >
-              {/* Project Preview */}
-              <div className="h-48 bg-secondary/50 flex items-center justify-center border-b border-border">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto bg-primary/10 rounded-xl flex items-center justify-center mb-3">
-                    <span className="text-2xl text-primary">{"</>"}</span>
-                  </div>
-                  <p className="text-muted-foreground text-sm">Project Preview</p>
-                </div>
-              </div>
-
-              {/* Project Info */}
-              <div className="p-6 space-y-4">
-                <div className="flex items-start justify-between">
-                  <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
+              {/* Glow effect */}
+              <div className="absolute -inset-2 bg-primary/5 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 group-hover:bg-primary/10 transition-all duration-500" />
+              
+              <div className="relative bg-card border border-border rounded-xl overflow-hidden glow-cyan-hover transition-all duration-300">
+                {/* Terminal Header */}
+                <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border-b border-border">
+                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+                  <span className="ml-4 text-xs text-muted-foreground">{project.filename}</span>
                   {project.pinned && (
-                    <Badge variant="outline" className="border-primary text-primary">
-                      <Pin className="h-3 w-3 mr-1" />
-                      Pinned
-                    </Badge>
+                    <span className="ml-auto text-[10px] text-primary">● pinned</span>
                   )}
                 </div>
 
-                <p className="text-muted-foreground text-sm leading-relaxed">{project.description}</p>
-
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech, techIndex) => (
-                    <Badge key={techIndex} variant="secondary" className="bg-secondary text-secondary-foreground">
-                      {tech}
-                    </Badge>
+                {/* Code Content */}
+                <div className="p-4 font-mono text-sm glass-subtle">
+                  {project.code.map((line, lineIndex) => (
+                    <div key={lineIndex} className="leading-6">
+                      <span className="text-muted-foreground/40 mr-4 select-none text-xs">
+                        {String(lineIndex + 1).padStart(2, "0")}
+                      </span>
+                      <span className={line.color}>{line.text}</span>
+                    </div>
                   ))}
+                  <div className="mt-1">
+                    <span className="text-muted-foreground/40 mr-4 select-none text-xs">
+                      {String(project.code.length + 1).padStart(2, "0")}
+                    </span>
+                    <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor" />
+                  </div>
                 </div>
 
-                <div className="flex gap-3 pt-2">
-                  <Button
-                    size="sm"
-                    variant="outline"
-                    className="border-border text-foreground hover:bg-secondary bg-transparent"
-                  >
-                    <Github className="h-4 w-4 mr-2" />
-                    GitHub
-                  </Button>
-                  <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90">
-                    <ExternalLink className="h-4 w-4 mr-2" />
-                    Live Demo
-                  </Button>
+                {/* Project Info */}
+                <div className="p-4 space-y-4 border-t border-border/50">
+                  <div>
+                    <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mt-1">{project.description}</p>
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.tech.map((tech, techIndex) => (
+                      <span key={techIndex} className="text-xs text-muted-foreground bg-secondary/60 px-2 py-1 rounded">
+                        {tech}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="flex flex-wrap gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="border-border text-foreground hover:bg-secondary bg-transparent h-8 text-xs"
+                    >
+                      Code
+                    </Button>
+                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
+                      Demo
+                    </Button>
+                    <Link href={project.caseStudy}>
+                      <Button size="sm" variant="ghost" className="text-primary hover:text-primary hover:bg-primary/10 h-8 text-xs">
+                        Case Study →
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>

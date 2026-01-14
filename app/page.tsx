@@ -6,18 +6,36 @@ import { MindsetSection } from "@/components/mindset-section"
 import { AchievementsSection } from "@/components/achievements-section"
 import { ContactSection } from "@/components/contact-section"
 import { Navigation } from "@/components/navigation"
+import { AnimatedTerminal } from "@/components/animated-terminal"
+import { GitHubStatsSection } from "@/components/github-stats-section"
+import { FloorTilesBackground } from "@/components/floor-tiles-background"
+import { ResumeCard } from "@/components/resume-download"
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      <Navigation />
-      <HeroSection />
-      <AboutSection />
-      <TechStackSection />
-      <ProjectsSection />
-      <MindsetSection />
-      <AchievementsSection />
-      <ContactSection />
+    <main className="min-h-screen bg-background relative">
+      <FloorTilesBackground />
+      <div className="relative z-10">
+        <Navigation />
+        <HeroSection />
+        <AboutSection />
+        <AnimatedTerminal />
+        <TechStackSection />
+        <ProjectsSection />
+        <GitHubStatsSection />
+        <MindsetSection />
+        <AchievementsSection />
+        <section className="py-16 px-6">
+          <div className="max-w-2xl mx-auto">
+            <div className="mb-8 text-center">
+              <p className="text-primary text-sm tracking-wider mb-2">{"// Resume"}</p>
+              <h2 className="text-3xl font-bold text-foreground">Download My CV</h2>
+            </div>
+            <ResumeCard />
+          </div>
+        </section>
+        <ContactSection />
+      </div>
     </main>
   )
 }

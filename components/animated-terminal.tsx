@@ -94,33 +94,30 @@ export function AnimatedTerminal() {
   }
 
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-4">
       <div className="max-w-4xl mx-auto">
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <p className="text-primary text-sm tracking-wider mb-2">{"// Interactive Terminal"}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Live Development Preview</h2>
         </div>
 
         <div className="relative group">
           {/* Glow effect */}
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 via-primary/10 to-primary/20 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-primary/5 to-primary/10 rounded-2xl blur-xl opacity-50 group-hover:opacity-75 transition-opacity duration-500" />
           
           <div className="relative bg-card border border-border rounded-xl overflow-hidden glow-cyan">
             {/* Terminal Header */}
-            <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border">
-              <div className="w-3 h-3 rounded-full bg-red-500/80 glow-dot-red" />
-              <div className="w-3 h-3 rounded-full bg-yellow-500/80 glow-dot-yellow" />
-              <div className="w-3 h-3 rounded-full bg-green-500/80 glow-dot-green" />
+            <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border-b border-border">
+              <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+              <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
               <span className="ml-4 text-xs text-muted-foreground">sovandara@portfolio ~ zsh</span>
-              <div className="ml-auto flex items-center gap-2">
-                <span className="text-xs text-muted-foreground/50">bash</span>
-              </div>
             </div>
 
             {/* Terminal Content */}
             <div
               ref={containerRef}
-              className="p-6 font-mono text-sm h-80 overflow-y-auto scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border"
+              className="p-4 font-mono text-sm h-72 overflow-y-auto glass-subtle"
             >
               {visibleLines.map((line, index) => (
                 <div
@@ -145,7 +142,7 @@ export function AnimatedTerminal() {
                   <span className="text-green-400">➜</span>{" "}
                   <span className="text-primary">~</span>{" "}
                   <span>{currentTyping}</span>
-                  <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-0.5" />
+                  <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor ml-0.5" />
                 </div>
               )}
               
@@ -154,7 +151,7 @@ export function AnimatedTerminal() {
                 <div className="mb-1 text-foreground">
                   <span className="text-green-400">➜</span>{" "}
                   <span className="text-primary">~</span>{" "}
-                  <span className="inline-block w-2 h-4 bg-primary animate-pulse ml-1" />
+                  <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor ml-1" />
                 </div>
               )}
             </div>

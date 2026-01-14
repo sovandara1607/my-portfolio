@@ -33,35 +33,35 @@ export function CodePreview() {
   }, [])
 
   return (
-    <div className="relative">
-      <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-xl" />
+    <div className="relative group">
+      <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-xl group-hover:bg-primary/10 transition-colors duration-500" />
       <div className="relative bg-card border border-border rounded-xl overflow-hidden glow-cyan">
         {/* Terminal Header */}
-        <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border">
-          <div className="w-3 h-3 rounded-full bg-red-500/80" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-          <div className="w-3 h-3 rounded-full bg-green-500/80" />
+        <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border-b border-border">
+          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
+          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
           <span className="ml-4 text-xs text-muted-foreground">developer.ts</span>
         </div>
 
         {/* Code Content */}
-        <div className="p-6 font-mono text-sm">
+        <div className="p-4 font-mono text-sm glass-subtle">
           {codeLines.map((line, index) => (
             <div
               key={index}
-              className={`transition-all duration-300 ${
+              className={`transition-all duration-300 leading-6 ${
                 index < visibleLines ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-4"
               }`}
             >
-              <span className="text-muted-foreground mr-4 select-none">{String(index + 1).padStart(2, "0")}</span>
+              <span className="text-muted-foreground/40 mr-4 select-none text-xs">{String(index + 1).padStart(2, "0")}</span>
               <span className={line.color}>{line.text}</span>
             </div>
           ))}
           <div className="mt-2">
-            <span className="text-muted-foreground mr-4 select-none">
+            <span className="text-muted-foreground/40 mr-4 select-none text-xs">
               {String(codeLines.length + 1).padStart(2, "0")}
             </span>
-            <span className="inline-block w-2 h-4 bg-primary animate-pulse" />
+            <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor" />
           </div>
         </div>
       </div>

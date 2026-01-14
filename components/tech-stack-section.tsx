@@ -1,23 +1,44 @@
+"use client"
+
 const techCategories = [
   {
     title: "Languages",
-    items: ["C++", "Python", "PHP", "JavaScript", "TypeScript", "Dart"],
+    items: [
+      { name: "C++", proficiency: 75 },
+      { name: "Python", proficiency: 85 },
+      { name: "PHP", proficiency: 60 },
+      { name: "JavaScript", proficiency: 90 },
+      { name: "TypeScript", proficiency: 88 },
+      { name: "Dart", proficiency: 70 },
+    ],
   },
   {
     title: "Frameworks & Tools",
-    items: ["Expo", "Flutter", "Docker", "Git", "MySQL", "PostgreSQL"],
+    items: [
+      { name: "Expo", proficiency: 85 },
+      { name: "Flutter", proficiency: 75 },
+      { name: "Docker", proficiency: 65 },
+      { name: "Git", proficiency: 90 },
+      { name: "MySQL", proficiency: 80 },
+      { name: "PostgreSQL", proficiency: 75 },
+    ],
   },
   {
     title: "Other",
-    items: ["Convex", "ESP32", "REST APIs", "DigitalOcean"],
+    items: [
+      { name: "Convex", proficiency: 70 },
+      { name: "ESP32", proficiency: 80 },
+      { name: "REST APIs", proficiency: 90 },
+      { name: "DigitalOcean", proficiency: 65 },
+    ],
   },
 ]
 
 export function TechStackSection() {
   return (
-    <section id="tech" className="py-24 px-6 bg-secondary/20">
+    <section id="tech" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-2">{"// Tech Stack"}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Technologies I Work With</h2>
         </div>
@@ -25,14 +46,27 @@ export function TechStackSection() {
         <div className="grid md:grid-cols-3 gap-8">
           {techCategories.map((category, categoryIndex) => (
             <div key={categoryIndex} className="space-y-4">
-              <h3 className="text-lg font-semibold text-primary">{category.title}</h3>
-              <div className="grid grid-cols-2 gap-3">
+              <h3 className="text-base font-semibold text-primary">{category.title}</h3>
+              <div className="grid grid-cols-2 gap-2">
                 {category.items.map((item, itemIndex) => (
                   <div
                     key={itemIndex}
-                    className="bg-card border border-border rounded-lg p-3 text-center text-sm text-foreground glow-cyan-hover transition-all duration-300 hover:border-primary/50"
+                    className="group relative bg-card border border-border rounded-lg p-3 text-center text-sm text-foreground glow-cyan-hover transition-all duration-300 hover:border-primary/50 overflow-hidden"
                   >
-                    {item}
+                    <span className="relative z-10 group-hover:text-primary transition-colors">{item.name}</span>
+                    
+                    {/* Progress bar on hover */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-secondary/50">
+                      <div 
+                        className="h-full bg-primary/60 transition-all duration-500 ease-out origin-left scale-x-0 group-hover:scale-x-100"
+                        style={{ width: `${item.proficiency}%` }}
+                      />
+                    </div>
+                    
+                    {/* Proficiency percentage tooltip */}
+                    <span className="absolute top-1 right-1 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      {item.proficiency}%
+                    </span>
                   </div>
                 ))}
               </div>

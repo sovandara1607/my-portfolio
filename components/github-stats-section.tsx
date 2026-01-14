@@ -16,24 +16,24 @@ const achievements = [
     description: "Opened pull requests that have been merged",
     tier: "gold",
     icon: "🦈",
-    count: 16,
+    count: 1,
   },
-  {
-    id: "arctic-code-vault",
-    title: "Arctic Code Vault",
-    description: "Contributed code to the 2020 GitHub Archive Program",
-    tier: "default",
-    icon: "❄️",
-    count: null,
-  },
-  {
-    id: "quickdraw",
-    title: "Quickdraw",
-    description: "Gitty up! You closed an issue or pull request within 5 minutes of opening",
-    tier: "default",
-    icon: "⚡",
-    count: null,
-  },
+//   {
+//     id: "arctic-code-vault",
+//     title: "Arctic Code Vault",
+//     description: "Contributed code to the 2020 GitHub Archive Program",
+//     tier: "default",
+//     icon: "❄️",
+//     count: null,
+//   },
+//   {
+//     id: "quickdraw",
+//     title: "Quickdraw",
+//     description: "Gitty up! You closed an issue or pull request within 5 minutes of opening",
+//     tier: "default",
+//     icon: "⚡",
+//     count: null,
+//   },
   {
     id: "yolo",
     title: "YOLO",
@@ -42,22 +42,22 @@ const achievements = [
     icon: "🚀",
     count: null,
   },
-  {
-    id: "starstruck",
-    title: "Starstruck",
-    description: "Created a repository that has many stars",
-    tier: "bronze",
-    icon: "⭐",
-    count: 16,
-  },
-  {
-    id: "pair-extraordinaire",
-    title: "Pair Extraordinaire",
-    description: "Coauthored commits on a merged pull request",
-    tier: "bronze",
-    icon: "👥",
-    count: 2,
-  },
+//   {
+//     id: "starstruck",
+//     title: "Starstruck",
+//     description: "Created a repository that has many stars",
+//     tier: "bronze",
+//     icon: "⭐",
+//     count: 16,
+//   },
+//   {
+//     id: "pair-extraordinaire",
+//     title: "Pair Extraordinaire",
+//     description: "Coauthored commits on a merged pull request",
+//     tier: "bronze",
+//     icon: "👥",
+//     count: 2,
+//   },
 ]
 
 const getTierStyles = (tier: string) => {
@@ -73,6 +73,92 @@ const getTierStyles = (tier: string) => {
   }
 }
 
+// Generate contribution data based on real GitHub activity pattern
+// 0 = no contributions, 1-4 = increasing intensity
+function generateContributionData(): number[][] {
+  const weeks: number[][] = []
+  
+  // 52 weeks of data (Jan 2025 - Jan 2026)
+  for (let week = 0; week < 52; week++) {
+    const days: number[] = []
+    
+    for (let day = 0; day < 7; day++) {
+      let level = 0
+      
+      // Jan-Apr: Very sparse (weeks 0-17)
+      if (week < 18) {
+        level = 0
+      }
+      // May: One contribution around week 18-19
+      else if (week >= 18 && week <= 20) {
+        if (week === 19 && day === 5) level = 2
+        else level = 0
+      }
+      // June: A few contributions (weeks 22-25)
+      else if (week >= 22 && week <= 25) {
+        if (week === 24 && day === 1) level = 2
+        else if (week === 25 && (day === 1 || day === 5)) level = 1
+        else level = 0
+      }
+      // July: More activity (weeks 26-30)
+      else if (week >= 26 && week <= 30) {
+        if (week === 27 && day === 1) level = 2
+        else if (week === 28 && day === 1) level = 3
+        else if (week === 29 && (day === 1 || day === 5)) level = 1
+        else if (week === 30 && day === 5) level = 2
+        else level = 0
+      }
+      // Aug: Activity continues (weeks 31-35)
+      else if (week >= 31 && week <= 35) {
+        if (week === 32 && day === 1) level = 2
+        else if (week === 33 && day === 5) level = 1
+        else if (week === 34 && day === 1) level = 2
+        else level = 0
+      }
+      // Sep-Oct: Sparse (weeks 36-43)
+      else if (week >= 36 && week <= 43) {
+        level = 0
+      }
+      // Nov: Activity picks up (weeks 44-47)
+      else if (week >= 44 && week <= 47) {
+        if (week === 45 && day === 5) level = 1
+        else if (week === 46 && (day === 1 || day === 3)) level = 2
+        else if (week === 47 && day === 5) level = 1
+        else level = 0
+      }
+      // Dec: High activity (weeks 48-51)
+      else if (week >= 48 && week <= 51) {
+        if (week === 48) {
+          if (day === 1) level = 3
+          else if (day === 3) level = 2
+          else if (day === 5) level = 1
+          else level = 0
+        } else if (week === 49) {
+          if (day === 1) level = 4
+          else if (day === 3) level = 3
+          else if (day === 5) level = 2
+          else level = 0
+        } else if (week === 50) {
+          if (day === 1) level = 3
+          else if (day === 3) level = 2
+          else if (day === 5) level = 3
+          else level = 0
+        } else if (week === 51) {
+          if (day === 1) level = 4
+          else if (day === 3) level = 3
+          else level = 0
+        }
+      }
+      
+      days.push(level)
+    }
+    
+    weeks.push(days)
+  }
+  
+  return weeks
+}
+
 export function GitHubStatsSection() {
   const [stats, setStats] = useState<GitHubStats>({
     publicRepos: 0,
@@ -85,10 +171,10 @@ export function GitHubStatsSection() {
   useEffect(() => {
     // Animate stats counting up
     const targetStats: GitHubStats = {
-      publicRepos: 24,
-      followers: 128,
-      following: 56,
-      contributions: 847,
+      publicRepos: 25,
+      followers: 2,
+      following: 10,
+      contributions: 146,
     }
 
     setIsVisible(true)
@@ -120,32 +206,30 @@ export function GitHubStatsSection() {
   }, [])
 
   return (
-    <section id="github" className="py-24 px-6">
+    <section id="github" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12 text-center">
+        <div className="mb-8 text-center">
           <p className="text-primary text-sm tracking-wider mb-2">{"// GitHub Profile"}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Stats & Achievements</h2>
         </div>
 
         {/* Stats Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
           {[
-            { label: "Repositories", value: stats.publicRepos, icon: "📦" },
-            { label: "Followers", value: stats.followers, icon: "👥" },
-            { label: "Following", value: stats.following, icon: "➡️" },
-            { label: "Contributions", value: stats.contributions, icon: "🔥" },
+            { label: "Repositories", value: stats.publicRepos },
+            { label: "Followers", value: stats.followers },
+            { label: "Following", value: stats.following },
+            { label: "Contributions", value: stats.contributions },
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className={`relative group bg-card border border-border rounded-xl p-6 text-center glow-cyan-hover transition-all duration-500 ${
+              className={`relative group bg-card border border-border rounded-xl p-4 text-center glow-cyan-hover transition-all duration-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent rounded-xl opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="relative">
-                <span className="text-2xl mb-2 block">{stat.icon}</span>
-                <div className="text-3xl font-bold text-primary mb-1 tabular-nums">
+              <div className="glass-subtle rounded-lg p-2 -m-2">
+                <div className="text-2xl font-bold text-primary mb-1 tabular-nums">
                   {stat.value.toLocaleString()}
                 </div>
                 <div className="text-sm text-muted-foreground">{stat.label}</div>
@@ -154,39 +238,45 @@ export function GitHubStatsSection() {
           ))}
         </div>
 
-        {/* Contribution Graph Placeholder */}
-        <div className="mb-12 relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary/10 via-transparent to-primary/10 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="relative bg-card border border-border rounded-xl p-6 overflow-hidden">
-            <h3 className="text-lg font-semibold text-foreground mb-4">Contribution Activity</h3>
-            <div className="flex gap-1 flex-wrap">
-              {Array.from({ length: 52 * 7 }).map((_, i) => {
-                const intensity = Math.random()
-                let bgClass = "bg-secondary"
-                if (intensity > 0.8) bgClass = "bg-primary"
-                else if (intensity > 0.6) bgClass = "bg-primary/70"
-                else if (intensity > 0.4) bgClass = "bg-primary/40"
-                else if (intensity > 0.2) bgClass = "bg-primary/20"
-                
-                return (
-                  <div
-                    key={i}
-                    className={`w-2.5 h-2.5 rounded-sm ${bgClass} transition-all duration-300 hover:scale-150 hover:z-10`}
-                    style={{
-                      animationDelay: `${i * 2}ms`,
-                    }}
-                  />
-                )
-              })}
+        {/* Contribution Graph */}
+        <div className="mb-8 relative group">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative bg-card border border-border rounded-xl p-4 overflow-hidden">
+            <div className="flex items-center justify-between mb-4">
+              <h3 className="text-base font-semibold text-foreground">146 contributions in the last year</h3>
+            </div>
+            <div className="overflow-x-auto">
+              <div className="flex gap-[3px] min-w-max">
+                {/* Real contribution data - 52 weeks x 7 days */}
+                {generateContributionData().map((week, weekIndex) => (
+                  <div key={weekIndex} className="flex flex-col gap-[3px]">
+                    {week.map((level, dayIndex) => {
+                      const bgClass = 
+                        level === 0 ? "bg-secondary/50" :
+                        level === 1 ? "bg-green-900/60" :
+                        level === 2 ? "bg-green-700/70" :
+                        level === 3 ? "bg-green-500/80" :
+                        "bg-green-400"
+                      
+                      return (
+                        <div
+                          key={dayIndex}
+                          className={`w-[10px] h-[10px] rounded-sm ${bgClass} transition-all duration-200 hover:scale-150 hover:z-10`}
+                        />
+                      )
+                    })}
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
               <span>Less</span>
               <div className="flex gap-1">
-                <div className="w-2.5 h-2.5 rounded-sm bg-secondary" />
-                <div className="w-2.5 h-2.5 rounded-sm bg-primary/20" />
-                <div className="w-2.5 h-2.5 rounded-sm bg-primary/40" />
-                <div className="w-2.5 h-2.5 rounded-sm bg-primary/70" />
-                <div className="w-2.5 h-2.5 rounded-sm bg-primary" />
+                <div className="w-[10px] h-[10px] rounded-sm bg-secondary/50" />
+                <div className="w-[10px] h-[10px] rounded-sm bg-green-900/60" />
+                <div className="w-[10px] h-[10px] rounded-sm bg-green-700/70" />
+                <div className="w-[10px] h-[10px] rounded-sm bg-green-500/80" />
+                <div className="w-[10px] h-[10px] rounded-sm bg-green-400" />
               </div>
               <span>More</span>
             </div>

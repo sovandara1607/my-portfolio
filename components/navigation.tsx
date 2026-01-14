@@ -1,7 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { Menu, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const navLinks = [
@@ -29,8 +28,8 @@ export function Navigation() {
         isScrolled ? "bg-background/80 backdrop-blur-md border-b border-border" : "bg-transparent"
       }`}
     >
-      <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-        <a href="#" className="text-primary font-bold text-lg">
+      <div className="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <a href="#" className="text-primary font-bold text-base">
           {"<SR />"}
         </a>
 
@@ -50,18 +49,18 @@ export function Navigation() {
         {/* Mobile Menu Button */}
         <Button
           variant="ghost"
-          size="icon"
+          size="sm"
           className="md:hidden text-foreground"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
-          {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+          {isMobileMenuOpen ? "×" : "☰"}
         </Button>
       </div>
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
         <div className="md:hidden bg-background/95 backdrop-blur-md border-b border-border">
-          <div className="px-6 py-4 flex flex-col gap-4">
+          <div className="px-4 py-4 flex flex-col gap-4">
             {navLinks.map((link) => (
               <a
                 key={link.href}

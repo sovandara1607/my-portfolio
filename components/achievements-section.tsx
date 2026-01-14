@@ -1,48 +1,65 @@
-import { GitPullRequest, Snowflake, Zap, Rocket } from "lucide-react"
+"use client"
 
 const achievements = [
   {
-    icon: GitPullRequest,
     title: "Pull Shark",
     description: "Active contributor with multiple merged PRs",
+    tier: "gold",
+    emoji: "🦈",
   },
   {
-    icon: Snowflake,
-    title: "Arctic Code Vault Contributor",
+    title: "Arctic Code Vault",
     description: "Code preserved in GitHub Arctic Vault",
+    tier: "default",
+    emoji: "❄️",
   },
   {
-    icon: Zap,
     title: "Quickdraw",
     description: "Fast response to issues and discussions",
+    tier: "default",
+    emoji: "⚡",
   },
   {
-    icon: Rocket,
     title: "YOLO",
     description: "Merged PRs without review (with confidence!)",
+    tier: "default",
+    emoji: "🚀",
   },
 ]
 
+const getTierGlow = (tier: string) => {
+  switch (tier) {
+    case "gold":
+      return "hover:shadow-[0_0_24px_rgba(234,179,8,0.2)]"
+    case "silver":
+      return "hover:shadow-[0_0_24px_rgba(156,163,175,0.2)]"
+    case "bronze":
+      return "hover:shadow-[0_0_24px_rgba(217,119,6,0.2)]"
+    default:
+      return "hover:shadow-[0_0_24px_rgba(56,189,248,0.2)]"
+  }
+}
+
 export function AchievementsSection() {
   return (
-    <section className="py-24 px-6">
+    <section className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
+        <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-2">{"// GitHub Achievements"}</p>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground">Recognition & Impact</h2>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className="bg-card border border-border rounded-xl p-6 text-center glow-cyan-hover transition-all duration-300 hover:border-primary/50"
+              className={`group bg-card border border-border rounded-xl p-6 text-center transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 ${getTierGlow(achievement.tier)}`}
             >
-              <div className="w-14 h-14 mx-auto bg-primary/10 rounded-xl flex items-center justify-center mb-4">
-                <achievement.icon className="h-7 w-7 text-primary" />
+              <div className="glass-subtle rounded-lg p-4 -m-2">
+                <span className="text-2xl mb-4 block">{achievement.emoji}</span>
+                <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{achievement.title}</h3>
+                <p className="text-sm text-muted-foreground">{achievement.description}</p>
               </div>
-              <h3 className="font-bold text-foreground mb-2">{achievement.title}</h3>
-              <p className="text-sm text-muted-foreground">{achievement.description}</p>
             </div>
           ))}
         </div>
