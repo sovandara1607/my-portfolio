@@ -86,6 +86,10 @@ const translations: Record<Language, Record<string, string>> = {
     "achievements.yolo": "YOLO",
     "achievements.yoloDesc": "Merged PRs without review (with confidence!)",
 
+    // Resume Section
+    "resume.label": "// Resume",
+    "resume.title": "Download My CV",
+
     // Contact Section
     "contact.label": "// Get In Touch",
     "contact.title": "Let's Connect",
@@ -170,6 +174,10 @@ const translations: Record<Language, Record<string, string>> = {
     "achievements.pullSharkDesc": "អ្នករួមចំណែកសកម្ម ជាមួយ PR ច្រើនដែលត្រូវបាន Merge",
     "achievements.yolo": "YOLO",
     "achievements.yoloDesc": "Merge PR ដោយគ្មានការត្រួតពិនិត្យ (ដោយទំនុកចិត្ត!)",
+
+    // Resume Section
+    "resume.label": "// ប្រវត្តិរូប",
+    "resume.title": "ទាញយក CV របស់ខ្ញុំ",
 
     // Contact Section
     "contact.label": "// ទំនាក់ទំនង",

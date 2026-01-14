@@ -5,7 +5,7 @@
 
 :root {
   /* Dark theme as default - dark grey background with cyan accents */
-  --background: oklch(0.20 0.01 260);
+  --background: oklch(0.2 0.01 260);
   --foreground: oklch(0.98 0 0);
   --card: oklch(0.24 0.012 260);
   --card-foreground: oklch(0.98 0 0);
@@ -14,8 +14,8 @@
   --primary: oklch(0.75 0.15 195);
   --primary-foreground: oklch(0.15 0 0);
   --secondary: oklch(0.28 0.012 260);
-  --secondary-foreground: oklch(0.90 0 0);
-  --muted: oklch(0.30 0.01 260);
+  --secondary-foreground: oklch(0.9 0 0);
+  --muted: oklch(0.3 0.01 260);
   --muted-foreground: oklch(0.65 0 0);
   --accent: oklch(0.75 0.15 195);
   --accent-foreground: oklch(0.15 0 0);
@@ -41,8 +41,11 @@
 }
 
 @theme inline {
-  --font-sans: "JetBrains Mono", "Geist Mono Fallback", monospace;
-  --font-mono: "JetBrains Mono", "Geist Mono Fallback", monospace;
+  --font-sans: var(--font-jetbrains), "JetBrains Mono", "Geist Mono Fallback",
+    monospace;
+  --font-mono: var(--font-jetbrains), "JetBrains Mono", "Geist Mono Fallback",
+    monospace;
+  --font-khmer: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -116,34 +119,35 @@
   * {
     @apply border-border outline-ring/50;
   }
-  
+
   /* Smooth theme transition on all elements */
   *,
   *::before,
   *::after {
-    transition-property: background-color, border-color, color, fill, stroke, box-shadow, opacity;
+    transition-property: background-color, border-color, color, fill, stroke,
+      box-shadow, opacity;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 400ms;
   }
-  
+
   /* Disable transition on user interaction for responsiveness */
   *:active,
   *:focus {
     transition-duration: 100ms;
   }
-  
+
   body {
     @apply bg-background text-foreground;
   }
-  
+
   /* Smooth card elevation during theme switch */
   .theme-transition-card {
     transition: background-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
-                border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
-                box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1),
-                transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
+      border-color 400ms cubic-bezier(0.4, 0, 0.2, 1),
+      box-shadow 400ms cubic-bezier(0.4, 0, 0.2, 1),
+      transform 300ms cubic-bezier(0.4, 0, 0.2, 1);
   }
-  
+
   /* Crossfade for icons and UI elements */
   .theme-crossfade {
     transition: opacity 300ms ease-in-out, transform 300ms ease-in-out;
@@ -152,15 +156,18 @@
 
 /* Custom glow effects */
 .glow-cyan {
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), 0 0 40px rgba(56, 189, 248, 0.1);
+  box-shadow: 0 0 20px rgba(56, 189, 248, 0.15),
+    0 0 40px rgba(56, 189, 248, 0.1);
 }
 
 .light .glow-cyan {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15), 0 0 40px rgba(59, 130, 246, 0.1);
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.15),
+    0 0 40px rgba(59, 130, 246, 0.1);
 }
 
 .glow-cyan-hover:hover {
-  box-shadow: 0 0 25px rgba(56, 189, 248, 0.25), 0 0 50px rgba(56, 189, 248, 0.15);
+  box-shadow: 0 0 25px rgba(56, 189, 248, 0.25),
+    0 0 50px rgba(56, 189, 248, 0.15);
   transform: translateY(-2px);
 }
 
@@ -191,16 +198,19 @@
 
 /* Subtle terminal cursor */
 @keyframes cursor-blink {
-  0%, 50% {
+  0%,
+  50% {
     opacity: 1;
   }
-  51%, 100% {
+  51%,
+  100% {
     opacity: 0;
   }
 }
 
 @keyframes cursor-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 4px rgba(56, 189, 248, 0.6);
   }
   50% {
@@ -209,7 +219,8 @@
 }
 
 .terminal-cursor {
-  animation: cursor-blink 1s step-end infinite, cursor-glow 2s ease-in-out infinite;
+  animation: cursor-blink 1s step-end infinite,
+    cursor-glow 2s ease-in-out infinite;
 }
 
 /* Glassmorphism for card interiors */
@@ -227,11 +238,13 @@
 
 /* Dark glow micro-interactions */
 @keyframes pulse-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
   }
   50% {
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.4), 0 0 60px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.4),
+      0 0 60px rgba(56, 189, 248, 0.2);
   }
 }
 
@@ -247,7 +260,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -265,7 +279,8 @@
 }
 
 @keyframes border-glow {
-  0%, 100% {
+  0%,
+  100% {
     border-color: rgba(56, 189, 248, 0.3);
   }
   50% {
@@ -307,16 +322,12 @@
 
 .glow-hover-lift:hover {
   transform: translateY(-4px);
-  box-shadow: 
-    0 10px 20px rgba(0, 0, 0, 0.3),
-    0 0 30px rgba(56, 189, 248, 0.2),
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3), 0 0 30px rgba(56, 189, 248, 0.2),
     0 0 60px rgba(56, 189, 248, 0.1);
 }
 
 .light .glow-hover-lift:hover {
-  box-shadow: 
-    0 10px 25px rgba(0, 0, 0, 0.1),
-    0 0 30px rgba(59, 130, 246, 0.15),
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 0 30px rgba(59, 130, 246, 0.15),
     0 0 60px rgba(59, 130, 246, 0.08);
 }
 
@@ -327,10 +338,15 @@
 }
 
 .btn-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -2px;
-  background: linear-gradient(45deg, transparent, rgba(56, 189, 248, 0.5), transparent);
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(56, 189, 248, 0.5),
+    transparent
+  );
   opacity: 0;
   transition: opacity 0.3s;
 }
@@ -345,7 +361,7 @@
 }
 
 .card-glow::before {
-  content: '';
+  content: "";
   position: absolute;
   inset: -1px;
   background: linear-gradient(
@@ -380,8 +396,10 @@
 }
 
 /* Focus glow for inputs */
-input:focus, textarea:focus {
-  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3), 0 0 20px rgba(56, 189, 248, 0.1);
+input:focus,
+textarea:focus {
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.3),
+    0 0 20px rgba(56, 189, 248, 0.1);
 }
 
 /* Link hover glow */
@@ -448,7 +466,8 @@ a:hover {
 }
 
 @keyframes theme-pulse {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   50% {
@@ -478,11 +497,13 @@ a:hover {
 
 /* Profile picture glow pulse */
 @keyframes profile-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
   }
   50% {
-    box-shadow: 0 0 40px rgba(56, 189, 248, 0.5), 0 0 60px rgba(56, 189, 248, 0.2);
+    box-shadow: 0 0 40px rgba(56, 189, 248, 0.5),
+      0 0 60px rgba(56, 189, 248, 0.2);
   }
 }
 
@@ -545,7 +566,8 @@ a:hover {
 }
 
 @keyframes screen-flash {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0;
   }
   5% {
@@ -614,7 +636,8 @@ a:hover {
 
 /* Active tab glow */
 @keyframes active-glow {
-  0%, 100% {
+  0%,
+  100% {
     box-shadow: 0 0 8px rgba(6, 182, 212, 0.3);
   }
   50% {
@@ -624,4 +647,19 @@ a:hover {
 
 .active-tab-glow {
   animation: active-glow 2s ease-in-out infinite;
+}
+
+/* Khmer language font */
+.lang-kh {
+  font-family: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+}
+
+.lang-kh h1,
+.lang-kh h2,
+.lang-kh h3,
+.lang-kh p,
+.lang-kh span,
+.lang-kh a,
+.lang-kh button {
+  font-family: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
 }
