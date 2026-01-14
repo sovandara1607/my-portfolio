@@ -45,7 +45,8 @@
     monospace;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", "Geist Mono Fallback",
     monospace;
-  --font-khmer: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  --font-khmer: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer",
+    sans-serif;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -177,6 +178,48 @@
 
 .text-glow {
   text-shadow: 0 0 20px rgba(56, 189, 248, 0.5);
+}
+
+/* Sound Wave Animation for Music Player */
+@keyframes soundWave {
+  0%,
+  100% {
+    height: 4px;
+  }
+  25% {
+    height: 16px;
+  }
+  50% {
+    height: 8px;
+  }
+  75% {
+    height: 20px;
+  }
+}
+
+.sound-wave {
+  animation: soundWave 0.8s ease-in-out infinite;
+}
+
+/* Smaller sound wave for navigation bar */
+@keyframes soundWaveMini {
+  0%,
+  100% {
+    height: 3px;
+  }
+  25% {
+    height: 12px;
+  }
+  50% {
+    height: 6px;
+  }
+  75% {
+    height: 16px;
+  }
+}
+
+.sound-wave-mini {
+  animation: soundWaveMini 0.7s ease-in-out infinite;
 }
 
 .light .text-glow {

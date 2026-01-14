@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button"
 import { Sun, Moon, Menu, X, Search, Languages } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
+import { useMusic } from "@/lib/music-context"
 
 // NavLink component with click animation
 function NavLink({ href, label, isActive, onClick }: { href: string; label: string; isActive: boolean; onClick: () => void }) {
@@ -117,6 +118,7 @@ export function Navigation() {
   const searchInputRef = useRef<HTMLInputElement>(null)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const { language, setLanguage, t } = useLanguage()
+  const { isPlaying } = useMusic()
 
   const navLinks = [
     { href: "#about", label: t("nav.about"), keywords: ["about", "me", "bio", "introduction", "who", "អំពី"] },
@@ -244,18 +246,35 @@ export function Navigation() {
           className="max-w-6xl mx-auto border bg-zinc-800/95 backdrop-blur-xl border-white/15 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
-            {/* Logo with Profile Picture */}
-            <a href="#" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-400/30 group-hover:border-cyan-400 transition-colors duration-300">
-                <Image
-                  src="/profile.PNG"
-                  alt="Sovandara Rith"
-                  fill
-                  className="object-cover"
-                  priority
-                />
-              </div>
-            </a>
+            {/* Logo with Profile Picture and Sound Wave */}
+            <div className="flex items-center gap-3">
+              <a href="#" className="flex items-center gap-3 group">
+                <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-400/30 group-hover:border-cyan-400 transition-colors duration-300">
+                  <Image
+                    src="/profile.PNG"
+                    alt="Sovandara Rith"
+                    fill
+                    className="object-cover"
+                    priority
+                  />
+                </div>
+              </a>
+              
+              {/* Sound Wave Visualizer in Nav */}
+              {isPlaying && (
+                <div className="hidden sm:flex items-end gap-[2px] h-5">
+                  {[1, 2, 3, 4].map((i) => (
+                    <div
+                      key={i}
+                      className="w-[3px] bg-green-500 rounded-full sound-wave-mini"
+                      style={{
+                        animationDelay: `${i * 0.12}s`,
+                      }}
+                    />
+                  ))}
+                </div>
+              )}
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">

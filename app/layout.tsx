@@ -4,6 +4,7 @@ import { JetBrains_Mono, Kantumruy_Pro } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
+import { MusicProvider } from "@/lib/music-context"
 import "./globals.css"
 
 const jetbrainsMono = JetBrains_Mono({ 
@@ -38,7 +39,9 @@ export default function RootLayout({
           disableTransitionOnChange={false}
         >
           <LanguageProvider>
-            {children}
+            <MusicProvider>
+              {children}
+            </MusicProvider>
           </LanguageProvider>
         </ThemeProvider>
         <Analytics />

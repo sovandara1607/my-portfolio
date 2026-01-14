@@ -13,6 +13,7 @@ import { GitHubStatsSection } from "@/components/github-stats-section"
 import { FloorTilesBackground } from "@/components/floor-tiles-background"
 import { ResumeCard } from "@/components/resume-download"
 import { LanguageWrapper } from "@/components/language-wrapper"
+import { MusicPlayer } from "@/components/music-player"
 import { useLanguage } from "@/lib/language-context"
 
 export default function Home() {
@@ -22,6 +23,7 @@ export default function Home() {
     <LanguageWrapper>
       <main className="min-h-screen bg-background relative">
         <FloorTilesBackground />
+        <MusicPlayer />
         <div className="relative z-10">
           <Navigation />
           <HeroSection />
