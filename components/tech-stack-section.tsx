@@ -58,13 +58,13 @@ export function TechStackSection() {
                     {/* Progress bar on hover */}
                     <div className="absolute bottom-0 left-0 right-0 h-1 bg-secondary/50">
                       <div 
-                        className="h-full bg-primary/60 transition-all duration-500 ease-out origin-left scale-x-0 group-hover:scale-x-100"
+                        className="h-full bg-primary/60 transition-all duration-500 ease-out origin-left md:scale-x-0 md:group-hover:scale-x-100"
                         style={{ width: `${item.proficiency}%` }}
                       />
                     </div>
                     
-                    {/* Proficiency percentage tooltip */}
-                    <span className="absolute top-1 right-1 text-[10px] text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    {/* Proficiency percentage - always visible on mobile, hover on desktop */}
+                    <span className="absolute top-1 right-1 text-[10px] text-primary opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
                       {item.proficiency}%
                     </span>
                   </div>
