@@ -1,46 +1,47 @@
 "use client"
 
-const techCategories = [
-  {
-    title: "Languages",
-    items: [
-      { name: "C++", proficiency: 75 },
-      { name: "Python", proficiency: 85 },
-      { name: "PHP", proficiency: 60 },
-      { name: "JavaScript", proficiency: 90 },
-      { name: "TypeScript", proficiency: 88 },
-      { name: "Dart", proficiency: 70 },
-    ],
-  },
-  {
-    title: "Frameworks & Tools",
-    items: [
-      { name: "Expo", proficiency: 85 },
-      { name: "Flutter", proficiency: 75 },
-      { name: "Docker", proficiency: 65 },
-      { name: "Git", proficiency: 90 },
-      { name: "MySQL", proficiency: 80 },
-      { name: "PostgreSQL", proficiency: 75 },
-    ],
-  },
-  {
-    title: "Other",
-    items: [
-      { name: "Convex", proficiency: 70 },
-      { name: "ESP32", proficiency: 80 },
-      { name: "REST APIs", proficiency: 90 },
-      { name: "DigitalOcean", proficiency: 65 },
-    ],
-  },
-]
+import { useLanguage } from "@/lib/language-context"
+
+const techItems = {
+  languages: [
+    { name: "C++", proficiency: 75 },
+    { name: "Python", proficiency: 85 },
+    { name: "PHP", proficiency: 60 },
+    { name: "JavaScript", proficiency: 90 },
+    { name: "TypeScript", proficiency: 88 },
+    { name: "Dart", proficiency: 70 },
+  ],
+  frameworks: [
+    { name: "Expo", proficiency: 85 },
+    { name: "Flutter", proficiency: 75 },
+    { name: "Docker", proficiency: 65 },
+    { name: "Git", proficiency: 90 },
+    { name: "MySQL", proficiency: 80 },
+    { name: "PostgreSQL", proficiency: 75 },
+  ],
+  other: [
+    { name: "Convex", proficiency: 70 },
+    { name: "ESP32", proficiency: 80 },
+    { name: "REST APIs", proficiency: 90 },
+    { name: "DigitalOcean", proficiency: 65 },
+  ],
+}
 
 export function TechStackSection() {
+  const { t } = useLanguage()
+
+  const techCategories = [
+    { title: t("tech.languages"), items: techItems.languages },
+    { title: t("tech.frameworks"), items: techItems.frameworks },
+    { title: t("tech.other"), items: techItems.other },
+  ]
+
   return (
     <section id="tech" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <p className="text-primary text-sm tracking-wider mb-2">{"// Tech Stack"}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">Technologies I Work With</h2>
+          <p className="text-primary text-sm tracking-wider mb-2">{t("tech.label")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("tech.title")}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

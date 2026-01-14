@@ -3,23 +3,9 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon, Menu, X, Search } from "lucide-react"
+import { Sun, Moon, Menu, X, Search, Languages } from "lucide-react"
 import Image from "next/image"
-
-const navLinks = [
-  { href: "#about", label: "About", keywords: ["about", "me", "bio", "introduction", "who"] },
-  { href: "#tech", label: "Tech Stack", keywords: ["tech", "stack", "skills", "technologies", "programming", "languages", "tools"] },
-  { href: "#projects", label: "Projects", keywords: ["projects", "work", "portfolio", "apps", "applications"] },
-  { href: "#contact", label: "Contact", keywords: ["contact", "email", "message", "reach", "connect", "hire"] },
-]
-
-const allSections = [
-  { href: "#", label: "Home", keywords: ["home", "top", "start", "beginning"] },
-  ...navLinks,
-  { href: "#github", label: "GitHub Stats", keywords: ["github", "stats", "contributions", "commits"] },
-  { href: "#achievements", label: "Achievements", keywords: ["achievements", "awards", "accomplishments"] },
-  { href: "#resume", label: "Resume", keywords: ["resume", "cv", "download", "pdf"] },
-]
+import { useLanguage } from "@/lib/language-context"
 
 // NavLink component with click animation
 function NavLink({ href, label, isActive, onClick }: { href: string; label: string; isActive: boolean; onClick: () => void }) {
@@ -130,6 +116,22 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState("")
   const searchInputRef = useRef<HTMLInputElement>(null)
   const { theme, setTheme, resolvedTheme } = useTheme()
+  const { language, setLanguage, t } = useLanguage()
+
+  const navLinks = [
+    { href: "#about", label: t("nav.about"), keywords: ["about", "me", "bio", "introduction", "who", "អំពី"] },
+    { href: "#tech", label: t("nav.tech"), keywords: ["tech", "stack", "skills", "technologies", "programming", "បច្ចេកវិទ្យា"] },
+    { href: "#projects", label: t("nav.projects"), keywords: ["projects", "work", "portfolio", "apps", "គម្រោង"] },
+    { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message", "ទំនាក់ទំនង"] },
+  ]
+
+  const allSections = [
+    { href: "#", label: language === "kh" ? "ទំព័រដើម" : "Home", keywords: ["home", "top", "ដើម"] },
+    ...navLinks,
+    { href: "#github", label: "GitHub Stats", keywords: ["github", "stats", "contributions"] },
+    { href: "#achievements", label: language === "kh" ? "សមិទ្ធិផល" : "Achievements", keywords: ["achievements", "awards"] },
+    { href: "#resume", label: "Resume", keywords: ["resume", "cv", "download"] },
+  ]
 
   const filteredSections = searchQuery.trim() 
     ? allSections.filter(section => 
@@ -137,6 +139,10 @@ export function Navigation() {
         section.keywords.some(k => k.includes(searchQuery.toLowerCase()))
       )
     : []
+
+  const toggleLanguage = () => {
+    setLanguage(language === "en" ? "kh" : "en")
+  }
 
   useEffect(() => {
     setMounted(true)
@@ -307,6 +313,19 @@ export function Navigation() {
                 </Button>
               )}
 
+              {/* Language Toggle */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleLanguage}
+                className="relative w-10 h-10 rounded-full hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+                aria-label="Toggle language"
+              >
+                <span className="text-xs font-bold">
+                  {language === "en" ? "KH" : "EN"}
+                </span>
+              </Button>
+
               {/* Mobile Menu Button */}
               <Button
                 variant="ghost"
@@ -372,7 +391,7 @@ export function Navigation() {
                     window.location.href = "#contact"
                   }}
                 >
-                  Get in Touch
+                  {t("nav.getInTouch")}
                 </Button>
               </div>
             </div>
@@ -408,7 +427,7 @@ export function Navigation() {
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search sections... (try 'projects', 'contact', 'skills')"
+                placeholder={t("nav.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none text-base"
@@ -436,7 +455,7 @@ export function Navigation() {
                   </div>
                 ) : (
                   <div className="px-4 py-8 text-center text-gray-500">
-                    No sections found for "{searchQuery}"
+                    {t("nav.noResults")} "{searchQuery}"
                   </div>
                 )}
               </div>

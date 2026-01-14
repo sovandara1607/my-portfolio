@@ -1,59 +1,64 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
-
-const projects = [
-  {
-    title: "Track Your Fitness",
-    description: "Fitness tracking app focused on usability, performance, and clean UI.",
-    tech: ["TypeScript", "React Native", "Expo"],
-    pinned: true,
-    github: "#",
-    demo: "#",
-    caseStudy: "/projects/fitness-app",
-    filename: "fitness-app.tsx",
-    code: [
-      { text: "const FitnessApp = () => {", color: "text-primary" },
-      { text: "  const features = [", color: "text-foreground" },
-      { text: '    "workout-tracking",', color: "text-muted-foreground" },
-      { text: '    "progress-analytics",', color: "text-muted-foreground" },
-      { text: '    "social-challenges"', color: "text-muted-foreground" },
-      { text: "  ];", color: "text-foreground" },
-      { text: "", color: "text-foreground" },
-      { text: "  return <App features={features} />;", color: "text-foreground" },
-      { text: "};", color: "text-primary" },
-    ],
-  },
-  {
-    title: "ESP32 Web Server",
-    description: "Web-based controller to manage ESP32 hardware outputs via WiFi.",
-    tech: ["C++", "ESP32", "Web Server"],
-    pinned: false,
-    github: "#",
-    demo: "#",
-    caseStudy: "/projects/esp32-server",
-    filename: "esp32_server.cpp",
-    code: [
-      { text: "void setup() {", color: "text-primary" },
-      { text: "  WiFi.begin(ssid, pass);", color: "text-foreground" },
-      { text: "  server.on(\"/\", handleRoot);", color: "text-foreground" },
-      { text: "  server.on(\"/gpio\", handleGPIO);", color: "text-foreground" },
-      { text: "  server.begin();", color: "text-foreground" },
-      { text: "", color: "text-foreground" },
-      { text: "  // Ready for connections", color: "text-muted-foreground" },
-      { text: '  Serial.println("Server OK");', color: "text-foreground" },
-      { text: "}", color: "text-primary" },
-    ],
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 export function ProjectsSection() {
+  const { t } = useLanguage()
+
+  const projects = [
+    {
+      title: t("projects.fitnessTitle"),
+      description: t("projects.fitnessDesc"),
+      tech: ["TypeScript", "React Native", "Expo"],
+      pinned: true,
+      github: "#",
+      demo: "#",
+      caseStudy: "/projects/fitness-app",
+      filename: "fitness-app.tsx",
+      code: [
+        { text: "const FitnessApp = () => {", color: "text-primary" },
+        { text: "  const features = [", color: "text-foreground" },
+        { text: '    "workout-tracking",', color: "text-muted-foreground" },
+        { text: '    "progress-analytics",', color: "text-muted-foreground" },
+        { text: '    "social-challenges"', color: "text-muted-foreground" },
+        { text: "  ];", color: "text-foreground" },
+        { text: "", color: "text-foreground" },
+        { text: "  return <App features={features} />;", color: "text-foreground" },
+        { text: "};", color: "text-primary" },
+      ],
+    },
+    {
+      title: t("projects.esp32Title"),
+      description: t("projects.esp32Desc"),
+      tech: ["C++", "ESP32", "Web Server"],
+      pinned: false,
+      github: "#",
+      demo: "#",
+      caseStudy: "/projects/esp32-server",
+      filename: "esp32_server.cpp",
+      code: [
+        { text: "void setup() {", color: "text-primary" },
+        { text: "  WiFi.begin(ssid, pass);", color: "text-foreground" },
+        { text: "  server.on(\"/\", handleRoot);", color: "text-foreground" },
+        { text: "  server.on(\"/gpio\", handleGPIO);", color: "text-foreground" },
+        { text: "  server.begin();", color: "text-foreground" },
+        { text: "", color: "text-foreground" },
+        { text: "  // Ready for connections", color: "text-muted-foreground" },
+        { text: '  Serial.println("Server OK");', color: "text-foreground" },
+        { text: "}", color: "text-primary" },
+      ],
+    },
+  ]
+
   return (
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <p className="text-primary text-sm tracking-wider mb-2">{"// Featured Projects"}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">What I've Built</h2>
+          <p className="text-primary text-sm tracking-wider mb-2">{t("projects.label")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("projects.title")}</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -73,7 +78,7 @@ export function ProjectsSection() {
                   <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                   <span className="ml-4 text-xs text-muted-foreground">{project.filename}</span>
                   {project.pinned && (
-                    <span className="ml-auto text-[10px] text-primary">● pinned</span>
+                    <span className="ml-auto text-[10px] text-primary">{t("projects.pinned")}</span>
                   )}
                 </div>
 
@@ -118,14 +123,14 @@ export function ProjectsSection() {
                       variant="outline"
                       className="border-border text-foreground hover:bg-secondary bg-transparent h-8 text-xs"
                     >
-                      Code
+                      {t("projects.code")}
                     </Button>
                     <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
-                      Demo
+                      {t("projects.demo")}
                     </Button>
                     <Link href={project.caseStudy}>
                       <Button size="sm" variant="ghost" className="text-primary hover:text-primary hover:bg-primary/10 h-8 text-xs">
-                        Case Study →
+                        {t("projects.caseStudy")}
                       </Button>
                     </Link>
                   </div>

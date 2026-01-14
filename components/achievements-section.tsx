@@ -1,31 +1,6 @@
 "use client"
 
-const achievements = [
-  {
-    title: "Pull Shark",
-    description: "Active contributor with multiple merged PRs",
-    tier: "gold",
-    emoji: "🦈",
-  },
-  {
-    title: "Arctic Code Vault",
-    description: "Code preserved in GitHub Arctic Vault",
-    tier: "default",
-    emoji: "❄️",
-  },
-  {
-    title: "Quickdraw",
-    description: "Fast response to issues and discussions",
-    tier: "default",
-    emoji: "⚡",
-  },
-  {
-    title: "YOLO",
-    description: "Merged PRs without review (with confidence!)",
-    tier: "default",
-    emoji: "🚀",
-  },
-]
+import { useLanguage } from "@/lib/language-context"
 
 const getTierGlow = (tier: string) => {
   switch (tier) {
@@ -41,12 +16,29 @@ const getTierGlow = (tier: string) => {
 }
 
 export function AchievementsSection() {
+  const { t } = useLanguage()
+
+  const achievements = [
+    {
+      title: t("achievements.pullShark"),
+      description: t("achievements.pullSharkDesc"),
+      tier: "gold",
+      emoji: "🦈",
+    },
+    {
+      title: t("achievements.yolo"),
+      description: t("achievements.yoloDesc"),
+      tier: "default",
+      emoji: "🚀",
+    },
+  ]
+
   return (
     <section className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <p className="text-primary text-sm tracking-wider mb-2">{"// GitHub Achievements"}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">Recognition & Impact</h2>
+          <p className="text-primary text-sm tracking-wider mb-2">{t("achievements.label")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("achievements.title")}</h2>
         </div>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
