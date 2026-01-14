@@ -90,7 +90,7 @@ export function Navigation() {
                   priority
                 />
               </div>
-              <span className="text-cyan-400 font-bold text-sm hidden sm:block">{"<SR />"}</span>
+              {/* <span className="text-cyan-400 font-bold text-sm hidden sm:block">{"<SR />"}</span> */}
             </a>
 
             {/* Desktop Navigation */}
