@@ -10,11 +10,6 @@ const jetbrainsMono = JetBrains_Mono({ subsets: ["latin"] })
 export const metadata: Metadata = {
   title: "Sovandara Rith | Portfolio",
   description: "Year 3 Computer Science Student · Web & Mobile Developer · Aspiring Software Engineer",
-  generator: "v0.app",
-  icons: {
-    icon: "/profile.PNG",
-    apple: "/profile.PNG",
-  },
 }
 
 export default function RootLayout({
