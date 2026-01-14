@@ -21,6 +21,105 @@ const allSections = [
   { href: "#resume", label: "Resume", keywords: ["resume", "cv", "download", "pdf"] },
 ]
 
+// NavLink component with click animation
+function NavLink({ href, label, isActive, onClick }: { href: string; label: string; isActive: boolean; onClick: () => void }) {
+  const [isPressed, setIsPressed] = useState(false)
+  const [ripples, setRipples] = useState<{ id: number; x: number; y: number }[]>([])
+  const linkRef = useRef<HTMLAnchorElement>(null)
+
+  const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
+    // Create ripple effect
+    if (linkRef.current) {
+      const rect = linkRef.current.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      const newRipple = { id: Date.now(), x, y }
+      setRipples(prev => [...prev, newRipple])
+      
+      // Remove ripple after animation
+      setTimeout(() => {
+        setRipples(prev => prev.filter(r => r.id !== newRipple.id))
+      }, 600)
+    }
+    
+    onClick()
+  }
+
+  return (
+    <a
+      ref={linkRef}
+      href={href}
+      onClick={handleClick}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+      className={`
+        relative px-4 py-2 rounded-full text-sm font-medium overflow-hidden
+        transition-all duration-300 ease-out
+        ${isActive 
+          ? "text-white bg-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.3)]" 
+          : "text-gray-300 hover:text-white hover:bg-white/10"
+        }
+        ${isPressed ? "scale-95" : "scale-100"}
+        active:scale-95
+      `}
+      style={{
+        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
+      }}
+    >
+      {/* Ripple effects */}
+      {ripples.map(ripple => (
+        <span
+          key={ripple.id}
+          className="absolute rounded-full bg-cyan-400/30 animate-ripple pointer-events-none"
+          style={{
+            left: ripple.x,
+            top: ripple.y,
+            transform: 'translate(-50%, -50%)',
+          }}
+        />
+      ))}
+      
+      {/* Active indicator dot */}
+      {isActive && (
+        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse" />
+      )}
+      
+      <span className="relative z-10">{label}</span>
+    </a>
+  )
+}
+
+// Mobile NavLink component
+function MobileNavLink({ href, label, isActive, onClick, delay }: { href: string; label: string; isActive: boolean; onClick: () => void; delay: number }) {
+  const [isPressed, setIsPressed] = useState(false)
+
+  return (
+    <a
+      href={href}
+      onClick={onClick}
+      onMouseDown={() => setIsPressed(true)}
+      onMouseUp={() => setIsPressed(false)}
+      onMouseLeave={() => setIsPressed(false)}
+      className={`
+        block px-4 py-3 rounded-xl text-base font-medium
+        transition-all duration-200 ease-out
+        ${isActive 
+          ? "text-cyan-400 bg-cyan-500/10" 
+          : "text-gray-300 hover:text-white hover:bg-white/10"
+        }
+        ${isPressed ? "scale-[0.98] bg-white/15" : "scale-100"}
+        active:scale-[0.98]
+      `}
+    >
+      <span className="flex items-center gap-3">
+        {isActive && <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />}
+        {label}
+      </span>
+    </a>
+  )
+}
+
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -28,6 +127,7 @@ export function Navigation() {
   const [isFlashing, setIsFlashing] = useState(false)
   const [isSearchOpen, setIsSearchOpen] = useState(false)
   const [searchQuery, setSearchQuery] = useState("")
+  const [activeSection, setActiveSection] = useState("")
   const searchInputRef = useRef<HTMLInputElement>(null)
   const { theme, setTheme, resolvedTheme } = useTheme()
 
@@ -42,6 +142,24 @@ export function Navigation() {
     setMounted(true)
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50)
+      
+      // Track active section based on scroll position
+      const sections = navLinks.map(link => link.href.replace('#', ''))
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section)
+        if (element) {
+          const rect = element.getBoundingClientRect()
+          if (rect.top <= 150) {
+            setActiveSection(`#${section}`)
+            break
+          }
+        }
+      }
+      
+      // If at top, no active section
+      if (window.scrollY < 100) {
+        setActiveSection("")
+      }
     }
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
@@ -117,7 +235,7 @@ export function Navigation() {
       
       <nav className="fixed top-4 left-4 right-4 z-50">
         <div
-          className="max-w-6xl mx-auto border bg-neutral-900/95 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
+          className="max-w-6xl mx-auto border bg-zinc-800/95 backdrop-blur-xl border-white/15 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture */}
@@ -136,13 +254,13 @@ export function Navigation() {
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-1">
               {navLinks.map((link) => (
-                <a
+                <NavLink
                   key={link.href}
                   href={link.href}
-                  className="px-4 py-2 text-gray-300 hover:text-white hover:bg-white/10 rounded-full transition-all duration-300 text-sm font-medium"
-                >
-                  {link.label}
-                </a>
+                  label={link.label}
+                  isActive={activeSection === link.href}
+                  onClick={() => setActiveSection(link.href)}
+                />
               ))}
             </div>
 
@@ -267,7 +385,7 @@ export function Navigation() {
       >
         {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-neutral-900/70 backdrop-blur-sm"
+          className="absolute inset-0 bg-zinc-800/70 backdrop-blur-sm"
           onClick={() => {
             setIsSearchOpen(false)
             setSearchQuery("")
@@ -277,7 +395,7 @@ export function Navigation() {
         {/* Search Container */}
         <div className="relative max-w-xl mx-auto mt-24 px-4">
           <div
-            className={`bg-neutral-900/98 border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${
+            className={`bg-zinc-800 border border-white/15 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${
               isSearchOpen ? "translate-y-0 scale-100" : "-translate-y-4 scale-95"
             }`}
           >
