@@ -1,6 +1,9 @@
 const interests = [
-  "Scalable Backend Systems",
-  "Product Thinking & UX",
+  "Basketball, Music, F1 & Art",
+  "Web & Mobile Development",
+  "Open Source Contribution",
+  "Cloud Computing & DevOps",
+  "AI & Machine Learning",
   "System Design",
 ]
 
@@ -18,7 +21,7 @@ export function AboutSection() {
             <div className="glass-subtle rounded-lg p-4 -m-4 mb-4">
               <p className="text-muted-foreground leading-relaxed">
                 Passionate about building real-world, user-focused applications. I have experience across full-stack web,
-                mobile apps, and IoT development.
+                mobile apps, and a little bit of IoT development.
               </p>
             </div>
             <p className="text-muted-foreground leading-relaxed mb-8">
@@ -27,7 +30,7 @@ export function AboutSection() {
             </p>
             <div className="pt-4 border-t border-border">
               <span className="text-sm text-primary font-medium">Career Goal</span>
-              <p className="mt-2 text-foreground">Software Engineer / Product Engineer</p>
+              <p className="mt-2 text-foreground">Software Engineer ~ Hopefully</p>
             </div>
           </div>
 
