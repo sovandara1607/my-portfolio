@@ -117,7 +117,7 @@ export function Navigation() {
       
       <nav className="fixed top-4 left-4 right-4 z-50">
         <div
-          className="max-w-6xl mx-auto border bg-black/90 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
+          className="max-w-6xl mx-auto border bg-neutral-900/95 backdrop-blur-xl border-white/10 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture */}
@@ -215,19 +215,21 @@ export function Navigation() {
 
           {/* Mobile Menu Dropdown - Inside the navbar */}
           <div
-            className="md:hidden grid"
+            className="md:hidden"
             style={{
+              display: 'grid',
               gridTemplateRows: isMobileMenuOpen ? '1fr' : '0fr',
-              transition: 'grid-template-rows 350ms cubic-bezier(0.4, 0, 0.2, 1)'
+              transition: 'grid-template-rows 450ms cubic-bezier(0.33, 1, 0.68, 1)'
             }}
           >
-            <div className="overflow-hidden">
+            <div style={{ overflow: 'hidden' }}>
               <div 
                 className="border-t border-white/10 px-4 py-4 space-y-1"
                 style={{
                   opacity: isMobileMenuOpen ? 1 : 0,
-                  transition: 'opacity 250ms ease-out',
-                  transitionDelay: isMobileMenuOpen ? '100ms' : '0ms'
+                  transform: isMobileMenuOpen ? 'translateY(0)' : 'translateY(-10px)',
+                  transition: 'opacity 400ms ease-out, transform 400ms ease-out',
+                  transitionDelay: isMobileMenuOpen ? '50ms' : '0ms'
                 }}
               >
                 {navLinks.map((link, index) => (
@@ -265,7 +267,7 @@ export function Navigation() {
       >
         {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+          className="absolute inset-0 bg-neutral-900/70 backdrop-blur-sm"
           onClick={() => {
             setIsSearchOpen(false)
             setSearchQuery("")
@@ -275,7 +277,7 @@ export function Navigation() {
         {/* Search Container */}
         <div className="relative max-w-xl mx-auto mt-24 px-4">
           <div
-            className={`bg-black/95 border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${
+            className={`bg-neutral-900/98 border border-white/10 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${
               isSearchOpen ? "translate-y-0 scale-100" : "-translate-y-4 scale-95"
             }`}
           >
