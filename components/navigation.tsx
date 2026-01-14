@@ -74,9 +74,9 @@ export function Navigation() {
       
       <nav className="fixed top-4 left-4 right-4 z-50">
         <div
-          className={`max-w-6xl mx-auto rounded-full border transition-all duration-500 ease-in-out bg-black/90 backdrop-blur-xl border-white/10 ${
+          className={`max-w-6xl mx-auto rounded-2xl border transition-all duration-500 ease-in-out bg-black/90 backdrop-blur-xl border-white/10 ${
             isScrolled ? "shadow-lg shadow-black/20" : ""
-          }`}
+          } ${isMobileMenuOpen ? "rounded-2xl" : "rounded-full"}`}
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture */}
@@ -161,76 +161,42 @@ export function Navigation() {
               </Button>
             </div>
           </div>
-        </div>
-      </nav>
 
-      {/* Mobile Menu Overlay */}
-      <div
-        className={`fixed inset-0 z-40 transition-all duration-500 ease-in-out ${
-          isMobileMenuOpen ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
-      >
-        {/* Backdrop */}
-        <div 
-          className="absolute inset-0 bg-black/80 backdrop-blur-xl"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-        
-        {/* Menu Content */}
-        <div
-          className={`absolute top-20 left-4 right-4 bg-black/95 backdrop-blur-xl rounded-2xl border border-white/10 shadow-2xl transition-all duration-500 ease-out ${
-            isMobileMenuOpen ? "translate-y-0 opacity-100" : "-translate-y-4 opacity-0"
-          }`}
-        >
-          {/* Mobile Logo */}
-          <div className="px-6 py-4 border-b border-white/10 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative w-12 h-12 rounded-full overflow-hidden border-2 border-cyan-400/30">
-                <Image
-                  src="/profile.PNG"
-                  alt="Sovandara Rith"
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div>
-                <p className="font-bold text-white">Sovandara Rith</p>
-                <p className="text-xs text-gray-400">Software Developer</p>
-              </div>
+          {/* Mobile Menu Dropdown - Inside the navbar */}
+          <div
+            className={`md:hidden overflow-hidden transition-all duration-400 ease-out ${
+              isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            }`}
+          >
+            <div className="border-t border-white/10 px-4 py-4 space-y-1">
+              {navLinks.map((link, index) => (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-xl transition-all duration-300 text-base font-medium ${
+                    isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-2 opacity-0"
+                  }`}
+                  style={{ transitionDelay: isMobileMenuOpen ? `${index * 50}ms` : "0ms" }}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {link.label}
+                </a>
+              ))}
+              
+              {/* CTA Button */}
+              <Button 
+                className="w-full mt-3 py-5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-all duration-300"
+                onClick={() => {
+                  setIsMobileMenuOpen(false)
+                  window.location.href = "#contact"
+                }}
+              >
+                Get in Touch
+              </Button>
             </div>
           </div>
-
-          {/* Navigation Links */}
-          <div className="px-6 py-6 space-y-2">
-            {navLinks.map((link, index) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={`block text-2xl font-semibold text-white hover:text-cyan-400 transition-all duration-300 py-3 ${
-                  isMobileMenuOpen ? "translate-x-0 opacity-100" : "-translate-x-4 opacity-0"
-                }`}
-                style={{ transitionDelay: isMobileMenuOpen ? `${index * 50 + 100}ms` : "0ms" }}
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                {link.label}
-              </a>
-            ))}
-          </div>
-
-          {/* CTA Button */}
-          <div className="px-6 pb-6">
-            <Button 
-              className="w-full py-6 text-lg rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-all duration-300"
-              onClick={() => {
-                setIsMobileMenuOpen(false)
-                window.location.href = "#contact"
-              }}
-            >
-              Get in Touch
-            </Button>
-          </div>
         </div>
-      </div>
+      </nav>
     </>
   )
 }
