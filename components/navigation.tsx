@@ -351,14 +351,17 @@ export function Navigation() {
                 }}
               >
                 {navLinks.map((link, index) => (
-                  <a
+                  <MobileNavLink
                     key={link.href}
                     href={link.href}
-                    className="block px-4 py-3 text-gray-300 hover:text-white hover:bg-white/10 rounded-xl text-base font-medium transition-colors duration-200"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    {link.label}
-                  </a>
+                    label={link.label}
+                    isActive={activeSection === link.href}
+                    onClick={() => {
+                      setActiveSection(link.href)
+                      setIsMobileMenuOpen(false)
+                    }}
+                    delay={index * 30}
+                  />
                 ))}
                 
                 {/* CTA Button */}
