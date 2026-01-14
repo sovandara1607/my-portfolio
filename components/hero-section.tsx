@@ -41,7 +41,12 @@ export function HeroSection() {
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
-            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-cyan-hover">
+            <Button 
+              className="bg-primary text-primary-foreground hover:bg-primary/90 glow-cyan-hover"
+              onClick={() => {
+                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
+              }}
+            >
               View Projects →
             </Button>
             <ResumeDownload />
