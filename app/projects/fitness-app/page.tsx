@@ -67,10 +67,12 @@ export default function FitnessAppCaseStudy() {
               <Github className="h-4 w-4 mr-2" />
               View Code
             </Button>
-            <Button size="sm" className="bg-primary text-primary-foreground">
-              <ExternalLink className="h-4 w-4 mr-2" />
-              Live Demo
-            </Button>
+            <a href="https://track-your-fitness-beta.vercel.app/" target="_blank" rel="noopener noreferrer">
+              <Button size="sm" className="bg-primary text-primary-foreground">
+                <ExternalLink className="h-4 w-4 mr-2" />
+                Live Demo
+              </Button>
+            </a>
           </div>
         </div>
       </nav>
@@ -118,11 +120,13 @@ export default function FitnessAppCaseStudy() {
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
               <div className="relative bg-card border border-border rounded-2xl p-8 glow-cyan">
-                <div className="aspect-[9/16] bg-secondary/50 rounded-xl flex items-center justify-center">
-                  <div className="text-center">
-                    <Smartphone className="h-16 w-16 text-primary mx-auto mb-4" />
-                    <p className="text-muted-foreground">App Preview</p>
-                  </div>
+                <div className="aspect-[9/16] bg-secondary/50 rounded-xl overflow-hidden">
+                  <iframe
+                    src="https://track-your-fitness-beta.vercel.app/"
+                    className="w-full h-full border-0"
+                    title="Track Your Fitness App Preview"
+                    loading="lazy"
+                  />
                 </div>
               </div>
             </div>

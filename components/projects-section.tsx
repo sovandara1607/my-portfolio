@@ -14,8 +14,8 @@ export function ProjectsSection() {
       description: t("projects.fitnessDesc"),
       tech: ["TypeScript", "React Native", "Expo"],
       pinned: true,
-      github: "#",
-      demo: "#",
+      github: "https://github.com/sovandara1607/Track-Your-Fitness",
+      demo: "https://track-your-fitness-beta.vercel.app/",
       caseStudy: "/projects/fitness-app",
       filename: "fitness-app.tsx",
       code: [
@@ -125,9 +125,11 @@ export function ProjectsSection() {
                     >
                       {t("projects.code")}
                     </Button>
-                    <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
-                      {t("projects.demo")}
-                    </Button>
+                    <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                      <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
+                        {t("projects.demo")}
+                      </Button>
+                    </a>
                     <Link href={project.caseStudy}>
                       <Button size="sm" variant="ghost" className="text-primary hover:text-primary hover:bg-primary/10 h-8 text-xs">
                         {t("projects.caseStudy")}
