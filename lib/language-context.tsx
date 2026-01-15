@@ -114,7 +114,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero Section
     "hero.welcome": "// សូមស្វាគមន៍មកកាន់ Portfolio របស់ខ្ញុំ",
-    "hero.greeting": "សួស្ដី ខ្ញុំគឺ",
+    "hero.greeting": "សួស្ដី ខ្ញុំឈ្មោះ",
     "hero.name": "រិទ្ធ សុវណ្ណតារា",
     "hero.subtitle": "ជានិស្សិតវិទ្យាសាស្ត្រកុំព្យូទ័រឆ្នាំទី៣ · អ្នកអភិវឌ្ឍន៍ Web & Mobile",
     "hero.aspiring": "អ្នកវិស្វករ Software & Product ដែលកំពុងរីកចម្រើន",
@@ -156,7 +156,7 @@ const translations: Record<Language, Record<string, string>> = {
     "projects.esp32Desc": "ឧបករណ៍គ្រប់គ្រង Hardware ESP32 តាមរយៈ WiFi។",
 
     // Mindset Section
-    "mindset.label": "// ផ្នត់គំនិតរបស់ Engineering",
+    "mindset.label": "// ផ្នត់គំនិត",
     "mindset.title": "របៀបដែលខ្ញុំចូលទៅកាន់ជំនាញ Software Engineering ក្នុងនាមជា CS Student",
     "mindset.p1": "រៀនរចនា System ដែលអាចថែរក្សា និង Scalable បាន",
     "mindset.p2": "ផ្តោតលើគុណភាព Code និង Best Practices",
@@ -187,7 +187,7 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.github": "GitHub",
     "contact.location": "ទីតាំង",
     "contact.locationValue": "រាជធានីភ្នំពេញ កម្ពុជា",
-    "contact.quote": '"រីករាយបើកទទួលសម្រាប់ការ Internships ការសហការ និងការបង្កើតផលិតផលមានអត្ថន័យ។"',
+    "contact.quote": '"រីករាយបើកទទួលសម្រាប់ ការសហការ និងការបង្កើតផលិតផលមានអត្ថន័យ។"',
     "contact.copyright": "© ២០២៦ រិទ្ធ សុវណ្ណតារា",
   },
 }
