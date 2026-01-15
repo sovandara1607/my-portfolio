@@ -119,14 +119,94 @@ export default function FitnessAppCaseStudy() {
             {/* App Preview */}
             <div className="relative">
               <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
-              <div className="relative bg-card border border-border rounded-2xl p-8 glow-cyan">
-                <div className="aspect-[9/16] bg-secondary/50 rounded-xl overflow-hidden">
-                  <iframe
-                    src="https://track-your-fitness-beta.vercel.app/"
-                    className="w-full h-full border-0"
-                    title="Track Your Fitness App Preview"
-                    loading="lazy"
-                  />
+              <div className="relative">
+                {/* Desktop: iPhone frame with embedded iframe */}
+                <div className="hidden md:block">
+                  <div className="relative max-w-[400px] mx-auto">
+                    {/* Outer titanium frame */}
+                    <div className="relative rounded-[3.5rem] p-[14px] shadow-2xl bg-gradient-to-b from-[#4a4a4a] via-[#2d2d2d] to-[#1a1a1a] border-2 border-[#5a5a5a]">
+                      {/* Side buttons - Silent switch */}
+                      <div className="absolute -left-[5px] top-[100px] w-[5px] h-8 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                      {/* Volume up */}
+                      <div className="absolute -left-[5px] top-[145px] w-[5px] h-12 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                      {/* Volume down */}
+                      <div className="absolute -left-[5px] top-[210px] w-[5px] h-12 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                      {/* Power button */}
+                      <div className="absolute -right-[5px] top-[165px] w-[5px] h-16 bg-gradient-to-l from-[#3a3a3a] to-[#5a5a5a] rounded-r-sm shadow-md" />
+                      
+                      {/* Inner screen area */}
+                      <div className="relative bg-black rounded-[2.8rem] overflow-hidden ring-1 ring-black/50">
+                        {/* Dynamic Island */}
+                        <div className="absolute top-5 left-1/2 -translate-x-1/2 w-[120px] h-[36px] bg-black rounded-full z-20 shadow-inner" />
+                        
+                        {/* Screen content - iframe */}
+                        <div className="aspect-[9/19.5] bg-secondary/50 overflow-hidden">
+                          <iframe
+                            src="https://track-your-fitness-beta.vercel.app/"
+                            className="w-full h-full border-0"
+                            title="Track Your Fitness App Preview"
+                            loading="lazy"
+                          />
+                        </div>
+                        
+                        {/* Home indicator */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 w-[140px] h-[5px] bg-white/40 rounded-full z-20" />
+                      </div>
+                    </div>
+                    
+                    {/* Reflection highlight on frame */}
+                    <div className="absolute inset-0 rounded-[3.5rem] bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+                  </div>
+                </div>
+                
+                {/* Mobile: Interactive preview card with iPhone frame */}
+                <div className="md:hidden">
+                  <a 
+                    href="https://track-your-fitness-beta.vercel.app/" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="block"
+                  >
+                    {/* iPhone Frame */}
+                    <div className="relative max-w-[280px] mx-auto">
+                      {/* Outer titanium frame */}
+                      <div className="relative rounded-[3rem] p-[12px] shadow-2xl bg-gradient-to-b from-[#4a4a4a] via-[#2d2d2d] to-[#1a1a1a] border-2 border-[#5a5a5a]">
+                        {/* Side buttons - Silent switch */}
+                        <div className="absolute -left-[4px] top-[80px] w-[4px] h-6 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                        {/* Volume up */}
+                        <div className="absolute -left-[4px] top-[115px] w-[4px] h-10 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                        {/* Volume down */}
+                        <div className="absolute -left-[4px] top-[165px] w-[4px] h-10 bg-gradient-to-r from-[#3a3a3a] to-[#5a5a5a] rounded-l-sm shadow-md" />
+                        {/* Power button */}
+                        <div className="absolute -right-[4px] top-[130px] w-[4px] h-14 bg-gradient-to-l from-[#3a3a3a] to-[#5a5a5a] rounded-r-sm shadow-md" />
+                        
+                        {/* Inner screen area */}
+                        <div className="relative bg-black rounded-[2.3rem] overflow-hidden ring-1 ring-black/50">
+                          {/* Dynamic Island */}
+                          <div className="absolute top-4 left-1/2 -translate-x-1/2 w-[100px] h-[32px] bg-black rounded-full z-20 shadow-inner" />
+                          
+                          {/* Screen content */}
+                          <div className="aspect-[9/19.5] bg-gradient-to-b from-secondary to-secondary/60 flex flex-col items-center justify-center p-6 active:opacity-90 transition-opacity">
+                            <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm">
+                              <Smartphone className="h-8 w-8 text-primary" />
+                            </div>
+                            <h4 className="text-lg font-semibold text-foreground mb-2 text-center">Track Your Fitness</h4>
+                            <p className="text-sm text-muted-foreground text-center mb-6">Tap to open the live app preview</p>
+                            <Button className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 shadow-lg">
+                              <ExternalLink className="h-4 w-4" />
+                              Open App
+                            </Button>
+                          </div>
+                          
+                          {/* Home indicator */}
+                          <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-[120px] h-[5px] bg-white/40 rounded-full" />
+                        </div>
+                      </div>
+                      
+                      {/* Reflection highlight on frame */}
+                      <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-tr from-transparent via-white/5 to-white/10 pointer-events-none" />
+                    </div>
+                  </a>
                 </div>
               </div>
             </div>
