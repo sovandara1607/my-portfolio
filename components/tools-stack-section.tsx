@@ -2,46 +2,47 @@
 
 import { useLanguage } from "@/lib/language-context"
 
-const techItems = {
-  languages: [
-    { name: "C++", proficiency: 70 },
-    { name: "Python", proficiency: 75 },
-    { name: "PHP", proficiency: 65 },
-    { name: "JavaScript", proficiency: 70 },
-    { name: "TypeScript", proficiency: 80 },
-    { name: "Dart", proficiency: 50 },
+const toolItems = {
+  Adobe: [
+    { name: "Adobe Photoshop", proficiency: 70 },
+    { name: "Adobe Illustrator", proficiency: 75 },
+    { name: "Adobe Lightroom", proficiency: 65 },
+    { name: "Adobe Premiere Pro", proficiency: 70 },
+    { name: "Adobe After Effects", proficiency: 80 },
   ],
-  frameworks: [
-    { name: "Expo", proficiency: 85 },
-    { name: "Flutter", proficiency: 65 },
-    { name: "Docker", proficiency: 80 },
-    { name: "Git", proficiency: 95 },
-    { name: "MySQL", proficiency: 80 },
-    { name: "PostgreSQL", proficiency: 75 },
+  VectorizeDesign: [
+    { name: "Figma", proficiency: 85 },
+    { name: "Prototyping", proficiency: 65 },
+    { name: "Design Systems", proficiency: 80 },
+    { name: "Collaboration", proficiency: 95 },
+    { name: "Plugins", proficiency: 75 },
+    { name: "Canva", proficiency: 80 },
   ],
-  other: [
-    { name: "Convex", proficiency: 80 },
-    { name: "ESP32", proficiency: 50 },
-    { name: "REST APIs", proficiency: 90 },
-    { name: "DigitalOcean", proficiency: 80 },
+  VideoEditing: [
+    { name: "Adobe Premiere Pro", proficiency: 70 },
+    { name: "Adobe After Effects", proficiency: 80 },
+    { name: "Final Cut Pro", proficiency: 60 },
+    { name: "DaVinci Resolve", proficiency: 80 },
+    { name: "iMovie", proficiency: 90 },
+
   ],
 }
 
-export function TechStackSection() {
+export function ToolsStackSection() {
   const { t } = useLanguage()
 
   const techCategories = [
-    { title: t("tech.languages"), items: techItems.languages },
-    { title: t("tech.frameworks"), items: techItems.frameworks },
-    { title: t("tech.other"), items: techItems.other },
+    { title: t("// tools.adobe"), items: toolItems.Adobe },
+    { title: t("// tools.vectorizeDesign"), items: toolItems.VectorizeDesign },
+    { title: t("// tools.videoEditing"), items: toolItems.VideoEditing },
   ]
 
   return (
-    <section id="tech" className="py-24 px-4 bg-secondary/20">
+    <section id="tool" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <p className="text-primary text-sm tracking-wider mb-2">{t("tech.label")}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("tech.title")}</h2>
+          <p className="text-primary text-sm tracking-wider mb-4">{t("// Tools For Design/VideoEditing As a Hobby")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("Tools I am proficient in")}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

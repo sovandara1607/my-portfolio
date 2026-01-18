@@ -31,24 +31,23 @@ export function ProjectsSection() {
       ],
     },
     {
-      title: t("projects.esp32Title"),
-      description: t("projects.esp32Desc"),
-      tech: ["C++", "ESP32", "Web Server"],
+      title: "Performative Detector",
+      description: "A fun Python project using MediaPipe and computer vision to detect when you're holding a cup and plays music on Spotify.",
+      tech: ["Python", "MediaPipe", "OpenCV", "Spotify API"],
       pinned: false,
-      github: "#",
-      demo: "#",
-      caseStudy: "/projects/esp32-server",
-      filename: "esp32_server.cpp",
+      github: "https://github.com/sovandara1607/performative_detector",
+      demo: "https://youtu.be/dQw4w9WgXcQ",
+      caseStudy: "/projects/performative_detector",
+      filename: "performative_detector.py",
       code: [
-        { text: "void setup() {", color: "text-primary" },
-        { text: "  WiFi.begin(ssid, pass);", color: "text-foreground" },
-        { text: "  server.on(\"/\", handleRoot);", color: "text-foreground" },
-        { text: "  server.on(\"/gpio\", handleGPIO);", color: "text-foreground" },
-        { text: "  server.begin();", color: "text-foreground" },
-        { text: "", color: "text-foreground" },
-        { text: "  // Ready for connections", color: "text-muted-foreground" },
-        { text: '  Serial.println("Server OK");', color: "text-foreground" },
-        { text: "}", color: "text-primary" },
+        { text: "def detect_holding(self):", color: "text-primary" },
+        { text: "  hands = self.mp_hands.process(frame)", color: "text-foreground" },
+        { text: "  if hands.multi_hand_landmarks:", color: "text-foreground" },
+        { text: "    is_holding = self.check_grip()", color: "text-foreground" },
+        { text: "    if is_holding:", color: "text-foreground" },
+        { text: '      self.display("PERFORMATIVE")', color: "text-muted-foreground" },
+        { text: "      self.spotify.play()", color: "text-foreground" },
+        { text: "  return is_holding", color: "text-foreground" },
       ],
     },
   ]
@@ -118,13 +117,15 @@ export function ProjectsSection() {
                   </div>
 
                   <div className="flex flex-wrap gap-2">
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="border-border text-foreground hover:bg-secondary bg-transparent h-8 text-xs"
-                    >
-                      {t("projects.code")}
-                    </Button>
+                    <a href={project.github} target="_blank" rel="noopener noreferrer">
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="border-border text-foreground hover:bg-secondary bg-transparent h-8 text-xs"
+                      >
+                        {t("projects.code")}
+                      </Button>
+                    </a>
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
                       <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
                         {t("projects.demo")}

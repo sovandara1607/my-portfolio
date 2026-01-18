@@ -3,6 +3,7 @@
 import { HeroSection } from "@/components/hero-section"
 import { AboutSection } from "@/components/about-section"
 import { TechStackSection } from "@/components/tech-stack-section"
+import { ToolsStackSection } from "@/components/tools-stack-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { MindsetSection } from "@/components/mindset-section"
 import { AchievementsSection } from "@/components/achievements-section"
@@ -30,6 +31,7 @@ export default function Home() {
           <AboutSection />
           <AnimatedTerminal />
           <TechStackSection />
+          <ToolsStackSection />
           <ProjectsSection />
           <GitHubStatsSection />
           <MindsetSection />
