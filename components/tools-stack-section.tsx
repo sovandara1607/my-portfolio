@@ -32,17 +32,17 @@ export function ToolsStackSection() {
   const { t } = useLanguage()
 
   const techCategories = [
-    { title: t("// tools.adobe"), items: toolItems.Adobe },
-    { title: t("// tools.vectorizeDesign"), items: toolItems.VectorizeDesign },
-    { title: t("// tools.videoEditing"), items: toolItems.VideoEditing },
+    { title: t("tool.adobe"), items: toolItems.Adobe },
+    { title: t("tool.vectorizeDesign"), items: toolItems.VectorizeDesign },
+    { title: t("tool.videoEditing"), items: toolItems.VideoEditing },
   ]
 
   return (
     <section id="tool" className="py-24 px-4 bg-secondary/20">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
-          <p className="text-primary text-sm tracking-wider mb-4">{t("// Tools For Design/VideoEditing As a Hobby")}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("Tools I am proficient in")}</h2>
+          <p className="text-primary text-sm tracking-wider mb-4">{t("tool.label")}</p>
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("tool.title")}</h2>
         </div>
 
         <div className="grid md:grid-cols-3 gap-8">

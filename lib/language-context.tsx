@@ -54,6 +54,11 @@ const translations: Record<Language, Record<string, string>> = {
     "tech.frameworks": "Frameworks & Tools",
     "tech.other": "Other",
 
+    // Tools Section
+    "tool.label": "// Tools & Software",
+    "tool.title": "Tools I'm Proficient With",
+    "tool.adobe": "Adobe Creative Suite",
+
     // Projects Section
     "projects.label": "// Featured Projects",
     "projects.title": "What I've Built",
@@ -142,6 +147,14 @@ const translations: Record<Language, Record<string, string>> = {
     "tech.languages": "ភាសា",
     "tech.frameworks": "Frameworks & Tools",
     "tech.other": "ផ្សេងទៀត",
+
+    // Tools Section
+    "tool.label": "// ឧបករណ៍ និង Software",
+    "tool.title": "ឧបករណ៍ដែលខ្ញុំមានជំនាញសម្រាប់ការប្រើប្រាស់",
+    "tool.adobe": "Adobe Creative Suite",
+    "tool.vectorizeDesign": "ឧបករណ៍ Vectorize & Design",
+    "tool.videoEditing": "ឧបករណ៍កាត់តវីដេអូ",
+    
 
     // Projects Section
     "projects.label": "// គម្រោងសំខាន់ៗ",
