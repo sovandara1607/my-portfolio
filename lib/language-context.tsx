@@ -121,7 +121,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.greeting": "សួស្ដី ខ្ញុំឈ្មោះ",
     "hero.name": "រិទ្ធ សុវណ្ណតារា",
     "hero.subtitle": "ជានិស្សិតវិទ្យាសាស្ត្រកុំព្យូទ័រឆ្នាំទី៣ · អ្នកអភិវឌ្ឍន៍ Web & Mobile",
-    "hero.aspiring": "អ្នកវិស្វករ Software & Product ដែលកំពុងរីកចម្រើន",
     "hero.viewProjects": "មើលគម្រោង →",
     "hero.downloadResume": "ទាញយក Resume",
 
