@@ -40,7 +40,7 @@ export function HeroSection() {
 
           <div className="space-y-2">
             <p className="text-lg lg:text-xl text-muted-foreground">{t("hero.subtitle")}</p>
-            <p className="text-muted-foreground">{t("hero.aspiring")}</p>
+            {/* <p className="text-muted-foreground">{t("hero.aspiring")}</p> */}
           </div>
 
           <div className="flex flex-wrap gap-4 justify-center lg:justify-start">
