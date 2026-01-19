@@ -86,141 +86,24 @@ export default function PerformativeDetectorCaseStudy() {
   const streamRef = useRef<MediaStream | null>(null)
   const handsRef = useRef<any>(null)
   const animationRef = useRef<number | null>(null)
-
-  // Initialize MediaPipe Hands
-  const initializeHands = useCallback(async () => {
-    // Dynamically import MediaPipe
-    const { Hands } = await import("@mediapipe/hands")
-    const { Camera } = await import("@mediapipe/camera_utils")
-    
-    const hands = new Hands({
-      locateFile: (file) => {
-        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
-      },
-    })
-    
-    hands.setOptions({
-      maxNumHands: 2,
-      modelComplexity: 1,
-      minDetectionConfidence: 0.7,
-      minTrackingConfidence: 0.5,
-    })
-    
-    hands.onResults((results: any) => {
-      const canvas = canvasRef.current
-      const ctx = canvas?.getContext("2d")
-      
-      if (!canvas || !ctx || !videoRef.current) return
-      
-      // Set canvas size to match video
-      canvas.width = videoRef.current.videoWidth
-      canvas.height = videoRef.current.videoHeight
-      
-      // Clear canvas
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Draw hand landmarks
-      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
-        setHandsDetected(results.multiHandLandmarks.length)
-        
-        let anyHandHolding = false
-        
-        for (const landmarks of results.multiHandLandmarks) {
-          // Check if this hand is in holding position
-          if (isHoldingGesture(landmarks)) {
-            anyHandHolding = true
-          }
-          
-          // Draw landmarks
-          ctx.fillStyle = anyHandHolding ? "hsl(var(--primary))" : "#8b5cf6"
-          ctx.strokeStyle = anyHandHolding ? "hsl(var(--primary))" : "#8b5cf6"
-          ctx.lineWidth = 2
-          
-          // Draw connections
-          const connections = [
-            [0, 1], [1, 2], [2, 3], [3, 4], // Thumb
-            [0, 5], [5, 6], [6, 7], [7, 8], // Index
-            [0, 9], [9, 10], [10, 11], [11, 12], // Middle
-            [0, 13], [13, 14], [14, 15], [15, 16], // Ring
-            [0, 17], [17, 18], [18, 19], [19, 20], // Pinky
-            [5, 9], [9, 13], [13, 17], // Palm
-          ]
-          
-          for (const [start, end] of connections) {
-            const startPt = landmarks[start]
-            const endPt = landmarks[end]
-            ctx.beginPath()
-            ctx.moveTo(startPt.x * canvas.width, startPt.y * canvas.height)
-            ctx.lineTo(endPt.x * canvas.width, endPt.y * canvas.height)
-            ctx.stroke()
-          }
-          
-          // Draw landmark points
-          for (const landmark of landmarks) {
-            ctx.beginPath()
-            ctx.arc(landmark.x * canvas.width, landmark.y * canvas.height, 4, 0, 2 * Math.PI)
-            ctx.fill()
-          }
-        }
-        
-        setIsHolding(anyHandHolding)
-      } else {
-        setHandsDetected(0)
-        setIsHolding(false)
-      }
-    })
-    
-    handsRef.current = hands
-    return { hands, Camera }
-  }, [])
-
-  // Start camera
-  const startCamera = useCallback(async () => {
-    setIsLoading(true)
-    setCameraError(null)
-    
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: { 
-          width: { ideal: 640 },
-          height: { ideal: 480 },
-          facingMode: "user"
-        }
-      })
-      
-      if (videoRef.current) {
-        videoRef.current.srcObject = stream
-        streamRef.current = stream
-        
-        await videoRef.current.play()
-        
-        // Initialize MediaPipe after video is ready
-        const { hands, Camera } = await initializeHands()
-        
-        // Use MediaPipe Camera utility for consistent frame processing
-        const camera = new Camera(videoRef.current, {
-          onFrame: async () => {
-            if (handsRef.current && videoRef.current) {
-              await handsRef.current.send({ image: videoRef.current })
-            }
-          },
-          width: 640,
-          height: 480,
-        })
-        
-        await camera.start()
-        setCameraActive(true)
-      }
-    } catch (error: any) {
-      console.error("Camera error:", error)
-      setCameraError(error.message || "Failed to access camera")
-    } finally {
-      setIsLoading(false)
-    }
-  }, [initializeHands])
+  const cameraRef = useRef<any>(null)
 
   // Stop camera
   const stopCamera = useCallback(() => {
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current)
+      animationRef.current = null
+    }
+    
+    if (cameraRef.current) {
+      try {
+        cameraRef.current.stop()
+      } catch (e) {
+        // Ignore
+      }
+      cameraRef.current = null
+    }
+    
     if (streamRef.current) {
       streamRef.current.getTracks().forEach(track => track.stop())
       streamRef.current = null
@@ -230,15 +113,177 @@ export default function PerformativeDetectorCaseStudy() {
       videoRef.current.srcObject = null
     }
     
-    if (animationRef.current) {
-      cancelAnimationFrame(animationRef.current)
-      animationRef.current = null
-    }
-    
     setCameraActive(false)
     setIsHolding(false)
     setHandsDetected(0)
   }, [])
+
+  // Start camera
+  const startCamera = useCallback(async () => {
+    setIsLoading(true)
+    setCameraError(null)
+    
+    try {
+      // Check if mediaDevices is available
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        throw new Error("Camera access is not supported in this browser")
+      }
+      
+      // Request camera access
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { 
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+          facingMode: "user"
+        }
+      })
+      
+      if (!videoRef.current) {
+        stream.getTracks().forEach(track => track.stop())
+        throw new Error("Video element not ready")
+      }
+      
+      // Set up video element
+      const video = videoRef.current
+      video.srcObject = stream
+      streamRef.current = stream
+      
+      // Wait for video to be playable
+      await new Promise<void>((resolve, reject) => {
+        const timeout = setTimeout(() => {
+          reject(new Error("Video load timeout"))
+        }, 10000)
+        
+        const onCanPlay = () => {
+          clearTimeout(timeout)
+          video.removeEventListener('canplay', onCanPlay)
+          resolve()
+        }
+        
+        video.addEventListener('canplay', onCanPlay)
+        
+        if (video.readyState >= 3) {
+          clearTimeout(timeout)
+          video.removeEventListener('canplay', onCanPlay)
+          resolve()
+        }
+      })
+      
+      await video.play()
+      
+      // Dynamically import MediaPipe
+      const { Hands } = await import("@mediapipe/hands")
+      const { Camera } = await import("@mediapipe/camera_utils")
+      
+      // Initialize MediaPipe Hands
+      const hands = new Hands({
+        locateFile: (file) => {
+          return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1675469240/${file}`
+        },
+      })
+      
+      hands.setOptions({
+        maxNumHands: 2,
+        modelComplexity: 1,
+        minDetectionConfidence: 0.5,
+        minTrackingConfidence: 0.5,
+      })
+      
+      hands.onResults((results: any) => {
+        const canvas = canvasRef.current
+        const ctx = canvas?.getContext("2d")
+        
+        if (!canvas || !ctx || !videoRef.current) return
+        
+        // Set canvas size to match video
+        canvas.width = videoRef.current.videoWidth
+        canvas.height = videoRef.current.videoHeight
+        
+        // Clear canvas
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
+        
+        // Draw hand landmarks
+        if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+          setHandsDetected(results.multiHandLandmarks.length)
+          
+          let anyHandHolding = false
+          
+          for (const landmarks of results.multiHandLandmarks) {
+            if (isHoldingGesture(landmarks)) {
+              anyHandHolding = true
+            }
+            
+            // Draw landmarks
+            ctx.fillStyle = anyHandHolding ? "#22d3ee" : "#8b5cf6"
+            ctx.strokeStyle = anyHandHolding ? "#22d3ee" : "#8b5cf6"
+            ctx.lineWidth = 2
+            
+            // Draw connections
+            const connections = [
+              [0, 1], [1, 2], [2, 3], [3, 4],
+              [0, 5], [5, 6], [6, 7], [7, 8],
+              [0, 9], [9, 10], [10, 11], [11, 12],
+              [0, 13], [13, 14], [14, 15], [15, 16],
+              [0, 17], [17, 18], [18, 19], [19, 20],
+              [5, 9], [9, 13], [13, 17],
+            ]
+            
+            for (const [start, end] of connections) {
+              const startPt = landmarks[start]
+              const endPt = landmarks[end]
+              ctx.beginPath()
+              ctx.moveTo(startPt.x * canvas.width, startPt.y * canvas.height)
+              ctx.lineTo(endPt.x * canvas.width, endPt.y * canvas.height)
+              ctx.stroke()
+            }
+            
+            for (const landmark of landmarks) {
+              ctx.beginPath()
+              ctx.arc(landmark.x * canvas.width, landmark.y * canvas.height, 4, 0, 2 * Math.PI)
+              ctx.fill()
+            }
+          }
+          
+          setIsHolding(anyHandHolding)
+        } else {
+          setHandsDetected(0)
+          setIsHolding(false)
+        }
+      })
+      
+      handsRef.current = hands
+      
+      // Use MediaPipe Camera for frame processing
+      const camera = new Camera(video, {
+        onFrame: async () => {
+          if (handsRef.current) {
+            await handsRef.current.send({ image: video })
+          }
+        },
+        width: 640,
+        height: 480,
+      })
+      
+      cameraRef.current = camera
+      await camera.start()
+      
+      setCameraActive(true)
+    } catch (error: any) {
+      console.error("Camera error:", error)
+      let errorMessage = error.message || "Failed to access camera"
+      if (error.name === "NotAllowedError" || error.name === "PermissionDeniedError") {
+        errorMessage = "Camera permission denied. Please allow camera access."
+      } else if (error.name === "NotFoundError" || error.name === "DevicesNotFoundError") {
+        errorMessage = "No camera found."
+      } else if (error.name === "NotReadableError" || error.name === "TrackStartError") {
+        errorMessage = "Camera is in use by another app."
+      }
+      setCameraError(errorMessage)
+      stopCamera()
+    } finally {
+      setIsLoading(false)
+    }
+  }, [stopCamera])
 
   // Cleanup on unmount
   useEffect(() => {
@@ -251,16 +296,17 @@ export default function PerformativeDetectorCaseStudy() {
     <main className="min-h-screen bg-background">
       {/* Navigation */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" />
-            <span>Back to Portfolio</span>
+            <span className="text-sm sm:text-base">Back</span>
           </Link>
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
             <a href="https://github.com/sovandara1607/performative_detector" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="border-border bg-transparent">
-                <Github className="h-4 w-4 mr-2" />
-                View Code
+              <Button variant="outline" size="sm" className="border-border bg-transparent text-xs sm:text-sm px-2.5 sm:px-3 h-8 sm:h-9">
+                <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
+                <span className="hidden sm:inline">View Code</span>
+                <span className="sm:hidden">Code</span>
               </Button>
             </a>
           </div>
@@ -268,17 +314,17 @@ export default function PerformativeDetectorCaseStudy() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-32 pb-16 px-6">
+      <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+            <div className="space-y-4 sm:space-y-6">
               <Badge variant="outline" className="border-primary text-primary">
                 Case Study
               </Badge>
-              <h1 className="text-4xl md:text-5xl font-bold text-foreground">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
                 Performative <span className="text-primary text-glow">Detector</span>
               </h1>
-              <p className="text-xl text-muted-foreground">
+              <p className="text-lg sm:text-xl text-muted-foreground">
                 A fun Python project that uses MediaPipe and computer vision to detect when you&apos;re holding a matcha (or any cup) and plays your favorite songs on Spotify while displaying &quot;PERFORMATIVE&quot; on screen.
               </p>
               
@@ -307,15 +353,15 @@ export default function PerformativeDetectorCaseStudy() {
             </div>
 
             {/* Interactive Demo Preview */}
-            <div className="relative">
-              <div className="absolute -inset-4 bg-primary/10 rounded-3xl blur-2xl" />
-              <div className="relative bg-card border border-border rounded-2xl overflow-hidden glow-cyan">
+            <div className="relative mt-8 lg:mt-0">
+              <div className="absolute -inset-2 sm:-inset-4 bg-primary/10 rounded-2xl sm:rounded-3xl blur-xl sm:blur-2xl" />
+              <div className="relative bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden glow-cyan">
                 {/* Terminal Header */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border">
-                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-4 text-xs text-muted-foreground">performative_detector.py — Live Camera Feed</span>
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-secondary/50 border-b border-border">
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
+                  <span className="ml-2 sm:ml-4 text-[10px] sm:text-xs text-muted-foreground truncate">performative_detector.py — Live</span>
                 </div>
                 
                 {/* Camera View */}
@@ -338,9 +384,9 @@ export default function PerformativeDetectorCaseStudy() {
                   
                   {/* Placeholder when camera is off */}
                   {!cameraActive && (
-                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                    <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
                       {/* Grid overlay for camera effect */}
-                      <div className="absolute inset-0 opacity-10">
+                      <div className="absolute inset-0 opacity-10 pointer-events-none">
                         <div className="w-full h-full" style={{
                           backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
                           backgroundSize: '20px 20px'
@@ -348,12 +394,12 @@ export default function PerformativeDetectorCaseStudy() {
                       </div>
                       
                       {isLoading ? (
-                        <div className="flex flex-col items-center gap-4">
+                        <div className="flex flex-col items-center gap-4 relative z-20">
                           <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
                           <p className="text-muted-foreground text-sm">Initializing camera & AI model...</p>
                         </div>
                       ) : cameraError ? (
-                        <div className="flex flex-col items-center gap-4 text-center px-4">
+                        <div className="flex flex-col items-center gap-4 text-center px-4 relative z-20">
                           <VideoOff className="w-16 h-16 text-red-400" />
                           <p className="text-red-400 text-sm">{cameraError}</p>
                           <Button onClick={startCamera} variant="outline" size="sm">
@@ -361,12 +407,12 @@ export default function PerformativeDetectorCaseStudy() {
                           </Button>
                         </div>
                       ) : (
-                        <div className="flex flex-col items-center gap-4">
+                        <div className="flex flex-col items-center gap-4 relative z-20">
                           <Camera className="w-16 h-16 text-muted-foreground/50" />
                           <p className="text-muted-foreground text-sm text-center px-4">
                             Click below to start live hand detection
                           </p>
-                          <Button onClick={startCamera} className="bg-primary text-primary-foreground hover:bg-primary/90">
+                          <Button onClick={startCamera} className="bg-primary text-primary-foreground hover:bg-primary/90 cursor-pointer">
                             <Video className="w-4 h-4 mr-2" />
                             Start Camera
                           </Button>
@@ -376,31 +422,31 @@ export default function PerformativeDetectorCaseStudy() {
                   )}
                   
                   {/* Status overlay */}
-                  <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
-                    <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
-                      <div className={`w-2 h-2 rounded-full ${cameraActive ? (isHolding ? 'bg-green-500' : 'bg-yellow-500') : 'bg-red-500'} animate-pulse`} />
-                      <span className="text-xs text-white font-mono">
-                        {!cameraActive ? 'CAMERA OFF' : isHolding ? 'DETECTED' : handsDetected > 0 ? 'TRACKING' : 'SCANNING...'}
+                  <div className="absolute top-2 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex items-center justify-between gap-2 pointer-events-none z-20">
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-black/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
+                      <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${cameraActive ? (isHolding ? 'bg-green-500' : 'bg-yellow-500') : 'bg-red-500'} animate-pulse`} />
+                      <span className="text-[10px] sm:text-xs text-white font-mono">
+                        {!cameraActive ? 'OFF' : isHolding ? 'DETECTED' : handsDetected > 0 ? 'TRACKING' : 'SCAN'}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center gap-1 sm:gap-2">
                       {cameraActive && (
-                        <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
+                        <div className="hidden sm:flex items-center gap-2 bg-black/60 rounded-lg px-3 py-1.5 backdrop-blur-sm">
                           <Hand className="h-3 w-3 text-white" />
-                          <span className="text-xs text-white font-mono">{handsDetected} hand{handsDetected !== 1 ? 's' : ''}</span>
+                          <span className="text-xs text-white font-mono">{handsDetected}</span>
                         </div>
                       )}
-                      <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
-                        <Camera className="h-3 w-3 text-white" />
-                        <span className="text-xs text-white font-mono">{cameraActive ? 'LIVE' : 'OFF'}</span>
+                      <div className="flex items-center gap-1 sm:gap-2 bg-black/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
+                        <Camera className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-white" />
+                        <span className="text-[10px] sm:text-xs text-white font-mono">{cameraActive ? 'LIVE' : 'OFF'}</span>
                       </div>
                     </div>
                   </div>
                   
                   {/* Main status text */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <div className="absolute bottom-0 left-0 right-0 p-3 sm:p-6 pointer-events-none">
                     <div className={`text-center transition-all duration-300 ${isHolding ? 'scale-105' : 'scale-100'}`}>
-                      <p className={`text-3xl font-bold tracking-wider ${isHolding ? 'text-pink-400' : 'text-muted-foreground/60'}`}>
+                      <p className={`text-xl sm:text-3xl font-bold tracking-wider ${isHolding ? 'text-pink-400' : 'text-muted-foreground/60'}`}>
                         {isHolding ? '✨ PERFORMATIVE ✨' : 'not performative'}
                       </p>
                     </div>
@@ -408,23 +454,23 @@ export default function PerformativeDetectorCaseStudy() {
                   
                   {/* Music indicator when holding */}
                   {isHolding && (
-                    <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 backdrop-blur-sm animate-pulse">
-                      <Play className="h-4 w-4 text-green-400 fill-green-400" />
-                      <span className="text-xs text-green-400 font-medium">Holding Detected!</span>
-                      <Volume2 className="h-4 w-4 text-green-400" />
+                    <div className="absolute bottom-14 sm:bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-2.5 sm:px-4 py-1.5 sm:py-2 backdrop-blur-sm animate-pulse pointer-events-none">
+                      <Play className="h-3 w-3 sm:h-4 sm:w-4 text-green-400 fill-green-400" />
+                      <span className="text-[10px] sm:text-xs text-green-400 font-medium">Detected!</span>
+                      <Volume2 className="h-3 w-3 sm:h-4 sm:w-4 text-green-400" />
                     </div>
                   )}
                   
                   {/* Camera control button when active */}
                   {cameraActive && (
-                    <div className="absolute bottom-4 right-4">
+                    <div className="absolute bottom-2 sm:bottom-4 right-2 sm:right-4 z-30">
                       <Button
                         onClick={stopCamera}
                         variant="outline"
                         size="sm"
-                        className="bg-black/50 border-white/20 text-white hover:bg-black/70"
+                        className="bg-black/60 border-white/20 text-white hover:bg-black/70 text-xs sm:text-sm px-2 sm:px-3 h-7 sm:h-9 cursor-pointer"
                       >
-                        <VideoOff className="w-4 h-4 mr-2" />
+                        <VideoOff className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                         Stop
                       </Button>
                     </div>
@@ -433,8 +479,8 @@ export default function PerformativeDetectorCaseStudy() {
               </div>
               
               {/* Demo note */}
-              <p className="text-center text-xs text-muted-foreground mt-4">
-                ↑ Live demo using your webcam — make a holding/gripping gesture with your hand
+              <p className="text-center text-[11px] sm:text-xs text-muted-foreground mt-3 sm:mt-4 px-2">
+                ↑ Live demo — make a holding/gripping gesture with your hand
               </p>
             </div>
           </div>
@@ -442,25 +488,25 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* How It Works */}
-      <section className="py-16 px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// How It Works"}</p>
-            <h2 className="text-3xl font-bold text-foreground">Detection Pipeline</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Detection Pipeline</h2>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
             {howItWorks.map((item, index) => (
               <div key={index} className="relative">
                 {index < howItWorks.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent -z-10" />
                 )}
-                <div className="bg-card border border-border rounded-xl p-4 text-center glow-cyan-hover transition-all duration-300 h-full">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                    <span className="text-xl font-bold text-primary">{item.step}</span>
+                <div className="bg-card border border-border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center glow-cyan-hover transition-all duration-300 h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+                    <span className="text-lg sm:text-xl font-bold text-primary">{item.step}</span>
                   </div>
-                  <h3 className="font-semibold text-foreground mb-2">{item.title}</h3>
-                  <p className="text-sm text-muted-foreground">{item.description}</p>
+                  <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{item.title}</h3>
+                  <p className="text-xs sm:text-sm text-muted-foreground">{item.description}</p>
                 </div>
               </div>
             ))}
@@ -469,21 +515,21 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Features Section */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Capabilities"}</p>
-            <h2 className="text-3xl font-bold text-foreground">Features</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Features</h2>
           </div>
           
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-center gap-3 p-4 bg-card border border-border rounded-xl glow-cyan-hover transition-all duration-300"
+                className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-card border border-border rounded-lg sm:rounded-xl glow-cyan-hover transition-all duration-300"
               >
-                <CheckCircle2 className="h-5 w-5 text-primary flex-shrink-0" />
-                <span className="text-foreground">{feature}</span>
+                <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
+                <span className="text-foreground text-sm sm:text-base">{feature}</span>
               </div>
             ))}
           </div>
@@ -491,23 +537,23 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Code Sample */}
-      <section className="py-16 px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Code Sample"}</p>
-            <h2 className="text-3xl font-bold text-foreground">Hand Detection Logic</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Hand Detection Logic</h2>
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-2 bg-primary/5 rounded-2xl blur-xl" />
-            <div className="relative bg-card border border-border rounded-xl overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-3 bg-secondary/50 border-b border-border">
-                <div className="w-3 h-3 rounded-full bg-red-500/80" />
-                <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-                <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                <span className="ml-4 text-xs text-muted-foreground">performative_detector.py</span>
+            <div className="absolute -inset-2 bg-primary/5 rounded-xl sm:rounded-2xl blur-xl" />
+            <div className="relative bg-card border border-border rounded-lg sm:rounded-xl overflow-hidden">
+              <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-secondary/50 border-b border-border">
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
+                <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
+                <span className="ml-2 sm:ml-4 text-[10px] sm:text-xs text-muted-foreground">performative_detector.py</span>
               </div>
-              <pre className="p-6 text-sm overflow-x-auto">
+              <pre className="p-3 sm:p-6 text-[11px] sm:text-sm overflow-x-auto">
                 <code className="text-foreground">{`def is_holding_with_one_hand(self, hand_landmarks) -> bool:
     """
     Detect if a single hand is in a holding/gripping position
@@ -546,26 +592,26 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Challenges Section */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Technical Deep Dive"}</p>
-            <h2 className="text-3xl font-bold text-foreground">Challenges & Solutions</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Challenges & Solutions</h2>
           </div>
           
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-6">
             {challenges.map((challenge, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-xl p-6 glow-cyan-hover transition-all duration-300"
+                className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300"
               >
-                <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center flex-shrink-0">
-                    <challenge.icon className="h-6 w-6 text-primary" />
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                    <challenge.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
-                  <div className="flex-1 space-y-4">
-                    <h3 className="text-xl font-bold text-foreground">{challenge.title}</h3>
-                    <div className="grid md:grid-cols-2 gap-4">
+                  <div className="flex-1 space-y-3 sm:space-y-4">
+                    <h3 className="text-lg sm:text-xl font-bold text-foreground">{challenge.title}</h3>
+                    <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                       <div className="space-y-2">
                         <p className="text-sm font-medium text-red-400">Problem</p>
                         <p className="text-muted-foreground">{challenge.problem}</p>
@@ -584,47 +630,47 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Spotify Integration */}
-      <section className="py-16 px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
         <div className="max-w-6xl mx-auto">
-          <div className="mb-12">
+          <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Integration"}</p>
-            <h2 className="text-3xl font-bold text-foreground">Spotify Features</h2>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Spotify Features</h2>
           </div>
           
-          <div className="grid md:grid-cols-3 gap-6">
-            <div className="bg-card border border-border rounded-xl p-6 glow-cyan-hover transition-all duration-300">
-              <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
-                <Music className="h-6 w-6 text-green-500" />
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                <Music className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Playlist Support</h3>
-              <p className="text-muted-foreground text-sm">Configure your favorite playlist or individual tracks to play when holding is detected.</p>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Playlist Support</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">Configure your favorite playlist or individual tracks to play when holding is detected.</p>
             </div>
-            <div className="bg-card border border-border rounded-xl p-6 glow-cyan-hover transition-all duration-300">
-              <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
-                <Settings className="h-6 w-6 text-green-500" />
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Shuffle Mode</h3>
-              <p className="text-muted-foreground text-sm">Enable shuffle to randomize playback from your configured playlist or track list.</p>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Shuffle Mode</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">Enable shuffle to randomize playback from your configured playlist or track list.</p>
             </div>
-            <div className="bg-card border border-border rounded-xl p-6 glow-cyan-hover transition-all duration-300">
-              <div className="w-12 h-12 bg-green-500/10 rounded-xl flex items-center justify-center mb-4">
-                <Sparkles className="h-6 w-6 text-green-500" />
+            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300 sm:col-span-2 md:col-span-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+                <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
-              <h3 className="text-lg font-semibold text-foreground mb-2">Free Account Fallback</h3>
-              <p className="text-muted-foreground text-sm">AppleScript fallback for non-Premium accounts, controlling Spotify desktop directly on macOS.</p>
+              <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Free Account Fallback</h3>
+              <p className="text-muted-foreground text-xs sm:text-sm">AppleScript fallback for non-Premium accounts, controlling Spotify desktop directly on macOS.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 px-6">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-foreground mb-4">Want to Try It?</h2>
-          <p className="text-muted-foreground mb-8">
+          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">Want to Try It?</h2>
+          <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base">
             Clone the repo and detect your own performative moments! ✨🍵
           </p>
-          <div className="flex justify-center gap-4 flex-wrap">
+          <div className="flex justify-center gap-3 sm:gap-4 flex-wrap">
             <a href="https://github.com/sovandara1607/performative_detector" target="_blank" rel="noopener noreferrer">
               <Button className="bg-primary text-primary-foreground hover:bg-primary/90 glow-cyan-hover">
                 <Github className="h-4 w-4 mr-2" />
