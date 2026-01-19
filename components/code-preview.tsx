@@ -11,10 +11,9 @@ const codeLines = [
   { text: '    "Python", "Php",', color: "text-muted-foreground" },
   { text: '    "Nextjs", "Expo",', color: "text-muted-foreground" },
   { text: '    "Flutter", "Node.js"', color: "text-muted-foreground" },
-  { text: '    "Ot dg", "Dak ey tt te",', color: "text-muted-foreground" },
   { text: "  ],", color: "text-foreground" },
   { text: '  passion: "Building impactful apps",', color: "text-foreground" },
-  { text: "  openToWork: true,", color: "text-primary" },
+  { text: '  openToWork: true,', color: "text-primary" },
   { text: "};", color: "text-primary" },
 ]
 
