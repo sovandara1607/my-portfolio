@@ -21,7 +21,7 @@ const kantumruyPro = Kantumruy_Pro({
 
 export const metadata: Metadata = {
   title: "Sovandara Rith | Portfolio",
-  description: "Year 3 Computer Science Student · Web & Mobile Developer · Aspiring Software Engineer",
+  description: "Year 3 Computer Science Student · Web & Mobile Developer ",
 }
 
 export default function RootLayout({

@@ -28,7 +28,6 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.greeting": "Hi, I'm",
     "hero.name": "Sovandara Rith",
     "hero.subtitle": "Year 3 Computer Science Student · Web & Mobile Developer",
-    "hero.aspiring": "Aspiring Software Engineer & Product Engineer",
     "hero.viewProjects": "View Projects →",
     "hero.downloadResume": "Download Resume",
 
@@ -73,7 +72,7 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Mindset Section
     "mindset.label": "// Engineering Mindset",
-    "mindset.title": "How I Approach Software Engineering as a CS Student",
+    "mindset.title": "How I Will Approach Software Engineering as a CS Student",
     "mindset.p1": "Learning to design maintainable and scalable systems",
     "mindset.p2": "Prioritizing code quality and best practices",
     "mindset.p3": "Prioritizing user experience and accessibility",
