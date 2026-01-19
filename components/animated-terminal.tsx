@@ -15,7 +15,7 @@ const terminalSequence: TerminalLine[] = [
   { type: "output", text: "{", delay: 2000 },
   { type: "output", text: '  "frontend": ["React", "Next.js", "TypeScript"],', delay: 2200 },
   { type: "output", text: '  "mobile": ["React Native", "Flutter", "Expo"],', delay: 2400 },
-  { type: "output", text: '  "backend": ["Node.js", "Express", "PostgreSQL"],', delay: 2600 },
+  { type: "output", text: '  "backend": ["Node.js", "PHP", "Python", "PostgreSQL"],', delay: 2600 },
   { type: "output", text: '  "tools": ["Git", "Docker", "Figma"]', delay: 2800 },
   { type: "output", text: "}", delay: 3000 },
   { type: "command", text: "git log --oneline -3", delay: 3800 },
