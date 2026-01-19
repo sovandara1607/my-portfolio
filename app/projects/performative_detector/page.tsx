@@ -2,9 +2,9 @@
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, ExternalLink, Github, Calendar, Clock, Users, Hand, Music, Camera, Eye, Sparkles, Settings, CheckCircle2, Play, Volume2 } from "lucide-react"
+import { ArrowLeft, ExternalLink, Github, Calendar, Clock, Users, Hand, Music, Camera, Eye, Sparkles, Settings, CheckCircle2, Play, Volume2, VideoOff, Video } from "lucide-react"
 import Link from "next/link"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 
 const techStack = [
   { name: "Python", category: "Language" },
@@ -52,22 +52,200 @@ const howItWorks = [
   { step: "4", title: "Trigger Action", description: "Plays music and displays 'PERFORMATIVE' overlay" },
 ]
 
+// Hand landmark indices for finger detection
+const FINGER_TIPS = [8, 12, 16, 20] // Index, Middle, Ring, Pinky tips
+const FINGER_PIPS = [6, 10, 14, 18] // Index, Middle, Ring, Pinky PIPs (middle joints)
+
+// Check if fingers are curled (holding gesture)
+function isHoldingGesture(landmarks: { x: number; y: number; z: number }[]): boolean {
+  let curledFingers = 0
+  
+  for (let i = 0; i < FINGER_TIPS.length; i++) {
+    const tipY = landmarks[FINGER_TIPS[i]].y
+    const pipY = landmarks[FINGER_PIPS[i]].y
+    
+    // If fingertip is below PIP (larger y value), finger is curled
+    if (tipY > pipY) {
+      curledFingers++
+    }
+  }
+  
+  // Holding detected if 3+ fingers are curled
+  return curledFingers >= 3
+}
+
 export default function PerformativeDetectorCaseStudy() {
   const [isHolding, setIsHolding] = useState(false)
-  const [demoFrame, setDemoFrame] = useState(0)
+  const [cameraActive, setCameraActive] = useState(false)
+  const [cameraError, setCameraError] = useState<string | null>(null)
+  const [handsDetected, setHandsDetected] = useState(0)
+  const [isLoading, setIsLoading] = useState(false)
+  
+  const videoRef = useRef<HTMLVideoElement>(null)
+  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const streamRef = useRef<MediaStream | null>(null)
+  const handsRef = useRef<any>(null)
+  const animationRef = useRef<number | null>(null)
 
-  // Animate demo preview
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setDemoFrame((prev) => (prev + 1) % 100)
-      if (demoFrame > 30 && demoFrame < 70) {
-        setIsHolding(true)
+  // Initialize MediaPipe Hands
+  const initializeHands = useCallback(async () => {
+    // Dynamically import MediaPipe
+    const { Hands } = await import("@mediapipe/hands")
+    const { Camera } = await import("@mediapipe/camera_utils")
+    
+    const hands = new Hands({
+      locateFile: (file) => {
+        return `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`
+      },
+    })
+    
+    hands.setOptions({
+      maxNumHands: 2,
+      modelComplexity: 1,
+      minDetectionConfidence: 0.7,
+      minTrackingConfidence: 0.5,
+    })
+    
+    hands.onResults((results: any) => {
+      const canvas = canvasRef.current
+      const ctx = canvas?.getContext("2d")
+      
+      if (!canvas || !ctx || !videoRef.current) return
+      
+      // Set canvas size to match video
+      canvas.width = videoRef.current.videoWidth
+      canvas.height = videoRef.current.videoHeight
+      
+      // Clear canvas
+      ctx.clearRect(0, 0, canvas.width, canvas.height)
+      
+      // Draw hand landmarks
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        setHandsDetected(results.multiHandLandmarks.length)
+        
+        let anyHandHolding = false
+        
+        for (const landmarks of results.multiHandLandmarks) {
+          // Check if this hand is in holding position
+          if (isHoldingGesture(landmarks)) {
+            anyHandHolding = true
+          }
+          
+          // Draw landmarks
+          ctx.fillStyle = anyHandHolding ? "hsl(var(--primary))" : "#8b5cf6"
+          ctx.strokeStyle = anyHandHolding ? "hsl(var(--primary))" : "#8b5cf6"
+          ctx.lineWidth = 2
+          
+          // Draw connections
+          const connections = [
+            [0, 1], [1, 2], [2, 3], [3, 4], // Thumb
+            [0, 5], [5, 6], [6, 7], [7, 8], // Index
+            [0, 9], [9, 10], [10, 11], [11, 12], // Middle
+            [0, 13], [13, 14], [14, 15], [15, 16], // Ring
+            [0, 17], [17, 18], [18, 19], [19, 20], // Pinky
+            [5, 9], [9, 13], [13, 17], // Palm
+          ]
+          
+          for (const [start, end] of connections) {
+            const startPt = landmarks[start]
+            const endPt = landmarks[end]
+            ctx.beginPath()
+            ctx.moveTo(startPt.x * canvas.width, startPt.y * canvas.height)
+            ctx.lineTo(endPt.x * canvas.width, endPt.y * canvas.height)
+            ctx.stroke()
+          }
+          
+          // Draw landmark points
+          for (const landmark of landmarks) {
+            ctx.beginPath()
+            ctx.arc(landmark.x * canvas.width, landmark.y * canvas.height, 4, 0, 2 * Math.PI)
+            ctx.fill()
+          }
+        }
+        
+        setIsHolding(anyHandHolding)
       } else {
+        setHandsDetected(0)
         setIsHolding(false)
       }
-    }, 100)
-    return () => clearInterval(interval)
-  }, [demoFrame])
+    })
+    
+    handsRef.current = hands
+    return { hands, Camera }
+  }, [])
+
+  // Start camera
+  const startCamera = useCallback(async () => {
+    setIsLoading(true)
+    setCameraError(null)
+    
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: { 
+          width: { ideal: 640 },
+          height: { ideal: 480 },
+          facingMode: "user"
+        }
+      })
+      
+      if (videoRef.current) {
+        videoRef.current.srcObject = stream
+        streamRef.current = stream
+        
+        await videoRef.current.play()
+        
+        // Initialize MediaPipe after video is ready
+        const { hands, Camera } = await initializeHands()
+        
+        // Use MediaPipe Camera utility for consistent frame processing
+        const camera = new Camera(videoRef.current, {
+          onFrame: async () => {
+            if (handsRef.current && videoRef.current) {
+              await handsRef.current.send({ image: videoRef.current })
+            }
+          },
+          width: 640,
+          height: 480,
+        })
+        
+        await camera.start()
+        setCameraActive(true)
+      }
+    } catch (error: any) {
+      console.error("Camera error:", error)
+      setCameraError(error.message || "Failed to access camera")
+    } finally {
+      setIsLoading(false)
+    }
+  }, [initializeHands])
+
+  // Stop camera
+  const stopCamera = useCallback(() => {
+    if (streamRef.current) {
+      streamRef.current.getTracks().forEach(track => track.stop())
+      streamRef.current = null
+    }
+    
+    if (videoRef.current) {
+      videoRef.current.srcObject = null
+    }
+    
+    if (animationRef.current) {
+      cancelAnimationFrame(animationRef.current)
+      animationRef.current = null
+    }
+    
+    setCameraActive(false)
+    setIsHolding(false)
+    setHandsDetected(0)
+  }, [])
+
+  // Cleanup on unmount
+  useEffect(() => {
+    return () => {
+      stopCamera()
+    }
+  }, [stopCamera])
 
   return (
     <main className="min-h-screen bg-background">
@@ -137,71 +315,85 @@ export default function PerformativeDetectorCaseStudy() {
                   <div className="w-3 h-3 rounded-full bg-red-500/80" />
                   <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-3 h-3 rounded-full bg-green-500/80" />
-                  <span className="ml-4 text-xs text-muted-foreground">performative_detector.py — Camera Feed</span>
+                  <span className="ml-4 text-xs text-muted-foreground">performative_detector.py — Live Camera Feed</span>
                 </div>
                 
-                {/* Simulated Camera View */}
+                {/* Camera View */}
                 <div className="aspect-video bg-gradient-to-br from-secondary via-secondary/80 to-secondary/60 relative overflow-hidden">
-                  {/* Grid overlay for camera effect */}
-                  <div className="absolute inset-0 opacity-10">
-                    <div className="w-full h-full" style={{
-                      backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
-                      backgroundSize: '20px 20px'
-                    }} />
-                  </div>
+                  {/* Video element (hidden, used for processing) */}
+                  <video
+                    ref={videoRef}
+                    className={`absolute inset-0 w-full h-full object-cover ${cameraActive ? 'opacity-100' : 'opacity-0'}`}
+                    playsInline
+                    muted
+                    style={{ transform: 'scaleX(-1)' }}
+                  />
                   
-                  {/* Hand landmarks visualization */}
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className={`relative transition-all duration-500 ${isHolding ? 'scale-110' : 'scale-100'}`}>
-                      {/* Simulated hand skeleton */}
-                      <svg width="200" height="200" viewBox="0 0 200 200" className="opacity-80">
-                        {/* Palm */}
-                        <circle cx="100" cy="120" r="8" className={`${isHolding ? 'fill-primary' : 'fill-muted-foreground'} transition-colors`} />
-                        {/* Fingers */}
-                        {[
-                          { path: "M100,120 L85,80 L80,50", tip: { x: 80, y: 50 } },
-                          { path: "M100,120 L95,70 L92,35", tip: { x: 92, y: 35 } },
-                          { path: "M100,120 L105,65 L108,30", tip: { x: 108, y: 30 } },
-                          { path: "M100,120 L115,75 L125,50", tip: { x: 125, y: 50 } },
-                          { path: "M100,120 L125,100 L145,90", tip: { x: 145, y: 90 } },
-                        ].map((finger, i) => (
-                          <g key={i}>
-                            <path
-                              d={finger.path}
-                              fill="none"
-                              strokeWidth="3"
-                              className={`${isHolding ? 'stroke-primary' : 'stroke-muted-foreground'} transition-colors`}
-                            />
-                            <circle
-                              cx={finger.tip.x}
-                              cy={finger.tip.y}
-                              r="5"
-                              className={`${isHolding ? 'fill-primary' : 'fill-muted-foreground'} transition-colors`}
-                            />
-                          </g>
-                        ))}
-                        {/* Cup indicator */}
-                        {isHolding && (
-                          <g className="animate-pulse">
-                            <ellipse cx="100" cy="90" rx="25" ry="12" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeDasharray="4 4" />
-                            <rect x="80" y="90" width="40" height="50" rx="3" fill="none" stroke="hsl(var(--primary))" strokeWidth="2" strokeDasharray="4 4" />
-                          </g>
-                        )}
-                      </svg>
+                  {/* Canvas for hand landmarks overlay */}
+                  <canvas
+                    ref={canvasRef}
+                    className={`absolute inset-0 w-full h-full object-cover ${cameraActive ? 'opacity-100' : 'opacity-0'}`}
+                    style={{ transform: 'scaleX(-1)' }}
+                  />
+                  
+                  {/* Placeholder when camera is off */}
+                  {!cameraActive && (
+                    <div className="absolute inset-0 flex flex-col items-center justify-center">
+                      {/* Grid overlay for camera effect */}
+                      <div className="absolute inset-0 opacity-10">
+                        <div className="w-full h-full" style={{
+                          backgroundImage: 'linear-gradient(rgba(255,255,255,0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.1) 1px, transparent 1px)',
+                          backgroundSize: '20px 20px'
+                        }} />
+                      </div>
+                      
+                      {isLoading ? (
+                        <div className="flex flex-col items-center gap-4">
+                          <div className="w-16 h-16 border-4 border-primary border-t-transparent rounded-full animate-spin" />
+                          <p className="text-muted-foreground text-sm">Initializing camera & AI model...</p>
+                        </div>
+                      ) : cameraError ? (
+                        <div className="flex flex-col items-center gap-4 text-center px-4">
+                          <VideoOff className="w-16 h-16 text-red-400" />
+                          <p className="text-red-400 text-sm">{cameraError}</p>
+                          <Button onClick={startCamera} variant="outline" size="sm">
+                            Try Again
+                          </Button>
+                        </div>
+                      ) : (
+                        <div className="flex flex-col items-center gap-4">
+                          <Camera className="w-16 h-16 text-muted-foreground/50" />
+                          <p className="text-muted-foreground text-sm text-center px-4">
+                            Click below to start live hand detection
+                          </p>
+                          <Button onClick={startCamera} className="bg-primary text-primary-foreground hover:bg-primary/90">
+                            <Video className="w-4 h-4 mr-2" />
+                            Start Camera
+                          </Button>
+                        </div>
+                      )}
                     </div>
-                  </div>
+                  )}
                   
                   {/* Status overlay */}
                   <div className="absolute top-4 left-4 right-4 flex items-center justify-between">
                     <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
-                      <div className={`w-2 h-2 rounded-full ${isHolding ? 'bg-green-500' : 'bg-red-500'} animate-pulse`} />
+                      <div className={`w-2 h-2 rounded-full ${cameraActive ? (isHolding ? 'bg-green-500' : 'bg-yellow-500') : 'bg-red-500'} animate-pulse`} />
                       <span className="text-xs text-white font-mono">
-                        {isHolding ? 'DETECTED' : 'SCANNING...'}
+                        {!cameraActive ? 'CAMERA OFF' : isHolding ? 'DETECTED' : handsDetected > 0 ? 'TRACKING' : 'SCANNING...'}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
-                      <Camera className="h-3 w-3 text-white" />
-                      <span className="text-xs text-white font-mono">30 FPS</span>
+                    <div className="flex items-center gap-2">
+                      {cameraActive && (
+                        <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
+                          <Hand className="h-3 w-3 text-white" />
+                          <span className="text-xs text-white font-mono">{handsDetected} hand{handsDetected !== 1 ? 's' : ''}</span>
+                        </div>
+                      )}
+                      <div className="flex items-center gap-2 bg-black/50 rounded-lg px-3 py-1.5 backdrop-blur-sm">
+                        <Camera className="h-3 w-3 text-white" />
+                        <span className="text-xs text-white font-mono">{cameraActive ? 'LIVE' : 'OFF'}</span>
+                      </div>
                     </div>
                   </div>
                   
@@ -218,8 +410,23 @@ export default function PerformativeDetectorCaseStudy() {
                   {isHolding && (
                     <div className="absolute bottom-20 left-1/2 -translate-x-1/2 flex items-center gap-2 bg-green-500/20 border border-green-500/30 rounded-full px-4 py-2 backdrop-blur-sm animate-pulse">
                       <Play className="h-4 w-4 text-green-400 fill-green-400" />
-                      <span className="text-xs text-green-400 font-medium">Playing on Spotify</span>
+                      <span className="text-xs text-green-400 font-medium">Holding Detected!</span>
                       <Volume2 className="h-4 w-4 text-green-400" />
+                    </div>
+                  )}
+                  
+                  {/* Camera control button when active */}
+                  {cameraActive && (
+                    <div className="absolute bottom-4 right-4">
+                      <Button
+                        onClick={stopCamera}
+                        variant="outline"
+                        size="sm"
+                        className="bg-black/50 border-white/20 text-white hover:bg-black/70"
+                      >
+                        <VideoOff className="w-4 h-4 mr-2" />
+                        Stop
+                      </Button>
                     </div>
                   )}
                 </div>
@@ -227,7 +434,7 @@ export default function PerformativeDetectorCaseStudy() {
               
               {/* Demo note */}
               <p className="text-center text-xs text-muted-foreground mt-4">
-                ↑ Interactive demo simulation — actual app uses your webcam
+                ↑ Live demo using your webcam — make a holding/gripping gesture with your hand
               </p>
             </div>
           </div>
