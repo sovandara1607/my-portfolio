@@ -62,8 +62,8 @@ const nextConfig = {
               "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
               // Media: self for music player
               "media-src 'self' blob:",
-              // Frames: none (prevent embedding)
-              "frame-src 'none'",
+              // Frames: allow fitness app demo
+              "frame-src 'self' https://track-your-fitness-beta.vercel.app",
               // Frame ancestors: none (prevent being embedded)
               "frame-ancestors 'none'",
               // Form actions: self only
