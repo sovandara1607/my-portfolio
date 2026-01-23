@@ -103,6 +103,9 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.location": "Location",
     "contact.locationValue": "Phnom Penh, Cambodia",
     "contact.quote": '"Always open to internships, collaboration, and building meaningful products."',
+    "contact.buyMeCoffee": "Support My Work",
+    "contact.buyMeCoffeeDesc": "If you enjoy my work or find it helpful, consider buying me a coffee! Your support helps me continue learning and creating.",
+    "contact.buyMeCoffeeButton": "Buy Me a Coffee",
     "contact.copyright": "© 2026 Sovandara Rith.",
   },
   kh: {
@@ -199,6 +202,9 @@ const translations: Record<Language, Record<string, string>> = {
     "contact.location": "ទីតាំង",
     "contact.locationValue": "រាជធានីភ្នំពេញ កម្ពុជា",
     "contact.quote": '"រីករាយបើកទទួលសម្រាប់ ការសហការ និងការបង្កើតផលិតផលមានអត្ថន័យ។"',
+    "contact.buyMeCoffee": "គាំទ្រការងាររបស់ខ្ញុំ",
+    "contact.buyMeCoffeeDesc": "ប្រសិនបើអ្នកចូលចិត្តការងាររបស់ខ្ញុំ សូមពិចារណាទិញកាហ្វេមួយកែវ! ការគាំទ្ររបស់អ្នកជួយខ្ញុំបន្តរៀន និងបង្កើតអ្វីថ្មីៗ។",
+    "contact.buyMeCoffeeButton": "ទិញកាហ្វេមួយកែវ",
     "contact.copyright": "© ២០២៦ រិទ្ធ សុវណ្ណតារា",
   },
 }

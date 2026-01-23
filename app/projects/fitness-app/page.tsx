@@ -361,6 +361,22 @@ export default function FitnessAppCaseStudy() {
               </Button>
             </Link>
           </div>
+          
+          {/* Buy Me a Coffee */}
+          <div className="mt-8 pt-8 border-t border-border">
+            <div className="flex flex-col items-center gap-3">
+              <p className="text-sm text-muted-foreground">Enjoyed this project? Consider supporting my work ☕</p>
+              <a
+                href="https://link.payway.com.kh/cg4094277"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/25 cursor-pointer"
+              >
+                <span>☕</span>
+                Buy Me a Coffee
+              </a>
+            </div>
+          </div>
         </div>
       </section>
     </main>

@@ -142,6 +142,30 @@ export function ProjectsSection() {
             </div>
           ))}
         </div>
+
+        {/* Buy Me a Coffee */}
+        <div className="mt-12 bg-card border border-border rounded-xl p-6 glow-cyan text-center max-w-md mx-auto">
+          <div className="flex flex-col items-center gap-3">
+            <div className="text-3xl">☕</div>
+            <div>
+              <h3 className="text-base font-semibold text-foreground mb-1">
+                {t("contact.buyMeCoffee")}
+              </h3>
+              <p className="text-xs text-muted-foreground mb-3">
+                {t("contact.buyMeCoffeeDesc")}
+              </p>
+            </div>
+            <a
+              href="https://link.payway.com.kh/cg4094277"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/25 cursor-pointer"
+            >
+              <span>☕</span>
+              {t("contact.buyMeCoffeeButton")}
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   )

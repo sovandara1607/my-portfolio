@@ -54,6 +54,30 @@ export function ContactSection() {
               </p>
             </div>
           </div>
+
+          {/* Buy Me a Coffee */}
+          <div className="mt-8 bg-card border border-border rounded-xl p-6 glow-cyan text-center">
+            <div className="flex flex-col items-center gap-4">
+              <div className="text-4xl">☕</div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  {t("contact.buyMeCoffee")}
+                </h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  {t("contact.buyMeCoffeeDesc")}
+                </p>
+              </div>
+              <a
+                href="https://link.payway.com.kh/cg4094277"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="relative z-10 inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/25 cursor-pointer"
+              >
+                <span>☕</span>
+                {t("contact.buyMeCoffeeButton")}
+              </a>
+            </div>
+          </div>
         </div>
 
         {/* Footer */}
