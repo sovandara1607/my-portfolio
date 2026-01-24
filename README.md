@@ -73,6 +73,6 @@ A modern, interactive portfolio application built with **Next.js 16** and **Reac
 - `pnpm start`: Runs the built production application.
 - `pnpm lint`: Runs ESLint to check for code quality issues.
 
-## 📄 License
+## 📄 The License
 
 This project is open source and available under the [MIT License](LICENSE).
