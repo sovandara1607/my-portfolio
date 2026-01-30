@@ -38,7 +38,7 @@ export function ToolsStackSection() {
   ]
 
   return (
-    <section id="tool" className="py-24 px-4 bg-secondary/20">
+    <section id="tool" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-4">{t("tool.label")}</p>

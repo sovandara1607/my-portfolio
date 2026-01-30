@@ -67,17 +67,17 @@ export function ProjectsSection() {
               className="group relative"
             >
               {/* Glow effect */}
-              <div className="absolute -inset-2 bg-primary/5 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 group-hover:bg-primary/10 transition-all duration-500" />
+              <div className="absolute -inset-2 bg-primary/6 blur-xl opacity-50 group-hover:opacity-100 group-hover:bg-primary/12 transition-all duration-500" />
               
-              <div className="relative bg-card border border-border rounded-xl overflow-hidden glow-cyan-hover transition-all duration-300">
-                {/* Terminal Header */}
-                <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border-b border-border">
-                  <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-                  <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+              <div className="relative bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] overflow-hidden shadow-[4px_4px_0_rgba(0,0,0,0.35)] transition-all duration-300 hover:shadow-[4px_4px_0_rgba(93,155,53,0.3),0_0_20px_rgba(128,255,32,0.12)]">
+                {/* Terminal Header - Minecraft style */}
+                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-secondary/55 to-secondary/35 border-b-3 border-b-[rgba(0,0,0,0.2)]">
+                  <div className="w-3 h-3 bg-[#D93A3A] border border-[#A82C2C]" />
+                  <div className="w-3 h-3 bg-[#FCDB00] border border-[#C4A800]" />
+                  <div className="w-3 h-3 bg-[#5D9B35] border border-[#4A7D2A]" />
                   <span className="ml-4 text-xs text-muted-foreground">{project.filename}</span>
                   {project.pinned && (
-                    <span className="ml-auto text-[10px] text-primary">{t("projects.pinned")}</span>
+                    <span className="ml-auto text-[10px] text-[#80FF20] drop-shadow-[0_0_4px_rgba(128,255,32,0.5)]">{t("projects.pinned")}</span>
                   )}
                 </div>
 
@@ -95,14 +95,14 @@ export function ProjectsSection() {
                     <span className="text-muted-foreground/40 mr-4 select-none text-xs">
                       {String(project.code.length + 1).padStart(2, "0")}
                     </span>
-                    <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor" />
+                    <span className="inline-block w-2 h-4 bg-[#80FF20] terminal-cursor" />
                   </div>
                 </div>
 
                 {/* Project Info */}
-                <div className="p-4 space-y-4 border-t border-border/50">
+                <div className="p-4 space-y-4 border-t-3 border-t-[rgba(0,0,0,0.2)]">
                   <div>
-                    <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
+                    <h3 className="text-base font-semibold text-foreground group-hover:text-[#80FF20] transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-muted-foreground text-sm mt-1">{project.description}</p>
@@ -110,7 +110,7 @@ export function ProjectsSection() {
 
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="text-xs text-muted-foreground bg-secondary/60 px-2 py-1 rounded">
+                      <span key={techIndex} className="text-xs text-muted-foreground bg-gradient-to-b from-secondary/70 to-secondary/50 px-2 py-1 border-2 border-t-[rgba(255,255,255,0.08)] border-l-[rgba(255,255,255,0.08)] border-b-[rgba(0,0,0,0.2)] border-r-[rgba(0,0,0,0.2)]">
                         {tech}
                       </span>
                     ))}
@@ -144,7 +144,7 @@ export function ProjectsSection() {
         </div>
 
         {/* Buy Me a Coffee */}
-        <div className="mt-12 bg-card border border-border rounded-xl p-6 glow-cyan text-center max-w-md mx-auto">
+        <div className="mt-12 bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-6 shadow-[4px_4px_0_rgba(0,0,0,0.35)] glow-mc text-center max-w-md mx-auto">
           <div className="flex flex-col items-center gap-3">
             <div className="text-3xl">☕</div>
             <div>
@@ -159,10 +159,11 @@ export function ProjectsSection() {
               href="https://link.payway.com.kh/cg4094277"
               target="_blank"
               rel="noopener noreferrer"
-              className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/25 cursor-pointer"
             >
-              <span>☕</span>
-              {t("contact.buyMeCoffeeButton")}
+              <Button variant="gold">
+                <span>☕</span>
+                {t("contact.buyMeCoffeeButton")}
+              </Button>
             </a>
           </div>
         </div>

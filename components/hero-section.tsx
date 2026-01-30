@@ -17,8 +17,8 @@ export function HeroSection() {
           <div className="flex flex-col lg:flex-row items-center lg:items-start gap-6">
             {/* Profile Picture */}
             <div className="relative group flex-shrink-0">
-              <div className="absolute -inset-1 bg-gradient-to-r from-primary/40 to-accent/40 rounded-full blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative w-28 h-28 lg:w-32 lg:h-32 rounded-full overflow-hidden border-3 border-primary/40 shadow-xl theme-transition-card">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/50 to-primary/30 blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-28 h-28 lg:w-32 lg:h-32 overflow-hidden border-4 border-t-border/50 border-l-border/50 border-b-border border-r-border shadow-[4px_4px_0_rgba(0,0,0,0.25)] theme-transition-card">
                 <Image
                   src="/profile.PNG"
                   alt="Sovandara Rith"
@@ -33,7 +33,7 @@ export function HeroSection() {
             <div className="space-y-2 flex-1">
               <p className="text-primary text-sm tracking-wider">{t("hero.welcome")}</p>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                {t("hero.greeting")} <span className="text-primary text-glow">{language === "kh" ? t("hero.name") : "Sovandara Rith"}</span>
+                {t("hero.greeting")} <span className="text-primary">{language === "kh" ? t("hero.name") : "Sovandara Rith"}</span>
               </h1>
             </div>
           </div>

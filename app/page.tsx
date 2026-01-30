@@ -15,6 +15,7 @@ import { FloorTilesBackground } from "@/components/floor-tiles-background"
 import { ResumeCard } from "@/components/resume-download"
 import { LanguageWrapper } from "@/components/language-wrapper"
 import { MusicPlayer } from "@/components/music-player"
+import { Footer } from "@/components/footer"
 import { useLanguage } from "@/lib/language-context"
 
 export default function Home() {
@@ -22,7 +23,9 @@ export default function Home() {
 
   return (
     <LanguageWrapper>
-      <main className="min-h-screen bg-background relative">
+      <main className="min-h-screen bg-background relative mc-stone-texture">
+        {/* Minecraft night sky overlay */}
+        <div className="fixed inset-0 pointer-events-none mc-night-sky opacity-40" />
         <FloorTilesBackground />
         <MusicPlayer />
         <div className="relative z-10">
@@ -36,7 +39,7 @@ export default function Home() {
           <GitHubStatsSection />
           <MindsetSection />
           <AchievementsSection />
-          <section className="py-16 px-6">
+          <section id="resume" className="py-16 px-6">
             <div className="max-w-2xl mx-auto">
               <div className="mb-8 text-center">
                 <p className="text-primary text-sm tracking-wider mb-2">{t("resume.label") || "// Resume"}</p>
@@ -46,6 +49,7 @@ export default function Home() {
             </div>
           </section>
           <ContactSection />
+          <Footer />
         </div>
       </main>
     </LanguageWrapper>

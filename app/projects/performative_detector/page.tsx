@@ -5,6 +5,7 @@ import { Badge } from "@/components/ui/badge"
 import { ArrowLeft, ExternalLink, Github, Calendar, Clock, Users, Hand, Music, Camera, Eye, Sparkles, Settings, CheckCircle2, Play, Volume2, VideoOff, Video } from "lucide-react"
 import Link from "next/link"
 import { useState, useEffect, useRef, useCallback } from "react"
+import { FloorTilesBackground } from "@/components/floor-tiles-background"
 
 const techStack = [
   { name: "Python", category: "Language" },
@@ -293,9 +294,11 @@ export default function PerformativeDetectorCaseStudy() {
   }, [stopCamera])
 
   return (
-    <main className="min-h-screen bg-background">
+    <main className="min-h-screen bg-background relative">
+      <FloorTilesBackground />
+      
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-card/95 backdrop-blur-md border-b-4 border-b-[rgba(0,0,0,0.3)]">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
           <Link href="/" className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" />
@@ -313,6 +316,7 @@ export default function PerformativeDetectorCaseStudy() {
         </div>
       </nav>
 
+      <div className="relative z-10">
       {/* Hero Section */}
       <section className="pt-24 sm:pt-32 pb-12 sm:pb-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
@@ -354,8 +358,8 @@ export default function PerformativeDetectorCaseStudy() {
 
             {/* Interactive Demo Preview */}
             <div className="relative mt-8 lg:mt-0">
-              <div className="absolute -inset-2 sm:-inset-4 bg-primary/10 rounded-2xl sm:rounded-3xl blur-xl sm:blur-2xl" />
-              <div className="relative bg-card border border-border rounded-xl sm:rounded-2xl overflow-hidden glow-cyan">
+              <div className="absolute -inset-2 sm:-inset-4 bg-primary/10 blur-xl sm:blur-2xl" />
+              <div className="relative bg-card border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] overflow-hidden">
                 {/* Terminal Header */}
                 <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-secondary/50 border-b border-border">
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
@@ -488,7 +492,7 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* How It Works */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// How It Works"}</p>
@@ -501,8 +505,8 @@ export default function PerformativeDetectorCaseStudy() {
                 {index < howItWorks.length - 1 && (
                   <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-primary/50 to-transparent -z-10" />
                 )}
-                <div className="bg-card border border-border rounded-lg sm:rounded-xl p-3 sm:p-4 text-center glow-cyan-hover transition-all duration-300 h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3">
+                <div className="bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] p-3 sm:p-4 text-center glow-mc-hover transition-all duration-300 h-full">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/15 flex items-center justify-center mx-auto mb-2 sm:mb-3 border-2 border-primary/30">
                     <span className="text-lg sm:text-xl font-bold text-primary">{item.step}</span>
                   </div>
                   <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{item.title}</h3>
@@ -526,7 +530,7 @@ export default function PerformativeDetectorCaseStudy() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-card border border-border rounded-lg sm:rounded-xl glow-cyan-hover transition-all duration-300"
+                className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-gradient-to-b from-card to-card/95 border-3 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] shadow-[3px_3px_0_rgba(0,0,0,0.3)] glow-mc-hover transition-all duration-300"
               >
                 <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-primary flex-shrink-0" />
                 <span className="text-foreground text-sm sm:text-base">{feature}</span>
@@ -537,7 +541,7 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Code Sample */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Code Sample"}</p>
@@ -545,8 +549,8 @@ export default function PerformativeDetectorCaseStudy() {
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-2 bg-primary/5 rounded-xl sm:rounded-2xl blur-xl" />
-            <div className="relative bg-card border border-border rounded-lg sm:rounded-xl overflow-hidden">
+            <div className="absolute -inset-2 bg-primary/5 blur-xl" />
+            <div className="relative bg-card border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] overflow-hidden">
               <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-secondary/50 border-b border-border">
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
@@ -603,22 +607,22 @@ export default function PerformativeDetectorCaseStudy() {
             {challenges.map((challenge, index) => (
               <div
                 key={index}
-                className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300"
+                className="bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] p-4 sm:p-6 glow-mc-hover transition-all duration-300"
               >
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-lg sm:rounded-xl flex items-center justify-center flex-shrink-0">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/15 flex items-center justify-center flex-shrink-0 border-2 border-primary/30">
                     <challenge.icon className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
                   <div className="flex-1 space-y-3 sm:space-y-4">
                     <h3 className="text-lg sm:text-xl font-bold text-foreground">{challenge.title}</h3>
                     <div className="grid md:grid-cols-2 gap-3 sm:gap-4">
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-red-400">Problem</p>
-                        <p className="text-muted-foreground">{challenge.problem}</p>
+                        <p className="text-xs sm:text-sm font-medium text-[#EF5555]">Problem</p>
+                        <p className="text-sm sm:text-base text-muted-foreground">{challenge.problem}</p>
                       </div>
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-green-400">Solution</p>
-                        <p className="text-muted-foreground">{challenge.solution}</p>
+                        <p className="text-xs sm:text-sm font-medium text-[#80FF20]">Solution</p>
+                        <p className="text-sm sm:text-base text-muted-foreground">{challenge.solution}</p>
                       </div>
                     </div>
                   </div>
@@ -630,7 +634,7 @@ export default function PerformativeDetectorCaseStudy() {
       </section>
 
       {/* Spotify Integration */}
-      <section className="py-12 sm:py-16 px-4 sm:px-6 bg-card/50">
+      <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Integration"}</p>
@@ -638,22 +642,22 @@ export default function PerformativeDetectorCaseStudy() {
           </div>
           
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <div className="bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] p-4 sm:p-6 glow-mc-hover transition-all duration-300">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/15 flex items-center justify-center mb-3 sm:mb-4 border-2 border-green-500/30">
                 <Music className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Playlist Support</h3>
               <p className="text-muted-foreground text-xs sm:text-sm">Configure your favorite playlist or individual tracks to play when holding is detected.</p>
             </div>
-            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <div className="bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] p-4 sm:p-6 glow-mc-hover transition-all duration-300">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/15 flex items-center justify-center mb-3 sm:mb-4 border-2 border-green-500/30">
                 <Settings className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Shuffle Mode</h3>
               <p className="text-muted-foreground text-xs sm:text-sm">Enable shuffle to randomize playback from your configured playlist or track list.</p>
             </div>
-            <div className="bg-card border border-border rounded-lg sm:rounded-xl p-4 sm:p-6 glow-cyan-hover transition-all duration-300 sm:col-span-2 md:col-span-1">
-              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/10 rounded-lg sm:rounded-xl flex items-center justify-center mb-3 sm:mb-4">
+            <div className="bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35)] p-4 sm:p-6 glow-mc-hover transition-all duration-300 sm:col-span-2 md:col-span-1">
+              <div className="w-10 h-10 sm:w-12 sm:h-12 bg-green-500/15 flex items-center justify-center mb-3 sm:mb-4 border-2 border-green-500/30">
                 <Sparkles className="h-5 w-5 sm:h-6 sm:w-6 text-green-500" />
               </div>
               <h3 className="text-base sm:text-lg font-semibold text-foreground mb-1.5 sm:mb-2">Free Account Fallback</h3>
@@ -690,22 +694,24 @@ export default function PerformativeDetectorCaseStudy() {
           </div>
           
           {/* Buy Me a Coffee */}
-          <div className="mt-8 pt-8 border-t border-border">
+          <div className="mt-8 pt-8 border-t-2 border-border">
             <div className="flex flex-col items-center gap-3">
               <p className="text-sm text-muted-foreground">Enjoyed this project? Consider supporting my work ☕</p>
               <a
                 href="https://link.payway.com.kh/cg4094277"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="relative z-10 inline-flex items-center gap-2 px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm hover:bg-primary/90 transition-all hover:scale-105 shadow-lg shadow-primary/25 cursor-pointer"
               >
-                <span>☕</span>
-                Buy Me a Coffee
+                <Button variant="gold">
+                  <span>☕</span>
+                  Buy Me a Coffee
+                </Button>
               </a>
             </div>
           </div>
         </div>
       </section>
+      </div>
     </main>
   )
 }

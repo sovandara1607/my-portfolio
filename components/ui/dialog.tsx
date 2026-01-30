@@ -38,7 +38,7 @@ function DialogOverlay({
     <DialogPrimitive.Overlay
       data-slot="dialog-overlay"
       className={cn(
-        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50',
+        'data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/70 backdrop-blur-sm',
         className,
       )}
       {...props}
@@ -60,7 +60,17 @@ function DialogContent({
       <DialogPrimitive.Content
         data-slot="dialog-content"
         className={cn(
-          'bg-background data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 sm:max-w-lg',
+          // Minecraft panel styling
+          'bg-gradient-to-b from-card to-card/95 border-4',
+          'border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)]',
+          'border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)]',
+          'shadow-[6px_6px_0_rgba(0,0,0,0.4),0_0_40px_rgba(0,0,0,0.5)]',
+          // Animation and positioning
+          'data-[state=open]:animate-in data-[state=closed]:animate-out',
+          'data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0',
+          'data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95',
+          'fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)]',
+          'translate-x-[-50%] translate-y-[-50%] gap-4 p-6 duration-200 sm:max-w-lg',
           className,
         )}
         {...props}
@@ -69,9 +79,9 @@ function DialogContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="dialog-close"
-            className="ring-offset-background focus:ring-ring data-[state=open]:bg-accent data-[state=open]:text-muted-foreground absolute top-4 right-4 rounded-xs opacity-70 transition-opacity hover:opacity-100 focus:ring-2 focus:ring-offset-2 focus:outline-hidden disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            className="absolute top-3 right-3 w-8 h-8 flex items-center justify-center bg-gradient-to-b from-[#4A4A4A] to-[#3A3A3A] border-2 border-t-[#6A6A6A] border-l-[#6A6A6A] border-b-[#2A2A2A] border-r-[#2A2A2A] shadow-[2px_2px_0_rgba(0,0,0,0.4)] text-muted-foreground hover:text-foreground hover:from-[#5A5A5A] hover:to-[#4A4A4A] active:shadow-[1px_1px_0_rgba(0,0,0,0.3)] active:translate-x-[1px] active:translate-y-[1px] transition-all"
           >
-            <XIcon />
+            <XIcon className="size-4" />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         )}

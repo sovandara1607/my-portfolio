@@ -76,8 +76,8 @@ export function ResumeCard() {
         ${isHovered ? "opacity-100" : "opacity-0"}
       `} />
       
-      <div className="relative bg-card border border-border rounded-xl p-6 transition-all duration-300 hover:border-primary/50 glow-cyan-hover">
-        <div className="glass-subtle rounded-lg p-4 -m-4">
+      <div className="relative bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-6 shadow-[4px_4px_0_rgba(0,0,0,0.35)] transition-all duration-300 hover:shadow-[4px_4px_0_rgba(93,155,53,0.3),0_0_15px_rgba(128,255,32,0.1)] hover:border-primary/40 glow-mc-hover">
+        <div className="glass-subtle p-4 -m-4">
           <div className="flex items-start gap-4">
             {/* PDF Preview */}
             <div className="w-12 h-16 bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-500/30 rounded flex items-center justify-center flex-shrink-0">

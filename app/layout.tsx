@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { JetBrains_Mono, Kantumruy_Pro } from "next/font/google"
+import { JetBrains_Mono, Kantumruy_Pro, Press_Start_2P } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
@@ -19,6 +19,13 @@ const kantumruyPro = Kantumruy_Pro({
   variable: "--font-khmer",
 })
 
+// Minecraft pixel font - Press Start 2P
+const pressStart2P = Press_Start_2P({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-pixel",
+})
+
 export const metadata: Metadata = {
   title: "Sovandara Rith | Portfolio",
   description: "Year 3 Computer Science Student · Web & Mobile Developer ",
@@ -30,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${jetbrainsMono.variable} ${kantumruyPro.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${jetbrainsMono.variable} ${kantumruyPro.variable} ${pressStart2P.variable}`}>
       <body className={`font-mono antialiased`}>
         <ThemeProvider
           attribute="class"

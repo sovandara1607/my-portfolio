@@ -41,24 +41,24 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
       className={`
-        relative px-4 py-2 rounded-full text-sm font-medium overflow-hidden
-        transition-all duration-300 ease-out
+        relative px-4 py-2 text-sm font-medium overflow-hidden
+        border-2 transition-all duration-200 ease-out
         ${isActive 
-          ? "text-white bg-cyan-500/20 shadow-[0_0_15px_rgba(34,211,238,0.3)]" 
-          : "text-gray-300 hover:text-white hover:bg-white/10"
+          ? "text-primary bg-primary/15 border-primary/50 shadow-[inset_0_2px_0_rgba(255,255,255,0.1),inset_0_-2px_0_rgba(0,0,0,0.2)]" 
+          : "text-muted-foreground hover:text-foreground border-transparent hover:border-border hover:bg-secondary/50"
         }
-        ${isPressed ? "scale-95" : "scale-100"}
-        active:scale-95
+        ${isPressed ? "scale-95 translate-y-[1px]" : "scale-100"}
+        active:scale-95 active:translate-y-[1px]
       `}
       style={{
-        transform: isPressed ? 'scale(0.95)' : 'scale(1)',
+        transform: isPressed ? 'scale(0.95) translateY(1px)' : 'scale(1)',
       }}
     >
       {/* Ripple effects */}
       {ripples.map(ripple => (
         <span
           key={ripple.id}
-          className="absolute rounded-full bg-cyan-400/30 animate-ripple pointer-events-none"
+          className="absolute bg-primary/30 animate-ripple pointer-events-none"
           style={{
             left: ripple.x,
             top: ripple.y,
@@ -69,7 +69,7 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       
       {/* Active indicator dot */}
       {isActive && (
-        <span className="absolute bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-cyan-400 rounded-full animate-pulse" />
+        <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-2 h-[2px] bg-primary" />
       )}
       
       <span className="relative z-10">{label}</span>
@@ -89,18 +89,18 @@ function MobileNavLink({ href, label, isActive, onClick, delay }: { href: string
       onMouseUp={() => setIsPressed(false)}
       onMouseLeave={() => setIsPressed(false)}
       className={`
-        block px-4 py-3 rounded-xl text-base font-medium
+        block px-4 py-3 text-base font-medium border-l-4
         transition-all duration-200 ease-out
         ${isActive 
-          ? "text-cyan-400 bg-cyan-500/10" 
-          : "text-gray-300 hover:text-white hover:bg-white/10"
+          ? "text-primary bg-primary/15 border-l-primary" 
+          : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 border-l-transparent hover:border-l-border"
         }
-        ${isPressed ? "scale-[0.98] bg-white/15" : "scale-100"}
+        ${isPressed ? "scale-[0.98] bg-secondary" : "scale-100"}
         active:scale-[0.98]
       `}
     >
       <span className="flex items-center gap-3">
-        {isActive && <span className="w-2 h-2 bg-cyan-400 rounded-full animate-pulse" />}
+        {isActive && <span className="w-2 h-2 bg-primary" />}
         {label}
       </span>
     </a>
@@ -243,13 +243,13 @@ export function Navigation() {
       
       <nav className="fixed top-4 left-4 right-4 z-50">
         <div
-          className="max-w-6xl mx-auto border bg-zinc-800/95 backdrop-blur-xl border-white/15 shadow-lg shadow-black/20 rounded-2xl overflow-hidden"
+          className="max-w-6xl mx-auto border-2 bg-card/95 backdrop-blur-xl border-primary/40 shadow-[0_4px_0_rgba(0,0,0,0.25),inset_0_1px_0_rgba(255,255,255,0.08)] overflow-hidden"
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture and Sound Wave */}
             <div className="flex items-center gap-3">
               <a href="#" className="flex items-center gap-3 group">
-                <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-cyan-400/30 group-hover:border-cyan-400 transition-colors duration-300">
+                <div className="relative w-10 h-10 overflow-hidden border-2 border-primary/50 group-hover:border-primary transition-colors duration-300 shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
                   <Image
                     src="/profile.PNG"
                     alt="Sovandara Rith"
@@ -266,7 +266,7 @@ export function Navigation() {
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className="w-[3px] bg-green-500 rounded-full sound-wave-mini"
+                      className="w-[3px] bg-primary rounded-full sound-wave-mini"
                       style={{
                         animationDelay: `${i * 0.12}s`,
                       }}
@@ -296,7 +296,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsSearchOpen(true)}
-                className="relative w-10 h-10 rounded-full hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+                className="relative w-10 h-10 hover:bg-primary/20 transition-all duration-200 text-muted-foreground hover:text-primary border-2 border-transparent hover:border-primary/30"
                 aria-label="Search"
               >
                 <Search className="w-5 h-5" />
@@ -308,8 +308,8 @@ export function Navigation() {
                   variant="ghost"
                   size="icon"
                   onClick={toggleTheme}
-                  className={`relative w-10 h-10 rounded-full hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white ${
-                    isFlashing ? "scale-125 rotate-12" : "scale-100 rotate-0"
+                  className={`relative w-10 h-10 hover:bg-primary/20 transition-all duration-200 text-muted-foreground hover:text-primary border-2 border-transparent hover:border-primary/30 ${
+                    isFlashing ? "scale-110" : "scale-100"
                   }`}
                   aria-label="Toggle theme"
                 >
@@ -337,7 +337,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleLanguage}
-                className="relative w-10 h-10 rounded-full hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+                className="relative w-10 h-10 hover:bg-primary/20 transition-all duration-200 text-muted-foreground hover:text-primary border-2 border-transparent hover:border-primary/30"
                 aria-label="Toggle language"
               >
                 <span className="text-xs font-bold">
@@ -349,7 +349,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden w-10 h-10 rounded-full hover:bg-white/10 transition-all duration-300 text-gray-300 hover:text-white"
+                className="md:hidden w-10 h-10 hover:bg-primary/20 transition-all duration-200 text-muted-foreground hover:text-primary border-2 border-transparent hover:border-primary/30"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -404,7 +404,7 @@ export function Navigation() {
                 
                 {/* CTA Button */}
                 <Button 
-                  className="w-full mt-3 py-5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-black font-semibold transition-colors duration-200"
+                  className="w-full mt-3 py-5 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-colors duration-200 border-2 border-primary/80 shadow-[0_4px_0_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:shadow-[0_2px_0_rgba(0,0,0,0.3),inset_0_1px_0_rgba(255,255,255,0.2)] hover:translate-y-[2px]"
                   onClick={() => {
                     setIsMobileMenuOpen(false)
                     window.location.href = "#contact"
@@ -426,7 +426,7 @@ export function Navigation() {
       >
         {/* Backdrop */}
         <div 
-          className="absolute inset-0 bg-zinc-800/70 backdrop-blur-sm"
+          className="absolute inset-0 bg-background/80 backdrop-blur-sm"
           onClick={() => {
             setIsSearchOpen(false)
             setSearchQuery("")
@@ -436,22 +436,22 @@ export function Navigation() {
         {/* Search Container */}
         <div className="relative max-w-xl mx-auto mt-24 px-4">
           <div
-            className={`bg-zinc-800 border border-white/15 rounded-2xl shadow-2xl overflow-hidden transition-all duration-300 ${
+            className={`bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.12)] border-l-[rgba(255,255,255,0.12)] border-b-[rgba(0,0,0,0.35)] border-r-[rgba(0,0,0,0.35)] shadow-[4px_4px_0_rgba(0,0,0,0.35),0_0_20px_rgba(93,155,53,0.15)] overflow-hidden transition-all duration-300 ${
               isSearchOpen ? "translate-y-0 scale-100" : "-translate-y-4 scale-95"
             }`}
           >
             {/* Search Input */}
-            <div className="flex items-center gap-3 px-4 py-4 border-b border-white/10">
-              <Search className="w-5 h-5 text-gray-400 flex-shrink-0" />
+            <div className="flex items-center gap-3 px-4 py-4 border-b-3 border-b-[rgba(0,0,0,0.15)]">
+              <Search className="w-5 h-5 text-primary flex-shrink-0" />
               <input
                 ref={searchInputRef}
                 type="text"
                 placeholder={t("nav.searchPlaceholder")}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="flex-1 bg-transparent text-white placeholder-gray-500 outline-none text-base"
+                className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-base"
               />
-              <kbd className="hidden sm:inline-flex px-2 py-1 text-xs text-gray-500 bg-white/5 rounded border border-white/10">
+              <kbd className="hidden sm:inline-flex px-2 py-1 text-xs text-primary bg-primary/10 border-2 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.2)] border-r-[rgba(0,0,0,0.2)]">
                 ESC
               </kbd>
             </div>
@@ -465,15 +465,15 @@ export function Navigation() {
                       <button
                         key={section.href}
                         onClick={() => handleSearch(section.href)}
-                        className="w-full px-4 py-3 text-left text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200 flex items-center gap-3"
+                        className="w-full px-4 py-3 text-left text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200 flex items-center gap-3 border-l-3 border-transparent hover:border-l-primary"
                       >
-                        <span className="text-cyan-400">#</span>
+                        <span className="text-primary">#</span>
                         <span>{section.label}</span>
                       </button>
                     ))}
                   </div>
                 ) : (
-                  <div className="px-4 py-8 text-center text-gray-500">
+                  <div className="px-4 py-8 text-center text-muted-foreground">
                     {t("nav.noResults")} "{searchQuery}"
                   </div>
                 )}
@@ -483,14 +483,14 @@ export function Navigation() {
             {/* Quick Links when empty */}
             {!searchQuery.trim() && (
               <div className="py-2">
-                <p className="px-4 py-2 text-xs text-gray-500 uppercase tracking-wider">Quick Navigation</p>
+                <p className="px-4 py-2 text-xs text-primary uppercase tracking-wider font-medium">Quick Navigation</p>
                 {allSections.slice(0, 5).map((section) => (
                   <button
                     key={section.href}
                     onClick={() => handleSearch(section.href)}
-                    className="w-full px-4 py-3 text-left text-gray-300 hover:text-white hover:bg-white/10 transition-colors duration-200 flex items-center gap-3"
+                    className="w-full px-4 py-3 text-left text-muted-foreground hover:text-primary hover:bg-primary/10 transition-colors duration-200 flex items-center gap-3 border-l-3 border-transparent hover:border-l-primary"
                   >
-                    <span className="text-cyan-400">#</span>
+                    <span className="text-primary">#</span>
                     <span>{section.label}</span>
                   </button>
                 ))}
@@ -499,8 +499,8 @@ export function Navigation() {
           </div>
 
           {/* Keyboard hint */}
-          <p className="text-center text-gray-500 text-sm mt-4">
-            Press <kbd className="px-1.5 py-0.5 text-xs bg-white/5 rounded border border-white/10">⌘K</kbd> to open search anytime
+          <p className="text-center text-muted-foreground text-sm mt-4">
+            Press <kbd className="px-1.5 py-0.5 text-xs text-primary bg-primary/10 border-2 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.2)] border-r-[rgba(0,0,0,0.2)]">⌘K</kbd> to open search anytime
           </p>
         </div>
       </div>

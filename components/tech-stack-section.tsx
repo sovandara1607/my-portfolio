@@ -37,7 +37,7 @@ export function TechStackSection() {
   ]
 
   return (
-    <section id="tech" className="py-24 px-4 bg-secondary/20">
+    <section id="tech" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-2">{t("tech.label")}</p>
@@ -52,14 +52,14 @@ export function TechStackSection() {
                 {category.items.map((item, itemIndex) => (
                   <div
                     key={itemIndex}
-                    className="group relative bg-card border border-border rounded-lg p-3 text-center text-sm text-foreground glow-cyan-hover transition-all duration-300 hover:border-primary/50 overflow-hidden"
+                    className="group relative bg-gradient-to-b from-card to-card/90 border-2 border-t-border/30 border-l-border/30 border-b-border/60 border-r-border/60 p-3 text-center text-sm text-foreground transition-all duration-300 hover:border-primary/50 overflow-hidden shadow-[3px_3px_0_rgba(0,0,0,0.2)] hover:shadow-[3px_3px_0_rgba(0,0,0,0.15),0_0_15px_rgba(93,155,53,0.1)]"
                   >
                     <span className="relative z-10 group-hover:text-primary transition-colors">{item.name}</span>
                     
-                    {/* Progress bar on hover */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-secondary/50">
+                    {/* Minecraft XP bar style progress on hover */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1.5 bg-gradient-to-b from-secondary to-secondary/80 border-t border-border">
                       <div 
-                        className="h-full bg-primary/60 transition-all duration-500 ease-out origin-left md:scale-x-0 md:group-hover:scale-x-100"
+                        className="h-full bg-gradient-to-b from-primary via-primary/80 to-primary/60 transition-all duration-500 ease-out origin-left md:scale-x-0 md:group-hover:scale-x-100 shadow-[inset_0_1px_0_rgba(255,255,255,0.3)]"
                         style={{ width: `${item.proficiency}%` }}
                       />
                     </div>

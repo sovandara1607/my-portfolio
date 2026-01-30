@@ -2,19 +2,6 @@
 
 import { useLanguage } from "@/lib/language-context"
 
-const getTierGlow = (tier: string) => {
-  switch (tier) {
-    case "gold":
-      return "hover:shadow-[0_0_24px_rgba(234,179,8,0.2)]"
-    case "silver":
-      return "hover:shadow-[0_0_24px_rgba(156,163,175,0.2)]"
-    case "bronze":
-      return "hover:shadow-[0_0_24px_rgba(217,119,6,0.2)]"
-    default:
-      return "hover:shadow-[0_0_24px_rgba(56,189,248,0.2)]"
-  }
-}
-
 export function AchievementsSection() {
   const { t } = useLanguage()
 
@@ -45,11 +32,11 @@ export function AchievementsSection() {
           {achievements.map((achievement, index) => (
             <div
               key={index}
-              className={`group bg-card border border-border rounded-xl p-6 text-center transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 ${getTierGlow(achievement.tier)}`}
+              className={`group bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-6 text-center transition-all duration-300 hover:border-primary/50 hover:-translate-y-1 shadow-[4px_4px_0_rgba(0,0,0,0.35)] glow-mc-hover`}
             >
-              <div className="glass-subtle rounded-lg p-4 -m-2">
+              <div className="glass-subtle p-4 -m-2">
                 <span className="text-2xl mb-4 block">{achievement.emoji}</span>
-                <h3 className="font-semibold text-foreground mb-2 group-hover:text-primary transition-colors">{achievement.title}</h3>
+                <h3 className="font-semibold text-foreground mb-2 group-hover:text-[#80FF20] transition-colors">{achievement.title}</h3>
                 <p className="text-sm text-muted-foreground">{achievement.description}</p>
               </div>
             </div>

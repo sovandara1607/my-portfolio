@@ -223,7 +223,7 @@ export function GitHubStatsSection() {
           ].map((stat, index) => (
             <div
               key={stat.label}
-              className={`relative group bg-card border border-border rounded-xl p-4 text-center glow-cyan-hover transition-all duration-500 ${
+              className={`relative group bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-4 text-center shadow-[3px_3px_0_rgba(0,0,0,0.3)] glow-mc-hover transition-all duration-500 ${
                 isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
@@ -240,8 +240,8 @@ export function GitHubStatsSection() {
 
         {/* Contribution Graph */}
         <div className="mb-8 relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-          <div className="relative bg-card border border-border rounded-xl p-4 overflow-hidden">
+          <div className="absolute -inset-1 bg-gradient-to-r from-primary/5 via-transparent to-primary/5 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="relative bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-4 overflow-hidden shadow-[4px_4px_0_rgba(0,0,0,0.35)]">
             <div className="flex items-center justify-between mb-4">
               <h3 className="text-base font-semibold text-foreground">146 contributions in the last year</h3>
             </div>
@@ -261,7 +261,7 @@ export function GitHubStatsSection() {
                       return (
                         <div
                           key={dayIndex}
-                          className={`w-[10px] h-[10px] rounded-sm ${bgClass} transition-all duration-200 hover:scale-150 hover:z-10`}
+                          className={`w-[10px] h-[10px] ${bgClass} transition-all duration-200 hover:scale-150 hover:z-10`}
                         />
                       )
                     })}
@@ -272,11 +272,11 @@ export function GitHubStatsSection() {
             <div className="flex items-center justify-end gap-2 mt-4 text-xs text-muted-foreground">
               <span>Less</span>
               <div className="flex gap-1">
-                <div className="w-[10px] h-[10px] rounded-sm bg-secondary/50" />
-                <div className="w-[10px] h-[10px] rounded-sm bg-green-900/60" />
-                <div className="w-[10px] h-[10px] rounded-sm bg-green-700/70" />
-                <div className="w-[10px] h-[10px] rounded-sm bg-green-500/80" />
-                <div className="w-[10px] h-[10px] rounded-sm bg-green-400" />
+                <div className="w-[10px] h-[10px] bg-secondary/50" />
+                <div className="w-[10px] h-[10px] bg-green-900/60" />
+                <div className="w-[10px] h-[10px] bg-green-700/70" />
+                <div className="w-[10px] h-[10px] bg-green-500/80" />
+                <div className="w-[10px] h-[10px] bg-green-400" />
               </div>
               <span>More</span>
             </div>
@@ -290,7 +290,7 @@ export function GitHubStatsSection() {
             {achievements.map((achievement, index) => (
               <div
                 key={achievement.id}
-                className={`relative group bg-gradient-to-br ${getTierStyles(achievement.tier)} border rounded-xl p-5 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg`}
+                className={`relative group bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-5 shadow-[3px_3px_0_rgba(0,0,0,0.3)] transition-all duration-300 hover:shadow-[4px_4px_0_rgba(93,155,53,0.3),0_0_15px_rgba(128,255,32,0.1)] hover:border-primary/40`}
                 style={{
                   animationDelay: `${index * 100}ms`,
                 }}

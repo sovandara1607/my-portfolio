@@ -36,13 +36,13 @@ export function CodePreview() {
 
   return (
     <div className="relative group">
-      <div className="absolute -inset-4 bg-primary/5 rounded-2xl blur-xl group-hover:bg-primary/10 transition-colors duration-500" />
-      <div className="relative bg-card border border-border rounded-xl overflow-hidden glow-cyan">
-        {/* Terminal Header */}
-        <div className="flex items-center gap-2 px-4 py-2 bg-secondary/50 border-b border-border">
-          <div className="w-2.5 h-2.5 rounded-full bg-red-500/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/80" />
-          <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
+      <div className="absolute -inset-4 bg-primary/8 blur-xl group-hover:bg-primary/12 transition-colors duration-500" />
+      <div className="relative bg-gradient-to-b from-card to-card/95 border-4 border-t-border/30 border-l-border/30 border-b-border/70 border-r-border/70 overflow-hidden shadow-[5px_5px_0_rgba(0,0,0,0.25)] glow-mc">
+        {/* Terminal Header - Minecraft style */}
+        <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-secondary/60 to-secondary/40 border-b-2 border-b-border/50">
+          <div className="w-3 h-3 bg-destructive border border-destructive/80" />
+          <div className="w-3 h-3 bg-warning border border-warning/80" />
+          <div className="w-3 h-3 bg-primary border border-primary/80" />
           <span className="ml-4 text-xs text-muted-foreground">developer.ts</span>
         </div>
 
@@ -63,7 +63,7 @@ export function CodePreview() {
             <span className="text-muted-foreground/40 mr-4 select-none text-xs">
               {String(codeLines.length + 1).padStart(2, "0")}
             </span>
-            <span className="inline-block w-1.5 h-4 bg-primary terminal-cursor" />
+            <span className="inline-block w-2 h-4 bg-primary terminal-cursor" />
           </div>
         </div>
       </div>
