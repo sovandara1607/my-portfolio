@@ -323,48 +323,77 @@
   }
 
   /* ========================================
-     TYPOGRAPHY SCALE
+     TYPOGRAPHY SCALE - MINECRAFT PIXEL FONT
+     Only apply to actual content headings, not nav/UI elements
      ======================================== */
-  h1,
+  section h1,
+  section h2,
+  section h3,
+  main > h1,
+  main > h2,
+  .text-h1,
+  .text-h2,
+  .text-h3,
+  .font-pixel {
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
+  }
+
+  section h1,
+  main > h1,
   .text-h1 {
-    font-size: var(--text-5xl);
-    line-height: var(--leading-tight);
-    font-weight: 700;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    line-height: var(--leading-relaxed);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.3);
   }
 
-  h2,
+  section h2,
+  main > h2,
   .text-h2 {
-    font-size: var(--text-4xl);
-    line-height: var(--leading-tight);
-    font-weight: 700;
+    font-size: clamp(1rem, 3vw, 1.5rem);
+    line-height: var(--leading-relaxed);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
   }
 
-  h3,
+  section h3,
   .text-h3 {
-    font-size: var(--text-3xl);
-    line-height: var(--leading-snug);
-    font-weight: 600;
+    font-size: clamp(0.75rem, 2vw, 1rem);
+    line-height: var(--leading-relaxed);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.2);
+  }
+
+  /* Regular headings (cards, nav, etc) use mono font */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-jetbrains), "JetBrains Mono", monospace;
+    font-weight: 700;
   }
 
   h4,
   .text-h4 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
     line-height: var(--leading-snug);
-    font-weight: 600;
   }
 
   h5,
   .text-h5 {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
     line-height: var(--leading-normal);
-    font-weight: 600;
   }
 
   h6,
   .text-h6 {
-    font-size: var(--text-lg);
+    font-size: var(--text-base);
     line-height: var(--leading-normal);
-    font-weight: 600;
   }
 
   .text-body {
@@ -385,9 +414,39 @@
 
   /* Pixel font heading variant */
   .text-pixel {
-    font-family: "Press Start 2P", monospace;
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
     letter-spacing: 0.05em;
     line-height: var(--leading-relaxed);
+  }
+
+  /* Pixel font sizes for various elements */
+  .text-pixel-xs {
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
+    font-size: 0.5rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  .text-pixel-sm {
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
+    font-size: 0.625rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  .text-pixel-base {
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
+    font-size: 0.75rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  .text-pixel-lg {
+    font-family: var(--font-pixel), "Press Start 2P", monospace;
+    font-size: 1rem;
+    line-height: var(--leading-relaxed);
+  }
+
+  /* Reset to mono font for code/terminal */
+  .font-mono-reset {
+    font-family: var(--font-jetbrains), "JetBrains Mono", monospace !important;
   }
 
   /* Smooth card elevation during theme switch */
@@ -411,10 +470,16 @@
    MINECRAFT-STYLE EFFECTS & ANIMATIONS
    ======================================== */
 
-/* Pixel font for headings */
+/* Pixel font for headings - main class */
 .font-pixel {
-  font-family: "Press Start 2P", monospace;
-  letter-spacing: 0.05em;
+  font-family: var(--font-pixel), "Press Start 2P", monospace !important;
+  letter-spacing: 0.02em;
+  text-shadow: 2px 2px 0 rgba(0, 0, 0, 0.25);
+}
+
+/* Light mode: softer text shadow */
+.light .font-pixel {
+  text-shadow: 1px 1px 0 rgba(0, 0, 0, 0.15);
 }
 
 /* Minecraft block-style border */
@@ -1089,6 +1154,14 @@ a:hover {
 .lang-kh h1,
 .lang-kh h2,
 .lang-kh h3,
+.lang-kh h4,
+.lang-kh h5,
+.lang-kh h6 {
+  font-family:
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  text-shadow: none;
+}
+
 .lang-kh p,
 .lang-kh span,
 .lang-kh a,

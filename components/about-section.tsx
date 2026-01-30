@@ -19,7 +19,7 @@ export function AboutSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-2">{t("about.label")}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("about.title")}</h2>
+          <h2 className="text-lg md:text-xl font-bold text-foreground font-pixel">{t("about.title")}</h2>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-8">

@@ -93,7 +93,7 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
-              © {currentYear} Sovandara. {language === "kh" ? "រក្សាសិទ្ធិគ្រប់យ៉ាង។" : "All rights reserved."}
+              © {currentYear} Sovandara Rith. {language === "kh" ? "រក្សាសិទ្ធិគ្រប់យ៉ាង។" : "All rights reserved."}
             </p>
             <p className="text-xs text-muted-foreground flex items-center gap-1">
               {language === "kh" ? "បង្កើតដោយ" : "Built with"}

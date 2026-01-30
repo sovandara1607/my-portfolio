@@ -91,7 +91,7 @@ export default function FitnessAppCaseStudy() {
                 <Badge variant="outline">
                   Case Study
                 </Badge>
-                <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+                <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground font-pixel">
                   Track Your <span className="text-primary text-glow">Fitness</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground">
@@ -260,7 +260,7 @@ export default function FitnessAppCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-xs sm:text-sm tracking-wider mb-2">{"// Key Features"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">What Makes It Special</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">What Makes It Special</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -282,7 +282,7 @@ export default function FitnessAppCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-xs sm:text-sm tracking-wider mb-2">{"// Technical Deep Dive"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Challenges & Solutions</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Challenges & Solutions</h2>
           </div>
           
           <div className="space-y-4 sm:space-y-6">
@@ -320,7 +320,7 @@ export default function FitnessAppCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-xs sm:text-sm tracking-wider mb-2">{"// Project Timeline"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Development Journey</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Development Journey</h2>
           </div>
           
           <div className="relative">
@@ -349,7 +349,7 @@ export default function FitnessAppCaseStudy() {
       {/* CTA Section */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">Interested in Working Together?</h2>
+          <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel mb-3 sm:mb-4">Interested in Working Together?</h2>
           <p className="text-sm sm:text-base text-muted-foreground mb-6 sm:mb-8">
             I'm always open to discussing new projects and opportunities.
           </p>

@@ -32,8 +32,8 @@ export function HeroSection() {
             {/* Name and Title */}
             <div className="space-y-2 flex-1">
               <p className="text-primary text-sm tracking-wider">{t("hero.welcome")}</p>
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-                {t("hero.greeting")} <span className="text-primary">{language === "kh" ? t("hero.name") : "Sovandara Rith"}</span>
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground leading-relaxed font-pixel">
+                {t("hero.greeting")} <span className="text-primary text-glow">{language === "kh" ? t("hero.name") : "Sovandara Rith"}</span>
               </h1>
             </div>
           </div>

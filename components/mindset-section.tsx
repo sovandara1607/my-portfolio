@@ -21,7 +21,7 @@ export function MindsetSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8">
           <p className="text-primary text-sm tracking-wider mb-2">{t("mindset.label")}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">{t("mindset.title")}</h2>
+          <h2 className="text-lg md:text-xl font-bold text-foreground font-pixel">{t("mindset.title")}</h2>
         </div>
 
         <div className="bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-8 shadow-[4px_4px_0_rgba(0,0,0,0.35)] glow-mc">

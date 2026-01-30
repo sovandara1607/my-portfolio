@@ -325,7 +325,7 @@ export default function PerformativeDetectorCaseStudy() {
               <Badge variant="outline" className="border-primary text-primary">
                 Case Study
               </Badge>
-              <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-foreground">
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground font-pixel">
                 Performative <span className="text-primary text-glow">Detector</span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground">
@@ -496,7 +496,7 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// How It Works"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Detection Pipeline</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Detection Pipeline</h2>
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4">
@@ -523,7 +523,7 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Capabilities"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Features</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Features</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
@@ -545,7 +545,7 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Code Sample"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Hand Detection Logic</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Hand Detection Logic</h2>
           </div>
           
           <div className="relative">
@@ -600,7 +600,7 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Technical Deep Dive"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Challenges & Solutions</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Challenges & Solutions</h2>
           </div>
           
           <div className="space-y-4 sm:space-y-6">
@@ -638,7 +638,7 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
             <p className="text-primary text-sm tracking-wider mb-2">{"// Integration"}</p>
-            <h2 className="text-2xl sm:text-3xl font-bold text-foreground">Spotify Features</h2>
+            <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel">Spotify Features</h2>
           </div>
           
           <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
@@ -670,7 +670,7 @@ export default function PerformativeDetectorCaseStudy() {
       {/* CTA Section */}
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-3 sm:mb-4">Want to Try It?</h2>
+          <h2 className="text-base sm:text-lg font-bold text-foreground font-pixel mb-3 sm:mb-4">Want to Try It?</h2>
           <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base">
             Clone the repo and detect your own performative moments! ✨🍵
           </p>

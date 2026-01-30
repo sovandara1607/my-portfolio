@@ -210,7 +210,7 @@ export function GitHubStatsSection() {
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 text-center">
           <p className="text-primary text-sm tracking-wider mb-2">{"// GitHub Profile"}</p>
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">Stats & Achievements</h2>
+          <h2 className="text-lg md:text-xl font-bold text-foreground font-pixel">Stats & Achievements</h2>
         </div>
 
         {/* Stats Grid */}
