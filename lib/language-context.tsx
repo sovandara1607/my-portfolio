@@ -27,14 +27,14 @@ const translations: Record<Language, Record<string, string>> = {
     "hero.welcome": "// Welcome to my portfolio",
     "hero.greeting": "Hi, I'm",
     "hero.name": "Sovandara Rith",
-    "hero.subtitle": "Year 3 Computer Science Student · Web & Mobile Developer",
+    "hero.subtitle": "Year 3 Computer Science Student · Currently Learning Web & Mobile Development",
     "hero.viewProjects": "View Projects →",
     "hero.downloadResume": "Download Resume",
 
     // About Section
     "about.label": "// About Me",
-    "about.title": "Who I Am",
-    "about.description1": "Passionate about building real-world, user-focused applications. I have experience across full-stack web, mobile apps, and a little bit of IoT development.",
+    "about.title": "Who Am I",
+    "about.description1": "Passionate about building real-world, user-focused applications. I have experience across full-stack web, mobile apps.",
     "about.description2": "My focus is on clean UI, solid backend architecture, and maintainability. I believe in writing code that not only works but is elegant and scalable.",
     "about.careerGoal": "Career Goal",
     "about.careerGoalText": "Software Engineer ~ Hopefully",
@@ -44,7 +44,7 @@ const translations: Record<Language, Record<string, string>> = {
     "about.interest3": "Open Source Contribution",
     "about.interest4": "Cloud Computing & DevOps",
     "about.interest5": "AI & Machine Learning",
-    "about.interest6": "System Design",
+
 
     // Tech Stack Section
     "tech.label": "// Tech Stack",
@@ -121,10 +121,10 @@ const translations: Record<Language, Record<string, string>> = {
 
     // Hero Section
     "hero.welcome": "// សូមស្វាគមន៍មកកាន់ Portfolio របស់ខ្ញុំ",
-    "hero.greeting": "សួស្ដី ខ្ញុំឈ្មោះ",
+    "hero.greeting": "សួស្ដី ខ្ញុំបាទឈ្មោះ",
     "hero.name": "រិទ្ធ សុវណ្ណតារា",
-    "hero.subtitle": "ជានិស្សិតវិទ្យាសាស្ត្រកុំព្យូទ័រឆ្នាំទី៣ · អ្នកអភិវឌ្ឍន៍ Web & Mobile",
-    "hero.viewProjects": "មើលគម្រោង →",
+    "hero.subtitle": "សព្វថ្ងៃជានិស្សិតវិទ្យាសាស្ត្រកុំព្យូទ័រឆ្នាំទី៣ · កំពុងរៀន Web & Mobile Development",
+    "hero.viewProjects": "ចុចមើលគម្រោង →",
     "hero.downloadResume": "ទាញយក Resume",
 
     // About Section
@@ -140,7 +140,7 @@ const translations: Record<Language, Record<string, string>> = {
     "about.interest3": "Open Source Contribution",
     "about.interest4": "Cloud Computing & DevOps",
     "about.interest5": "AI & Machine Learning",
-    "about.interest6": "System Design",
+
 
     // Tech Stack Section
     "tech.label": "// បច្ចេកវិទ្យា",

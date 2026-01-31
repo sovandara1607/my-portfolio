@@ -1145,10 +1145,10 @@ a:hover {
   animation: active-glow 2s ease-in-out infinite;
 }
 
-/* Khmer language font */
+/* Khmer language font - must override pixel font */
 .lang-kh {
   font-family:
-    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
 }
 
 .lang-kh h1,
@@ -1156,16 +1156,27 @@ a:hover {
 .lang-kh h3,
 .lang-kh h4,
 .lang-kh h5,
-.lang-kh h6 {
+.lang-kh h6,
+.lang-kh .font-pixel {
   font-family:
-    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
-  text-shadow: none;
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
+  text-shadow: none !important;
 }
 
 .lang-kh p,
 .lang-kh span,
 .lang-kh a,
-.lang-kh button {
+.lang-kh button,
+.lang-kh li,
+.lang-kh label,
+.lang-kh input,
+.lang-kh textarea {
+  font-family:
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
+}
+
+/* Ensure all text elements in Khmer mode use Khmer font */
+.lang-kh * {
   font-family:
     var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
 }

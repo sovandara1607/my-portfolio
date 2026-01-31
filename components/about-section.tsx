@@ -11,7 +11,6 @@ export function AboutSection() {
     t("about.interest3"),
     t("about.interest4"),
     t("about.interest5"),
-    t("about.interest6"),
   ]
 
   return (
