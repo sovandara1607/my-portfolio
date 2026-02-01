@@ -4,7 +4,7 @@ import { useLanguage } from "@/lib/language-context"
 
 const techItems = {
   languages: [
-    { name: "C++", proficiency: 70 },
+    { name: "C++", proficiency: 75 },
     { name: "Python", proficiency: 75 },
     { name: "PHP", proficiency: 65 },
     { name: "JavaScript", proficiency: 70 },
@@ -15,13 +15,13 @@ const techItems = {
     { name: "Expo", proficiency: 85 },
     { name: "Flutter", proficiency: 65 },
     { name: "Docker", proficiency: 80 },
-    { name: "Git", proficiency: 95 },
+    { name: "Git", proficiency: 90 },
     { name: "MySQL", proficiency: 80 },
     { name: "PostgreSQL", proficiency: 75 },
   ],
   other: [
     { name: "Convex", proficiency: 80 },
-    { name: "ESP32", proficiency: 50 },
+    // { name: "ESP32", proficiency: 50 },
     { name: "REST APIs", proficiency: 90 },
     { name: "DigitalOcean", proficiency: 80 },
   ],
