@@ -56,8 +56,8 @@ export function ProjectsSection() {
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <p className="text-primary text-sm tracking-wider mb-2">{t("projects.label")}</p>
-          <h2 className="text-lg md:text-xl font-bold text-foreground font-pixel">{t("projects.title")}</h2>
+          <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{t("projects.label")}</p>
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground">{t("projects.title")}</h2>
         </div>
 
         <div className="grid md:grid-cols-2 gap-8">
@@ -66,23 +66,20 @@ export function ProjectsSection() {
               key={index}
               className="group relative"
             >
-              {/* Glow effect */}
-              <div className="absolute -inset-2 bg-primary/6 blur-xl opacity-50 group-hover:opacity-100 group-hover:bg-primary/12 transition-all duration-500" />
-              
-              <div className="relative bg-gradient-to-b from-card to-card/95 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] overflow-hidden shadow-[4px_4px_0_rgba(0,0,0,0.35)] transition-all duration-300 hover:shadow-[4px_4px_0_rgba(93,155,53,0.3),0_0_20px_rgba(128,255,32,0.12)]">
+              <div className="relative glass-card overflow-hidden transition-all duration-300">
                 {/* Terminal Header - Minecraft style */}
-                <div className="flex items-center gap-2 px-4 py-2 bg-gradient-to-b from-secondary/55 to-secondary/35 border-b-3 border-b-[rgba(0,0,0,0.2)]">
-                  <div className="w-3 h-3 bg-[#D93A3A] border border-[#A82C2C]" />
-                  <div className="w-3 h-3 bg-[#FCDB00] border border-[#C4A800]" />
-                  <div className="w-3 h-3 bg-[#5D9B35] border border-[#4A7D2A]" />
+                <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.02] border-b border-white/10">
+                  <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
+                  <div className="w-3 h-3 rounded-full bg-[#febd2f]" />
+                  <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                   <span className="ml-4 text-xs text-muted-foreground">{project.filename}</span>
                   {project.pinned && (
-                    <span className="ml-auto text-[10px] text-[#80FF20] drop-shadow-[0_0_4px_rgba(128,255,32,0.5)]">{t("projects.pinned")}</span>
+                    <span className="ml-auto text-[10px] text-white/50">{t("projects.pinned")}</span>
                   )}
                 </div>
 
                 {/* Code Content */}
-                <div className="p-4 font-mono text-sm glass-subtle">
+                <div className="p-4 font-mono text-sm">
                   {project.code.map((line, lineIndex) => (
                     <div key={lineIndex} className="leading-6">
                       <span className="text-muted-foreground/40 mr-4 select-none text-xs">
@@ -95,14 +92,14 @@ export function ProjectsSection() {
                     <span className="text-muted-foreground/40 mr-4 select-none text-xs">
                       {String(project.code.length + 1).padStart(2, "0")}
                     </span>
-                    <span className="inline-block w-2 h-4 bg-[#80FF20] terminal-cursor" />
+                    <span className="inline-block w-2 h-4 bg-white/60 animate-pulse" />
                   </div>
                 </div>
 
                 {/* Project Info */}
-                <div className="p-4 space-y-4 border-t-3 border-t-[rgba(0,0,0,0.2)]">
+                <div className="p-4 space-y-4 border-t border-white/10">
                   <div>
-                    <h3 className="text-base font-semibold text-foreground group-hover:text-[#80FF20] transition-colors">
+                    <h3 className="text-base font-semibold text-foreground group-hover:text-white transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-muted-foreground text-sm mt-1">{project.description}</p>
@@ -110,7 +107,7 @@ export function ProjectsSection() {
 
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="text-xs text-muted-foreground bg-gradient-to-b from-secondary/70 to-secondary/50 px-2 py-1 border-2 border-t-[rgba(255,255,255,0.08)] border-l-[rgba(255,255,255,0.08)] border-b-[rgba(0,0,0,0.2)] border-r-[rgba(0,0,0,0.2)]">
+                      <span key={techIndex} className="text-xs text-muted-foreground bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
                         {tech}
                       </span>
                     ))}
@@ -121,18 +118,18 @@ export function ProjectsSection() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-border text-foreground hover:bg-secondary bg-transparent h-8 text-xs"
+                        className="border-white/10 text-foreground hover:bg-white/5 bg-transparent h-8 text-xs rounded-full"
                       >
                         {t("projects.code")}
                       </Button>
                     </a>
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs">
+                      <Button size="sm" className="bg-white text-black hover:bg-white/90 h-8 text-xs rounded-full">
                         {t("projects.demo")}
                       </Button>
                     </a>
                     <Link href={project.caseStudy}>
-                      <Button size="sm" variant="ghost" className="text-primary hover:text-primary hover:bg-primary/10 h-8 text-xs">
+                      <Button size="sm" variant="ghost" className="text-white/50 hover:text-white hover:bg-white/5 h-8 text-xs rounded-full">
                         {t("projects.caseStudy")}
                       </Button>
                     </Link>
@@ -144,7 +141,7 @@ export function ProjectsSection() {
         </div>
 
         {/* Buy Me a Coffee */}
-        <div className="mt-12 bg-gradient-to-b from-card to-card/90 border-4 border-t-[rgba(255,255,255,0.1)] border-l-[rgba(255,255,255,0.1)] border-b-[rgba(0,0,0,0.3)] border-r-[rgba(0,0,0,0.3)] p-6 shadow-[4px_4px_0_rgba(0,0,0,0.35)] glow-mc text-center max-w-md mx-auto">
+        <div className="mt-12 glass-card p-6 text-center max-w-md mx-auto">
           <div className="flex flex-col items-center gap-3">
             <div className="text-3xl">☕</div>
             <div>
@@ -160,7 +157,7 @@ export function ProjectsSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button variant="gold">
+              <Button className="bg-amber-500 hover:bg-amber-400 text-black rounded-full px-6 font-semibold">
                 <span>☕</span>
                 {t("contact.buyMeCoffeeButton")}
               </Button>
