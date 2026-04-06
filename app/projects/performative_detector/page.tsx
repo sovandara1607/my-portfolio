@@ -295,15 +295,15 @@ export default function PerformativeDetectorCaseStudy() {
   return (
     <main className="min-h-screen bg-background relative">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/60 backdrop-blur-2xl border-b border-white/10">
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-2xl border-b border-border">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex items-center justify-between">
-          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-white transition-colors">
+          <Link href="/" className="flex items-center gap-1.5 sm:gap-2 text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="h-4 w-4" />
             <span className="text-sm sm:text-base">Back</span>
           </Link>
           <div className="flex items-center gap-2 sm:gap-3">
             <a href="https://github.com/sovandara1607/performative_detector" target="_blank" rel="noopener noreferrer">
-              <Button variant="outline" size="sm" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10 text-xs sm:text-sm px-2.5 sm:px-3 h-8 sm:h-9">
+              <Button variant="outline" size="sm" className="rounded-full border-border bg-muted hover:bg-primary/10 text-xs sm:text-sm px-2.5 sm:px-3 h-8 sm:h-9">
                 <Github className="h-3.5 w-3.5 sm:h-4 sm:w-4 mr-1.5 sm:mr-2" />
                 <span className="hidden sm:inline">View Code</span>
                 <span className="sm:hidden">Code</span>
@@ -319,11 +319,11 @@ export default function PerformativeDetectorCaseStudy() {
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <div className="space-y-4 sm:space-y-6">
-              <Badge variant="outline" className="rounded-full border-white/20 bg-white/5">
+              <Badge variant="outline" className="rounded-full border-border bg-muted">
                 Case Study
               </Badge>
               <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">
-                Performative <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">Detector</span>
+                Performative <span className="bg-gradient-to-r text-primary">Detector</span>
               </h1>
               <p className="text-lg sm:text-xl text-muted-foreground">
                 A fun Python project that uses MediaPipe and computer vision to detect when you&apos;re holding a matcha (or any cup) and plays your favorite songs on Spotify while displaying &quot;PERFORMATIVE&quot; on screen.
@@ -331,22 +331,22 @@ export default function PerformativeDetectorCaseStudy() {
               
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <div className="flex items-center gap-2">
-                  <Calendar className="h-4 w-4 text-white/40" />
+                  <Calendar className="h-4 w-4 text-muted-foreground" />
                   <span>2025</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-white/40" />
+                  <Clock className="h-4 w-4 text-muted-foreground" />
                   <span>~2 weeks</span>
                 </div>
                 <div className="flex items-center gap-2">
-                  <Users className="h-4 w-4 text-white/40" />
+                  <Users className="h-4 w-4 text-muted-foreground" />
                   <span>Personal Project</span>
                 </div>
               </div>
 
               <div className="flex flex-wrap gap-2">
                 {techStack.map((tech) => (
-                  <Badge key={tech.name} variant="secondary" className="bg-white/5 border border-white/10 rounded-full">
+                  <Badge key={tech.name} variant="secondary" className="bg-muted border border-border rounded-full">
                     {tech.name}
                   </Badge>
                 ))}
@@ -355,10 +355,10 @@ export default function PerformativeDetectorCaseStudy() {
 
             {/* Interactive Demo Preview */}
             <div className="relative mt-8 lg:mt-0">
-              <div className="absolute -inset-2 sm:-inset-4 bg-white/[0.02] blur-xl sm:blur-2xl" />
+              <div className="absolute -inset-2 sm:-inset-4 bg-primary/5 blur-xl sm:blur-2xl" />
               <div className="relative glass-card overflow-hidden rounded-2xl">
                 {/* Terminal Header */}
-                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-white/[0.03] border-b border-white/[0.08]">
+                <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-muted border-b border-border">
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-red-500/80" />
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
@@ -424,22 +424,22 @@ export default function PerformativeDetectorCaseStudy() {
                   
                   {/* Status overlay */}
                   <div className="absolute top-2 sm:top-4 left-2 sm:left-4 right-2 sm:right-4 flex items-center justify-between gap-2 pointer-events-none z-20">
-                    <div className="flex items-center gap-1.5 sm:gap-2 bg-black/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
+                    <div className="flex items-center gap-1.5 sm:gap-2 bg-foreground/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
                       <div className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${cameraActive ? (isHolding ? 'bg-green-500' : 'bg-yellow-500') : 'bg-red-500'} animate-pulse`} />
-                      <span className="text-[10px] sm:text-xs text-white font-mono">
+                      <span className="text-[10px] sm:text-xs text-background font-mono">
                         {!cameraActive ? 'OFF' : isHolding ? 'DETECTED' : handsDetected > 0 ? 'TRACKING' : 'SCAN'}
                       </span>
                     </div>
                     <div className="flex items-center gap-1 sm:gap-2">
                       {cameraActive && (
-                        <div className="hidden sm:flex items-center gap-2 bg-black/60 rounded-lg px-3 py-1.5 backdrop-blur-sm">
-                          <Hand className="h-3 w-3 text-white" />
-                          <span className="text-xs text-white font-mono">{handsDetected}</span>
+                        <div className="hidden sm:flex items-center gap-2 bg-foreground/60 rounded-lg px-3 py-1.5 backdrop-blur-sm">
+                          <Hand className="h-3 w-3 text-background" />
+                          <span className="text-xs text-background font-mono">{handsDetected}</span>
                         </div>
                       )}
-                      <div className="flex items-center gap-1 sm:gap-2 bg-black/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
-                        <Camera className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-white" />
-                        <span className="text-[10px] sm:text-xs text-white font-mono">{cameraActive ? 'LIVE' : 'OFF'}</span>
+                      <div className="flex items-center gap-1 sm:gap-2 bg-foreground/60 rounded-md sm:rounded-lg px-2 sm:px-3 py-1 sm:py-1.5 backdrop-blur-sm">
+                        <Camera className="h-2.5 w-2.5 sm:h-3 sm:w-3 text-background" />
+                        <span className="text-[10px] sm:text-xs text-background font-mono">{cameraActive ? 'LIVE' : 'OFF'}</span>
                       </div>
                     </div>
                   </div>
@@ -469,7 +469,7 @@ export default function PerformativeDetectorCaseStudy() {
                         onClick={stopCamera}
                         variant="outline"
                         size="sm"
-                        className="bg-black/60 border-white/20 text-white hover:bg-black/70 text-xs sm:text-sm px-2 sm:px-3 h-7 sm:h-9 cursor-pointer"
+                        className="bg-foreground/60 border-border text-background hover:bg-foreground/70 text-xs sm:text-sm px-2 sm:px-3 h-7 sm:h-9 cursor-pointer"
                       >
                         <VideoOff className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                         Stop
@@ -492,7 +492,7 @@ export default function PerformativeDetectorCaseStudy() {
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{"// How It Works"}</p>
+            <p className="text-muted-foreground text-sm tracking-wider uppercase mb-2">{"// How It Works"}</p>
             <h2 className="text-base sm:text-lg font-bold text-foreground">Detection Pipeline</h2>
           </div>
           
@@ -503,8 +503,8 @@ export default function PerformativeDetectorCaseStudy() {
                   <div className="hidden md:block absolute top-8 left-full w-full h-0.5 bg-gradient-to-r from-white/10 to-transparent -z-10" />
                 )}
                 <div className="glass-card p-3 sm:p-4 text-center transition-all duration-300 h-full">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-xl flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-white/10">
-                    <span className="text-lg sm:text-xl font-bold text-white/70">{item.step}</span>
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted rounded-xl flex items-center justify-center mx-auto mb-2 sm:mb-3 border border-border">
+                    <span className="text-lg sm:text-xl font-bold text-foreground/70">{item.step}</span>
                   </div>
                   <h3 className="font-semibold text-foreground mb-1 sm:mb-2 text-sm sm:text-base">{item.title}</h3>
                   <p className="text-xs sm:text-sm text-muted-foreground">{item.description}</p>
@@ -519,7 +519,7 @@ export default function PerformativeDetectorCaseStudy() {
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{"// Capabilities"}</p>
+            <p className="text-muted-foreground text-sm tracking-wider uppercase mb-2">{"// Capabilities"}</p>
             <h2 className="text-base sm:text-lg font-bold text-foreground">Features</h2>
           </div>
           
@@ -527,9 +527,9 @@ export default function PerformativeDetectorCaseStudy() {
             {features.map((feature, index) => (
               <div
                 key={index}
-                className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white/[0.03] rounded-xl border border-white/[0.08] hover:border-white/15 transition-all duration-300"
+                className="flex items-center gap-2.5 sm:gap-3 p-3 sm:p-4 bg-muted rounded-xl border border-border hover:border-primary/20 transition-all duration-300"
               >
-                <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-emerald-400 flex-shrink-0" />
+                <CheckCircle2 className="h-4 w-4 sm:h-5 sm:w-5 text-secondary flex-shrink-0" />
                 <span className="text-foreground text-sm sm:text-base">{feature}</span>
               </div>
             ))}
@@ -541,14 +541,14 @@ export default function PerformativeDetectorCaseStudy() {
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{"// Code Sample"}</p>
+            <p className="text-muted-foreground text-sm tracking-wider uppercase mb-2">{"// Code Sample"}</p>
             <h2 className="text-base sm:text-lg font-bold text-foreground">Hand Detection Logic</h2>
           </div>
           
           <div className="relative">
-            <div className="absolute -inset-2 bg-white/[0.02] blur-xl" />
+            <div className="absolute -inset-2 bg-primary/5 blur-xl" />
             <div className="relative glass-card overflow-hidden rounded-2xl">
-              <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-white/[0.03] border-b border-white/[0.08]">
+              <div className="flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 sm:py-3 bg-muted border-b border-border">
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#ff5f57]" />
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#febc2e]" />
                 <div className="w-2 h-2 sm:w-3 sm:h-3 rounded-full bg-[#28c840]" />
@@ -596,7 +596,7 @@ export default function PerformativeDetectorCaseStudy() {
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{"// Technical Deep Dive"}</p>
+            <p className="text-muted-foreground text-sm tracking-wider uppercase mb-2">{"// Technical Deep Dive"}</p>
             <h2 className="text-base sm:text-lg font-bold text-foreground">Challenges & Solutions</h2>
           </div>
           
@@ -607,8 +607,8 @@ export default function PerformativeDetectorCaseStudy() {
                 className="glass-card p-4 sm:p-6 transition-all duration-300"
               >
                 <div className="flex items-start gap-3 sm:gap-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/5 rounded-xl flex items-center justify-center flex-shrink-0 border border-white/10">
-                    <challenge.icon className="h-5 w-5 sm:h-6 sm:w-6 text-white/70" />
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-muted rounded-xl flex items-center justify-center flex-shrink-0 border border-border">
+                    <challenge.icon className="h-5 w-5 sm:h-6 sm:w-6 text-foreground/70" />
                   </div>
                   <div className="flex-1 space-y-3 sm:space-y-4">
                     <h3 className="text-lg sm:text-xl font-bold text-foreground">{challenge.title}</h3>
@@ -618,7 +618,7 @@ export default function PerformativeDetectorCaseStudy() {
                         <p className="text-sm sm:text-base text-muted-foreground">{challenge.problem}</p>
                       </div>
                       <div className="space-y-2">
-                        <p className="text-xs sm:text-sm font-medium text-emerald-400">Solution</p>
+                        <p className="text-xs sm:text-sm font-medium text-secondary">Solution</p>
                         <p className="text-sm sm:text-base text-muted-foreground">{challenge.solution}</p>
                       </div>
                     </div>
@@ -634,7 +634,7 @@ export default function PerformativeDetectorCaseStudy() {
       <section className="py-12 sm:py-16 px-4 sm:px-6">
         <div className="max-w-6xl mx-auto">
           <div className="mb-8 sm:mb-12">
-            <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{"// Integration"}</p>
+            <p className="text-muted-foreground text-sm tracking-wider uppercase mb-2">{"// Integration"}</p>
             <h2 className="text-base sm:text-lg font-bold text-foreground">Spotify Features</h2>
           </div>
           
@@ -673,13 +673,13 @@ export default function PerformativeDetectorCaseStudy() {
           </p>
           <div className="flex justify-center gap-3 sm:gap-4 flex-wrap">
             <a href="https://github.com/sovandara1607/performative_detector" target="_blank" rel="noopener noreferrer">
-              <Button className="rounded-full bg-white text-black hover:bg-white/90">
+              <Button className="rounded-full bg-primary text-primary-foreground hover:bg-primary/90">
                 <Github className="h-4 w-4 mr-2" />
                 View on GitHub
               </Button>
             </a>
             <Link href="/#contact">
-              <Button variant="outline" className="rounded-full border-white/10 bg-white/5 hover:bg-white/10">
+              <Button variant="outline" className="rounded-full border-border bg-muted hover:bg-primary/10">
                 Get In Touch
               </Button>
             </Link>
@@ -691,7 +691,7 @@ export default function PerformativeDetectorCaseStudy() {
           </div>
           
           {/* Buy Me a Coffee */}
-          <div className="mt-8 pt-8 border-t border-white/10">
+          <div className="mt-8 pt-8 border-t border-border">
             <div className="flex flex-col items-center gap-3">
               <p className="text-sm text-muted-foreground">Enjoyed this project? Consider supporting my work ☕</p>
               <a
@@ -699,7 +699,7 @@ export default function PerformativeDetectorCaseStudy() {
                 target="_blank"
                 rel="noopener noreferrer"
               >
-                <Button className="rounded-full bg-amber-500 hover:bg-amber-600 text-black">
+                <Button className="rounded-full bg-primary hover:bg-primary/90 text-primary-foreground">
                   <span>☕</span>
                   Buy Me a Coffee
                 </Button>

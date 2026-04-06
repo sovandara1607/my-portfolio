@@ -56,7 +56,7 @@ export function ProjectsSection() {
     <section id="projects" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{t("projects.label")}</p>
+          <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">{t("projects.label")}</p>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">{t("projects.title")}</h2>
         </div>
 
@@ -68,13 +68,13 @@ export function ProjectsSection() {
             >
               <div className="relative glass-card overflow-hidden transition-all duration-300">
                 {/* Terminal Header - Minecraft style */}
-                <div className="flex items-center gap-2 px-4 py-2 bg-white/[0.02] border-b border-white/10">
+                <div className="flex items-center gap-2 px-4 py-2 bg-muted/50 border-b border-border">
                   <div className="w-3 h-3 rounded-full bg-[#ff5f57]" />
                   <div className="w-3 h-3 rounded-full bg-[#febd2f]" />
                   <div className="w-3 h-3 rounded-full bg-[#28c840]" />
                   <span className="ml-4 text-xs text-muted-foreground">{project.filename}</span>
                   {project.pinned && (
-                    <span className="ml-auto text-[10px] text-white/50">{t("projects.pinned")}</span>
+                    <span className="ml-auto text-[10px] text-muted-foreground">{t("projects.pinned")}</span>
                   )}
                 </div>
 
@@ -92,14 +92,14 @@ export function ProjectsSection() {
                     <span className="text-muted-foreground/40 mr-4 select-none text-xs">
                       {String(project.code.length + 1).padStart(2, "0")}
                     </span>
-                    <span className="inline-block w-2 h-4 bg-white/60 animate-pulse" />
+                    <span className="inline-block w-2 h-4 bg-primary/60 animate-pulse" />
                   </div>
                 </div>
 
                 {/* Project Info */}
-                <div className="p-4 space-y-4 border-t border-white/10">
+                <div className="p-4 space-y-4 border-t border-border">
                   <div>
-                    <h3 className="text-base font-semibold text-foreground group-hover:text-white transition-colors">
+                    <h3 className="text-base font-semibold text-foreground group-hover:text-primary transition-colors">
                       {project.title}
                     </h3>
                     <p className="text-muted-foreground text-sm mt-1">{project.description}</p>
@@ -107,7 +107,7 @@ export function ProjectsSection() {
 
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech, techIndex) => (
-                      <span key={techIndex} className="text-xs text-muted-foreground bg-white/5 px-2.5 py-1 rounded-full border border-white/10">
+                      <span key={techIndex} className="text-xs text-muted-foreground bg-muted px-2.5 py-1 rounded-full border border-border font-[family-name:var(--font-space-grotesk)]">
                         {tech}
                       </span>
                     ))}
@@ -118,18 +118,18 @@ export function ProjectsSection() {
                       <Button
                         size="sm"
                         variant="outline"
-                        className="border-white/10 text-foreground hover:bg-white/5 bg-transparent h-8 text-xs rounded-full"
+                        className="border-border text-foreground hover:bg-primary/5 bg-transparent h-8 text-xs rounded-full"
                       >
                         {t("projects.code")}
                       </Button>
                     </a>
                     <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                      <Button size="sm" className="bg-white text-black hover:bg-white/90 h-8 text-xs rounded-full">
+                      <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90 h-8 text-xs rounded-full">
                         {t("projects.demo")}
                       </Button>
                     </a>
                     <Link href={project.caseStudy}>
-                      <Button size="sm" variant="ghost" className="text-white/50 hover:text-white hover:bg-white/5 h-8 text-xs rounded-full">
+                      <Button size="sm" variant="ghost" className="text-muted-foreground hover:text-foreground hover:bg-primary/5 h-8 text-xs rounded-full">
                         {t("projects.caseStudy")}
                       </Button>
                     </Link>
@@ -157,7 +157,7 @@ export function ProjectsSection() {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button className="bg-amber-500 hover:bg-amber-400 text-black rounded-full px-6 font-semibold">
+              <Button className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full px-6 font-semibold">
                 <span>☕</span>
                 {t("contact.buyMeCoffeeButton")}
               </Button>

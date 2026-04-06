@@ -21,7 +21,7 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       className={`
         relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
         ${isActive 
-          ? "text-foreground bg-white/10" 
+          ? "text-foreground bg-primary/10" 
           : "text-muted-foreground hover:text-foreground"
         }
       `}
@@ -29,7 +29,7 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
       {isActive && (
         <motion.div
           layoutId="activeNav"
-          className="absolute inset-0 bg-white/10 rounded-full"
+          className="absolute inset-0 bg-primary/10 rounded-full"
           transition={{ type: "spring", stiffness: 380, damping: 30 }}
         />
       )}
@@ -50,8 +50,8 @@ function MobileNavLink({ href, label, isActive, onClick }: { href: string; label
       className={`
         block px-4 py-3 text-base font-medium rounded-xl transition-all duration-200
         ${isActive 
-          ? "text-foreground bg-white/10" 
-          : "text-muted-foreground hover:text-foreground hover:bg-white/5"
+          ? "text-foreground bg-primary/10" 
+          : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
         }
       `}
     >
@@ -165,15 +165,15 @@ export function Navigation() {
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className={`max-w-5xl mx-auto rounded-2xl border border-white/10 bg-black/60 backdrop-blur-2xl transition-all duration-500 ${
-            isScrolled ? "shadow-[0_8px_32px_rgba(0,0,0,0.4)]" : ""
+          className={`max-w-5xl mx-auto rounded-2xl border border-border bg-background/80 backdrop-blur-2xl transition-all duration-500 ${
+            isScrolled ? "shadow-[0_8px_32px_rgba(0,0,0,0.1)]" : ""
           }`}
         >
           <div className="px-4 md:px-6 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture and Sound Wave */}
             <div className="flex items-center gap-3">
               <a href="#" className="flex items-center gap-3 group" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-white/20 group-hover:border-white/40 transition-colors duration-300">
+                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/40 transition-colors duration-300">
                   <Image
                     src="/profile.PNG"
                     alt="Sovandara Rith"
@@ -190,7 +190,7 @@ export function Navigation() {
                   {[1, 2, 3, 4].map((i) => (
                     <div
                       key={i}
-                      className="w-[2px] bg-white/50 rounded-full sound-wave-mini"
+                      className="w-[2px] bg-primary/60 rounded-full sound-wave-mini"
                       style={{ animationDelay: `${i * 0.12}s` }}
                     />
                   ))}
@@ -218,7 +218,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsSearchOpen(true)}
-                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200"
+                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                 aria-label="Search"
               >
                 <Search className="w-4 h-4" />
@@ -230,7 +230,7 @@ export function Navigation() {
                   variant="ghost"
                   size="icon"
                   onClick={toggleTheme}
-                  className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200"
+                  className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                   aria-label="Toggle theme"
                 >
                   <div className="relative w-4 h-4">
@@ -257,7 +257,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleLanguage}
-                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200"
+                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                 aria-label="Toggle language"
               >
                 <span className="text-xs font-semibold">
@@ -269,7 +269,7 @@ export function Navigation() {
               <Button
                 variant="ghost"
                 size="icon"
-                className="lg:hidden w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-white/10 transition-all duration-200"
+                className="lg:hidden w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 aria-label="Toggle menu"
               >
@@ -299,7 +299,7 @@ export function Navigation() {
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="border-t border-white/10 px-4 py-4 space-y-1">
+              <div className="border-t border-border px-4 py-4 space-y-1">
                 {navLinks.map((link) => (
                   <MobileNavLink
                     key={link.href}
@@ -314,7 +314,7 @@ export function Navigation() {
                 ))}
                 
                 <Button 
-                  className="w-full mt-3 bg-white text-black hover:bg-white/90 rounded-xl font-medium transition-all duration-200"
+                  className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-medium transition-all duration-200"
                   onClick={() => {
                     setIsMobileMenuOpen(false)
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })
@@ -340,7 +340,7 @@ export function Navigation() {
           transition={{ duration: 0.2 }}
         >
           <div 
-            className="absolute inset-0 bg-black/60 backdrop-blur-sm"
+            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
             onClick={() => {
               setIsSearchOpen(false)
               setSearchQuery("")
@@ -356,8 +356,8 @@ export function Navigation() {
               className="glass-card overflow-hidden"
             >
               {/* Search Input */}
-              <div className="flex items-center gap-3 px-5 py-4 border-b border-white/10">
-                <Search className="w-5 h-5 text-white/40 flex-shrink-0" />
+              <div className="flex items-center gap-3 px-5 py-4 border-b border-border">
+                <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
                 <input
                   ref={searchInputRef}
                   type="text"
@@ -366,7 +366,7 @@ export function Navigation() {
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-base"
                 />
-                <kbd className="hidden sm:inline-flex px-2 py-1 text-xs text-white/40 bg-white/5 border border-white/10 rounded-md">
+                <kbd className="hidden sm:inline-flex px-2 py-1 text-xs text-muted-foreground bg-muted border border-border rounded-md">
                   ESC
                 </kbd>
               </div>
@@ -380,9 +380,9 @@ export function Navigation() {
                         <button
                           key={section.href}
                           onClick={() => handleSearch(section.href)}
-                          className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors duration-200 flex items-center gap-3"
+                          className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors duration-200 flex items-center gap-3"
                         >
-                          <span className="text-white/30">#</span>
+                          <span className="text-primary/50">#</span>
                           <span>{section.label}</span>
                         </button>
                       ))}
@@ -398,14 +398,14 @@ export function Navigation() {
               {/* Quick Links */}
               {!searchQuery.trim() && (
                 <div className="py-2">
-                  <p className="px-5 py-2 text-xs text-white/30 uppercase tracking-wider font-medium">Quick Navigation</p>
+                  <p className="px-5 py-2 text-xs text-muted-foreground uppercase tracking-wider font-medium font-[family-name:var(--font-space-grotesk)]">Quick Navigation</p>
                   {allSections.slice(0, 5).map((section) => (
                     <button
                       key={section.href}
                       onClick={() => handleSearch(section.href)}
-                      className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-white/5 transition-colors duration-200 flex items-center gap-3"
+                      className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors duration-200 flex items-center gap-3"
                     >
-                      <span className="text-white/30">#</span>
+                      <span className="text-primary/50">#</span>
                       <span>{section.label}</span>
                     </button>
                   ))}
@@ -413,8 +413,8 @@ export function Navigation() {
               )}
             </motion.div>
 
-            <p className="text-center text-white/30 text-sm mt-4">
-              Press <kbd className="px-1.5 py-0.5 text-xs text-white/40 bg-white/5 border border-white/10 rounded-md">⌘K</kbd> to open search anytime
+            <p className="text-center text-muted-foreground text-sm mt-4">
+              Press <kbd className="px-1.5 py-0.5 text-xs text-muted-foreground bg-muted border border-border rounded-md">⌘K</kbd> to open search anytime
             </p>
           </div>
         </motion.div>

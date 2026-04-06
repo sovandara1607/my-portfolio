@@ -26,14 +26,14 @@ export function Footer() {
   const currentYear = new Date().getFullYear()
 
   return (
-    <footer className="relative border-t border-white/10 bg-black/50">
+    <footer className="relative border-t border-border bg-muted/30">
       <div className="max-w-6xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Brand Section */}
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center">
-                <span className="text-sm font-bold text-white">S</span>
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <span className="text-sm font-bold text-primary">S</span>
               </div>
               <span className="font-bold text-lg text-foreground">Sovandara</span>
             </div>
@@ -51,13 +51,13 @@ export function Footer() {
               {language === "kh" ? "តំណភ្ជាប់រហ័ស" : "Quick Links"}
             </h3>
             <nav className="flex flex-col gap-2">
-              <a href="#projects" className="text-sm text-muted-foreground hover:text-white transition-colors">
+              <a href="#projects" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 {language === "kh" ? "គម្រោង" : "Projects"}
               </a>
-              <a href="#experiences" className="text-sm text-muted-foreground hover:text-white transition-colors">
+              <a href="#experiences" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 {language === "kh" ? "បទពិសោធន៍" : "Experiences"}
               </a>
-              <a href="#contact" className="text-sm text-muted-foreground hover:text-white transition-colors">
+              <a href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 {language === "kh" ? "ទំនាក់ទំនង" : "Contact"}
               </a>
             </nav>
@@ -75,7 +75,7 @@ export function Footer() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-10 h-10 rounded-full flex items-center justify-center bg-white/5 border border-white/10 text-muted-foreground hover:text-white hover:bg-white/10 transition-all duration-200"
+                  className="w-10 h-10 rounded-full flex items-center justify-center bg-muted border border-border text-muted-foreground hover:text-primary hover:bg-primary/10 transition-all duration-200"
                   aria-label={link.name}
                 >
                   <link.icon className="w-4 h-4" />
@@ -86,7 +86,7 @@ export function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-12 pt-6 border-t border-white/5">
+        <div className="mt-12 pt-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
               © {currentYear} Sovandara Rith. {language === "kh" ? "រក្សាសិទ្ធិគ្រប់យ៉ាង។" : "All rights reserved."}
@@ -95,7 +95,7 @@ export function Footer() {
               {language === "kh" ? "បង្កើតដោយ" : "Built with"}
               <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
               {language === "kh" ? "និង" : "&"}
-              <span className="text-white">Next.js</span>
+              <span className="text-primary font-semibold">Next.js</span>
             </p>
           </div>
         </div>

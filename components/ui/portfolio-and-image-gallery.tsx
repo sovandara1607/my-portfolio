@@ -61,6 +61,31 @@ function useResponsiveValue(baseValue: number, mobileValue: number) {
   return value;
 }
 
+function useIsMobile(breakpoint = 768) {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const check = () => setIsMobile(window.innerWidth < breakpoint);
+    check();
+
+    let timeoutId: NodeJS.Timeout;
+    const debouncedCheck = () => {
+      clearTimeout(timeoutId);
+      timeoutId = setTimeout(check, 100);
+    };
+
+    window.addEventListener('resize', debouncedCheck);
+    return () => {
+      window.removeEventListener('resize', debouncedCheck);
+      clearTimeout(timeoutId);
+    };
+  }, [breakpoint]);
+
+  return isMobile;
+}
+
 export interface RadialScrollGalleryProps
   extends Omit<HTMLAttributes<HTMLDivElement>, 'children'> {
   children: (hoveredIndex: number | null) => ReactNode[];
@@ -99,6 +124,7 @@ export const RadialScrollGallery = forwardRef<
     const childRef = useRef<HTMLLIElement>(null);
 
     const mergedRef = useMergeRefs(ref, pinRef);
+    const isMobile = useIsMobile();
 
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [childSize, setChildSize] = useState<{ w: number; h: number } | null>(
@@ -146,7 +172,7 @@ export const RadialScrollGallery = forwardRef<
 
     useGSAP(
       () => {
-        if (!pinRef.current || !containerRef.current || childrenCount === 0)
+        if (isMobile || !pinRef.current || !containerRef.current || childrenCount === 0)
           return;
 
         const prefersReducedMotion = window.matchMedia(
@@ -188,6 +214,7 @@ export const RadialScrollGallery = forwardRef<
       {
         scope: pinRef,
         dependencies: [
+          isMobile,
           scrollDuration,
           currentRadius,
           startTrigger,
@@ -197,6 +224,76 @@ export const RadialScrollGallery = forwardRef<
     );
 
     if (childrenCount === 0) return null;
+
+    // Mobile: horizontal snap-scroll carousel
+    if (isMobile) {
+      return (
+        <div
+          ref={mergedRef}
+          className={`w-full relative py-8 ${className}`}
+          {...rest}
+        >
+          <ul
+            className={`
+              flex gap-4 overflow-x-auto snap-x snap-mandatory px-6 pb-4 m-0 list-none
+              scrollbar-hide
+              ${disabled ? 'opacity-50 pointer-events-none grayscale' : ''}
+            `}
+            style={{
+              WebkitOverflowScrolling: 'touch',
+              scrollbarWidth: 'none',
+              msOverflowStyle: 'none',
+            }}
+            dir={direction}
+          >
+            {childrenNodes.map((child, index) => {
+              const isHovered = hoveredIndex === index;
+              const isAnyHovered = hoveredIndex !== null;
+
+              return (
+                <li
+                  key={index}
+                  className="flex-shrink-0 snap-center"
+                >
+                  <div
+                    role='button'
+                    tabIndex={disabled ? -1 : 0}
+                    onClick={() => !disabled && onItemSelect?.(index)}
+                    onKeyDown={(e) => {
+                      if (disabled) return;
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        onItemSelect?.(index);
+                      }
+                    }}
+                    onTouchStart={() => !disabled && setHoveredIndex(index)}
+                    onTouchEnd={() => !disabled && setHoveredIndex(null)}
+                    onMouseEnter={() => !disabled && setHoveredIndex(index)}
+                    onMouseLeave={() => !disabled && setHoveredIndex(null)}
+                    onFocus={() => !disabled && setHoveredIndex(index)}
+                    onBlur={() => !disabled && setHoveredIndex(null)}
+                    className={`
+                      block cursor-pointer outline-none text-left
+                      focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2
+                      rounded-xl transition-all duration-300 ease-out
+                      ${isHovered ? 'scale-105' : 'scale-100'}
+                      ${
+                        isAnyHovered && !isHovered
+                          ? 'opacity-60' : 'opacity-100'
+                      }
+                    `}
+                  >
+                    {child}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      );
+    }
+
+    // Desktop: radial scroll gallery
 
     const scaleFactor = 1.25;
     const calculatedBuffer = childSize

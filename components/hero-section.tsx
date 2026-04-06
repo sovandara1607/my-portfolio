@@ -15,8 +15,8 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 pt-24 pb-8 overflow-hidden">
       {/* Ambient light sources */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-white/[0.02] rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-white/[0.015] rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       <div className="max-w-6xl mx-auto grid lg:grid-cols-2 gap-8 lg:gap-16 items-center relative z-10">
         <motion.div 
@@ -33,8 +33,8 @@ export function HeroSection() {
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <div className="absolute -inset-1 bg-gradient-to-r from-white/20 to-white/5 rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
-              <div className="relative w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden border border-white/10 shadow-2xl">
+              <div className="absolute -inset-1 bg-gradient-to-r from-primary/20 to-primary/5 rounded-2xl blur-md opacity-60 group-hover:opacity-100 transition-opacity duration-500" />
+              <div className="relative w-28 h-28 lg:w-32 lg:h-32 rounded-2xl overflow-hidden border border-border shadow-2xl">
                 <Image
                   src="/profile.PNG"
                   alt="Sovandara Rith"
@@ -47,7 +47,7 @@ export function HeroSection() {
             
             <div className="space-y-2 flex-1">
               <motion.p 
-                className="text-white/50 text-sm tracking-wider uppercase"
+                className="text-secondary text-sm tracking-wider uppercase font-[family-name:var(--font-space-grotesk)]"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3 }}
@@ -61,7 +61,7 @@ export function HeroSection() {
                 transition={{ delay: 0.4, duration: 0.6 }}
               >
                 {t("hero.greeting")}{" "}
-                <span className="bg-gradient-to-r from-white to-white/60 bg-clip-text text-transparent">
+                <span className="text-primary">
                   {language === "kh" ? t("hero.name") : "Sovandara Rith"}
                 </span>
               </motion.h1>
@@ -76,9 +76,9 @@ export function HeroSection() {
           >
             {/* Status badge */}
             <div className="flex items-center gap-3 justify-center lg:justify-start">
-              <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm">
-                <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                <span className="text-sm text-white/60 tracking-wide">
+              <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-muted border border-border backdrop-blur-sm">
+                <div className="w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                <span className="text-sm text-muted-foreground tracking-wide font-[family-name:var(--font-space-grotesk)]">
                   {language === "kh" ? "និស្សិតឆ្នាំទី៣ · វិទ្យាសាស្ត្រកុំព្យូទ័រ" : "Year 3 · Computer Science"}
                 </span>
               </div>
@@ -104,7 +104,7 @@ export function HeroSection() {
             transition={{ delay: 0.6 }}
           >
             <Button 
-              className="bg-white text-black hover:bg-white/90 rounded-full px-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(255,255,255,0.15)]"
+              className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-full px-6 transition-all duration-300 hover:shadow-[0_0_30px_rgba(243,128,32,0.25)]  font-[family-name:var(--font-space-grotesk)]  uppercase tracking-wider text-sm"
               onClick={() => {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
@@ -138,7 +138,7 @@ export function HeroSection() {
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
-          <ArrowDown className="w-5 h-5 text-white/30" />
+          <ArrowDown className="w-5 h-5 text-muted-foreground" />
         </motion.div>
       </motion.div>
     </section>

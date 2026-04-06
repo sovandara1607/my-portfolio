@@ -1,15 +1,25 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Plus_Jakarta_Sans, JetBrains_Mono, Kantumruy_Pro } from "next/font/google"
+import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono, Kantumruy_Pro } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
 import { MusicProvider } from "@/lib/music-context"
 import "./globals.css"
 
-const plusJakarta = Plus_Jakarta_Sans({
+const epilogue = Epilogue({
   subsets: ["latin"],
-  variable: "--font-plus-jakarta",
+  variable: "--font-epilogue",
+})
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-inter",
+})
+
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-space-grotesk",
 })
 
 const jetbrainsMono = JetBrains_Mono({ 
@@ -34,11 +44,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${plusJakarta.variable} ${jetbrainsMono.variable} ${kantumruyPro.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${kantumruyPro.variable}`}>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="dark"
+          defaultTheme="light"
           enableSystem
           disableTransitionOnChange={false}
         >

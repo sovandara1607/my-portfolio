@@ -10,7 +10,7 @@ export function ContactSection() {
     <section id="contact" className="py-24 px-4">
       <div className="max-w-6xl mx-auto">
         <div className="mb-8 text-center">
-          <p className="text-white/40 text-sm tracking-wider uppercase mb-2">{t("contact.label")}</p>
+          <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">{t("contact.label")}</p>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">{t("contact.title")}</h2>
         </div>
 
@@ -23,26 +23,26 @@ export function ContactSection() {
             transition={{ duration: 0.6 }}
           >
             <div className="space-y-4">
-              <div className="flex justify-between items-center py-3 border-b border-white/5">
+              <div className="flex justify-between items-center py-3 border-b border-border">
                 <span className="text-sm text-muted-foreground">{t("contact.portfolio")}</span>
-                <a href="#" className="text-foreground hover:text-white transition-colors">
+                <a href="#" className="text-foreground hover:text-primary transition-colors">
                   sovandararith
                 </a>
               </div>
 
-              <div className="flex justify-between items-center py-3 border-b border-white/5">
+              <div className="flex justify-between items-center py-3 border-b border-border">
                 <span className="text-sm text-muted-foreground">{t("contact.email")}</span>
                 <a
                   href="mailto:rithsovandara83@gmail.com"
-                  className="text-foreground hover:text-white transition-colors"
+                  className="text-foreground hover:text-primary transition-colors"
                 >
                   rithsovandara83@gmail.com
                 </a>
               </div>
 
-              <div className="flex justify-between items-center py-3 border-b border-white/5">
+              <div className="flex justify-between items-center py-3 border-b border-border">
                 <span className="text-sm text-muted-foreground">{t("contact.github")}</span>
-                <a href="https://github.com/sovandara1607" className="text-foreground hover:text-white transition-colors" target="_blank" rel="noopener noreferrer">
+                <a href="https://github.com/sovandara1607" className="text-foreground hover:text-primary transition-colors" target="_blank" rel="noopener noreferrer">
                   @sovandara1607
                 </a>
               </div>
@@ -53,7 +53,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="mt-8 pt-4 border-t border-white/5 text-center">
+            <div className="mt-8 pt-4 border-t border-border text-center">
               <p className="text-muted-foreground italic text-sm">
                 {t("contact.quote")}
               </p>
@@ -82,7 +82,7 @@ export function ContactSection() {
                 href="https://link.payway.com.kh/cg4094277"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-amber-500 hover:bg-amber-400 text-black font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)]"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold rounded-full transition-all duration-300 hover:shadow-[0_0_20px_rgba(243,128,32,0.3)]"
               >
                 <span>☕</span>
                 {t("contact.buyMeCoffeeButton")}
@@ -92,7 +92,7 @@ export function ContactSection() {
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-white/10 text-center">
+        <div className="mt-16 pt-8 border-t border-border text-center">
           <p className="text-sm text-muted-foreground">{t("contact.copyright")}</p>
         </div>
       </div>

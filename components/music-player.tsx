@@ -23,13 +23,13 @@ export function MusicPlayer() {
       >
         {/* Volume Slider - shows on hover */}
         <div 
-          className={`flex items-center gap-2 bg-zinc-800/95 backdrop-blur-xl border border-white/15 rounded-full px-3 py-2 transition-all duration-300 ${
+          className={`flex items-center gap-2 bg-card backdrop-blur-xl border border-border rounded-full px-3 py-2 transition-all duration-300 ${
             showVolumeSlider ? "opacity-100 translate-x-0" : "opacity-0 translate-x-4 pointer-events-none"
           }`}
         >
           <button
             onClick={toggleMute}
-            className="text-gray-400 hover:text-white transition-colors"
+            className="text-muted-foreground hover:text-primary transition-colors"
           >
             {volume === 0 ? (
               <VolumeX className="w-4 h-4" />
@@ -44,7 +44,7 @@ export function MusicPlayer() {
             step="0.01"
             value={volume}
             onChange={handleVolumeChange}
-            className="w-20 h-1 bg-white/20 rounded-full appearance-none cursor-pointer
+            className="w-20 h-1 bg-border rounded-full appearance-none cursor-pointer
               [&::-webkit-slider-thumb]:appearance-none
               [&::-webkit-slider-thumb]:w-3
               [&::-webkit-slider-thumb]:h-3
@@ -58,7 +58,7 @@ export function MusicPlayer() {
 
         {/* Sound Wave Bars - visible when playing */}
         {isPlaying && (
-          <div className="flex items-end gap-[3px] h-8 px-3 py-2 bg-zinc-800/95 backdrop-blur-xl border border-white/15 rounded-full">
+          <div className="flex items-end gap-[3px] h-8 px-3 py-2 bg-card backdrop-blur-xl border border-border rounded-full">
             {[1, 2, 3, 4, 5].map((i) => (
               <div
                 key={i}
@@ -78,7 +78,7 @@ export function MusicPlayer() {
           className={`relative w-14 h-14 rounded-full transition-all duration-300 shadow-lg ${
             isPlaying 
               ? "bg-green-500 hover:bg-green-400 hover:scale-105 text-black" 
-              : "bg-zinc-800/95 hover:bg-zinc-700 hover:scale-105 text-white border border-white/15"
+              : "bg-card hover:bg-accent hover:scale-105 text-foreground border border-border"
           }`}
         >
           {/* Pulsing ring when playing */}

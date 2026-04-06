@@ -45,19 +45,19 @@ export function WorkSection() {
     <section id="work" className="relative overflow-hidden">
       {/* Section Header */}
       <div className="text-center pt-24 pb-4 px-6">
-        <p className="text-white/40 text-sm tracking-wider uppercase mb-2">
+        <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">
           {language === 'kh' ? '// ការងារ' : '// Work'}
         </p>
         <h2 className="text-2xl md:text-3xl font-bold text-foreground">
           {language === 'kh' ? 'ស្នាដៃរបស់ខ្ញុំ' : 'My Work'}
         </h2>
-        <div className="animate-bounce text-white/30 text-xs mt-4">
+        <div className="animate-bounce text-muted-foreground text-xs mt-4">
           ↓ Scroll
         </div>
       </div>
 
       <RadialScrollGallery
-        className="!min-h-[600px]"
+        className="!min-h-[400px] md:!min-h-[600px]"
         baseRadius={400}
         mobileRadius={250}
         visiblePercentage={50}
@@ -69,7 +69,7 @@ export function WorkSection() {
             return (
               <div
                 key={project.id}
-                className="group relative w-[200px] h-[280px] sm:w-[240px] sm:h-[320px] overflow-hidden rounded-2xl border border-white/10 bg-card shadow-2xl"
+                className="group relative w-[200px] h-[280px] sm:w-[240px] sm:h-[320px] overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
               >
                 <div className="absolute inset-0 overflow-hidden">
                   <img

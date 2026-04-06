@@ -14,7 +14,7 @@ import { Footer } from "@/components/footer"
 export default function Home() {
   return (
     <LanguageWrapper>
-      <main className="min-h-screen bg-black relative">
+      <main className="min-h-screen bg-background relative">
         <HeroBackground />
         <MusicPlayer />
         <div className="relative z-10">

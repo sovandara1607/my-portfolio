@@ -96,7 +96,7 @@ export function ExperiencesSection() {
     <section id="experiences" className="py-24 px-6">
       <div className="max-w-6xl mx-auto">
         <div className="mb-12">
-          <p className="text-white/40 text-sm tracking-wider uppercase mb-2">
+          <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">
             {language === "kh" ? "// បទពិសោធន៍" : "// Experiences"}
           </p>
           <h2 className="text-2xl md:text-3xl font-bold text-foreground">
@@ -109,8 +109,8 @@ export function ExperiencesSection() {
             <div key={index} className="group relative">
               <div className="relative glass-card overflow-hidden transition-all duration-300">
                 {/* Category Header */}
-                <div className="flex items-center gap-2 px-4 py-3 bg-white/[0.02] border-b border-white/10">
-                  <span className="text-white/50">{exp.icon}</span>
+                <div className="flex items-center gap-2 px-4 py-3 bg-muted/50 border-b border-border">
+                  <span className="text-primary">{exp.icon}</span>
                   <span className="text-sm font-medium text-foreground">{exp.category}</span>
                 </div>
 
@@ -119,7 +119,7 @@ export function ExperiencesSection() {
                   {exp.items.map((item, itemIndex) => (
                     <div key={itemIndex} className="space-y-1">
                       <div className="flex items-start justify-between gap-2">
-                        <h3 className="text-sm font-semibold text-foreground group-hover:text-white transition-colors">
+                        <h3 className="text-sm font-semibold text-foreground group-hover:text-primary transition-colors">
                           {item.title}
                         </h3>
                       </div>

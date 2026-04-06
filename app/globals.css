@@ -4,53 +4,59 @@
 @custom-variant dark (&:is(.dark *));
 
 /* ========================================
-   MODERN DARK DESIGN SYSTEM
-   Clean, classy portfolio theme
+   CURATOR DESIGN SYSTEM
+   Editorial portfolio theme
+   Colors: Primary #F38020, Secondary #228B49, Tertiary #313131
+   Fonts: Epilogue (headlines), Inter (body), Space Grotesk (labels)
    ======================================== */
 
 :root {
-  /* Dark theme (default) */
-  --background: #000000;
-  --foreground: #fafafa;
-  --card: rgba(255, 255, 255, 0.03);
-  --card-foreground: #fafafa;
-  --popover: #0a0a0a;
-  --popover-foreground: #fafafa;
-  --primary: #ffffff;
-  --primary-foreground: #000000;
-  --secondary: rgba(255, 255, 255, 0.06);
-  --secondary-foreground: #e5e5e5;
-  --muted: rgba(255, 255, 255, 0.04);
-  --muted-foreground: rgba(255, 255, 255, 0.5);
-  --accent: rgba(255, 255, 255, 0.08);
-  --accent-foreground: #fafafa;
-  --destructive: #ef4444;
+  /* Light/warm theme (default) */
+  --background: #f5f0eb;
+  --foreground: #313131;
+  --card: rgba(255, 255, 255, 0.7);
+  --card-foreground: #313131;
+  --popover: #f5f0eb;
+  --popover-foreground: #313131;
+  --primary: #f38020;
+  --primary-foreground: #ffffff;
+  --secondary: #228b49;
+  --secondary-foreground: #ffffff;
+  --muted: rgba(49, 49, 49, 0.06);
+  --muted-foreground: rgba(49, 49, 49, 0.55);
+  --accent: rgba(243, 128, 32, 0.1);
+  --accent-foreground: #313131;
+  --destructive: #dc2626;
   --destructive-foreground: #fafafa;
-  --border: rgba(255, 255, 255, 0.1);
-  --input: rgba(255, 255, 255, 0.06);
-  --ring: rgba(255, 255, 255, 0.2);
-  --radius: 0.75rem;
+  --border: rgba(49, 49, 49, 0.12);
+  --input: rgba(49, 49, 49, 0.08);
+  --ring: rgba(243, 128, 32, 0.3);
+  --radius: 0.5rem;
 
-  --chart-1: #818cf8;
-  --chart-2: #a78bfa;
-  --chart-3: #f472b6;
-  --chart-4: #fb923c;
-  --chart-5: #34d399;
+  --chart-1: #f38020;
+  --chart-2: #228b49;
+  --chart-3: #313131;
+  --chart-4: #e06810;
+  --chart-5: #1a6b38;
 
-  --sidebar: #050505;
-  --sidebar-foreground: #fafafa;
-  --sidebar-primary: #ffffff;
-  --sidebar-primary-foreground: #000000;
-  --sidebar-accent: rgba(255, 255, 255, 0.06);
-  --sidebar-accent-foreground: #fafafa;
-  --sidebar-border: rgba(255, 255, 255, 0.08);
-  --sidebar-ring: rgba(255, 255, 255, 0.2);
+  --sidebar: #f0ebe5;
+  --sidebar-foreground: #313131;
+  --sidebar-primary: #f38020;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: rgba(243, 128, 32, 0.08);
+  --sidebar-accent-foreground: #313131;
+  --sidebar-border: rgba(49, 49, 49, 0.08);
+  --sidebar-ring: rgba(243, 128, 32, 0.2);
 }
 
 @theme inline {
-  --font-sans: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
+  --font-heading: var(--font-epilogue), "Epilogue", system-ui, sans-serif;
+  --font-label:
+    var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
-  --font-khmer: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  --font-khmer:
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -92,36 +98,36 @@
   --color-sidebar-ring: var(--sidebar-ring);
 }
 
-/* Light theme */
-.light {
-  --background: #ffffff;
-  --foreground: #0a0a0a;
-  --card: rgba(0, 0, 0, 0.02);
-  --card-foreground: #0a0a0a;
-  --popover: #ffffff;
-  --popover-foreground: #0a0a0a;
-  --primary: #0a0a0a;
+/* Dark theme */
+.dark {
+  --background: #1a1a1a;
+  --foreground: #f5f0eb;
+  --card: rgba(255, 255, 255, 0.05);
+  --card-foreground: #f5f0eb;
+  --popover: #1a1a1a;
+  --popover-foreground: #f5f0eb;
+  --primary: #f38020;
   --primary-foreground: #ffffff;
-  --secondary: rgba(0, 0, 0, 0.04);
-  --secondary-foreground: #171717;
-  --muted: rgba(0, 0, 0, 0.03);
-  --muted-foreground: rgba(0, 0, 0, 0.5);
-  --accent: rgba(0, 0, 0, 0.05);
-  --accent-foreground: #0a0a0a;
-  --destructive: #dc2626;
+  --secondary: #228b49;
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(245, 240, 235, 0.55);
+  --accent: rgba(243, 128, 32, 0.15);
+  --accent-foreground: #f5f0eb;
+  --destructive: #ef4444;
   --destructive-foreground: #fafafa;
-  --border: rgba(0, 0, 0, 0.08);
-  --input: rgba(0, 0, 0, 0.04);
-  --ring: rgba(0, 0, 0, 0.15);
+  --border: rgba(255, 255, 255, 0.1);
+  --input: rgba(255, 255, 255, 0.06);
+  --ring: rgba(243, 128, 32, 0.3);
 
-  --sidebar: #fafafa;
-  --sidebar-foreground: #0a0a0a;
-  --sidebar-primary: #0a0a0a;
+  --sidebar: #151515;
+  --sidebar-foreground: #f5f0eb;
+  --sidebar-primary: #f38020;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: rgba(0, 0, 0, 0.04);
-  --sidebar-accent-foreground: #0a0a0a;
-  --sidebar-border: rgba(0, 0, 0, 0.06);
-  --sidebar-ring: rgba(0, 0, 0, 0.15);
+  --sidebar-accent: rgba(243, 128, 32, 0.1);
+  --sidebar-accent-foreground: #f5f0eb;
+  --sidebar-border: rgba(255, 255, 255, 0.08);
+  --sidebar-ring: rgba(243, 128, 32, 0.2);
 }
 
 /* ========================================
@@ -134,63 +140,88 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+    font-family: var(--font-inter), "Inter", system-ui, sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-plus-jakarta), "Plus Jakarta Sans", system-ui, sans-serif;
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-epilogue), "Epilogue", system-ui, sans-serif;
     font-weight: 700;
   }
 
-  code, pre, .font-mono {
+  code,
+  pre,
+  .font-mono {
     font-family: var(--font-jetbrains), "JetBrains Mono", monospace;
   }
 }
 
 /* ========================================
-   GLASSMORPHISM CARDS
+   CARDS
    ======================================== */
 .glass-card {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(49, 49, 49, 0.08);
   border-radius: var(--radius);
 }
 
-.light .glass-card {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.06);
+.dark .glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .glass-card:hover {
-  border-color: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 0 30px rgba(255, 255, 255, 0.03);
+  border-color: rgba(243, 128, 32, 0.2);
+  box-shadow: 0 8px 30px rgba(243, 128, 32, 0.06);
 }
 
-.light .glass-card:hover {
-  border-color: rgba(0, 0, 0, 0.1);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+.dark .glass-card:hover {
+  border-color: rgba(243, 128, 32, 0.25);
+  box-shadow: 0 0 30px rgba(243, 128, 32, 0.05);
 }
 
 /* ========================================
    SOUND WAVE ANIMATION (for music player)
    ======================================== */
 @keyframes soundWave {
-  0%, 100% { height: 4px; }
-  25% { height: 16px; }
-  50% { height: 8px; }
-  75% { height: 20px; }
+  0%,
+  100% {
+    height: 4px;
+  }
+  25% {
+    height: 16px;
+  }
+  50% {
+    height: 8px;
+  }
+  75% {
+    height: 20px;
+  }
 }
 .sound-wave {
   animation: soundWave 0.8s ease-in-out infinite;
 }
 
 @keyframes soundWaveMini {
-  0%, 100% { height: 3px; }
-  25% { height: 12px; }
-  50% { height: 6px; }
-  75% { height: 16px; }
+  0%,
+  100% {
+    height: 3px;
+  }
+  25% {
+    height: 12px;
+  }
+  50% {
+    height: 6px;
+  }
+  75% {
+    height: 16px;
+  }
 }
 .sound-wave-mini {
   animation: soundWaveMini 0.7s ease-in-out infinite;
@@ -200,18 +231,33 @@
    ANIMATIONS
    ======================================== */
 @keyframes fade-in-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes float {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 @keyframes shimmer {
-  0% { background-position: -200% 0; }
-  100% { background-position: 200% 0; }
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
 }
 
 .animate-fade-in-up {
@@ -223,7 +269,12 @@
 }
 
 .animate-shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.06), transparent);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.06),
+    transparent
+  );
   background-size: 200% 100%;
   animation: shimmer 2s infinite;
 }
@@ -241,31 +292,40 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(49, 49, 49, 0.2);
   border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
+  background: rgba(49, 49, 49, 0.35);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.25);
 }
 
-.light ::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.15);
+/* Hide scrollbar utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
 }
-
-.light ::-webkit-scrollbar-thumb:hover {
-  background: rgba(0, 0, 0, 0.25);
+.scrollbar-hide {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
 /* Selection */
 ::selection {
-  background: rgba(255, 255, 255, 0.2);
-  color: white;
+  background: rgba(243, 128, 32, 0.2);
+  color: #313131;
 }
 
-.light ::selection {
-  background: rgba(0, 0, 0, 0.15);
-  color: black;
+.dark ::selection {
+  background: rgba(243, 128, 32, 0.3);
+  color: white;
 }
 
 /* ========================================
@@ -273,10 +333,16 @@
    ======================================== */
 .lang-kh,
 .lang-kh * {
-  font-family: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
+  font-family:
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
 }
 
-.lang-kh h1, .lang-kh h2, .lang-kh h3,
-.lang-kh h4, .lang-kh h5, .lang-kh h6 {
-  font-family: var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
+.lang-kh h1,
+.lang-kh h2,
+.lang-kh h3,
+.lang-kh h4,
+.lang-kh h5,
+.lang-kh h6 {
+  font-family:
+    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
 }
