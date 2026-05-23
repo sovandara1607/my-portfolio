@@ -9,7 +9,7 @@ import { useLanguage } from "@/lib/language-context"
 import { useMusic } from "@/lib/music-context"
 import { motion, AnimatePresence } from "framer-motion"
 
-function NavLink({ href, label, isActive, onClick }: { href: string; label: string; isActive: boolean; onClick: () => void }) {
+function NavLink({ href, label, index, isActive, onClick }: { href: string; label: string; index: string; isActive: boolean; onClick: () => void }) {
   return (
     <a
       href={href}
@@ -19,21 +19,27 @@ function NavLink({ href, label, isActive, onClick }: { href: string; label: stri
         document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
       }}
       className={`
-        relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300
-        ${isActive 
-          ? "text-foreground bg-primary/10" 
+        relative px-3 py-2 text-[13px] tracking-wide transition-colors duration-300
+        font-[family-name:var(--font-space-grotesk)]
+        ${isActive
+          ? "text-foreground"
           : "text-muted-foreground hover:text-foreground"
         }
       `}
     >
-      {isActive && (
-        <motion.div
-          layoutId="activeNav"
-          className="absolute inset-0 bg-primary/10 rounded-full"
-          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-        />
-      )}
-      <span className="relative z-10">{label}</span>
+      <span className="flex items-baseline gap-1.5">
+        <span className="text-[10px] text-primary/70 font-mono tabular-nums">{index}</span>
+        <span className="relative">
+          {label}
+          {isActive && (
+            <motion.span
+              layoutId="activeNav"
+              className="absolute -bottom-1 left-0 right-0 h-px bg-foreground"
+              transition={{ type: "spring", stiffness: 380, damping: 30 }}
+            />
+          )}
+        </span>
+      </span>
     </a>
   )
 }
@@ -48,10 +54,11 @@ function MobileNavLink({ href, label, isActive, onClick }: { href: string; label
         document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
       }}
       className={`
-        block px-4 py-3 text-base font-medium rounded-xl transition-all duration-200
-        ${isActive 
-          ? "text-foreground bg-primary/10" 
-          : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+        block px-4 py-3 text-base font-medium border-l-2 transition-all duration-200
+        font-[family-name:var(--font-space-grotesk)]
+        ${isActive
+          ? "text-foreground border-primary bg-primary/5"
+          : "text-muted-foreground border-transparent hover:text-foreground hover:border-border"
         }
       `}
     >
@@ -158,22 +165,22 @@ export function Navigation() {
 
   return (
     <>
-      <motion.nav 
-        className="fixed top-4 left-4 right-4 z-50"
+      <motion.nav
+        className="fixed top-5 left-5 right-5 z-50"
         initial={{ y: -100, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       >
         <div
-          className={`max-w-5xl mx-auto rounded-2xl border border-border bg-background/80 backdrop-blur-2xl transition-all duration-500 ${
-            isScrolled ? "shadow-[0_8px_32px_rgba(0,0,0,0.1)]" : ""
+          className={`max-w-6xl mx-auto border border-border/60 bg-background/75 backdrop-blur-2xl transition-all duration-500 ${
+            isScrolled ? "shadow-[0_4px_20px_rgba(0,0,0,0.06)]" : ""
           }`}
         >
-          <div className="px-4 md:px-6 py-3 flex items-center justify-between">
+          <div className="px-5 md:px-7 py-3 flex items-center justify-between">
             {/* Logo with Profile Picture and Sound Wave */}
             <div className="flex items-center gap-3">
               <a href="#" className="flex items-center gap-3 group" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }) }}>
-                <div className="relative w-9 h-9 rounded-full overflow-hidden border border-border group-hover:border-primary/40 transition-colors duration-300">
+                <div className="relative w-8 h-8 overflow-hidden border border-border group-hover:border-primary/40 transition-colors duration-300">
                   <Image
                     src="/profile.PNG"
                     alt="Sovandara Rith"
@@ -181,6 +188,10 @@ export function Navigation() {
                     className="object-cover"
                     priority
                   />
+                </div>
+                <div className="hidden sm:flex flex-col leading-tight">
+                  <span className="text-[11px] font-mono text-primary/70 tracking-widest">SR—01</span>
+                  <span className="text-xs font-semibold tracking-wide text-foreground font-[family-name:var(--font-space-grotesk)]">Sovandara Rith</span>
                 </div>
               </a>
               
@@ -199,12 +210,13 @@ export function Navigation() {
             </div>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center gap-1">
-              {navLinks.map((link) => (
+            <div className="hidden lg:flex items-center gap-4">
+              {navLinks.map((link, i) => (
                 <NavLink
                   key={link.href}
                   href={link.href}
                   label={link.label}
+                  index={String(i + 1).padStart(2, "0")}
                   isActive={activeSection === link.href}
                   onClick={() => setActiveSection(link.href)}
                 />
@@ -218,7 +230,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={() => setIsSearchOpen(true)}
-                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
+                className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                 aria-label="Search"
               >
                 <Search className="w-4 h-4" />
@@ -230,7 +242,7 @@ export function Navigation() {
                   variant="ghost"
                   size="icon"
                   onClick={toggleTheme}
-                  className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
+                  className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                   aria-label="Toggle theme"
                 >
                   <div className="relative w-4 h-4">
@@ -257,7 +269,7 @@ export function Navigation() {
                 variant="ghost"
                 size="icon"
                 onClick={toggleLanguage}
-                className="w-9 h-9 rounded-full text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
+                className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
                 aria-label="Toggle language"
               >
                 <span className="text-xs font-semibold">
@@ -313,8 +325,8 @@ export function Navigation() {
                   />
                 ))}
                 
-                <Button 
-                  className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-xl font-medium transition-all duration-200"
+                <Button
+                  className="w-full mt-3 bg-primary text-primary-foreground hover:bg-primary/90 rounded-none font-medium tracking-wider uppercase text-xs font-[family-name:var(--font-space-grotesk)] transition-all duration-200"
                   onClick={() => {
                     setIsMobileMenuOpen(false)
                     document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })

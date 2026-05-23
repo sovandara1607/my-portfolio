@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { useLanguage } from "@/lib/language-context"
+import { SectionHeader } from "./section-header"
 
 export function ProjectsSection() {
   const { t } = useLanguage()
@@ -53,12 +54,13 @@ export function ProjectsSection() {
   ]
 
   return (
-    <section id="projects" className="py-24 px-6">
+    <section id="projects" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">{t("projects.label")}</p>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">{t("projects.title")}</h2>
-        </div>
+        <SectionHeader
+          index="02"
+          kicker={t("projects.label").replace(/^\/\/\s*/, "")}
+          title={t("projects.title")}
+        />
 
         <div className="grid md:grid-cols-2 gap-8">
           {projects.map((project, index) => (

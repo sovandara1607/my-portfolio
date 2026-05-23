@@ -2,6 +2,7 @@
 
 import { Briefcase, Camera, Video, Palette, Code, MoreHorizontal } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
+import { SectionHeader } from "./section-header"
 
 interface Experience {
   category: string
@@ -93,16 +94,13 @@ export function ExperiencesSection() {
   ]
 
   return (
-    <section id="experiences" className="py-24 px-6">
+    <section id="experiences" className="py-24 md:py-32 px-6">
       <div className="max-w-6xl mx-auto">
-        <div className="mb-12">
-          <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">
-            {language === "kh" ? "// បទពិសោធន៍" : "// Experiences"}
-          </p>
-          <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-            {language === "kh" ? "អ្វីដែលខ្ញុំបានធ្វើ" : "What I've Done"}
-          </h2>
-        </div>
+        <SectionHeader
+          index="03"
+          kicker={language === "kh" ? "បទពិសោធន៍" : "Experiences"}
+          title={language === "kh" ? "អ្វីដែលខ្ញុំបានធ្វើ" : "What I've Done."}
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp, index) => (

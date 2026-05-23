@@ -4,6 +4,7 @@ import { RadialScrollGallery } from '@/components/ui/portfolio-and-image-gallery
 import { ArrowUpRight } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
 import { useLanguage } from '@/lib/language-context'
+import { SectionHeader } from './section-header'
 
 const projects = [
   {
@@ -42,18 +43,13 @@ export function WorkSection() {
   const { language } = useLanguage()
 
   return (
-    <section id="work" className="relative overflow-hidden">
-      {/* Section Header */}
-      <div className="text-center pt-24 pb-4 px-6">
-        <p className="text-secondary text-sm tracking-wider uppercase mb-2 font-[family-name:var(--font-space-grotesk)]">
-          {language === 'kh' ? '// ការងារ' : '// Work'}
-        </p>
-        <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-          {language === 'kh' ? 'ស្នាដៃរបស់ខ្ញុំ' : 'My Work'}
-        </h2>
-        <div className="animate-bounce text-muted-foreground text-xs mt-4">
-          ↓ Scroll
-        </div>
+    <section id="work" className="relative overflow-hidden pt-24 md:pt-32 pb-12">
+      <div className="max-w-6xl mx-auto px-6">
+        <SectionHeader
+          index="01"
+          kicker={language === 'kh' ? 'ការងារ' : 'Selected Work'}
+          title={language === 'kh' ? 'ស្នាដៃរបស់ខ្ញុំ' : 'Photographs I have taken.'}
+        />
       </div>
 
       <RadialScrollGallery

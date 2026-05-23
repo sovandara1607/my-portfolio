@@ -10,6 +10,7 @@ import { HeroBackground } from "@/components/ui/classy-hero"
 import { LanguageWrapper } from "@/components/language-wrapper"
 import { MusicPlayer } from "@/components/music-player"
 import { Footer } from "@/components/footer"
+import { EdgeMarker } from "@/components/edge-marker"
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <main className="min-h-screen bg-background relative">
         <HeroBackground />
         <MusicPlayer />
+        <EdgeMarker />
         <div className="relative z-10">
           <Navigation />
           <HeroSection />
