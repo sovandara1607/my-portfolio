@@ -54,7 +54,7 @@ export function ProjectsSection() {
   ]
 
   return (
-    <section id="projects" className="py-24 md:py-32 px-6">
+    <section id="projects" className="py-16 md:py-32 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           index="02"

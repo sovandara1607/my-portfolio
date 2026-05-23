@@ -13,7 +13,7 @@ export function HeroSection() {
   const { t, language } = useLanguage()
 
   return (
-    <section className="relative min-h-screen flex items-center px-6 pt-32 pb-16 overflow-hidden">
+    <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-24 sm:pt-32 pb-16 overflow-hidden">
       {/* Ambient light sources */}
       <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
       <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.03] rounded-full blur-[100px] pointer-events-none" />
@@ -28,10 +28,10 @@ export function HeroSection() {
         </span>
       </div>
 
-      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-10 lg:gap-12 items-center relative z-10">
+      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left column — editorial copy */}
         <motion.div
-          className="lg:col-span-7 space-y-8 text-left"
+          className="lg:col-span-7 space-y-6 sm:space-y-8 text-left order-2 lg:order-1"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
@@ -50,7 +50,7 @@ export function HeroSection() {
           </motion.div>
 
           <motion.h1
-            className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[0.95] tracking-tight"
+            className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[0.95] tracking-tight break-words"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
@@ -97,7 +97,7 @@ export function HeroSection() {
             transition={{ delay: 0.6 }}
           >
             <Button
-              className="bg-foreground text-background hover:bg-primary hover:text-primary-foreground rounded-none px-7 py-6 transition-all duration-300 font-[family-name:var(--font-space-grotesk)] uppercase tracking-[0.2em] text-xs"
+              className="bg-foreground text-background hover:bg-primary hover:text-primary-foreground rounded-none px-5 sm:px-7 py-5 sm:py-6 transition-all duration-300 font-[family-name:var(--font-space-grotesk)] uppercase tracking-[0.2em] text-xs"
               onClick={() => {
                 document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
               }}
@@ -110,12 +110,12 @@ export function HeroSection() {
 
         {/* Right column — portrait + meta card */}
         <motion.div
-          className="lg:col-span-5 space-y-4"
+          className="lg:col-span-5 space-y-4 order-1 lg:order-2"
           initial={{ opacity: 0, x: 30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative aspect-[4/5] max-w-sm mx-auto lg:ml-auto overflow-hidden border border-border">
+          <div className="relative aspect-[4/5] w-full max-w-[260px] sm:max-w-sm mx-auto lg:ml-auto overflow-hidden border border-border">
             <Image
               src="/profile.PNG"
               alt="Sovandara Rith"
@@ -145,7 +145,7 @@ export function HeroSection() {
 
       {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-8 left-6 flex items-center gap-3"
+        className="absolute bottom-6 left-4 sm:left-6 hidden sm:flex items-center gap-3"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.2 }}

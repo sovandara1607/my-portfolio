@@ -8,7 +8,7 @@ export function ContactSection() {
   const { t } = useLanguage()
 
   return (
-    <section id="contact" className="py-24 md:py-32 px-6">
+    <section id="contact" className="py-16 md:py-32 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           index="04"
@@ -35,11 +35,11 @@ export function ContactSection() {
                 { label: t("contact.github"), value: "@sovandara1607", href: "https://github.com/sovandara1607", external: true },
                 { label: t("contact.location"), value: t("contact.locationValue") },
               ].map((row) => (
-                <div key={row.label} className="grid grid-cols-[120px_1fr] md:grid-cols-[180px_1fr] items-baseline py-4 border-b border-border">
+                <div key={row.label} className="flex flex-col sm:grid sm:grid-cols-[140px_1fr] md:grid-cols-[180px_1fr] sm:items-baseline gap-1 sm:gap-4 py-4 border-b border-border">
                   <dt className="text-[11px] uppercase tracking-[0.2em] text-muted-foreground font-[family-name:var(--font-space-grotesk)]">
                     {row.label}
                   </dt>
-                  <dd className="text-base text-foreground">
+                  <dd className="text-sm sm:text-base text-foreground break-all sm:break-normal">
                     {row.href ? (
                       <a
                         href={row.href}

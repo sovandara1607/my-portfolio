@@ -94,7 +94,7 @@ export function ExperiencesSection() {
   ]
 
   return (
-    <section id="experiences" className="py-24 md:py-32 px-6">
+    <section id="experiences" className="py-16 md:py-32 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           index="03"
