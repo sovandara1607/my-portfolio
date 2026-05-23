@@ -3,7 +3,6 @@
 import { HeroSection } from "@/components/hero-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { ExperiencesSection } from "@/components/experiences-section"
-import { WorkSection } from "@/components/work-section"
 import { ContactSection } from "@/components/contact-section"
 import { Navigation } from "@/components/navigation"
 import { HeroBackground } from "@/components/ui/classy-hero"
@@ -22,7 +21,6 @@ export default function Home() {
         <div className="relative z-10">
           <Navigation />
           <HeroSection />
-          <WorkSection />
           <ProjectsSection />
           <ExperiencesSection />
           <ContactSection />

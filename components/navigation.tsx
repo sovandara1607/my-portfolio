@@ -80,7 +80,6 @@ export function Navigation() {
   const { isPlaying } = useMusic()
 
   const navLinks = [
-    { href: "#work", label: language === "kh" ? "ការងារ" : "Work", keywords: ["work", "portfolio", "ការងារ"] },
     { href: "#projects", label: t("nav.projects"), keywords: ["projects", "apps", "គម្រោង"] },
     { href: "#experiences", label: language === "kh" ? "បទពិសោធន៍" : "Experiences", keywords: ["experiences", "photography", "videography", "design", "បទពិសោធន៍"] },
     { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message", "ទំនាក់ទំនង"] },
