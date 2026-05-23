@@ -104,23 +104,11 @@ export function WorkSection() {
           title={language === 'kh' ? 'ស្នាដៃរបស់ខ្ញុំ' : 'Photographs I have taken.'}
         />
 
-        {/* Mobile: horizontal snap-scroll strip */}
-        <div className="md:hidden -mx-4 px-4 overflow-x-auto snap-x snap-mandatory scrollbar-hide">
-          <div className="flex gap-4 pb-4">
-            {photos.map((photo, i) => (
-              <div
-                key={photo.id}
-                className="snap-start flex-shrink-0 w-[78%] max-w-[320px]"
-              >
-                <PhotoCard photo={photo} index={i} />
-              </div>
-            ))}
-          </div>
-          <div className="flex items-center gap-2 text-[10px] uppercase tracking-[0.25em] text-muted-foreground font-[family-name:var(--font-space-grotesk)] mt-2">
-            <span>← Swipe</span>
-            <span className="flex-1 h-px bg-border" />
-            <span>{photos.length} photos</span>
-          </div>
+        {/* Mobile: simple vertical stack — no carousel */}
+        <div className="md:hidden flex flex-col gap-5">
+          {photos.map((photo, i) => (
+            <PhotoCard key={photo.id} photo={photo} index={i} />
+          ))}
         </div>
 
         {/* Desktop: editorial asymmetric grid */}
