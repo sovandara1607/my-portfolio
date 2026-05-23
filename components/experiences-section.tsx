@@ -4,6 +4,7 @@ import {
   Briefcase,
   GraduationCap,
   School,
+  Award,
   Quote,
   Camera,
   Video,
@@ -145,134 +146,315 @@ export function ExperiencesSection() {
           </div>
         </div>
 
-        {/* ── Education ─────────────────────────────────────────────── */}
+        {/* ── 02 · Education — Academic Record Sheet ──────────────── */}
         <SubHeader index="02" label={t("experiences.education")} />
 
-        <div className="grid md:grid-cols-2 gap-5 mb-16">
+        {/* Catalog meta strip */}
+        <div className="flex items-center justify-between mb-8 pt-4 border-t border-border">
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            Academic Record · {String(profile.education.length).padStart(2, "0")} entries
+          </span>
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            Phnom Penh · Cambodia
+          </span>
+        </div>
+
+        <div className="mb-12">
           {profile.education.map((edu, i) => {
             const Icon = educationIcons[i] ?? GraduationCap
+            const isLast = i === profile.education.length - 1
+            const isCurrent = edu.period.toLowerCase().includes("present")
+            const endYear = edu.period.split("–").pop()?.trim() ?? edu.period
+            const startYear = edu.period.split("–")[0]?.trim() ?? ""
+            const bigYear = isCurrent ? "2026" : endYear
+            const shortCode = edu.school
+              .split(" ")
+              .filter((w) => w[0] === w[0]?.toUpperCase())
+              .map((w) => w[0])
+              .join("")
+              .slice(0, 4)
             return (
               <div
                 key={edu.school}
-                className="glass-card p-6 group hover:border-primary/40 transition-all duration-300"
+                className={`group relative ${isLast ? "" : "border-b border-border"}`}
               >
-                <div className="flex items-start justify-between mb-4">
-                  <div className="flex items-center justify-center w-10 h-10 rounded-full bg-secondary/10 text-secondary">
-                    <Icon className="w-4 h-4" />
+                <div className="absolute inset-0 bg-muted/0 group-hover:bg-muted/20 transition-colors pointer-events-none" />
+
+                <article className="relative grid md:grid-cols-[180px_1fr_220px] gap-6 md:gap-10 py-8 md:py-12 px-2">
+                  {/* Col 1 · Conferred year + status */}
+                  <div className="flex md:flex-col gap-4 md:gap-0 items-baseline md:items-start md:justify-between">
+                    <div>
+                      <div className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)] mb-1">
+                        {isCurrent ? "Expected" : "Conferred"}
+                      </div>
+                      <div
+                        className="text-4xl md:text-6xl font-bold leading-none tracking-tight text-transparent font-[family-name:var(--font-space-grotesk)]"
+                        style={{ WebkitTextStroke: "1.5px var(--color-foreground)" }}
+                      >
+                        {bigYear}
+                      </div>
+                    </div>
+
+                    <div className="md:mt-auto md:pt-6 flex md:block items-center gap-3">
+                      <span
+                        className={`inline-flex items-center gap-1 text-[10px] tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)] px-2 py-0.5 rounded-full ${
+                          isCurrent
+                            ? "text-primary bg-primary/10"
+                            : "text-secondary bg-secondary/10"
+                        }`}
+                      >
+                        {isCurrent && (
+                          <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+                        )}
+                        {isCurrent ? "In progress" : "Graduated"}
+                      </span>
+                      <span className="md:block md:mt-2 text-xs text-muted-foreground/70 font-[family-name:var(--font-space-grotesk)] tracking-wider">
+                        {startYear} → {endYear}
+                      </span>
+                    </div>
                   </div>
-                  <span className="text-[10px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
-                    {edu.period}
-                  </span>
-                </div>
 
-                <h4 className="text-lg font-bold text-foreground leading-snug group-hover:text-primary transition-colors">
-                  {edu.degree}
-                </h4>
-                <p className="text-sm text-muted-foreground mt-1">
-                  {edu.school}
-                </p>
+                  {/* Col 2 · Degree + school + note */}
+                  <div className="flex flex-col gap-4 min-w-0">
+                    <h4 className="text-2xl md:text-4xl font-bold text-foreground leading-[1.05] tracking-tight group-hover:text-primary transition-colors">
+                      {edu.degree}
+                    </h4>
 
-                <div className="mt-4 pt-4 border-t border-border flex items-center gap-2">
-                  <span className="inline-block w-1.5 h-1.5 rounded-full bg-primary" />
-                  <span className="text-xs text-primary/80 font-medium">
-                    {edu.note}
-                  </span>
-                </div>
+                    <div className="flex items-center gap-3">
+                      <span className="inline-block w-6 h-px bg-secondary" />
+                      <span className="text-xs md:text-sm text-secondary tracking-wider font-[family-name:var(--font-space-grotesk)]">
+                        {edu.school}
+                      </span>
+                    </div>
+
+                    <div className="flex items-center gap-2 pt-2">
+                      <Award className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-sm text-foreground/90 italic">
+                        {edu.note}
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Col 3 · Diploma seal */}
+                  <div className="flex md:items-center md:justify-end md:border-l md:border-border md:pl-8">
+                    <div className="relative w-28 h-28">
+                      {/* Outer dashed ring */}
+                      <div className="absolute inset-0 rounded-full border border-dashed border-border" />
+                      {/* Inner solid ring */}
+                      <div className="absolute inset-2 rounded-full border border-border bg-muted/30 flex flex-col items-center justify-center">
+                        <Icon className="w-6 h-6 text-secondary mb-1" />
+                        <span className="text-[9px] text-muted-foreground tracking-[0.2em] font-[family-name:var(--font-space-grotesk)]">
+                          {shortCode}
+                        </span>
+                      </div>
+                      {/* Tiny corner stars */}
+                      <span className="absolute -top-0.5 left-1/2 -translate-x-1/2 text-[10px] text-primary/60">
+                        ✦
+                      </span>
+                      <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 text-[10px] text-primary/60">
+                        ✦
+                      </span>
+                    </div>
+                  </div>
+                </article>
               </div>
             )
           })}
         </div>
 
-        {/* ── Personal: Soft Skills · Languages · Interests ─────────── */}
-        <SubHeader index="03" label="Personal" />
+        {/* Catalog footer rule */}
+        <div className="mt-2 pt-4 border-t border-border flex items-center justify-between mb-16">
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            End of record
+          </span>
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            Year 3 · Ongoing
+          </span>
+        </div>
 
-        <div className="grid md:grid-cols-[1fr_1fr_1.4fr] gap-5">
-          {/* Soft Skills — pull quotes */}
-          <div className="glass-card p-6 flex flex-col">
-            <div className="flex items-center justify-between mb-5">
-              <span className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)]">
-                {t("experiences.softSkills")}
+        {/* ── 03 · Personal Index — Three Editorial Blocks ────────── */}
+        <SubHeader index="03" label="Personal Index" />
+
+        <div className="flex items-center justify-between mb-8 pt-4 border-t border-border">
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            Personal Index · 03 categories
+          </span>
+          <span className="text-[10px] text-muted-foreground/60 tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)]">
+            Analog · Off-Screen
+          </span>
+        </div>
+
+        <div className="grid md:grid-cols-[1fr_1fr_1.3fr] gap-5">
+          {/* ─── A · Soft Skills — pull quotes ─── */}
+          <div className="glass-card p-6 flex flex-col relative overflow-hidden">
+            <Quote
+              aria-hidden
+              className="absolute -top-2 -right-2 w-20 h-20 text-primary/5"
+            />
+
+            <div className="flex items-center justify-between mb-1 relative z-10">
+              <span className="text-[10px] text-foreground tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)] font-semibold">
+                A · {t("experiences.softSkills")}
               </span>
-              <Quote className="w-4 h-4 text-primary/40" />
+              <span className="text-[9px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
+                Vol. {String(profile.softSkills.length).padStart(2, "0")}
+              </span>
             </div>
+            <div className="h-px bg-border mb-6 relative z-10" />
 
-            <div className="space-y-5 flex-1">
+            <div className="space-y-6 flex-1 relative z-10">
               {profile.softSkills.map((skill, i) => (
-                <div key={skill} className="relative pl-4">
-                  <span className="absolute left-0 top-0 text-2xl text-primary/40 leading-none font-serif">
+                <div key={skill} className="relative">
+                  <span className="absolute -left-1 -top-3 text-5xl text-primary/40 leading-none font-serif select-none">
                     “
                   </span>
-                  <p className="text-sm text-foreground/90 italic leading-relaxed">
+                  <p className="pl-6 text-sm text-foreground/90 italic leading-relaxed">
                     {skill}
                   </p>
-                  <span className="block mt-2 text-[10px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
-                    {String(i + 1).padStart(2, "0")} / {String(profile.softSkills.length).padStart(2, "0")}
-                  </span>
+                  <div className="pl-6 mt-3 flex items-center gap-2">
+                    <span className="inline-block h-px w-6 bg-primary/40" />
+                    <span className="text-[10px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
+                      Trait {String(i + 1).padStart(2, "0")} / {String(profile.softSkills.length).padStart(2, "0")}
+                    </span>
+                  </div>
                 </div>
               ))}
             </div>
+
+            <div className="mt-6 pt-4 border-t border-dashed border-border flex items-center justify-between relative z-10">
+              <span className="text-[9px] text-muted-foreground/60 tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)]">
+                Soft / Human
+              </span>
+              <span className="text-[9px] text-primary/60">✦</span>
+            </div>
           </div>
 
-          {/* Languages — ranked pills */}
-          <div className="glass-card p-6 flex flex-col">
-            <span className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)] mb-5">
-              {t("experiences.languages")}
+          {/* ─── B · Languages — ranked records ─── */}
+          <div className="glass-card p-6 flex flex-col relative overflow-hidden">
+            {/* Decorative giant outlined count */}
+            <span
+              aria-hidden
+              className="absolute -bottom-4 -right-2 text-[80px] leading-none font-bold text-transparent font-[family-name:var(--font-space-grotesk)] select-none pointer-events-none"
+              style={{ WebkitTextStroke: "1px var(--color-border)" }}
+            >
+              {String(profile.languages.length).padStart(2, "0")}
             </span>
 
-            <div className="space-y-3 flex-1">
+            <div className="flex items-center justify-between mb-1 relative z-10">
+              <span className="text-[10px] text-foreground tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)] font-semibold">
+                B · {t("experiences.languages")}
+              </span>
+              <span className="text-[9px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
+                Spoken
+              </span>
+            </div>
+            <div className="h-px bg-border mb-6 relative z-10" />
+
+            <div className="space-y-5 flex-1 relative z-10">
               {profile.languages.map((lang, i) => {
                 const isNative = lang.toLowerCase().includes("native")
+                const filledDots = isNative ? 5 : 4
                 return (
-                  <div
-                    key={lang}
-                    className="flex items-center justify-between gap-3 pb-3 border-b border-border last:border-b-0 last:pb-0"
-                  >
-                    <div className="flex items-center gap-3">
-                      <span className="text-xs text-secondary tracking-wider font-[family-name:var(--font-space-grotesk)] w-5">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <span className="text-base font-medium text-foreground">
-                        {lang.split(" (")[0]}
-                      </span>
+                  <div key={lang} className="space-y-2">
+                    <div className="flex items-baseline justify-between gap-3">
+                      <div className="flex items-baseline gap-3">
+                        <span className="text-xs text-secondary tracking-wider font-[family-name:var(--font-space-grotesk)]">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <span className="text-lg font-bold text-foreground tracking-tight">
+                          {lang.split(" (")[0]}
+                        </span>
+                      </div>
+                      {isNative ? (
+                        <span className="text-[9px] text-primary bg-primary/10 px-2 py-0.5 rounded-full tracking-[0.2em] font-[family-name:var(--font-space-grotesk)] uppercase">
+                          Native
+                        </span>
+                      ) : (
+                        <span className="text-[9px] text-muted-foreground border border-border px-2 py-0.5 rounded-full tracking-[0.2em] font-[family-name:var(--font-space-grotesk)] uppercase">
+                          Fluent
+                        </span>
+                      )}
                     </div>
-                    {isNative ? (
-                      <span className="text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded-full tracking-wider font-[family-name:var(--font-space-grotesk)] uppercase">
-                        Native
-                      </span>
-                    ) : (
-                      <span className="text-[10px] text-muted-foreground border border-border px-2 py-0.5 rounded-full tracking-wider font-[family-name:var(--font-space-grotesk)] uppercase">
-                        Fluent
-                      </span>
-                    )}
+
+                    {/* Proficiency dots */}
+                    <div className="flex items-center gap-1.5 pl-7">
+                      {[...Array(5)].map((_, dotIdx) => (
+                        <span
+                          key={dotIdx}
+                          className={`inline-block w-2 h-2 rounded-full ${
+                            dotIdx < filledDots
+                              ? isNative
+                                ? "bg-primary"
+                                : "bg-secondary"
+                              : "bg-border"
+                          }`}
+                        />
+                      ))}
+                    </div>
                   </div>
                 )
               })}
             </div>
+
+            <div className="mt-6 pt-4 border-t border-dashed border-border flex items-center justify-between relative z-10">
+              <span className="text-[9px] text-muted-foreground/60 tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)]">
+                Read · Write · Speak
+              </span>
+              <span className="text-[9px] text-primary/60">✦</span>
+            </div>
           </div>
 
-          {/* Interests — iconified grid */}
+          {/* ─── C · Interests — specimen tiles ─── */}
           <div className="glass-card p-6 flex flex-col">
-            <span className="text-[10px] text-muted-foreground tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)] mb-5">
-              {t("experiences.interests")}
-            </span>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-[10px] text-foreground tracking-[0.3em] uppercase font-[family-name:var(--font-space-grotesk)] font-semibold">
+                C · {t("experiences.interests")}
+              </span>
+              <span className="text-[9px] text-muted-foreground/60 tracking-widest font-[family-name:var(--font-space-grotesk)]">
+                {String(profile.interests.length).padStart(2, "0")} Pursuits
+              </span>
+            </div>
+            <div className="h-px bg-border mb-6" />
 
             <div className="grid grid-cols-2 gap-3 flex-1">
-              {profile.interests.map((interest) => {
+              {profile.interests.map((interest, i) => {
                 const Icon = interestIconMap[interest] ?? Leaf
                 return (
                   <div
                     key={interest}
-                    className="group relative flex items-center gap-3 p-3 rounded-lg bg-muted/40 border border-border hover:border-primary/40 hover:bg-primary/5 transition-all duration-300"
+                    className="group/tile relative flex flex-col p-4 rounded-xl bg-muted/30 border border-border hover:border-primary/40 hover:bg-primary/5 transition-all duration-300 overflow-hidden"
                   >
-                    <div className="flex items-center justify-center w-8 h-8 rounded-md bg-background text-primary group-hover:scale-110 transition-transform">
-                      <Icon className="w-3.5 h-3.5" />
-                    </div>
-                    <span className="text-sm text-foreground font-medium">
-                      {interest}
+                    {/* Corner serial */}
+                    <span className="absolute top-2 left-3 text-[9px] text-muted-foreground/50 tracking-widest font-[family-name:var(--font-space-grotesk)]">
+                      {String(i + 1).padStart(2, "0")}
                     </span>
+                    {/* Corner accent */}
+                    <span className="absolute top-2 right-3 text-[10px] text-primary/30 group-hover/tile:text-primary/70 transition-colors">
+                      ✦
+                    </span>
+
+                    <div className="mt-4 mb-3 flex items-center justify-center">
+                      <div className="flex items-center justify-center w-12 h-12 rounded-full bg-background border border-border text-primary group-hover/tile:scale-110 group-hover/tile:border-primary/40 transition-all">
+                        <Icon className="w-5 h-5" />
+                      </div>
+                    </div>
+
+                    <div className="text-center">
+                      <div className="text-sm font-bold text-foreground">
+                        {interest}
+                      </div>
+                      <div className="h-px w-6 mx-auto mt-1.5 bg-border group-hover/tile:bg-primary transition-colors" />
+                    </div>
                   </div>
                 )
               })}
+            </div>
+
+            <div className="mt-6 pt-4 border-t border-dashed border-border flex items-center justify-between">
+              <span className="text-[9px] text-muted-foreground/60 tracking-[0.25em] uppercase font-[family-name:var(--font-space-grotesk)]">
+                Off the keyboard
+              </span>
+              <span className="text-[9px] text-primary/60">✦</span>
             </div>
           </div>
         </div>

@@ -78,9 +78,9 @@ export const profile = {
     frontend: ["HTML", "CSS", "JavaScript", "Tailwind CSS"],
     backend: ["PHP", "Laravel", "Go", "Java"],
     mobile: ["Dart", "Flutter", "Swift", "SwiftUI"],
-    databases: ["MySQL", "PostgreSQL"],
-    design: ["UI/UX", "Figma", "System Analysis & Software Design"],
-    tools: ["Docker", "Git", "DigitalOcean", "Vercel", "Railway"],
+    databases: ["MySQL", "PostgreSQL", "Redis", "MongoDB"],
+    design: ["UI/UX", "Figma", "System Analysis & Software Design", "Adobe Photoshop", "Adobe Illustrator"],
+    tools: ["Docker", "Git", "Gitea", "DigitalOcean", "Vercel", "Railway"],
   },
   softSkills: [
     "Team communication",
