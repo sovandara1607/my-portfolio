@@ -1,6 +1,7 @@
 "use client"
 
 import { HeroSection } from "@/components/hero-section"
+import { SkillsSection } from "@/components/skills-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { ExperiencesSection } from "@/components/experiences-section"
 import { ContactSection } from "@/components/contact-section"
@@ -21,6 +22,7 @@ export default function Home() {
         <div className="relative z-10">
           <Navigation />
           <HeroSection />
+          <SkillsSection />
           <ProjectsSection />
           <ExperiencesSection />
           <ContactSection />

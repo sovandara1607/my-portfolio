@@ -143,6 +143,24 @@
     font-family: var(--font-inter), "Inter", system-ui, sans-serif;
   }
 
+  /* Global film-grain overlay — fixed above all content, non-interactive */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,%3Csvg viewBox='0 0 240 240' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.45 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    background-size: 240px 240px;
+    opacity: 0.08;
+    mix-blend-mode: multiply;
+  }
+
+  .dark body::after {
+    opacity: 0.12;
+    mix-blend-mode: overlay;
+  }
+
   h1,
   h2,
   h3,

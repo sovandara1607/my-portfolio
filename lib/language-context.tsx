@@ -69,6 +69,36 @@ const translations: Record<Language, Record<string, string>> = {
     "projects.fitnessDesc": "Fitness tracking app focused on usability, performance, and clean UI.",
     "projects.esp32Title": "ESP32 Web Server",
     "projects.esp32Desc": "Web-based controller to manage ESP32 hardware outputs via WiFi.",
+    "projects.academicHeading": "Academic & Personal Work",
+    "projects.academicSubheading": "University coursework and side projects",
+    "projects.viewDetails": "View Details →",
+    "projects.platformIos": "iOS",
+    "projects.coursePrefix": "Course",
+
+    // Experiences extras
+    "experiences.work": "Work",
+    "experiences.education": "Education",
+    "experiences.languages": "Languages",
+    "experiences.interests": "Interests",
+    "experiences.softSkills": "Soft Skills",
+
+    // Skills
+    "skills.frontend": "Frontend",
+    "skills.backend": "Backend",
+    "skills.mobile": "Mobile",
+    "skills.databases": "Databases",
+    "skills.design": "Design",
+    "skills.tools": "Tools & Platforms",
+
+    // Case Study (generic)
+    "caseStudy.back": "Back",
+    "caseStudy.label": "Case Study",
+    "caseStudy.overview": "Overview",
+    "caseStudy.highlights": "Highlights",
+    "caseStudy.stack": "Tech Stack",
+    "caseStudy.course": "Course",
+    "caseStudy.period": "Period",
+    "caseStudy.platform": "Platform",
 
     // Mindset Section
     "mindset.label": "// Engineering Mindset",
@@ -168,6 +198,36 @@ const translations: Record<Language, Record<string, string>> = {
     "projects.fitnessDesc": "កម្មវិធីតាមដាន Fitness ផ្តោតលើការប្រើប្រាស់ ល្បឿន និង UI ស្រស់បំព្រង។",
     "projects.esp32Title": "ESP32 Web Server",
     "projects.esp32Desc": "ឧបករណ៍គ្រប់គ្រង Hardware ESP32 តាមរយៈ WiFi។",
+    "projects.academicHeading": "ការសិក្សា និងគម្រោងផ្ទាល់ខ្លួន",
+    "projects.academicSubheading": "កិច្ចការសាកលវិទ្យាល័យ និងគម្រោងបន្ថែម",
+    "projects.viewDetails": "មើលលម្អិត →",
+    "projects.platformIos": "iOS",
+    "projects.coursePrefix": "មុខវិជ្ជា",
+
+    // Experiences extras
+    "experiences.work": "ការងារ",
+    "experiences.education": "ការសិក្សា",
+    "experiences.languages": "ភាសា",
+    "experiences.interests": "ចំណាប់អារម្មណ៍",
+    "experiences.softSkills": "ជំនាញទន់",
+
+    // Skills
+    "skills.frontend": "Frontend",
+    "skills.backend": "Backend",
+    "skills.mobile": "Mobile",
+    "skills.databases": "មូលដ្ឋានទិន្នន័យ",
+    "skills.design": "រចនា",
+    "skills.tools": "ឧបករណ៍ & Platform",
+
+    // Case Study (generic)
+    "caseStudy.back": "ត្រឡប់ក្រោយ",
+    "caseStudy.label": "ករណីសិក្សា",
+    "caseStudy.overview": "ទិដ្ឋភាពទូទៅ",
+    "caseStudy.highlights": "ចំណុចសំខាន់",
+    "caseStudy.stack": "បច្ចេកវិទ្យា",
+    "caseStudy.course": "មុខវិជ្ជា",
+    "caseStudy.period": "រយៈពេល",
+    "caseStudy.platform": "Platform",
 
     // Mindset Section
     "mindset.label": "// ផ្នត់គំនិត",

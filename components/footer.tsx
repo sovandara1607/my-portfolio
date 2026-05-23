@@ -1,6 +1,6 @@
 "use client"
 
-import { Github, Linkedin, Mail, Heart } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
 
 const socialLinks = [
@@ -11,12 +11,12 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/sovandara",
+    href: "https://linkedin.com/in/sovandara1607",
     icon: Linkedin,
   },
   {
     name: "Email",
-    href: "mailto:contact@sovandara.dev",
+    href: "rithsovandara83@gmail.com",
     icon: Mail,
   },
 ]
@@ -90,12 +90,6 @@ export function Footer() {
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
               © {currentYear} Sovandara Rith. {language === "kh" ? "រក្សាសិទ្ធិគ្រប់យ៉ាង។" : "All rights reserved."}
-            </p>
-            <p className="text-xs text-muted-foreground flex items-center gap-1">
-              {language === "kh" ? "បង្កើតដោយ" : "Built with"}
-              <Heart className="w-3 h-3 text-red-500 fill-red-500 animate-pulse" />
-              {language === "kh" ? "និង" : "&"}
-              <span className="text-primary font-semibold">Next.js</span>
             </p>
           </div>
         </div>
