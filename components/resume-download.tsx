@@ -15,8 +15,8 @@ export function ResumeDownload() {
     
     // Create download link
     const link = document.createElement("a")
-    link.href = "/resume/Sovandara_Rith_Resume.pdf"
-    link.download = "Sovandara_Rith_Resume.pdf"
+    link.href = "/resume/Sovandara_Rith_Resume.docx"
+    link.download = "Sovandara_Rith_Resume.docx"
     document.body.appendChild(link)
     link.click()
     document.body.removeChild(link)
@@ -80,8 +80,8 @@ export function ResumeCard() {
         <div className="glass-subtle p-4 -m-4">
           <div className="flex items-start gap-4">
             {/* PDF Preview */}
-            <div className="w-12 h-16 bg-gradient-to-br from-red-500/20 to-red-600/20 border border-red-500/30 rounded flex items-center justify-center flex-shrink-0">
-              <span className="text-red-400 text-xs font-bold">PDF</span>
+            <div className="w-12 h-16 bg-gradient-to-br from-blue-500/20 to-blue-600/20 border border-blue-500/30 rounded flex items-center justify-center flex-shrink-0">
+              <span className="text-blue-400 text-xs font-bold">DOCX</span>
             </div>
             
             {/* Info */}
@@ -91,8 +91,8 @@ export function ResumeCard() {
                 Full-Stack Developer · Computer Science Student
               </p>
               <div className="flex items-center gap-2 text-xs text-muted-foreground mb-4">
-                <span className="bg-secondary/60 px-2 py-1 rounded">Updated Jan 2026</span>
-                <span className="bg-secondary/60 px-2 py-1 rounded">~150 KB</span>
+                <span className="bg-secondary/60 px-2 py-1 rounded">Updated May 2026</span>
+                <span className="bg-secondary/60 px-2 py-1 rounded">~11 KB</span>
               </div>
               <ResumeDownload />
             </div>
