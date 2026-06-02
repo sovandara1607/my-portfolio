@@ -3,7 +3,7 @@
 import { useState, useEffect, useCallback, useRef } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon, Menu, X, Search, Languages } from "lucide-react"
+import { Sun, Moon, Menu, X, Search } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { useMusic } from "@/lib/music-context"
@@ -76,18 +76,18 @@ export function Navigation() {
   const [activeSection, setActiveSection] = useState("")
   const searchInputRef = useRef<HTMLInputElement>(null)
   const { theme, setTheme, resolvedTheme } = useTheme()
-  const { language, setLanguage, t } = useLanguage()
+  const { t } = useLanguage()
   const { isPlaying } = useMusic()
 
   const navLinks = [
-    { href: "#skills", label: language === "kh" ? "បច្ចេកវិទ្យា" : "Skills", keywords: ["skills", "tech", "stack", "បច្ចេកវិទ្យា"] },
-    { href: "#projects", label: t("nav.projects"), keywords: ["projects", "apps", "គម្រោង"] },
-    { href: "#experiences", label: language === "kh" ? "បទពិសោធន៍" : "Experiences", keywords: ["experiences", "photography", "videography", "design", "បទពិសោធន៍"] },
-    { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message", "ទំនាក់ទំនង"] },
+    { href: "#skills", label: "Skills", keywords: ["skills", "tech", "stack"] },
+    { href: "#projects", label: t("nav.projects"), keywords: ["projects", "apps"] },
+    { href: "#experiences", label: "Experiences", keywords: ["experiences", "photography", "videography", "design"] },
+    { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message"] },
   ]
 
   const allSections = [
-    { href: "#", label: language === "kh" ? "ទំព័រដើម" : "Home", keywords: ["home", "top", "ដើម"] },
+    { href: "#", label: "Home", keywords: ["home", "top"] },
     ...navLinks,
   ]
 
@@ -97,10 +97,6 @@ export function Navigation() {
         section.keywords.some(k => k.includes(searchQuery.toLowerCase()))
       )
     : []
-
-  const toggleLanguage = () => {
-    setLanguage(language === "en" ? "kh" : "en")
-  }
 
   useEffect(() => {
     setMounted(true)
@@ -263,19 +259,6 @@ export function Navigation() {
                   </div>
                 </Button>
               )}
-
-              {/* Language Toggle */}
-              <Button
-                variant="ghost"
-                size="icon"
-                onClick={toggleLanguage}
-                className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
-                aria-label="Toggle language"
-              >
-                <span className="text-xs font-semibold">
-                  {language === "en" ? "KH" : "EN"}
-                </span>
-              </Button>
 
               {/* Mobile Menu */}
               <Button

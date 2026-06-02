@@ -55,8 +55,6 @@
   --font-label:
     var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
-  --font-khmer:
-    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
 
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -346,21 +344,3 @@
   color: white;
 }
 
-/* ========================================
-   LANG KHMER OVERRIDES
-   ======================================== */
-.lang-kh,
-.lang-kh * {
-  font-family:
-    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif;
-}
-
-.lang-kh h1,
-.lang-kh h2,
-.lang-kh h3,
-.lang-kh h4,
-.lang-kh h5,
-.lang-kh h6 {
-  font-family:
-    var(--font-khmer), "Kantumruy Pro", "Noto Sans Khmer", sans-serif !important;
-}

@@ -1,7 +1,6 @@
 "use client"
 
 import { Github, Linkedin, Mail } from "lucide-react"
-import { useLanguage } from "@/lib/language-context"
 
 const socialLinks = [
   {
@@ -22,7 +21,6 @@ const socialLinks = [
 ]
 
 export function Footer() {
-  const { language } = useLanguage()
   const currentYear = new Date().getFullYear()
 
   return (
@@ -38,27 +36,24 @@ export function Footer() {
               <span className="font-bold text-lg text-foreground">Sovandara</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              {language === "kh" 
-                ? "អ្នកអភិវឌ្ឍន៍កម្មវិធីដែលចូលចិត្តបង្កើតបទពិសោធន៍អ្នកប្រើប្រាស់ស្អាតៗ។"
-                : "A developer passionate about crafting beautiful user experiences and clean code."
-              }
+              A developer passionate about crafting beautiful user experiences and clean code.
             </p>
           </div>
 
           {/* Quick Links */}
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider">
-              {language === "kh" ? "តំណភ្ជាប់រហ័ស" : "Quick Links"}
+              Quick Links
             </h3>
             <nav className="flex flex-col gap-2">
               <a href="#projects" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                {language === "kh" ? "គម្រោង" : "Projects"}
+                Projects
               </a>
               <a href="#experiences" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                {language === "kh" ? "បទពិសោធន៍" : "Experiences"}
+                Experiences
               </a>
               <a href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                {language === "kh" ? "ទំនាក់ទំនង" : "Contact"}
+                Contact
               </a>
             </nav>
           </div>
@@ -66,7 +61,7 @@ export function Footer() {
           {/* Social Links */}
           <div className="space-y-4">
             <h3 className="font-semibold text-foreground text-sm uppercase tracking-wider">
-              {language === "kh" ? "បណ្ដាញសង្គម" : "Connect"}
+              Connect
             </h3>
             <div className="flex gap-3">
               {socialLinks.map((link) => (
@@ -89,7 +84,7 @@ export function Footer() {
         <div className="mt-12 pt-6 border-t border-border/50">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-xs text-muted-foreground">
-              © {currentYear} Sovandara Rith. {language === "kh" ? "រក្សាសិទ្ធិគ្រប់យ៉ាង។" : "All rights reserved."}
+              © {currentYear} Sovandara Rith. All rights reserved.
             </p>
           </div>
         </div>

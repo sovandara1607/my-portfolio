@@ -12,7 +12,7 @@ interface SkillGroup {
 }
 
 export function SkillsSection() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
 
   const groups: SkillGroup[] = [
     { key: "frontend", label: t("skills.frontend"), items: profile.skills.frontend },
@@ -28,8 +28,8 @@ export function SkillsSection() {
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           index="01"
-          kicker={language === "kh" ? "បច្ចេកវិទ្យា" : "Tech Stack"}
-          title={language === "kh" ? "បច្ចេកវិទ្យាដែលខ្ញុំប្រើ" : "Technologies I Use."}
+          kicker="Tech Stack"
+          title="Technologies I Use."
         />
 
         <div className="border-t border-border">

@@ -10,7 +10,7 @@ import { motion } from "framer-motion"
 import { ArrowDown } from "lucide-react"
 
 export function HeroSection() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
 
   return (
     <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-24 sm:pt-32 pb-16 overflow-hidden">
@@ -45,7 +45,7 @@ export function HeroSection() {
             <span className="text-xs font-mono text-primary tabular-nums tracking-widest">[00]</span>
             <span className="h-px w-12 bg-border" />
             <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-[family-name:var(--font-space-grotesk)]">
-              {language === "kh" ? "ស្វាគមន៍" : "Now Open"}
+              Now Open
             </span>
           </motion.div>
 
@@ -55,7 +55,7 @@ export function HeroSection() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.7 }}
           >
-            {language === "kh" ? t("hero.name") : "Sovandara"}
+            Sovandara
             <br />
             <span className="text-primary italic font-light">Rith</span>
             <span className="text-foreground">.</span>
@@ -67,9 +67,7 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            {language === "kh"
-              ? "និស្សិតវិទ្យាសាស្ត្រកុំព្យូទ័រឆ្នាំទី៣ — បង្កើតកម្មវិធីគេហទំព័រ និងទូរស័ព្ទ ដោយការយកចិត្តទុកដាក់ចំពោះការរចនា និងលម្អិត។"
-              : "Year 3 Computer Science student — building web and mobile interfaces with an obsession for typography, rhythm, and detail."}
+            Year 3 Computer Science student — building web and mobile interfaces with an obsession for typography, rhythm, and detail.
           </motion.p>
 
           <motion.div

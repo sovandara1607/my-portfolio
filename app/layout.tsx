@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono, Kantumruy_Pro } from "next/font/google"
+import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
@@ -22,15 +22,9 @@ const spaceGrotesk = Space_Grotesk({
   variable: "--font-space-grotesk",
 })
 
-const jetbrainsMono = JetBrains_Mono({ 
+const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
   variable: "--font-jetbrains",
-})
-
-const kantumruyPro = Kantumruy_Pro({ 
-  weight: ["400", "500", "600", "700"],
-  subsets: ["khmer", "latin"],
-  variable: "--font-khmer",
 })
 
 export const metadata: Metadata = {
@@ -44,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${kantumruyPro.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"

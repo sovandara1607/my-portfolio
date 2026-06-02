@@ -46,7 +46,7 @@ function SubHeader({
 }
 
 export function ExperiencesSection() {
-  const { t, language } = useLanguage()
+  const { t } = useLanguage()
 
   const work = profile.experience[0]
   const [startYear, endYear] = work.period.split(" – ")
@@ -56,8 +56,8 @@ export function ExperiencesSection() {
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           index="03"
-          kicker={language === "kh" ? "បទពិសោធន៍" : "Experiences"}
-          title={language === "kh" ? "អ្វីដែលខ្ញុំបានធ្វើ" : "What I've Done."}
+          kicker="Experiences"
+          title="What I've Done."
         />
 
         {/* ── Hero Work card ───────────────────────────────────────── */}
