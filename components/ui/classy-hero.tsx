@@ -1,6 +1,6 @@
 'use client'
 import React, { useState, useRef, useEffect } from 'react'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, type Variants } from 'framer-motion'
 import { cn } from '@/lib/utils'
 
 interface AnimatedPathProps {
@@ -79,11 +79,11 @@ export const TextRotator = ({
         return () => clearInterval(timer);
     }, [words.length, interval]);
 
-    const letterVariants = {
+    const letterVariants: Variants = {
         hidden: { opacity: 0, y: 20, filter: "blur(5px)", scale: 0.9 },
         visible: (i: number) => ({
             opacity: 1, y: 0, filter: "blur(0px)", scale: 1,
-            transition: { delay: i * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] }
+            transition: { delay: i * 0.05, duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }
         }),
         exit: (i: number) => ({
             opacity: 0, y: -20, filter: "blur(5px)", scale: 0.9,

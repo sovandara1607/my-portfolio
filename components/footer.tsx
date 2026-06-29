@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
 
 const socialLinks = [
@@ -55,6 +56,9 @@ export function Footer() {
               <a href="#contact" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Contact
               </a>
+              <Link href="/now" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Now
+              </Link>
             </nav>
           </div>
 

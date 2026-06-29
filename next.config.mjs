@@ -58,8 +58,8 @@ const nextConfig = {
               "img-src 'self' data: blob: https:",
               // Fonts: self + Google Fonts
               "font-src 'self' https://fonts.gstatic.com",
-              // Connections: self + Vercel Analytics
-              "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com",
+              // Connections: self + Vercel Analytics + Supabase + direct Cloudinary upload
+              "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.supabase.co wss://*.supabase.co https://api.cloudinary.com",
               // Media: self for music player
               "media-src 'self' blob:",
               // Frames: allow fitness app demo

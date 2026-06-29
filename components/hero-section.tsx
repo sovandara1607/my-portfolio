@@ -6,17 +6,55 @@ import { ResumeDownload } from "./resume-download"
 import { TextRotator } from "@/components/ui/classy-hero"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "framer-motion"
 import { ArrowDown } from "lucide-react"
+
+// ── Word-reveal headline ────────────────────────────────────────────────────
+
+const EASE = [0.22, 1, 0.36, 1] as const
+
+function WordReveal({
+  words,
+  className,
+}: {
+  words: { text: string; className?: string }[]
+  className?: string
+}) {
+  return (
+    <span className={className}>
+      {words.map((w, i) => (
+        <motion.span
+          key={i}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 + i * 0.1, duration: 0.7, ease: EASE }}
+          className={`inline-block ${w.className ?? ""}`}
+          style={{ marginRight: i < words.length - 1 ? undefined : undefined }}
+        >
+          {w.text}
+        </motion.span>
+      ))}
+    </span>
+  )
+}
+
+// ── Section ─────────────────────────────────────────────────────────────────
 
 export function HeroSection() {
   const { t } = useLanguage()
+  const { scrollY } = useScroll()
+
+  // Parallax transforms: blobs move up as user scrolls
+  const blobY1 = useTransform(scrollY, [0, 600], [0, -80])
+  const blobY2 = useTransform(scrollY, [0, 600], [0, -50])
+  // Text container: subtle push-up
+  const textY  = useTransform(scrollY, [0, 600], [0, 28])
 
   return (
     <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-24 sm:pt-32 pb-16 overflow-hidden">
-      {/* Ambient light sources */}
-      <div className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
-      <div className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.03] rounded-full blur-[100px] pointer-events-none" />
+      {/* Parallax ambient blobs */}
+      <motion.div style={{ y: blobY1 }} className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
+      <motion.div style={{ y: blobY2 }} className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.03] rounded-full blur-[100px] pointer-events-none" />
 
       {/* Editorial running header */}
       <div className="absolute top-28 left-0 right-0 hidden md:flex items-center justify-between px-6 max-w-6xl mx-auto z-10">
@@ -31,10 +69,11 @@ export function HeroSection() {
       <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
         {/* Left column — editorial copy */}
         <motion.div
+          style={{ y: textY }}
           className="lg:col-span-7 space-y-6 sm:space-y-8 text-left order-2 lg:order-1"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
           <motion.div
             className="flex items-baseline gap-3"
@@ -49,17 +88,20 @@ export function HeroSection() {
             </span>
           </motion.div>
 
-          <motion.h1
-            className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[0.95] tracking-tight break-words"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.7 }}
-          >
-            Sovandara
+          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[0.95] tracking-tight break-words overflow-hidden">
+            <WordReveal
+              words={[
+                { text: "Sovandara" },
+              ]}
+            />
             <br />
-            <span className="text-primary italic font-light">Rith</span>
-            <span className="text-foreground">.</span>
-          </motion.h1>
+            <WordReveal
+              words={[
+                { text: "Rith", className: "text-primary italic font-light" },
+                { text: ".", className: "text-foreground" },
+              ]}
+            />
+          </h1>
 
           <motion.p
             className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
@@ -113,7 +155,20 @@ export function HeroSection() {
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
         >
-          <div className="relative aspect-[4/5] w-full max-w-[260px] sm:max-w-sm mx-auto lg:ml-auto overflow-hidden border border-border">
+          {/* Floating ambient badge */}
+          <motion.div
+            className="hidden lg:flex items-center gap-2 ml-auto w-fit mb-2"
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.6 }}
+          >
+            <div className="animate-float px-3 py-1.5 border border-border/60 bg-background/60 backdrop-blur-sm text-[10px] font-[family-name:var(--font-space-grotesk)] uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+              CS Student · Phnom Penh
+            </div>
+          </motion.div>
+
+          <div className="relative aspect-[4/5] w-full max-w-[260px] sm:max-w-sm mx-auto lg:ml-auto overflow-hidden border border-border ring-1 ring-border/40 shadow-2xl">
             <Image
               src="/profile.PNG"
               alt="Sovandara Rith"

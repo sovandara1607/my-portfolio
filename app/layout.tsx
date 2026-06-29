@@ -5,6 +5,8 @@ import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
 import { MusicProvider } from "@/lib/music-context"
+import { CommandPalette } from "@/components/command-palette"
+import { AIAssistant } from "@/components/ai-assistant"
 import "./globals.css"
 
 const epilogue = Epilogue({
@@ -49,6 +51,8 @@ export default function RootLayout({
           <LanguageProvider>
             <MusicProvider>
               {children}
+              <CommandPalette />
+              <AIAssistant />
             </MusicProvider>
           </LanguageProvider>
         </ThemeProvider>

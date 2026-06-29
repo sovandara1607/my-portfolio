@@ -8,7 +8,7 @@ export const profile = {
     website: "https://www.sovandara.lol",
     handle: "@sovandara1607",
   },
-  bio: "Year 3 Computer Science student passionate about web and mobile development, with hands-on experience building full-stack applications using Laravel and MySQL.",
+  bio: "Year 3 Computer Science student passionate about web and mobile development.",
   education: [
     {
       degree: "Bachelor of Computer Science",

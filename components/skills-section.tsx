@@ -3,6 +3,7 @@
 import { Fragment } from "react"
 import { useLanguage } from "@/lib/language-context"
 import { SectionHeader } from "./section-header"
+import { LogoMarquee } from "./logo-marquee"
 import { profile } from "@/lib/profile"
 
 interface SkillGroup {
@@ -24,14 +25,24 @@ export function SkillsSection() {
   ]
 
   return (
-    <section id="skills" className="py-16 md:py-32 px-4 sm:px-6">
-      <div className="max-w-6xl mx-auto">
+    <section id="skills" className="py-12 md:py-20">
+
+      {/* Section header — constrained width */}
+      <div className="px-4 sm:px-6 max-w-6xl mx-auto">
         <SectionHeader
           index="01"
           kicker="Tech Stack"
           title="Technologies I Use."
         />
+      </div>
 
+      {/* Logo marquee — full-bleed visual overview of the stack.
+          Placed right after the header so it introduces the section,
+          not after the rows where it would feel like a footer. */}
+      <LogoMarquee />
+
+      {/* Detailed category breakdown */}
+      <div className="px-4 sm:px-6 max-w-6xl mx-auto mt-12 md:mt-16">
         <div className="border-t border-border">
           {groups.map((group, index) => (
             <div
@@ -66,6 +77,7 @@ export function SkillsSection() {
           ))}
         </div>
       </div>
+
     </section>
   )
 }

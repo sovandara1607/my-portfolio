@@ -1,9 +1,9 @@
 "use client"
 
-import { useState, useEffect, useCallback, useRef } from "react"
+import { useState, useEffect, useCallback } from "react"
 import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
-import { Sun, Moon, Menu, X, Search } from "lucide-react"
+import { Sun, Moon, Menu, X, Search, MonitorPlay } from "lucide-react"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { useMusic } from "@/lib/music-context"
@@ -71,32 +71,19 @@ export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
-  const [isSearchOpen, setIsSearchOpen] = useState(false)
-  const [searchQuery, setSearchQuery] = useState("")
   const [activeSection, setActiveSection] = useState("")
-  const searchInputRef = useRef<HTMLInputElement>(null)
   const { theme, setTheme, resolvedTheme } = useTheme()
   const { t } = useLanguage()
   const { isPlaying } = useMusic()
 
   const navLinks = [
+    { href: "#terminal", label: "Terminal", keywords: ["terminal", "cli", "commands", "interactive"] },
     { href: "#skills", label: "Skills", keywords: ["skills", "tech", "stack"] },
     { href: "#projects", label: t("nav.projects"), keywords: ["projects", "apps"] },
     { href: "#experiences", label: "Experiences", keywords: ["experiences", "photography", "videography", "design"] },
     { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message"] },
+    { href: "#wallpapers", label: "Wallpapers", keywords: ["wallpapers", "art", "design", "download", "backgrounds"] },
   ]
-
-  const allSections = [
-    { href: "#", label: "Home", keywords: ["home", "top"] },
-    ...navLinks,
-  ]
-
-  const filteredSections = searchQuery.trim() 
-    ? allSections.filter(section => 
-        section.label.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        section.keywords.some(k => k.includes(searchQuery.toLowerCase()))
-      )
-    : []
 
   useEffect(() => {
     setMounted(true)
@@ -123,41 +110,10 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  useEffect(() => {
-    if (isSearchOpen && searchInputRef.current) {
-      searchInputRef.current.focus()
-    }
-  }, [isSearchOpen])
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setIsSearchOpen(false)
-        setSearchQuery("")
-      }
-      if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault()
-        setIsSearchOpen(true)
-      }
-    }
-    window.addEventListener("keydown", handleKeyDown)
-    return () => window.removeEventListener("keydown", handleKeyDown)
-  }, [])
-
   const toggleTheme = useCallback(() => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }, [resolvedTheme, setTheme])
 
-  const handleSearch = (href: string) => {
-    setIsSearchOpen(false)
-    setSearchQuery("")
-    setIsMobileMenuOpen(false)
-    if (href === "#") {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    } else {
-      document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' })
-    }
-  }
 
   return (
     <>
@@ -221,15 +177,27 @@ export function Navigation() {
 
             {/* Right side actions */}
             <div className="flex items-center gap-1">
-              {/* Search */}
+              {/* Search — delegates to the global CommandPalette */}
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setIsSearchOpen(true)}
+                onClick={() => window.dispatchEvent(new CustomEvent("cmd-palette:open"))}
                 className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
-                aria-label="Search"
+                aria-label="Search (⌘K)"
               >
                 <Search className="w-4 h-4" />
+              </Button>
+
+              {/* Desktop Mode — launches the macOS-inspired experience */}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => window.dispatchEvent(new CustomEvent("enter-desktop"))}
+                className="w-9 h-9 rounded-none text-muted-foreground hover:text-foreground hover:bg-primary/10 transition-all duration-200"
+                aria-label="Enter Desktop Mode"
+                title="Desktop Mode"
+              >
+                <MonitorPlay className="w-4 h-4" />
               </Button>
 
               {/* Theme Toggle */}
@@ -324,97 +292,6 @@ export function Navigation() {
         </div>
       </motion.nav>
 
-      {/* Search Modal */}
-      <AnimatePresence>
-      {isSearchOpen && (
-        <motion.div
-          className="fixed inset-0 z-[60]"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-        >
-          <div 
-            className="absolute inset-0 bg-foreground/40 backdrop-blur-sm"
-            onClick={() => {
-              setIsSearchOpen(false)
-              setSearchQuery("")
-            }}
-          />
-          
-          <div className="relative max-w-xl mx-auto mt-24 px-4">
-            <motion.div
-              initial={{ y: -20, opacity: 0, scale: 0.95 }}
-              animate={{ y: 0, opacity: 1, scale: 1 }}
-              exit={{ y: -20, opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="glass-card overflow-hidden"
-            >
-              {/* Search Input */}
-              <div className="flex items-center gap-3 px-5 py-4 border-b border-border">
-                <Search className="w-5 h-5 text-muted-foreground flex-shrink-0" />
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  placeholder={t("nav.searchPlaceholder")}
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="flex-1 bg-transparent text-foreground placeholder-muted-foreground outline-none text-base"
-                />
-                <kbd className="hidden sm:inline-flex px-2 py-1 text-xs text-muted-foreground bg-muted border border-border rounded-md">
-                  ESC
-                </kbd>
-              </div>
-
-              {/* Search Results */}
-              {searchQuery.trim() && (
-                <div className="max-h-64 overflow-y-auto">
-                  {filteredSections.length > 0 ? (
-                    <div className="py-2">
-                      {filteredSections.map((section) => (
-                        <button
-                          key={section.href}
-                          onClick={() => handleSearch(section.href)}
-                          className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors duration-200 flex items-center gap-3"
-                        >
-                          <span className="text-primary/50">#</span>
-                          <span>{section.label}</span>
-                        </button>
-                      ))}
-                    </div>
-                  ) : (
-                    <div className="px-5 py-8 text-center text-muted-foreground">
-                      {t("nav.noResults")} &ldquo;{searchQuery}&rdquo;
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {/* Quick Links */}
-              {!searchQuery.trim() && (
-                <div className="py-2">
-                  <p className="px-5 py-2 text-xs text-muted-foreground uppercase tracking-wider font-medium font-[family-name:var(--font-space-grotesk)]">Quick Navigation</p>
-                  {allSections.slice(0, 5).map((section) => (
-                    <button
-                      key={section.href}
-                      onClick={() => handleSearch(section.href)}
-                      className="w-full px-5 py-3 text-left text-muted-foreground hover:text-foreground hover:bg-primary/5 transition-colors duration-200 flex items-center gap-3"
-                    >
-                      <span className="text-primary/50">#</span>
-                      <span>{section.label}</span>
-                    </button>
-                  ))}
-                </div>
-              )}
-            </motion.div>
-
-            <p className="text-center text-muted-foreground text-sm mt-4">
-              Press <kbd className="px-1.5 py-0.5 text-xs text-muted-foreground bg-muted border border-border rounded-md">⌘K</kbd> to open search anytime
-            </p>
-          </div>
-        </motion.div>
-      )}
-      </AnimatePresence>
     </>
   )
 }

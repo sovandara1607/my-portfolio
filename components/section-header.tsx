@@ -11,7 +11,7 @@ export function SectionHeader({ index, kicker, title, align = "left" }: SectionH
   const alignClass = align === "center" ? "items-center text-center" : "items-start text-left"
 
   return (
-    <div className={`flex flex-col ${alignClass} mb-10 md:mb-16`}>
+    <div className={`flex flex-col ${alignClass} mb-8 md:mb-12`}>
       <div className="flex items-baseline gap-2 sm:gap-3 mb-3 sm:mb-4 flex-wrap">
         <span className="text-[10px] sm:text-xs font-mono text-primary tabular-nums tracking-widest">
           [{index}]
