@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono } from "next/font/google"
+import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono, Unbounded } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
@@ -29,6 +29,12 @@ const jetbrainsMono = JetBrains_Mono({
   variable: "--font-jetbrains",
 })
 
+const unbounded = Unbounded({
+  subsets: ["latin"],
+  variable: "--font-unbounded",
+  weight: ["600", "700", "800"],
+})
+
 export const metadata: Metadata = {
   title: "Sovandara Rith | Portfolio",
   description: "Year 3 Computer Science Student · Web & Mobile Developer",
@@ -40,11 +46,11 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${unbounded.variable}`}>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange={false}
         >

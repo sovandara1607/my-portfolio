@@ -13,7 +13,7 @@ export const profile = {
     {
       degree: "Bachelor of Computer Science",
       school: "Paragon International University",
-      period: "2023 – Present",
+      period: "2024 – Present",
       note: "Year 3",
     },
     {
@@ -25,17 +25,34 @@ export const profile = {
   ],
   experience: [
     {
+      key: "student-council",
       role: "Media & Technical Lead",
       org: "Student Council AY 2024–2025",
       subtitle: "Computer Science Representative",
       period: "2024 – 2025",
+      link: "https://www.facebook.com/ParagonU.SC",
       bullets: [
         "Managed technical tasks and digital platforms for the student council.",
         "Built and hosted an online election system used for student voting.",
         "Supported media and technical activities for student council events.",
       ],
     },
+    {
+      key: "table-tennis",
+      role: "Media Lead",
+      org: "Paragon International University Table Tennis Club",
+      subtitle: "Secretary & Media Lead",
+      period: "2024 – 2025",
+      link: null as string | null,
+      bullets: [
+        "Managed media content creation and distribution for the table tennis club.",
+        "Supported media and technical activities for events.",
+      ],
+    },
+    
+
   ],
+  
   academicProjects: [
     {
       name: "Online Resume Builder Platform",

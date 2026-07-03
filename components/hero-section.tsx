@@ -1,218 +1,167 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { CodePreview } from "./code-preview"
 import { ResumeDownload } from "./resume-download"
 import { TextRotator } from "@/components/ui/classy-hero"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
-import { motion, useScroll, useTransform } from "framer-motion"
-import { ArrowDown } from "lucide-react"
-
-// ── Word-reveal headline ────────────────────────────────────────────────────
+import { motion } from "framer-motion"
+import { Github, Linkedin, Mail } from "lucide-react"
+import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
-function WordReveal({
-  words,
+const stats = [
+  { value: "3rd", label: "Year CS student" },
+  { value: "6+", label: "Projects built" },
+  { value: "10+", label: "Technologies" },
+  { value: "2", label: "Roles right now" },
+]
+
+const socials = [
+  { name: "GitHub", href: "https://github.com/sovandara1607", icon: Github },
+  { name: "LinkedIn", href: "https://linkedin.com/in/sovandara1607", icon: Linkedin },
+  { name: "Email", href: "mailto:rithsovandara83@gmail.com", icon: Mail },
+]
+
+function FadeIn({
+  children,
+  delay = 0,
   className,
 }: {
-  words: { text: string; className?: string }[]
+  children: React.ReactNode
+  delay?: number
   className?: string
 }) {
   return (
-    <span className={className}>
-      {words.map((w, i) => (
-        <motion.span
-          key={i}
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 + i * 0.1, duration: 0.7, ease: EASE }}
-          className={`inline-block ${w.className ?? ""}`}
-          style={{ marginRight: i < words.length - 1 ? undefined : undefined }}
-        >
-          {w.text}
-        </motion.span>
-      ))}
-    </span>
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, y: 16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay, duration: 0.6, ease: EASE }}
+    >
+      {children}
+    </motion.div>
   )
 }
 
-// ── Section ─────────────────────────────────────────────────────────────────
-
 export function HeroSection() {
   const { t } = useLanguage()
-  const { scrollY } = useScroll()
-
-  // Parallax transforms: blobs move up as user scrolls
-  const blobY1 = useTransform(scrollY, [0, 600], [0, -80])
-  const blobY2 = useTransform(scrollY, [0, 600], [0, -50])
-  // Text container: subtle push-up
-  const textY  = useTransform(scrollY, [0, 600], [0, 28])
 
   return (
-    <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-24 sm:pt-32 pb-16 overflow-hidden">
-      {/* Parallax ambient blobs */}
-      <motion.div style={{ y: blobY1 }} className="absolute top-0 left-1/4 w-[500px] h-[500px] bg-primary/[0.04] rounded-full blur-[120px] pointer-events-none" />
-      <motion.div style={{ y: blobY2 }} className="absolute bottom-0 right-1/4 w-[400px] h-[400px] bg-secondary/[0.03] rounded-full blur-[100px] pointer-events-none" />
-
-      {/* Editorial running header */}
-      <div className="absolute top-28 left-0 right-0 hidden md:flex items-center justify-between px-6 max-w-6xl mx-auto z-10">
-        <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground font-[family-name:var(--font-space-grotesk)]">
-          The Portfolio — Volume 01
-        </span>
-        <span className="text-[11px] uppercase tracking-[0.3em] text-muted-foreground font-mono">
-          {new Date().toLocaleDateString("en-US", { year: "numeric", month: "short", day: "2-digit" })}
-        </span>
-      </div>
-
-      <div className="max-w-6xl mx-auto w-full grid lg:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-        {/* Left column — editorial copy */}
-        <motion.div
-          style={{ y: textY }}
-          className="lg:col-span-7 space-y-6 sm:space-y-8 text-left order-2 lg:order-1"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5 }}
-        >
-          <motion.div
-            className="flex items-baseline gap-3"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
-          >
-            <span className="text-xs font-mono text-primary tabular-nums tracking-widest">[00]</span>
-            <span className="h-px w-12 bg-border" />
-            <span className="text-[11px] uppercase tracking-[0.25em] text-muted-foreground font-[family-name:var(--font-space-grotesk)]">
-              Now Open
-            </span>
-          </motion.div>
-
-          <h1 className="text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground leading-[0.95] tracking-tight break-words overflow-hidden">
-            <WordReveal
-              words={[
-                { text: "Sovandara" },
-              ]}
-            />
-            <br />
-            <WordReveal
-              words={[
-                { text: "Rith", className: "text-primary italic font-light" },
-                { text: ".", className: "text-foreground" },
-              ]}
-            />
-          </h1>
-
-          <motion.p
-            className="text-base md:text-lg text-muted-foreground leading-relaxed max-w-xl"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            Year 3 Computer Science student — building web and mobile interfaces with an obsession for typography, rhythm, and detail.
-          </motion.p>
-
-          <motion.div
-            className="pt-2"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.55 }}
-          >
-            <TextRotator
-              words={[
-                "Junior Web Developer",
-                "Junior Mobile Developer",
-                "Senior Video Editor",
-              ]}
-              className="text-sm md:text-base font-mono tracking-wide"
-              interval={3000}
-              letterAnimation
-            />
-          </motion.div>
-
-          <motion.div
-            className="flex flex-wrap gap-3 pt-4"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6 }}
-          >
-            <Button
-              className="bg-foreground text-background hover:bg-primary hover:text-primary-foreground rounded-none px-5 sm:px-7 py-5 sm:py-6 transition-all duration-300 font-[family-name:var(--font-space-grotesk)] uppercase tracking-[0.2em] text-xs"
-              onClick={() => {
-                document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' })
-              }}
-            >
-              {t("hero.viewProjects")}
-            </Button>
-            <ResumeDownload />
-          </motion.div>
-        </motion.div>
-
-        {/* Right column — portrait + meta card */}
-        <motion.div
-          className="lg:col-span-5 space-y-4 order-1 lg:order-2"
-          initial={{ opacity: 0, x: 30 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
-        >
-          {/* Floating ambient badge */}
-          <motion.div
-            className="hidden lg:flex items-center gap-2 ml-auto w-fit mb-2"
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.6 }}
-          >
-            <div className="animate-float px-3 py-1.5 border border-border/60 bg-background/60 backdrop-blur-sm text-[10px] font-[family-name:var(--font-space-grotesk)] uppercase tracking-[0.2em] text-muted-foreground flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-              CS Student · Phnom Penh
-            </div>
-          </motion.div>
-
-          <div className="relative aspect-[4/5] w-full max-w-[260px] sm:max-w-sm mx-auto lg:ml-auto overflow-hidden border border-border ring-1 ring-border/40 shadow-2xl">
+    <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16">
+      <div className="max-w-2xl mx-auto w-full flex flex-col items-center text-center">
+        {/* Avatar */}
+        <FadeIn>
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-border mb-6">
             <Image
               src="/profile.PNG"
               alt="Sovandara Rith"
               fill
-              className="object-cover grayscale-[15%]"
+              className="object-cover"
               priority
             />
-            <div className="absolute top-3 left-3 right-3 flex justify-between text-[10px] font-mono uppercase tracking-widest text-white/90 mix-blend-difference">
-              <span>fig. 01</span>
-              <span>SR / portrait</span>
-            </div>
-            <div className="absolute bottom-3 left-3 right-3 flex justify-between text-[10px] font-mono uppercase tracking-widest text-white/90 mix-blend-difference">
-              <span>Phnom Penh</span>
-              <span className="flex items-center gap-1.5">
-                <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
-                Available
-              </span>
-            </div>
           </div>
-          <div className="hidden lg:block max-w-sm mx-auto lg:ml-auto">
-            <div className="border border-border p-3 bg-background/40 backdrop-blur-sm">
-              <CodePreview />
-            </div>
-          </div>
-        </motion.div>
-      </div>
+        </FadeIn>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-6 left-4 sm:left-6 hidden sm:flex items-center gap-3"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1.2 }}
-      >
-        <motion.div
-          animate={{ y: [0, 6, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        >
-          <ArrowDown className="w-4 h-4 text-muted-foreground" />
-        </motion.div>
-        <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground font-[family-name:var(--font-space-grotesk)]">
-          Scroll to continue
-        </span>
-      </motion.div>
+        {/* Availability badge */}
+        <FadeIn delay={0.05}>
+          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+            Available for work · Phnom Penh
+          </div>
+        </FadeIn>
+
+        {/* Name */}
+        <FadeIn delay={0.1}>
+          <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground tracking-tight leading-[1.05] font-[family-name:var(--font-display)]">
+            Sovandara Rith<span className="text-sky-400">.</span>
+          </h1>
+        </FadeIn>
+
+        {/* Rotating role */}
+        <FadeIn delay={0.15} className="mt-4">
+          <TextRotator
+            words={[
+              "Junior Web Developer",
+              "Junior Mobile Developer",
+              "Systems Design Enthusiast",
+              "Open Source Contributor",
+              "UI/UX Design Enthusiast",
+            ]}
+            className="text-sm sm:text-base font-mono text-muted-foreground tracking-wide"
+            interval={3000}
+            letterAnimation
+            textGradient={false}
+          />
+        </FadeIn>
+
+        {/* Tagline */}
+        <FadeIn delay={0.2}>
+          <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-md mx-auto">
+            Year 3 Computer Science student.
+          </p>
+        </FadeIn>
+
+        {/* Stat cards */}
+        <FadeIn delay={0.3} className="w-full">
+          <div className="mt-10 glass-card overflow-hidden">
+            <div className="grid grid-cols-2 sm:grid-cols-4">
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.label}
+                  className={cn(
+                    "px-4 py-5 flex flex-col items-center gap-1",
+                    i % 2 === 0 && "border-r",
+                    i < 2 && "border-b sm:border-b-0",
+                    i === 1 && "sm:border-r"
+                  )}
+                >
+                  <span className="text-2xl font-bold text-foreground tracking-tight">
+                    {stat.value}
+                  </span>
+                  <span className="text-xs text-muted-foreground">
+                    {stat.label}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </FadeIn>
+
+        {/* CTAs */}
+        <FadeIn delay={0.4}>
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
+            <Button
+              className="rounded-full px-6 h-11 bg-foreground text-background hover:bg-foreground/85 text-sm font-medium transition-colors"
+              onClick={() => {
+                document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })
+              }}
+            >
+              {t("nav.getInTouch")}
+            </Button>
+            <ResumeDownload />
+          </div>
+        </FadeIn>
+
+        {/* Socials */}
+        <FadeIn delay={0.5}>
+          <div className="mt-8 flex items-center justify-center gap-2">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={social.name}
+                className="w-10 h-10 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              >
+                <social.icon className="w-4.5 h-4.5" />
+              </a>
+            ))}
+          </div>
+        </FadeIn>
+      </div>
     </section>
   )
 }

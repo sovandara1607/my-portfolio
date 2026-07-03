@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useState } from "react"
 import { Loader2, LogOut, Trash2, Check, AlertCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { AdminNav } from "@/components/admin/admin-nav"
 import { ImageUploader, type UploadedImage } from "@/components/admin/image-uploader"
 import { fetchWallpapersClient } from "@/lib/wallpapers-client"
 import type { Wallpaper, WallpaperCategory } from "@/lib/wallpapers-data"
@@ -106,17 +107,20 @@ export default function AdminWallpapersPage() {
             </p>
             <h1 className="text-lg font-bold text-foreground tracking-tight">Wallpaper Studio</h1>
           </div>
-          <form action="/auth/signout" method="post">
-            <Button
-              type="submit"
-              variant="outline"
-              size="sm"
-              className="rounded-none border-border hover:border-primary/40 gap-2 text-xs"
-            >
-              <LogOut className="w-3.5 h-3.5" />
-              Sign Out
-            </Button>
-          </form>
+          <div className="flex items-center gap-3">
+            <AdminNav />
+            <form action="/auth/signout" method="post">
+              <Button
+                type="submit"
+                variant="outline"
+                size="sm"
+                className="rounded-none border-border hover:border-primary/40 gap-2 text-xs"
+              >
+                <LogOut className="w-3.5 h-3.5" />
+                Sign Out
+              </Button>
+            </form>
+          </div>
         </div>
       </header>
 

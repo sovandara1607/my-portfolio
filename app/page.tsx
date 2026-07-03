@@ -9,14 +9,16 @@ import { ExperiencesSection } from "@/components/experiences-section"
 import { ContactSection } from "@/components/contact-section"
 import { WallpapersSection } from "@/components/wallpapers-section"
 import { Navigation } from "@/components/navigation"
-import { HeroBackground } from "@/components/ui/classy-hero"
 import { MusicPlayer } from "@/components/music-player"
+import { useMusic } from "@/lib/music-context"
 import { Footer } from "@/components/footer"
-import { EdgeMarker } from "@/components/edge-marker"
 import { Desktop } from "@/components/desktop/desktop"
+import { FluidBackground } from "@/components/ui/fluid-background"
+import { TvPreloader } from "@/components/tv-preloader"
 
 export default function Home() {
   const [desktopMode, setDesktopMode] = useState(false)
+  const { autoStart } = useMusic()
 
   // Allow nav / command palette to trigger desktop mode via a custom event
   useEffect(() => {
@@ -31,18 +33,19 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background relative">
-      <HeroBackground />
+      <TvPreloader onComplete={autoStart} />
+      <div aria-hidden className="dot-grid fixed inset-0 pointer-events-none" />
+      <FluidBackground />
       <MusicPlayer />
-      <EdgeMarker />
       <div className="relative z-10">
         <Navigation />
         <HeroSection />
-        <TerminalSection />
-        <SkillsSection />
-        <ProjectsSection />
         <ExperiencesSection />
-        <ContactSection />
+        <ProjectsSection />
+        <SkillsSection />
+        <TerminalSection />
         <WallpapersSection />
+        <ContactSection />
         <Footer />
       </div>
     </main>

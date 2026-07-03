@@ -54,3 +54,57 @@ create policy "Authenticated users can delete wallpapers"
   on public.wallpapers for delete
   to authenticated
   using (true);
+
+-- ============================================================================
+-- Experience photos schema
+--   Any number of photos per entry in profile.ts's `experience` array,
+--   matched by its static `key` (e.g. "student-council"). Uploaded via /admin.
+-- ============================================================================
+
+create table if not exists public.experience_photos (
+  id              uuid primary key default gen_random_uuid(),
+  experience_key  text not null,
+
+  -- Cloudinary image references (the master upload)
+  photo_public_id text not null,
+  photo_url       text not null,
+  width           int,
+  height          int,
+
+  -- Optional outbound link (e.g. the original post/article/event page).
+  link            text,
+
+  sort_order      int not null default 0,
+  created_at      timestamptz not null default now()
+);
+
+-- Safe to re-run: adds the column if this table already existed before `link`.
+alter table public.experience_photos add column if not exists link text;
+
+create index if not exists experience_photos_key_idx on public.experience_photos (experience_key);
+create index if not exists experience_photos_key_sort_idx on public.experience_photos (experience_key, sort_order);
+
+alter table public.experience_photos enable row level security;
+
+drop policy if exists "Experience photos are publicly readable" on public.experience_photos;
+create policy "Experience photos are publicly readable"
+  on public.experience_photos for select
+  using (true);
+
+drop policy if exists "Authenticated users can insert experience photos" on public.experience_photos;
+create policy "Authenticated users can insert experience photos"
+  on public.experience_photos for insert
+  to authenticated
+  with check (true);
+
+drop policy if exists "Authenticated users can update experience photos" on public.experience_photos;
+create policy "Authenticated users can update experience photos"
+  on public.experience_photos for update
+  to authenticated
+  using (true) with check (true);
+
+drop policy if exists "Authenticated users can delete experience photos" on public.experience_photos;
+create policy "Authenticated users can delete experience photos"
+  on public.experience_photos for delete
+  to authenticated
+  using (true);

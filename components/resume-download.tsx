@@ -34,10 +34,11 @@ export function ResumeDownload() {
       disabled={isDownloading}
       variant="outline"
       className={`
-        relative overflow-hidden border-border text-foreground 
-        hover:bg-secondary hover:text-secondary-foreground bg-transparent
-        transition-all duration-300 group
-        ${downloaded ? "border-green-500 text-green-500" : ""}
+        relative overflow-hidden rounded-full px-6 h-11 text-sm font-medium
+        border-border text-foreground bg-transparent
+        hover:bg-muted hover:text-foreground
+        transition-colors duration-300 group
+        ${downloaded ? "border-emerald-500 text-emerald-600" : ""}
       `}
     >
       <span className="relative flex items-center gap-2">

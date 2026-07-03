@@ -11,11 +11,11 @@ interface LanguageContextType {
 
 const translations: Record<string, string> = {
   // Navigation
-  "nav.about": "AbouT",
-  "nav.tech": "TecH",
-  "nav.projects": "ProjecTs",
-  "nav.contact": "ContacT",
-  "nav.getInTouch": "Get in ToucH",
+  "nav.about": "About",
+  "nav.tech": "Tech",
+  "nav.projects": "Projects",
+  "nav.contact": "Contact",
+  "nav.getInTouch": "Get in touch",
   "nav.searchPlaceholder": "Search sections...",
   "nav.noResults": "No results found",
   "nav.pressEnter": "Press Enter to navigate",

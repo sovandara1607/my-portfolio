@@ -8,15 +8,17 @@ interface MusicContextType {
   togglePlay: () => void
   setVolume: (volume: number) => void
   toggleMute: () => void
+  autoStart: () => void
   audioRef: React.RefObject<HTMLAudioElement | null>
 }
 
 const MusicContext = createContext<MusicContextType>({
   isPlaying: false,
-  volume: 0.3,
+  volume: 0.5,
   togglePlay: () => {},
   setVolume: () => {},
   toggleMute: () => {},
+  autoStart: () => {},
   audioRef: { current: null },
 })
 
@@ -77,8 +79,17 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     }
   }
 
+  // Starts playback once the boot preloader finishes (a real user
+  // gesture — skip click/keypress — has usually just happened, so the
+  // browser's autoplay-with-sound restriction is satisfied).
+  const autoStart = () => {
+    setIsPlaying(true)
+  }
+
   return (
-    <MusicContext.Provider value={{ isPlaying, volume, togglePlay, setVolume, toggleMute, audioRef }}>
+    <MusicContext.Provider
+      value={{ isPlaying, volume, togglePlay, setVolume, toggleMute, autoStart, audioRef }}
+    >
       {/* Audio element managed by context */}
       <audio
         ref={audioRef}

@@ -401,12 +401,11 @@ function TypedLine({ text, onDone }: { text: string; onDone: () => void }) {
 
 export function TerminalSection() {
   return (
-    <section id="terminal" className="py-2 md:py-2 px-4 sm:px-4">
-      <div className="max-w-6xl mx-auto">
+    <section id="terminal" className="py-16 md:py-24 px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto">
         <SectionHeader
-          index="00"
-          kicker="// Interactive"
-          title="Try the Terminal."
+          kicker="Interactive"
+          title="Try the terminal."
         />
         <TerminalWindow />
       </div>

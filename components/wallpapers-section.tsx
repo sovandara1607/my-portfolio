@@ -137,7 +137,7 @@ export function WallpapersSection() {
   return (
     <section id="wallpapers" className="py-12 md:py-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
-        <SectionHeader index="05" kicker="// My Collection" title="Wallpapers." />
+        <SectionHeader kicker="Collection" title="Wallpapers." />
 
         {/* Category Filter */}
         <div className="flex items-center gap-1 mb-10 md:mb-12">
