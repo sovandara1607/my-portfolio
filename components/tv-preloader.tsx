@@ -133,7 +133,7 @@ export function TvPreloader({ onComplete }: { onComplete?: () => void } = {}) {
 
     // Barcode pattern (precomputed random widths)
     const barcode: number[] = []
-    for (let x = 0; x < SW; ) {
+    for (let x = 0; x < SW;) {
       const w = 2 + Math.floor(Math.random() * 10)
       barcode.push(x, w, Math.random())
       x += w + 2 + Math.floor(Math.random() * 8)
@@ -481,7 +481,10 @@ export function TvPreloader({ onComplete }: { onComplete?: () => void } = {}) {
     // space, whatever the window's aspect ratio.
     const TV_BOUND_W = 4.9 // body width
     const TV_BOUND_H = 5.3 // feet-to-antenna-tip height
-    const OVERSCAN = 1.08 // slight overscan so no background sliver shows at the edges
+    // The bound box is measured at the TV group's local z=0 plane, but the body's
+    // back corners sit ~1.15 units behind that (perspective makes them ~14% larger
+    // than the flat estimate), so overscan needs real headroom, not just a hair.
+    const OVERSCAN = 0.75
     let baseScale = 1
 
     function computeFillScale() {
@@ -531,7 +534,7 @@ export function TvPreloader({ onComplete }: { onComplete?: () => void } = {}) {
     }
 
     // ── Finish / reveal ────────────────────────────────────────
-    function finish(skipped: boolean) {
+    const finish = (skipped: boolean) => {
       if (finished) return
       finished = true
       window.removeEventListener("keydown", onKey)
@@ -566,14 +569,14 @@ export function TvPreloader({ onComplete }: { onComplete?: () => void } = {}) {
     }
 
     // Skip (2nd visit onward — galekto behavior)
-    function onKey(e: KeyboardEvent) {
+    const onKey = (e: KeyboardEvent) => {
       if (!canSkip) return
       if (e.key === " " || e.key === "Escape") {
         e.preventDefault()
         finish(true)
       }
     }
-    function onTap() {
+    const onTap = () => {
       if (canSkip) finish(true)
     }
     window.addEventListener("keydown", onKey)

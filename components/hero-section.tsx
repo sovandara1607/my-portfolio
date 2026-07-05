@@ -3,6 +3,7 @@
 import { Button } from "@/components/ui/button"
 import { ResumeDownload } from "./resume-download"
 import { TextRotator } from "@/components/ui/classy-hero"
+import { HeroWireframeGrid } from "@/components/ui/hero-wireframe-grid"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { motion } from "framer-motion"
@@ -49,8 +50,9 @@ export function HeroSection() {
   const { t } = useLanguage()
 
   return (
-    <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16">
-      <div className="max-w-2xl mx-auto w-full flex flex-col items-center text-center">
+    <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16 overflow-hidden">
+      <HeroWireframeGrid />
+      <div className="relative z-10 max-w-2xl mx-auto w-full flex flex-col items-center text-center">
         {/* Avatar */}
         <FadeIn>
           <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-border mb-6">

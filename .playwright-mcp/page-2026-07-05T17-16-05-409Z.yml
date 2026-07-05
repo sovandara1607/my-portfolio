@@ -1,0 +1,449 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e6]: Press Space or Esc to skip
+    - generic [ref=e7]:
+      - generic:
+        - button:
+          - img
+        - slider: "0.3"
+      - button [ref=e8]:
+        - generic [ref=e9]:
+          - img
+    - generic [ref=e10]:
+      - navigation [ref=e11]:
+        - generic [ref=e13]:
+          - link "Sovandara Rith sovandara." [ref=e15] [cursor=pointer]:
+            - /url: "#"
+            - img "Sovandara Rith" [ref=e17]
+            - generic [ref=e18]: sovandara.
+          - generic [ref=e19]:
+            - link "Experience" [ref=e20] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Projects" [ref=e21] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Skills" [ref=e22] [cursor=pointer]:
+              - /url: "#skills"
+            - link "Terminal" [ref=e23] [cursor=pointer]:
+              - /url: "#terminal"
+            - link "Wallpapers" [ref=e24] [cursor=pointer]:
+              - /url: "#wallpapers"
+            - link "Contact" [ref=e25] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e26]:
+            - button "Search (⌘K)" [ref=e27]:
+              - img
+            - button "Enter Desktop Mode" [ref=e28]:
+              - img
+      - generic [ref=e31]:
+        - img "Sovandara Rith" [ref=e34]
+        - generic [ref=e36]: Available for work · Phnom Penh
+        - heading "Sovandara Rith." [level=1] [ref=e39]
+        - generic [ref=e41]:
+          - generic [ref=e42]:
+            - generic [ref=e43]: J
+            - generic [ref=e44]: u
+            - generic [ref=e45]: "n"
+            - generic [ref=e46]: i
+            - generic [ref=e47]: o
+            - generic [ref=e48]: r
+            - generic [ref=e50]: W
+            - generic [ref=e51]: e
+            - generic [ref=e52]: b
+            - generic [ref=e54]: D
+            - generic [ref=e55]: e
+            - generic [ref=e56]: v
+            - generic [ref=e57]: e
+            - generic [ref=e58]: l
+            - generic [ref=e59]: o
+            - generic [ref=e60]: p
+            - generic [ref=e61]: e
+            - generic [ref=e62]: r
+          - text: Junior Web Developer
+        - paragraph [ref=e64]: Year 3 Computer Science student.
+        - generic [ref=e67]:
+          - generic [ref=e68]:
+            - generic [ref=e69]: 3rd
+            - generic [ref=e70]: Year CS student
+          - generic [ref=e71]:
+            - generic [ref=e72]: 6+
+            - generic [ref=e73]: Projects built
+          - generic [ref=e74]:
+            - generic [ref=e75]: 10+
+            - generic [ref=e76]: Technologies
+          - generic [ref=e77]:
+            - generic [ref=e78]: "2"
+            - generic [ref=e79]: Roles right now
+        - generic [ref=e81]:
+          - button "Get in touch" [ref=e82]
+          - button "Download Resume ↓" [ref=e83]:
+            - generic [ref=e84]: Download Resume ↓
+        - generic [ref=e86]:
+          - link "GitHub" [ref=e87] [cursor=pointer]:
+            - /url: https://github.com/sovandara1607
+            - img [ref=e88]
+          - link "LinkedIn" [ref=e91] [cursor=pointer]:
+            - /url: https://linkedin.com/in/sovandara1607
+            - img [ref=e92]
+          - link "Email" [ref=e96] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e97]
+      - generic [ref=e101]:
+        - generic [ref=e102]:
+          - generic [ref=e103]: Experience
+          - heading "What I've done." [level=2] [ref=e104]
+        - generic [ref=e105]:
+          - heading "Work" [level=3] [ref=e106]
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - img [ref=e110]
+              - generic [ref=e113]:
+                - generic [ref=e114]:
+                  - heading "Media & Technical Lead Open link for Media & Technical Lead" [level=4] [ref=e115]:
+                    - text: Media & Technical Lead
+                    - link "Open link for Media & Technical Lead" [ref=e116] [cursor=pointer]:
+                      - /url: https://www.facebook.com/ParagonU.SC
+                      - img [ref=e117]
+                  - generic [ref=e121]: 2024 – 2025
+                - paragraph [ref=e122]: Student Council AY 2024–2025 · Computer Science Representative
+                - list [ref=e123]:
+                  - listitem [ref=e124]:
+                    - generic [ref=e125]: –
+                    - generic [ref=e126]: Managed technical tasks and digital platforms for the student council.
+                  - listitem [ref=e127]:
+                    - generic [ref=e128]: –
+                    - generic [ref=e129]: Built and hosted an online election system used for student voting.
+                  - listitem [ref=e130]:
+                    - generic [ref=e131]: –
+                    - generic [ref=e132]: Supported media and technical activities for student council events.
+            - generic [ref=e133]:
+              - img [ref=e135]
+              - generic [ref=e138]:
+                - generic [ref=e139]:
+                  - heading "Media Lead" [level=4] [ref=e140]
+                  - generic [ref=e141]: 2024 – 2025
+                - paragraph [ref=e142]: Paragon International University Table Tennis Club · Secretary & Media Lead
+                - list [ref=e143]:
+                  - listitem [ref=e144]:
+                    - generic [ref=e145]: –
+                    - generic [ref=e146]: Managed media content creation and distribution for the table tennis club.
+                  - listitem [ref=e147]:
+                    - generic [ref=e148]: –
+                    - generic [ref=e149]: Supported media and technical activities for events.
+        - generic [ref=e150]:
+          - heading "Education" [level=3] [ref=e151]
+          - generic [ref=e152]:
+            - generic [ref=e153]:
+              - img [ref=e155]
+              - generic [ref=e158]:
+                - generic [ref=e159]:
+                  - heading "Bachelor of Computer Science" [level=4] [ref=e160]
+                  - generic [ref=e161]: 2024 – Present
+                - paragraph [ref=e162]: Paragon International University
+                - generic [ref=e164]: Year 3
+            - generic [ref=e166]:
+              - img [ref=e168]
+              - generic [ref=e173]:
+                - generic [ref=e174]:
+                  - heading "High School Diploma" [level=4] [ref=e175]
+                  - generic [ref=e176]: 2018 – 2022
+                - paragraph [ref=e177]: Hun Sen Wat Svay High School
+                - generic [ref=e179]: Graduated 2022 — BacII Grade A
+        - generic [ref=e180]:
+          - generic [ref=e181]:
+            - heading "Soft Skills" [level=3] [ref=e182]
+            - list [ref=e183]:
+              - listitem [ref=e184]: Team communication
+              - listitem [ref=e185]: Willingness to learn in new environments
+          - generic [ref=e186]:
+            - heading "Languages" [level=3] [ref=e187]
+            - list [ref=e188]:
+              - listitem [ref=e189]: Khmer (Native)
+              - listitem [ref=e190]: English
+          - generic [ref=e191]:
+            - heading "Interests" [level=3] [ref=e192]
+            - generic [ref=e193]:
+              - generic [ref=e194]:
+                - img [ref=e195]
+                - text: Photography
+              - generic [ref=e198]:
+                - img [ref=e199]
+                - text: Videography
+              - generic [ref=e202]:
+                - img [ref=e203]
+                - text: Nature
+              - generic [ref=e206]:
+                - img [ref=e207]
+                - text: Music
+      - generic [ref=e212]:
+        - generic [ref=e213]:
+          - generic [ref=e214]: Featured Projects
+          - heading "What I've Built" [level=2] [ref=e215]
+        - generic [ref=e216]:
+          - article [ref=e217]:
+            - generic [ref=e219]: Featured
+            - heading "Track Your Fitness" [level=3] [ref=e220]
+            - paragraph [ref=e221]: Fitness tracking app focused on usability, performance, and clean UI.
+            - generic [ref=e223]:
+              - generic [ref=e224]: TypeScript
+              - generic [ref=e225]: React Native
+              - generic [ref=e226]: Expo
+            - generic [ref=e227]:
+              - link "Demo" [ref=e228] [cursor=pointer]:
+                - /url: https://track-your-fitness-beta.vercel.app/
+                - img [ref=e229]
+                - text: Demo
+              - link "Code" [ref=e233] [cursor=pointer]:
+                - /url: https://github.com/sovandara1607/Track-Your-Fitness
+                - img [ref=e234]
+                - text: Code
+              - link "Case Study →" [ref=e237] [cursor=pointer]:
+                - /url: /projects/fitness-app
+                - text: Case Study →
+                - img [ref=e238]
+          - article [ref=e241]:
+            - generic [ref=e243]: Featured
+            - heading "Performative Detector" [level=3] [ref=e244]
+            - paragraph [ref=e245]: A fun Python project using MediaPipe and computer vision to detect when you're holding a cup and plays music on Spotify.
+            - generic [ref=e247]:
+              - generic [ref=e248]: Python
+              - generic [ref=e249]: MediaPipe
+              - generic [ref=e250]: OpenCV
+              - generic [ref=e251]: Spotify API
+            - generic [ref=e252]:
+              - link "Demo" [ref=e253] [cursor=pointer]:
+                - /url: https://youtu.be/dQw4w9WgXcQ
+                - img [ref=e254]
+                - text: Demo
+              - link "Code" [ref=e258] [cursor=pointer]:
+                - /url: https://github.com/sovandara1607/performative_detector
+                - img [ref=e259]
+                - text: Code
+              - link "Case Study →" [ref=e262] [cursor=pointer]:
+                - /url: /projects/performative_detector
+                - text: Case Study →
+                - img [ref=e263]
+        - heading "Academic & Personal Work" [level=3] [ref=e266]
+        - paragraph [ref=e267]: University coursework and side projects
+        - generic [ref=e268]:
+          - link [ref=e269] [cursor=pointer]:
+            - /url: /projects/resume-builder
+            - article [ref=e270]:
+              - generic [ref=e271]:
+                - generic [ref=e272]: Academic
+                - generic [ref=e273]: 2025 – 2026
+              - heading "Online Resume Builder Platform" [level=4] [ref=e274]
+              - paragraph [ref=e275]: CS 262 — Full-Stack Development
+              - paragraph [ref=e276]: Web app for creating and managing professional resumes online.
+              - generic [ref=e277]:
+                - generic [ref=e278]:
+                  - generic [ref=e279]: Laravel
+                  - generic [ref=e280]: MySQL
+                  - generic [ref=e281]: REST API
+                - generic [ref=e282]:
+                  - text: Case Study →
+                  - img [ref=e283]
+          - link [ref=e286] [cursor=pointer]:
+            - /url: /projects/taskflow
+            - article [ref=e287]:
+              - generic [ref=e288]:
+                - generic [ref=e289]: Academic
+                - generic [ref=e290]: 2025 – 2026
+              - heading "TaskFlow — Task Management Mobile App" [level=4] [ref=e291]
+              - paragraph [ref=e292]: CS 361 — Full-Stack Development
+              - paragraph [ref=e293]: Mobile task manager to help users organize daily tasks.
+              - generic [ref=e294]:
+                - generic [ref=e295]:
+                  - generic [ref=e296]: Flutter
+                  - generic [ref=e297]: Dart
+                - generic [ref=e298]:
+                  - text: Case Study →
+                  - img [ref=e299]
+          - link [ref=e302] [cursor=pointer]:
+            - /url: /projects/myfinance
+            - article [ref=e303]:
+              - generic [ref=e304]:
+                - generic [ref=e305]: Personal
+                - generic [ref=e306]: 2025 – 2026
+              - heading "MyFinance — Finance Tracking App" [level=4] [ref=e307]
+              - paragraph [ref=e308]: iOS
+              - paragraph [ref=e309]: Track income and expenses, organized by category.
+              - generic [ref=e310]:
+                - generic [ref=e311]:
+                  - generic [ref=e312]: Swift
+                  - generic [ref=e313]: SwiftUI
+                - generic [ref=e314]:
+                  - text: Case Study →
+                  - img [ref=e315]
+      - generic [ref=e318]:
+        - generic [ref=e320]:
+          - generic [ref=e321]: Stack
+          - heading "Tools & technologies." [level=2] [ref=e322]
+        - list "Technologies and tools" [ref=e324]:
+          - generic [ref=e328]: HTML
+          - generic [ref=e331]: CSS
+          - generic [ref=e334]: JavaScript
+          - generic [ref=e337]: Tailwind
+          - generic [ref=e340]: PHP
+          - generic [ref=e343]: Laravel
+          - generic [ref=e346]: Go
+          - generic [ref=e349]: Java
+          - generic [ref=e352]: Dart
+          - generic [ref=e355]: Flutter
+          - generic [ref=e358]: Swift
+          - generic [ref=e361]: MySQL
+          - generic [ref=e364]: PostgreSQL
+          - generic [ref=e367]: Redis
+          - generic [ref=e370]: MongoDB
+          - generic [ref=e373]: Figma
+          - generic [ref=e376]: Docker
+          - generic [ref=e379]: Git
+          - generic [ref=e382]: Gitea
+          - generic [ref=e385]: DigitalOcean
+          - generic [ref=e388]: Vercel
+          - generic [ref=e391]: Railway
+          - generic [ref=e394]: Supabase
+          - generic [ref=e397]: Cloudinary
+          - generic [ref=e400]: HTML
+          - generic [ref=e403]: CSS
+          - generic [ref=e406]: JavaScript
+          - generic [ref=e409]: Tailwind
+          - generic [ref=e412]: PHP
+          - generic [ref=e415]: Laravel
+          - generic [ref=e418]: Go
+          - generic [ref=e421]: Java
+          - generic [ref=e424]: Dart
+          - generic [ref=e427]: Flutter
+          - generic [ref=e430]: Swift
+          - generic [ref=e433]: MySQL
+          - generic [ref=e436]: PostgreSQL
+          - generic [ref=e439]: Redis
+          - generic [ref=e442]: MongoDB
+          - generic [ref=e445]: Figma
+          - generic [ref=e448]: Docker
+          - generic [ref=e451]: Git
+          - generic [ref=e454]: Gitea
+          - generic [ref=e457]: DigitalOcean
+          - generic [ref=e460]: Vercel
+          - generic [ref=e463]: Railway
+          - generic [ref=e466]: Supabase
+          - generic [ref=e469]: Cloudinary
+        - generic [ref=e472]:
+          - generic [ref=e473]:
+            - heading "Frontend" [level=3] [ref=e474]
+            - generic [ref=e475]:
+              - generic [ref=e476]: HTML
+              - generic [ref=e477]: CSS
+              - generic [ref=e478]: JavaScript
+              - generic [ref=e479]: Tailwind CSS
+          - generic [ref=e480]:
+            - heading "Backend" [level=3] [ref=e481]
+            - generic [ref=e482]:
+              - generic [ref=e483]: PHP
+              - generic [ref=e484]: Laravel
+              - generic [ref=e485]: Go
+              - generic [ref=e486]: Java
+          - generic [ref=e487]:
+            - heading "Mobile" [level=3] [ref=e488]
+            - generic [ref=e489]:
+              - generic [ref=e490]: Dart
+              - generic [ref=e491]: Flutter
+              - generic [ref=e492]: Swift
+              - generic [ref=e493]: SwiftUI
+          - generic [ref=e494]:
+            - heading "Databases" [level=3] [ref=e495]
+            - generic [ref=e496]:
+              - generic [ref=e497]: MySQL
+              - generic [ref=e498]: PostgreSQL
+              - generic [ref=e499]: Redis
+              - generic [ref=e500]: MongoDB
+          - generic [ref=e501]:
+            - heading "Design" [level=3] [ref=e502]
+            - generic [ref=e503]:
+              - generic [ref=e504]: UI/UX
+              - generic [ref=e505]: Figma
+              - generic [ref=e506]: System Analysis & Software Design
+              - generic [ref=e507]: Adobe Photoshop
+              - generic [ref=e508]: Adobe Illustrator
+          - generic [ref=e509]:
+            - heading "Tools & Platforms" [level=3] [ref=e510]
+            - generic [ref=e511]:
+              - generic [ref=e512]: Docker
+              - generic [ref=e513]: Git
+              - generic [ref=e514]: Gitea
+              - generic [ref=e515]: DigitalOcean
+              - generic [ref=e516]: Vercel
+              - generic [ref=e517]: Railway
+      - generic [ref=e519]:
+        - generic [ref=e520]:
+          - generic [ref=e521]: Interactive
+          - heading "Try the terminal." [level=2] [ref=e522]
+        - generic [ref=e523]:
+          - generic [ref=e529]: sovandara@portfolio ~ bash
+          - generic [ref=e531]:
+            - generic [ref=e532]: $
+            - textbox "Terminal input" [ref=e533]
+      - generic [ref=e535]:
+        - generic [ref=e536]:
+          - generic [ref=e537]: Collection
+          - heading "Wallpapers." [level=2] [ref=e538]
+        - generic [ref=e539]:
+          - button "All" [ref=e540]
+          - button "Abstract" [ref=e541]
+          - button "Typography" [ref=e542]
+      - generic [ref=e589]:
+        - generic [ref=e590]:
+          - generic [ref=e591]: Get In Touch
+          - heading "Let's Connect" [level=2] [ref=e592]
+        - generic [ref=e593]:
+          - paragraph [ref=e594]: "\"Always open to internships, collaboration, and building meaningful products.\""
+          - link "Get in touch" [ref=e595] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e596]
+            - text: Get in touch
+          - generic [ref=e599]:
+            - generic [ref=e600]:
+              - term [ref=e601]: Email
+              - definition [ref=e602]:
+                - link "rithsovandara83@gmail.com" [ref=e603] [cursor=pointer]:
+                  - /url: mailto:rithsovandara83@gmail.com
+            - generic [ref=e604]:
+              - term [ref=e605]: GitHub
+              - definition [ref=e606]:
+                - link "@sovandara1607" [ref=e607] [cursor=pointer]:
+                  - /url: https://github.com/sovandara1607
+            - generic [ref=e608]:
+              - term [ref=e609]: Location
+              - definition [ref=e610]: Phnom Penh, Cambodia
+        - generic [ref=e612]:
+          - generic [ref=e613]:
+            - heading "Support My Work" [level=3] [ref=e614]
+            - paragraph [ref=e615]: If you enjoy my work or find it helpful, consider buying me a coffee! Your support helps me continue learning and creating.
+          - link "☕ Buy Me a Coffee" [ref=e616] [cursor=pointer]:
+            - /url: https://link.payway.com.kh/cg4094277
+            - text: ☕ Buy Me a Coffee
+            - img [ref=e617]
+      - generic [ref=e622]:
+        - paragraph [ref=e623]: © 2026 Sovandara Rith
+        - navigation [ref=e624]:
+          - link "Projects" [ref=e625] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Experience" [ref=e626] [cursor=pointer]:
+            - /url: "#experiences"
+          - link "Contact" [ref=e627] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Now" [ref=e628] [cursor=pointer]:
+            - /url: /now
+        - generic [ref=e629]:
+          - link "GitHub" [ref=e630] [cursor=pointer]:
+            - /url: https://github.com/sovandara1607
+            - img [ref=e631]
+          - link "LinkedIn" [ref=e634] [cursor=pointer]:
+            - /url: https://linkedin.com/in/sovandara1607
+            - img [ref=e635]
+          - link "Email" [ref=e639] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e640]
+  - button "Open AI assistant" [ref=e644]:
+    - img [ref=e646]
+  - button "Open Next.js Dev Tools" [ref=e653] [cursor=pointer]:
+    - img [ref=e654]

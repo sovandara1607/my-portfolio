@@ -1,0 +1,649 @@
+- generic [active] [ref=e1]:
+  - main [ref=e2]:
+    - generic [ref=e8]:
+      - generic:
+        - button:
+          - img
+        - slider: "0.3"
+      - button [ref=e9]:
+        - generic [ref=e10]:
+          - img
+    - generic [ref=e11]:
+      - navigation [ref=e12]:
+        - generic [ref=e14]:
+          - link "Sovandara Rith sovandara." [ref=e16] [cursor=pointer]:
+            - /url: "#"
+            - img "Sovandara Rith" [ref=e18]
+            - generic [ref=e19]: sovandara.
+          - generic [ref=e20]:
+            - link "Experience" [ref=e21] [cursor=pointer]:
+              - /url: "#experiences"
+            - link "Projects" [ref=e22] [cursor=pointer]:
+              - /url: "#projects"
+            - link "Skills" [ref=e23] [cursor=pointer]:
+              - /url: "#skills"
+            - link "Terminal" [ref=e24] [cursor=pointer]:
+              - /url: "#terminal"
+            - link "Wallpapers" [ref=e25] [cursor=pointer]:
+              - /url: "#wallpapers"
+            - link "Contact" [ref=e26] [cursor=pointer]:
+              - /url: "#contact"
+          - generic [ref=e27]:
+            - button "Search (⌘K)" [ref=e28]:
+              - img
+            - button "Enter Desktop Mode" [ref=e29]:
+              - img
+            - radiogroup "Theme" [ref=e30]:
+              - radio "Light" [ref=e31]:
+                - img [ref=e33]
+              - radio "System" [checked] [ref=e43]:
+                - img [ref=e46]
+              - radio "Dark" [ref=e48]:
+                - img [ref=e50]
+      - generic [ref=e53]:
+        - img "Sovandara Rith" [ref=e56]
+        - generic [ref=e58]: Available for work · Phnom Penh
+        - heading "Sovandara Rith." [level=1] [ref=e61]
+        - generic [ref=e63]:
+          - generic [ref=e920]:
+            - generic [ref=e921]: U
+            - generic [ref=e922]: I
+            - generic [ref=e923]: /
+            - generic [ref=e924]: U
+            - generic [ref=e925]: X
+            - generic [ref=e927]: D
+            - generic [ref=e928]: e
+            - generic [ref=e929]: s
+            - generic [ref=e930]: i
+            - generic [ref=e931]: g
+            - generic [ref=e932]: "n"
+            - generic [ref=e934]: E
+            - generic [ref=e935]: "n"
+            - generic [ref=e936]: t
+            - generic [ref=e937]: h
+            - generic [ref=e938]: u
+            - generic [ref=e939]: s
+            - generic [ref=e940]: i
+            - generic [ref=e941]: a
+            - generic [ref=e942]: s
+            - generic [ref=e943]: t
+          - text: Junior Web Developer
+        - paragraph [ref=e86]: Year 3 Computer Science student.
+        - generic [ref=e89]:
+          - generic [ref=e90]:
+            - generic [ref=e91]: 3rd
+            - generic [ref=e92]: Year CS student
+          - generic [ref=e93]:
+            - generic [ref=e94]: 6+
+            - generic [ref=e95]: Projects built
+          - generic [ref=e96]:
+            - generic [ref=e97]: 10+
+            - generic [ref=e98]: Technologies
+          - generic [ref=e99]:
+            - generic [ref=e100]: "2"
+            - generic [ref=e101]: Roles right now
+        - generic [ref=e103]:
+          - button "Get in touch" [ref=e104]
+          - button "Download Resume ↓" [ref=e105]:
+            - generic [ref=e106]: Download Resume ↓
+        - generic [ref=e108]:
+          - link "GitHub" [ref=e109] [cursor=pointer]:
+            - /url: https://github.com/sovandara1607
+            - img [ref=e110]
+          - link "LinkedIn" [ref=e113] [cursor=pointer]:
+            - /url: https://linkedin.com/in/sovandara1607
+            - img [ref=e114]
+          - link "Email" [ref=e118] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e119]
+      - generic [ref=e123]:
+        - generic [ref=e124]:
+          - generic [ref=e125]: Experience
+          - heading "What I've done." [level=2] [ref=e126]
+        - generic [ref=e127]:
+          - heading "Work" [level=3] [ref=e128]
+          - generic [ref=e129]:
+            - generic [ref=e130]:
+              - generic [ref=e705]:
+                - button [ref=e706]
+                - button [ref=e707]
+                - button [ref=e708]
+              - generic [ref=e135]:
+                - generic [ref=e136]:
+                  - heading "Media & Technical Lead Open link for Media & Technical Lead" [level=4] [ref=e137]:
+                    - text: Media & Technical Lead
+                    - link "Open link for Media & Technical Lead" [ref=e138] [cursor=pointer]:
+                      - /url: https://www.facebook.com/ParagonU.SC
+                      - img [ref=e139]
+                  - generic [ref=e143]: 2024 – 2025
+                - paragraph [ref=e144]: Student Council AY 2024–2025 · Computer Science Representative
+                - list [ref=e145]:
+                  - listitem [ref=e146]:
+                    - generic [ref=e147]: –
+                    - generic [ref=e148]: Managed technical tasks and digital platforms for the student council.
+                  - listitem [ref=e149]:
+                    - generic [ref=e150]: –
+                    - generic [ref=e151]: Built and hosted an online election system used for student voting.
+                  - listitem [ref=e152]:
+                    - generic [ref=e153]: –
+                    - generic [ref=e154]: Supported media and technical activities for student council events.
+            - generic [ref=e155]:
+              - generic [ref=e709]:
+                - button [ref=e710]
+                - button [ref=e711]
+              - generic [ref=e160]:
+                - generic [ref=e161]:
+                  - heading "Media Lead" [level=4] [ref=e162]
+                  - generic [ref=e163]: 2024 – 2025
+                - paragraph [ref=e164]: Paragon International University Table Tennis Club · Secretary & Media Lead
+                - list [ref=e165]:
+                  - listitem [ref=e166]:
+                    - generic [ref=e167]: –
+                    - generic [ref=e168]: Managed media content creation and distribution for the table tennis club.
+                  - listitem [ref=e169]:
+                    - generic [ref=e170]: –
+                    - generic [ref=e171]: Supported media and technical activities for events.
+        - generic [ref=e172]:
+          - heading "Education" [level=3] [ref=e173]
+          - generic [ref=e174]:
+            - generic [ref=e175]:
+              - img [ref=e177]
+              - generic [ref=e180]:
+                - generic [ref=e181]:
+                  - heading "Bachelor of Computer Science" [level=4] [ref=e182]
+                  - generic [ref=e183]: 2024 – Present
+                - paragraph [ref=e184]: Paragon International University
+                - generic [ref=e186]: Year 3
+            - generic [ref=e188]:
+              - img [ref=e190]
+              - generic [ref=e195]:
+                - generic [ref=e196]:
+                  - heading "High School Diploma" [level=4] [ref=e197]
+                  - generic [ref=e198]: 2018 – 2022
+                - paragraph [ref=e199]: Hun Sen Wat Svay High School
+                - generic [ref=e201]: Graduated 2022 — BacII Grade A
+        - generic [ref=e202]:
+          - generic [ref=e203]:
+            - heading "Soft Skills" [level=3] [ref=e204]
+            - list [ref=e205]:
+              - listitem [ref=e206]: Team communication
+              - listitem [ref=e207]: Willingness to learn in new environments
+          - generic [ref=e208]:
+            - heading "Languages" [level=3] [ref=e209]
+            - list [ref=e210]:
+              - listitem [ref=e211]: Khmer (Native)
+              - listitem [ref=e212]: English
+          - generic [ref=e213]:
+            - heading "Interests" [level=3] [ref=e214]
+            - generic [ref=e215]:
+              - generic [ref=e216]:
+                - img [ref=e217]
+                - text: Photography
+              - generic [ref=e220]:
+                - img [ref=e221]
+                - text: Videography
+              - generic [ref=e224]:
+                - img [ref=e225]
+                - text: Nature
+              - generic [ref=e228]:
+                - img [ref=e229]
+                - text: Music
+      - generic [ref=e234]:
+        - generic [ref=e235]:
+          - generic [ref=e236]: Featured Projects
+          - heading "What I've Built" [level=2] [ref=e237]
+        - generic [ref=e238]:
+          - article [ref=e239]:
+            - generic [ref=e241]: Featured
+            - heading "Track Your Fitness" [level=3] [ref=e242]
+            - paragraph [ref=e243]: Fitness tracking app focused on usability, performance, and clean UI.
+            - generic [ref=e245]:
+              - generic [ref=e246]: TypeScript
+              - generic [ref=e247]: React Native
+              - generic [ref=e248]: Expo
+            - generic [ref=e249]:
+              - link "Demo" [ref=e250] [cursor=pointer]:
+                - /url: https://track-your-fitness-beta.vercel.app/
+                - img [ref=e251]
+                - text: Demo
+              - link "Code" [ref=e255] [cursor=pointer]:
+                - /url: https://github.com/sovandara1607/Track-Your-Fitness
+                - img [ref=e256]
+                - text: Code
+              - link "Case Study →" [ref=e259] [cursor=pointer]:
+                - /url: /projects/fitness-app
+                - text: Case Study →
+                - img [ref=e260]
+          - article [ref=e263]:
+            - generic [ref=e265]: Featured
+            - heading "Performative Detector" [level=3] [ref=e266]
+            - paragraph [ref=e267]: A fun Python project using MediaPipe and computer vision to detect when you're holding a cup and plays music on Spotify.
+            - generic [ref=e269]:
+              - generic [ref=e270]: Python
+              - generic [ref=e271]: MediaPipe
+              - generic [ref=e272]: OpenCV
+              - generic [ref=e273]: Spotify API
+            - generic [ref=e274]:
+              - link "Demo" [ref=e275] [cursor=pointer]:
+                - /url: https://youtu.be/dQw4w9WgXcQ
+                - img [ref=e276]
+                - text: Demo
+              - link "Code" [ref=e280] [cursor=pointer]:
+                - /url: https://github.com/sovandara1607/performative_detector
+                - img [ref=e281]
+                - text: Code
+              - link "Case Study →" [ref=e284] [cursor=pointer]:
+                - /url: /projects/performative_detector
+                - text: Case Study →
+                - img [ref=e285]
+        - heading "Academic & Personal Work" [level=3] [ref=e288]
+        - paragraph [ref=e289]: University coursework and side projects
+        - generic [ref=e290]:
+          - link [ref=e291] [cursor=pointer]:
+            - /url: /projects/resume-builder
+            - article [ref=e292]:
+              - generic [ref=e293]:
+                - generic [ref=e294]: Academic
+                - generic [ref=e295]: 2025 – 2026
+              - heading "Online Resume Builder Platform" [level=4] [ref=e296]
+              - paragraph [ref=e297]: CS 262 — Full-Stack Development
+              - paragraph [ref=e298]: Web app for creating and managing professional resumes online.
+              - generic [ref=e299]:
+                - generic [ref=e300]:
+                  - generic [ref=e301]: Laravel
+                  - generic [ref=e302]: MySQL
+                  - generic [ref=e303]: REST API
+                - generic [ref=e304]:
+                  - text: Case Study →
+                  - img [ref=e305]
+          - link [ref=e308] [cursor=pointer]:
+            - /url: /projects/taskflow
+            - article [ref=e309]:
+              - generic [ref=e310]:
+                - generic [ref=e311]: Academic
+                - generic [ref=e312]: 2025 – 2026
+              - heading "TaskFlow — Task Management Mobile App" [level=4] [ref=e313]
+              - paragraph [ref=e314]: CS 361 — Full-Stack Development
+              - paragraph [ref=e315]: Mobile task manager to help users organize daily tasks.
+              - generic [ref=e316]:
+                - generic [ref=e317]:
+                  - generic [ref=e318]: Flutter
+                  - generic [ref=e319]: Dart
+                - generic [ref=e320]:
+                  - text: Case Study →
+                  - img [ref=e321]
+          - link [ref=e324] [cursor=pointer]:
+            - /url: /projects/myfinance
+            - article [ref=e325]:
+              - generic [ref=e326]:
+                - generic [ref=e327]: Personal
+                - generic [ref=e328]: 2025 – 2026
+              - heading "MyFinance — Finance Tracking App" [level=4] [ref=e329]
+              - paragraph [ref=e330]: iOS
+              - paragraph [ref=e331]: Track income and expenses, organized by category.
+              - generic [ref=e332]:
+                - generic [ref=e333]:
+                  - generic [ref=e334]: Swift
+                  - generic [ref=e335]: SwiftUI
+                - generic [ref=e336]:
+                  - text: Case Study →
+                  - img [ref=e337]
+      - generic [ref=e340]:
+        - generic [ref=e342]:
+          - generic [ref=e343]: Stack
+          - heading "Tools & technologies." [level=2] [ref=e344]
+        - list "Technologies and tools" [ref=e346]:
+          - generic [ref=e350]: HTML
+          - generic [ref=e353]: CSS
+          - generic [ref=e356]: JavaScript
+          - generic [ref=e359]: Tailwind
+          - generic [ref=e362]: PHP
+          - generic [ref=e365]: Laravel
+          - generic [ref=e368]: Go
+          - generic [ref=e371]: Java
+          - generic [ref=e374]: Dart
+          - generic [ref=e377]: Flutter
+          - generic [ref=e380]: Swift
+          - generic [ref=e383]: MySQL
+          - generic [ref=e386]: PostgreSQL
+          - generic [ref=e389]: Redis
+          - generic [ref=e392]: MongoDB
+          - generic [ref=e395]: Figma
+          - generic [ref=e398]: Docker
+          - generic [ref=e401]: Git
+          - generic [ref=e404]: Gitea
+          - generic [ref=e407]: DigitalOcean
+          - generic [ref=e410]: Vercel
+          - generic [ref=e413]: Railway
+          - generic [ref=e416]: Supabase
+          - generic [ref=e419]: Cloudinary
+          - generic [ref=e422]: HTML
+          - generic [ref=e425]: CSS
+          - generic [ref=e428]: JavaScript
+          - generic [ref=e431]: Tailwind
+          - generic [ref=e434]: PHP
+          - generic [ref=e437]: Laravel
+          - generic [ref=e440]: Go
+          - generic [ref=e443]: Java
+          - generic [ref=e446]: Dart
+          - generic [ref=e449]: Flutter
+          - generic [ref=e452]: Swift
+          - generic [ref=e455]: MySQL
+          - generic [ref=e458]: PostgreSQL
+          - generic [ref=e461]: Redis
+          - generic [ref=e464]: MongoDB
+          - generic [ref=e467]: Figma
+          - generic [ref=e470]: Docker
+          - generic [ref=e473]: Git
+          - generic [ref=e476]: Gitea
+          - generic [ref=e479]: DigitalOcean
+          - generic [ref=e482]: Vercel
+          - generic [ref=e485]: Railway
+          - generic [ref=e488]: Supabase
+          - generic [ref=e491]: Cloudinary
+        - generic [ref=e494]:
+          - generic [ref=e495]:
+            - heading "Frontend" [level=3] [ref=e496]
+            - generic [ref=e497]:
+              - generic [ref=e498]: HTML
+              - generic [ref=e499]: CSS
+              - generic [ref=e500]: JavaScript
+              - generic [ref=e501]: Tailwind CSS
+          - generic [ref=e502]:
+            - heading "Backend" [level=3] [ref=e503]
+            - generic [ref=e504]:
+              - generic [ref=e505]: PHP
+              - generic [ref=e506]: Laravel
+              - generic [ref=e507]: Go
+              - generic [ref=e508]: Java
+          - generic [ref=e509]:
+            - heading "Mobile" [level=3] [ref=e510]
+            - generic [ref=e511]:
+              - generic [ref=e512]: Dart
+              - generic [ref=e513]: Flutter
+              - generic [ref=e514]: Swift
+              - generic [ref=e515]: SwiftUI
+          - generic [ref=e516]:
+            - heading "Databases" [level=3] [ref=e517]
+            - generic [ref=e518]:
+              - generic [ref=e519]: MySQL
+              - generic [ref=e520]: PostgreSQL
+              - generic [ref=e521]: Redis
+              - generic [ref=e522]: MongoDB
+          - generic [ref=e523]:
+            - heading "Design" [level=3] [ref=e524]
+            - generic [ref=e525]:
+              - generic [ref=e526]: UI/UX
+              - generic [ref=e527]: Figma
+              - generic [ref=e528]: System Analysis & Software Design
+              - generic [ref=e529]: Adobe Photoshop
+              - generic [ref=e530]: Adobe Illustrator
+          - generic [ref=e531]:
+            - heading "Tools & Platforms" [level=3] [ref=e532]
+            - generic [ref=e533]:
+              - generic [ref=e534]: Docker
+              - generic [ref=e535]: Git
+              - generic [ref=e536]: Gitea
+              - generic [ref=e537]: DigitalOcean
+              - generic [ref=e538]: Vercel
+              - generic [ref=e539]: Railway
+      - generic [ref=e541]:
+        - generic [ref=e542]:
+          - generic [ref=e543]: Interactive
+          - heading "Try the terminal." [level=2] [ref=e544]
+        - generic [ref=e545]:
+          - generic [ref=e551]: sovandara@portfolio ~ bash
+          - generic [ref=e552]:
+            - generic [ref=e553]: Welcome to Sovandara's portfolio terminal.
+            - generic [ref=e712]: Type 'help' to see available commands.
+            - generic [ref=e554]:
+              - generic [ref=e555]: $
+              - textbox "Terminal input" [ref=e556]
+      - generic [ref=e558]:
+        - generic [ref=e559]:
+          - generic [ref=e560]: Collection
+          - heading "Wallpapers." [level=2] [ref=e561]
+        - generic [ref=e717]:
+          - generic [ref=e718]:
+            - link "Color Palette Edition" [ref=e719] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e721]
+            - link "Strata Excites" [ref=e722] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e724]
+            - link "Color Palette Edition" [ref=e725] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e727]
+            - link "Strata Excites" [ref=e728] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e730]
+            - link "Color Palette Edition" [ref=e731] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e733]
+            - link "Strata Excites" [ref=e734] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e736]
+            - link "Color Palette Edition" [ref=e737] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e739]
+            - link "Strata Excites" [ref=e740] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e742]
+            - link "Color Palette Edition" [ref=e743] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e745]
+            - link "Strata Excites" [ref=e746] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e748]
+            - link "Color Palette Edition" [ref=e749] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e751]
+            - link "Strata Excites" [ref=e752] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e754]
+            - link "Color Palette Edition" [ref=e755] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e757]
+            - link "Strata Excites" [ref=e758] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e760]
+            - link "Color Palette Edition" [ref=e761] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e763]
+            - link "Strata Excites" [ref=e764] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e766]
+            - link "Color Palette Edition" [ref=e767] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e769]
+            - link "Strata Excites" [ref=e770] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e772]
+            - link "Color Palette Edition" [ref=e773] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e775]
+            - link "Strata Excites" [ref=e776] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e778]
+            - link "Color Palette Edition" [ref=e779] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e781]
+            - link "Strata Excites" [ref=e782] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e784]
+            - link "Color Palette Edition" [ref=e785] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e787]
+            - link "Strata Excites" [ref=e788] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e790]
+          - generic [ref=e791]:
+            - link "Color Palette Edition" [ref=e792] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e794]
+            - link "Strata Excites" [ref=e795] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e797]
+            - link "Color Palette Edition" [ref=e798] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e800]
+            - link "Strata Excites" [ref=e801] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e803]
+            - link "Color Palette Edition" [ref=e804] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e806]
+            - link "Strata Excites" [ref=e807] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e809]
+            - link "Color Palette Edition" [ref=e810] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e812]
+            - link "Strata Excites" [ref=e813] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e815]
+            - link "Color Palette Edition" [ref=e816] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e818]
+            - link "Strata Excites" [ref=e819] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e821]
+            - link "Color Palette Edition" [ref=e822] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e824]
+            - link "Strata Excites" [ref=e825] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e827]
+            - link "Color Palette Edition" [ref=e828] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e830]
+            - link "Strata Excites" [ref=e831] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e833]
+            - link "Color Palette Edition" [ref=e834] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e836]
+            - link "Strata Excites" [ref=e837] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e839]
+            - link "Color Palette Edition" [ref=e840] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e842]
+            - link "Strata Excites" [ref=e843] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e845]
+            - link "Color Palette Edition" [ref=e846] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e848]
+            - link "Strata Excites" [ref=e849] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e851]
+            - link "Color Palette Edition" [ref=e852] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e854]
+            - link "Strata Excites" [ref=e855] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e857]
+            - link "Color Palette Edition" [ref=e858] [cursor=pointer]:
+              - /url: /wallpapers/color-palette-edition
+              - img "Color Palette Edition" [ref=e860]
+            - link "Strata Excites" [ref=e861] [cursor=pointer]:
+              - /url: /wallpapers/strata-excites
+              - img "Strata Excites" [ref=e863]
+        - generic [ref=e562]:
+          - button "All" [ref=e563]
+          - button "Abstract" [ref=e564]
+          - button "Typography" [ref=e565]
+          - generic [ref=e566]: "02"
+        - generic [ref=e864]:
+          - link "Color Palette Edition Original QHD FHD Color Palette Edition abstract 2026 3300×1856" [ref=e866] [cursor=pointer]:
+            - /url: /wallpapers/color-palette-edition
+            - generic [ref=e867]:
+              - img "Color Palette Edition" [ref=e868]
+              - generic [ref=e869]:
+                - generic [ref=e870]:
+                  - generic [ref=e871]: Original
+                  - generic [ref=e872]: QHD
+                  - generic [ref=e873]: FHD
+                - img [ref=e876]
+            - generic [ref=e879]:
+              - generic [ref=e880]:
+                - heading "Color Palette Edition" [level=3] [ref=e881]
+                - generic [ref=e882]:
+                  - generic [ref=e883]: abstract
+                  - generic [ref=e885]: "2026"
+              - generic [ref=e886]: 3300×1856
+          - link "Strata Excites Original FHD Strata Excites abstract 2026 2560×1664" [ref=e888] [cursor=pointer]:
+            - /url: /wallpapers/strata-excites
+            - generic [ref=e889]:
+              - img "Strata Excites" [ref=e890]
+              - generic [ref=e891]:
+                - generic [ref=e892]:
+                  - generic [ref=e893]: Original
+                  - generic [ref=e894]: FHD
+                - img [ref=e897]
+            - generic [ref=e900]:
+              - generic [ref=e901]:
+                - heading "Strata Excites" [level=3] [ref=e902]
+                - generic [ref=e903]:
+                  - generic [ref=e904]: abstract
+                  - generic [ref=e906]: "2026"
+              - generic [ref=e907]: 2560×1664
+      - generic [ref=e612]:
+        - generic [ref=e613]:
+          - generic [ref=e614]: Get In Touch
+          - heading "Let's Connect" [level=2] [ref=e615]
+        - generic [ref=e616]:
+          - paragraph [ref=e617]: "\"Always open to internships, collaboration, and building meaningful products.\""
+          - link "Get in touch" [ref=e618] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e619]
+            - text: Get in touch
+          - generic [ref=e622]:
+            - generic [ref=e623]:
+              - term [ref=e624]: Email
+              - definition [ref=e625]:
+                - link "rithsovandara83@gmail.com" [ref=e626] [cursor=pointer]:
+                  - /url: mailto:rithsovandara83@gmail.com
+            - generic [ref=e627]:
+              - term [ref=e628]: GitHub
+              - definition [ref=e629]:
+                - link "@sovandara1607" [ref=e630] [cursor=pointer]:
+                  - /url: https://github.com/sovandara1607
+            - generic [ref=e631]:
+              - term [ref=e632]: Location
+              - definition [ref=e633]: Phnom Penh, Cambodia
+        - generic [ref=e635]:
+          - generic [ref=e636]:
+            - heading "Support My Work" [level=3] [ref=e637]
+            - paragraph [ref=e638]: If you enjoy my work or find it helpful, consider buying me a coffee! Your support helps me continue learning and creating.
+          - link "☕ Buy Me a Coffee" [ref=e639] [cursor=pointer]:
+            - /url: https://link.payway.com.kh/cg4094277
+            - text: ☕ Buy Me a Coffee
+            - img [ref=e640]
+      - generic [ref=e645]:
+        - paragraph [ref=e646]: © 2026 Sovandara Rith
+        - navigation [ref=e647]:
+          - link "Projects" [ref=e648] [cursor=pointer]:
+            - /url: "#projects"
+          - link "Experience" [ref=e649] [cursor=pointer]:
+            - /url: "#experiences"
+          - link "Contact" [ref=e650] [cursor=pointer]:
+            - /url: "#contact"
+          - link "Now" [ref=e651] [cursor=pointer]:
+            - /url: /now
+        - generic [ref=e652]:
+          - link "GitHub" [ref=e653] [cursor=pointer]:
+            - /url: https://github.com/sovandara1607
+            - img [ref=e654]
+          - link "LinkedIn" [ref=e657] [cursor=pointer]:
+            - /url: https://linkedin.com/in/sovandara1607
+            - img [ref=e658]
+          - link "Email" [ref=e662] [cursor=pointer]:
+            - /url: mailto:rithsovandara83@gmail.com
+            - img [ref=e663]
+  - button "Open AI assistant" [ref=e667]:
+    - img [ref=e669]
+  - button "Open Next.js Dev Tools" [ref=e676] [cursor=pointer]:
+    - img [ref=e677]
+  - alert [ref=e680]

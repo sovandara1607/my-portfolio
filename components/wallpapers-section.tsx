@@ -1,12 +1,24 @@
 "use client"
 
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 import Link from "next/link"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowUpRight } from "lucide-react"
 import { SectionHeader } from "./section-header"
+import { WallpapersWall, type WallpaperTile } from "./ui/wallpapers-wall"
 import { wallpapers as seedWallpapers, type Wallpaper, type WallpaperCategory } from "@/lib/wallpapers-data"
 import { fetchWallpapersClient } from "@/lib/wallpapers-client"
+
+// The wall is a decorative mosaic, not the browsable grid — cycle the small
+// seed/live list a few times so the scroll has enough rows to feel alive.
+function toWallTiles(list: Wallpaper[], minCount = 24): WallpaperTile[] {
+  if (list.length === 0) return []
+  const reps = Math.max(1, Math.ceil(minCount / list.length))
+  return Array.from({ length: reps * list.length }, (_, i) => {
+    const w = list[i % list.length]
+    return { slug: w.slug, title: w.title, gradient: w.gradient, thumbnailUrl: w.thumbnailUrl }
+  })
+}
 
 type FilterCategory = "all" | WallpaperCategory
 
@@ -133,11 +145,16 @@ export function WallpapersSection() {
   const list = items ?? []
   const filtered =
     activeFilter === "all" ? list : list.filter((w) => w.category === activeFilter)
+  const wallTiles = useMemo(() => toWallTiles(list), [list])
 
   return (
     <section id="wallpapers" className="py-12 md:py-20 px-4 sm:px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader kicker="Collection" title="Wallpapers." />
+
+        {!loading && wallTiles.length > 0 && (
+          <WallpapersWall wallpapers={wallTiles} totalCount={list.length} className="mb-10 md:mb-12" />
+        )}
 
         {/* Category Filter */}
         <div className="flex items-center gap-1 mb-10 md:mb-12">
