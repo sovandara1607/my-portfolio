@@ -5,7 +5,7 @@ export const profile = {
   contact: {
     phone: "+855 99 944 923",
     email: "rithsovandara83@gmail.com",
-    website: "https://www.sovandara.lol",
+    website: "https://www.loy.sovandara.lol",
     handle: "@sovandara1607",
   },
   bio: "Year 3 Computer Science student passionate about web and mobile development.",
@@ -49,10 +49,10 @@ export const profile = {
         "Supported media and technical activities for events.",
       ],
     },
-    
+
 
   ],
-  
+
   academicProjects: [
     {
       name: "Online Resume Builder Platform",
@@ -64,6 +64,7 @@ export const profile = {
         "Implemented full CRUD for editing and managing resume data.",
         "Designed the database schema and user authentication flow.",
       ],
+      demo: null as string | null,
     },
     {
       name: "TaskFlow — Task Management Mobile App",
@@ -75,6 +76,17 @@ export const profile = {
         "Task creation, completion tracking, and management features.",
         "Clean, user-friendly interface built with Flutter.",
       ],
+      demo: null as string | null,
+    },
+    {
+      name: "MyLMS — Paragon University LMS",
+      course: "Paragon International University",
+      period: "2025 – 2026",
+      stack: ["Web"],
+      bullets: [
+        "Learning management system built/redesigned for Paragon International University.",
+      ],
+      demo: "https://mylms.paragoniu.app/auth/login" as string | null,
     },
   ],
   personalProjects: [
@@ -89,6 +101,17 @@ export const profile = {
         "Analyze spending with charts and trend insights.",
         "Dashboard with recent transactions and budget alerts.",
       ],
+      demo: null as string | null,
+    },
+    {
+      name: "RAG Search",
+      platform: "Web",
+      period: "2025 – 2026",
+      stack: ["TypeScript", "Next.js"],
+      bullets: [
+        "AI-powered retrieval-augmented generation (RAG) search app.",
+      ],
+      demo: "https://rag-search.sovandara.lol/" as string | null,
     },
   ],
   skills: {

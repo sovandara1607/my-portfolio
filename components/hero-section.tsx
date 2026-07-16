@@ -15,7 +15,7 @@ const EASE = [0.22, 1, 0.36, 1] as const
 const stats = [
   { value: "3rd", label: "Year CS student" },
   { value: "6+", label: "Projects built" },
-  { value: "10+", label: "Technologies" },
+  { value: "10+", label: "Adaptable To New Technologies" },
   { value: "2", label: "Roles right now" },
 ]
 
@@ -52,16 +52,17 @@ export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center px-4 sm:px-6 pt-28 pb-16 overflow-hidden">
       <HeroWireframeGrid />
+
       <div className="relative z-10 max-w-2xl mx-auto w-full flex flex-col items-center text-center">
-        {/* Avatar */}
+        {/* Avatar, monochrome by default, reveals color on hover */}
         <FadeIn>
-          <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-border mb-6">
+          <div className="group relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-border mb-6">
             <Image
-              src="/profile.PNG"
+              src="/dara1-portrait.png"
               alt="Sovandara Rith"
               fill
-              className="object-cover"
               priority
+              className="object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700 ease-out"
             />
           </div>
         </FadeIn>
