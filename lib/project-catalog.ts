@@ -32,6 +32,7 @@ export const projectSlugByName: Record<string, string> = {
   "MyFinance, a Finance Tracking App for iOS": "myfinance",
   "MyLMS, a Paragon International University LMS for EPP Students": "mylms",
   "RAG AI Search, a AI-powered retrieval-augmented generation (RAG) search app": "rag-ai-search",
+  "Fan Monitoring IoT Dashboard, an ESP32-based IoT Control System": "fan-monitoring-iot",
 }
 
 // Slugs that have a real page under app/projects/<slug>. Keep in sync with

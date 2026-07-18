@@ -17,6 +17,7 @@ import { wallpapers as seedWallpapers } from "@/lib/wallpapers-data"
 
 const NAV_SECTIONS = [
   { label: "Skills & Tech Stack", id: "#skills" },
+  { label: "GitHub Activity", id: "#github-activity" },
   { label: "Projects", id: "#projects" },
   { label: "Experiences", id: "#experiences" },
   { label: "Contact", id: "#contact" },

@@ -91,6 +91,18 @@ export const profile = {
       ],
       demo: "https://mylms.paragoniu.app/auth/login" as string | null,
     },
+    {
+      name: "Fan Monitoring IoT Dashboard, an ESP32-based IoT Control System",
+      course: "CS 397 — IoT / Embedded Systems",
+      role: "Frontend Developer",
+      period: "2026",
+      stack: ["Laravel", "PHP", "Tailwind CSS", "Blade", "Chart.js", "ESP32"],
+      bullets: [
+        "Unified IoT dashboard and REST API for controlling ESP32-connected fans and monitoring real-time sensor data.",
+        "Integrated with Sinric Pro for voice control via Alexa and Google Assistant.",
+      ],
+      demo: "https://www.fanmonitoringiot.systems" as string | null,
+    },
   ],
   personalProjects: [
     {

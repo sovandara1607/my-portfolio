@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { HeroSection } from "@/components/hero-section"
 import { TerminalSection } from "@/components/terminal-section"
 import { SkillsSection } from "@/components/skills-section"
+import { GithubHeatmapSection } from "@/components/github-heatmap-section"
 import { ProjectsSection } from "@/components/projects-section"
 import { ExperiencesSection } from "@/components/experiences-section"
 import { ContactSection } from "@/components/contact-section"
@@ -41,6 +42,7 @@ export default function Home() {
         <ExperiencesSection />
         <ProjectsSection />
         <SkillsSection />
+        <GithubHeatmapSection />
         <TerminalSection />
         <WallpapersSection />
         <ContactSection />

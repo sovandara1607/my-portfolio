@@ -71,6 +71,7 @@ export function Navigation() {
     { href: "#experiences", label: "Experience", keywords: ["experiences", "work", "education", "photography", "videography", "design"] },
     { href: "#projects", label: t("nav.projects"), keywords: ["projects", "apps"] },
     { href: "#skills", label: "Skills", keywords: ["skills", "tech", "stack"] },
+    { href: "#github-activity", label: "GitHub", keywords: ["github", "activity", "contributions", "heatmap", "stats"] },
     { href: "#terminal", label: "Terminal", keywords: ["terminal", "cli", "commands", "interactive"] },
     { href: "#wallpapers", label: "Wallpapers", keywords: ["wallpapers", "art", "design", "download", "backgrounds"] },
     { href: "#contact", label: t("nav.contact"), keywords: ["contact", "email", "message"] },
