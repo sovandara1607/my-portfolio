@@ -197,15 +197,15 @@ export function TerminalWindow({ embedded = false }: { embedded?: boolean }) {
   const [input, setInput]         = useState("")
   const [history, setHistory]     = useState<string[]>([])
   const [histIdx, setHistIdx]     = useState(-1)
-  const [welcomed, setWelcomed]   = useState(false)
 
-  const outputRef = useRef<HTMLDivElement>(null)
-  const inputRef  = useRef<HTMLInputElement>(null)
+  const outputRef  = useRef<HTMLDivElement>(null)
+  const inputRef   = useRef<HTMLInputElement>(null)
+  const welcomedRef = useRef(false)
 
   // Typewriter welcome on mount
   useEffect(() => {
-    if (welcomed) return
-    setWelcomed(true)
+    if (welcomedRef.current) return
+    welcomedRef.current = true
 
     let i = 0
     const displayNext = () => {
@@ -225,7 +225,7 @@ export function TerminalWindow({ embedded = false }: { embedded?: boolean }) {
       if (line === "") displayNext()
     }
     displayNext()
-  }, [welcomed])
+  }, [])
 
   // Auto-scroll to bottom whenever lines change
   useEffect(() => {

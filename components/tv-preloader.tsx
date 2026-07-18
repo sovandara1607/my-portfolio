@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react"
 import * as THREE from "three"
-import { animate, createTimeline } from "animejs"
+import { animate, createTimeline, steps } from "animejs"
 
 /**
  * Cinematic boot preloader — galekto.com-style TV loader, upgraded to 3D.
@@ -553,7 +553,7 @@ export function TvPreloader({ onComplete }: { onComplete?: () => void } = {}) {
       }
       // CRT blink reveal — the page flashes in like a warming tube
       const tl = createTimeline({
-        defaults: { duration: 60, ease: "steps(1)" },
+        defaults: { duration: 60, ease: steps(1) },
         onComplete: () => markDone(),
       })
       tl.add(overlay, { opacity: 0 })

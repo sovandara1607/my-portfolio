@@ -40,7 +40,7 @@ function DesktopInner({ onExit }: { onExit: () => void }) {
       <MenuBar activeAppName={activeName} onExit={onExit} onOpenAbout={() => openApp("about", APP_MAP.about.size)} />
 
       {/* Desktop shortcut icons */}
-      <div className="absolute top-12 right-5 flex flex-col gap-4 z-[120]">
+      <div className="absolute top-12 right-5 flex flex-col gap-4 z-[100]">
         {SHORTCUTS.map(id => {
           const app = APP_MAP[id]
           return (
@@ -62,7 +62,7 @@ function DesktopInner({ onExit }: { onExit: () => void }) {
       </div>
 
       {/* Windows layer */}
-      <div ref={constraintsRef} className="absolute inset-0 z-[110]">
+      <div ref={constraintsRef} className="absolute inset-0 z-[110] pointer-events-none">
         <AnimatePresence>
           {windows.map(w => {
             const app = APP_MAP[w.appId]
