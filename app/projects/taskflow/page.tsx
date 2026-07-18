@@ -5,7 +5,7 @@ import { profile } from "@/lib/profile"
 
 export default function TaskflowCaseStudy() {
   const project = profile.academicProjects.find(
-    (p) => p.name === "TaskFlow — Task Management Mobile App",
+    (p) => p.name === "TaskFlow, a Flutter Task Management Mobile App",
   )!
 
   return (

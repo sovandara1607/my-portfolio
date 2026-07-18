@@ -108,3 +108,50 @@ create policy "Authenticated users can delete experience photos"
   on public.experience_photos for delete
   to authenticated
   using (true);
+
+-- ============================================================================
+-- Project photos schema
+--   One logo or cover image per project, matched by its static key (e.g.
+--   "jgdo", "fitness-app", "taskflow") from lib/project-catalog.ts. Uploaded
+--   via /admin. `image_type` controls how the homepage renders it: a small
+--   square "logo" next to the title, or a wide "cover" banner in the card.
+-- ============================================================================
+
+create table if not exists public.project_photos (
+  id              uuid primary key default gen_random_uuid(),
+  project_key     text not null unique,
+  image_type      text not null default 'logo' check (image_type in ('logo', 'cover')),
+
+  -- Cloudinary image references (the master upload)
+  photo_public_id text not null,
+  photo_url       text not null,
+  width           int,
+  height          int,
+
+  created_at      timestamptz not null default now()
+);
+
+alter table public.project_photos enable row level security;
+
+drop policy if exists "Project photos are publicly readable" on public.project_photos;
+create policy "Project photos are publicly readable"
+  on public.project_photos for select
+  using (true);
+
+drop policy if exists "Authenticated users can insert project photos" on public.project_photos;
+create policy "Authenticated users can insert project photos"
+  on public.project_photos for insert
+  to authenticated
+  with check (true);
+
+drop policy if exists "Authenticated users can update project photos" on public.project_photos;
+create policy "Authenticated users can update project photos"
+  on public.project_photos for update
+  to authenticated
+  using (true) with check (true);
+
+drop policy if exists "Authenticated users can delete project photos" on public.project_photos;
+create policy "Authenticated users can delete project photos"
+  on public.project_photos for delete
+  to authenticated
+  using (true);

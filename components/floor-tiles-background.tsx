@@ -6,6 +6,11 @@ import { useTheme } from "next-themes"
 export function FloorTilesBackground() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const { resolvedTheme } = useTheme()
+  const isDarkRef = useRef(resolvedTheme === "dark")
+
+  useEffect(() => {
+    isDarkRef.current = resolvedTheme === "dark"
+  }, [resolvedTheme])
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -18,15 +23,7 @@ export function FloorTilesBackground() {
     let mouseX = -1000
     let mouseY = -1000
 
-    const isDark = resolvedTheme === "dark"
-    
-    // Simple consistent colors for the grid
-    // Light mode: very subtle grid on white background
-    const gridColor = isDark 
-      ? "rgba(93, 155, 53, 0.15)" 
-      : "rgba(93, 155, 53, 0.08)"
     const glowColor = "rgba(128, 255, 32, 0.4)"
-    const backgroundColor = isDark ? "transparent" : "#ffffff"
 
     const resize = () => {
       canvas.width = window.innerWidth
@@ -52,9 +49,12 @@ export function FloorTilesBackground() {
     const tileSize = 48
 
     const draw = () => {
+      const isDark = isDarkRef.current
+      const gridColor = isDark ? "rgba(93, 155, 53, 0.15)" : "rgba(93, 155, 53, 0.08)"
+
       // Fill with background color first (white in light mode)
       if (!isDark) {
-        ctx.fillStyle = backgroundColor
+        ctx.fillStyle = "#ffffff"
         ctx.fillRect(0, 0, canvas.width, canvas.height)
       } else {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
@@ -121,7 +121,11 @@ export function FloorTilesBackground() {
       window.removeEventListener("mouseleave", handleMouseLeave)
       cancelAnimationFrame(animationFrameId)
     }
-  }, [resolvedTheme])
+    // Deliberately mount-only: isDarkRef (kept in sync above) is read fresh
+    // each frame, so theme changes never need to tear down and restart the
+    // draw loop and event listeners.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <canvas

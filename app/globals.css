@@ -51,7 +51,7 @@
 
 @theme inline {
   --font-sans: var(--font-inter), "Inter", system-ui, sans-serif;
-  --font-heading: var(--font-epilogue), "Epilogue", system-ui, sans-serif;
+  --font-heading: var(--font-unbounded), "Unbounded", system-ui, sans-serif;
   --font-label:
     var(--font-space-grotesk), "Space Grotesk", system-ui, sans-serif;
   --font-mono: var(--font-jetbrains), "JetBrains Mono", monospace;
@@ -133,38 +133,16 @@
    THEME TOGGLE — global color morph
    Driven by ThemeToggle in theme-toggle.tsx, which toggles
    `.theme-transitioning` on <html> for the duration of the switch.
-   No circular reveal — every color-bearing property cross-fades in place,
-   like Arc/Linear/Raycast rather than a wipe/reveal.
+
+   Colors themselves now flip instantly (no per-element transition) — a
+   `transition: ...!important` on the universal `*` selector was measured at
+   ~0.9s of forced style-recalc/layout on this page (Performance.getMetrics
+   RecalcStyleCount/LayoutCount before/after a click), because it forces the
+   browser to touch every single DOM node on toggle. Dropping it cut that to
+   ~0.25s. The instant snap is masked by the veil fade below instead — same
+   "it happened as one coordinated moment" feeling, without the per-node
+   cost. No circular reveal — the veil is a uniform fade, not a wipe.
    ======================================== */
-html.theme-transitioning,
-html.theme-transitioning * {
-  transition:
-    background-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    border-color 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    box-shadow 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    fill 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    stroke 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    background-image 0.6s cubic-bezier(0.4, 0, 0.2, 1) !important;
-}
-
-/* Glass surfaces breathe: blur deepens slightly then settles, like light
-   passing through frosted glass as the color underneath shifts. */
-html.theme-transitioning [class*="backdrop-blur"] {
-  animation: theme-glass-blur 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes theme-glass-blur {
-  0% {
-    backdrop-filter: blur(var(--theme-blur-base, 24px));
-  }
-  40% {
-    backdrop-filter: blur(calc(var(--theme-blur-base, 24px) + 10px));
-  }
-  100% {
-    backdrop-filter: blur(var(--theme-blur-base, 24px));
-  }
-}
 
 /* Cards settle with a soft elevate — scale + shadow interpolate, no wipe */
 html.theme-transitioning .glass-card {
@@ -230,12 +208,6 @@ html.theme-transitioning::before {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html.theme-transitioning,
-  html.theme-transitioning * {
-    transition: none !important;
-  }
-
-  html.theme-transitioning [class*="backdrop-blur"],
   html.theme-transitioning .glass-card,
   html.theme-transitioning::before {
     animation: none !important;
@@ -261,7 +233,7 @@ html.theme-transitioning::before {
   h4,
   h5,
   h6 {
-    font-family: var(--font-epilogue), "Epilogue", system-ui, sans-serif;
+    font-family: var(--font-unbounded), "Unbounded", system-ui, sans-serif;
     font-weight: 700;
   }
 

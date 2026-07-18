@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { ResumeDownload } from "./resume-download"
 import { TextRotator } from "@/components/ui/classy-hero"
 import { HeroWireframeGrid } from "@/components/ui/hero-wireframe-grid"
+import { AvatarParticles } from "@/components/ui/avatar-particles"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { motion } from "framer-motion"
@@ -54,16 +55,19 @@ export function HeroSection() {
       <HeroWireframeGrid />
 
       <div className="relative z-10 max-w-2xl mx-auto w-full flex flex-col items-center text-center">
-        {/* Avatar, monochrome by default, reveals color on hover */}
+        {/* Avatar, monochrome by default, reveals color on hover — haloed by drifting yellow particles */}
         <FadeIn>
-          <div className="group relative w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden ring-1 ring-border mb-6">
-            <Image
-              src="/dara1-portrait.png"
-              alt="Sovandara Rith"
-              fill
-              priority
-              className="object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700 ease-out"
-            />
+          <div className="relative w-24 h-24 sm:w-28 sm:h-28 mb-6">
+            <AvatarParticles />
+            <div className="group relative w-full h-full rounded-full overflow-hidden ring-1 ring-border">
+              <Image
+                src="/dara1-portrait.png"
+                alt="Sovandara Rith"
+                fill
+                priority
+                className="object-cover object-top grayscale group-hover:grayscale-0 transition-[filter] duration-700 ease-out"
+              />
+            </div>
           </div>
         </FadeIn>
 
@@ -88,9 +92,12 @@ export function HeroSection() {
             words={[
               "Junior Web Developer",
               "Junior Mobile Developer",
-              "Systems Design Enthusiast",
+              "Systems Designer",
               "Open Source Contributor",
-              "UI/UX Design Enthusiast",
+              "UI/UX Designer",
+              "Software Engineer",
+              "Graphic Designer",
+              "Video Editor by passion",
             ]}
             className="text-sm sm:text-base font-mono text-muted-foreground tracking-wide"
             interval={3000}

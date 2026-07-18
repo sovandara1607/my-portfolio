@@ -50,16 +50,18 @@ const nextConfig = {
             value: [
               // Default to self
               "default-src 'self'",
-              // Scripts: self + inline for Next.js hydration + Vercel Analytics
-              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com",
+              // Scripts: self + inline for Next.js hydration + Vercel Analytics + MediaPipe's WASM/glue loader
+              "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://va.vercel-scripts.com https://cdn.jsdelivr.net",
               // Styles: self + inline for styled-components/emotion/tailwind
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               // Images: self + data URIs + common image hosts
               "img-src 'self' data: blob: https:",
               // Fonts: self + Google Fonts
               "font-src 'self' https://fonts.gstatic.com",
-              // Connections: self + Vercel Analytics + Supabase + direct Cloudinary upload
-              "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.supabase.co wss://*.supabase.co https://api.cloudinary.com",
+              // Connections: self + Vercel Analytics + Supabase + direct Cloudinary upload +
+              // jsdelivr (MediaPipe WASM/model files for the Hand Detector demo, world-atlas
+              // topojson for the desktop Travel Map app)
+              "connect-src 'self' https://vitals.vercel-insights.com https://va.vercel-scripts.com https://*.supabase.co wss://*.supabase.co https://api.cloudinary.com https://cdn.jsdelivr.net",
               // Media: self for music player
               "media-src 'self' blob:",
               // Frames: allow fitness app demo

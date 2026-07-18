@@ -5,6 +5,7 @@ import { useTheme } from "next-themes"
 import { motion, useMotionValue, useSpring, useReducedMotion } from "framer-motion"
 import { Sun, Moon, Monitor, type LucideIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { ThemePrismBurst, type ThemePrismBurstHandle } from "./theme-prism-burst"
 
 type Mode = "light" | "system" | "dark"
 
@@ -32,6 +33,7 @@ export function ThemeToggle() {
   const [mounted, setMounted] = useState(false)
   const reduceMotion = useReducedMotion()
   const containerRef = useRef<HTMLDivElement>(null)
+  const burstRef = useRef<ThemePrismBurstHandle>(null)
   const [ripples, setRipples] = useState<{ id: number; x: number; y: number; mode: Mode }[]>([])
 
   const mx = useMotionValue(0)
@@ -75,6 +77,7 @@ export function ThemeToggle() {
 
       const root = document.documentElement
       root.classList.add("theme-transitioning")
+      burstRef.current?.fire(e.clientX, e.clientY)
       setTheme(mode)
       setTimeout(() => root.classList.remove("theme-transitioning"), TRANSITION_MS)
     },
@@ -88,15 +91,17 @@ export function ThemeToggle() {
   const activeIndex = MODES.findIndex((m) => m.value === (theme ?? "system"))
 
   return (
-    <motion.div
-      ref={containerRef}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
-      style={{ x: springX, y: springY }}
-      className="relative flex items-center gap-0.5 p-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-xl"
-      role="radiogroup"
-      aria-label="Theme"
-    >
+    <>
+      <ThemePrismBurst ref={burstRef} />
+      <motion.div
+        ref={containerRef}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+        style={{ x: springX, y: springY }}
+        className="relative flex items-center gap-0.5 p-1 rounded-full border border-border/60 bg-background/60 backdrop-blur-xl"
+        role="radiogroup"
+        aria-label="Theme"
+      >
       {/* Ambient glow — soft, slow breathing behind the whole control */}
       {!reduceMotion && (
         <motion.div
@@ -169,5 +174,6 @@ export function ThemeToggle() {
         )
       })}
     </motion.div>
+    </>
   )
 }

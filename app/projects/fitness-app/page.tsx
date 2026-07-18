@@ -89,7 +89,7 @@ export default function FitnessAppCaseStudy() {
                   Case Study
                 </Badge>
                 <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-foreground">
-                  Track Your <span className="bg-gradient-to-r text-primary">Fitness</span>
+                  Tos <span className="bg-gradient-to-r text-primary">Lift</span>
                 </h1>
                 <p className="text-lg sm:text-xl text-muted-foreground">
                   A comprehensive fitness tracking app focused on usability, performance, and clean UI. Built with modern React Native technologies.
@@ -147,7 +147,7 @@ export default function FitnessAppCaseStudy() {
                           <iframe
                             src="https://track-your-fitness-beta.vercel.app/"
                             className="w-full h-full border-0"
-                            title="Track Your Fitness App Preview"
+                            title="Tos Lift App Preview"
                             loading="lazy"
                           />
                         </div>
@@ -193,7 +193,7 @@ export default function FitnessAppCaseStudy() {
                             <div className="w-16 h-16 bg-primary/20 rounded-2xl flex items-center justify-center mb-4 backdrop-blur-sm">
                               <Smartphone className="h-8 w-8 text-primary" />
                             </div>
-                            <h4 className="text-lg font-semibold text-foreground mb-2 text-center">Track Your Fitness</h4>
+                            <h4 className="text-lg font-semibold text-foreground mb-2 text-center">Tos Lift</h4>
                             <p className="text-sm text-muted-foreground text-center mb-6">Tap to open the live app preview</p>
                             <Button className="bg-primary text-primary-foreground hover:bg-primary/90 gap-2 shadow-lg">
                               <ExternalLink className="h-4 w-4" />

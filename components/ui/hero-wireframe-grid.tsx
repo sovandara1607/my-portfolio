@@ -5,6 +5,16 @@ import { useTheme } from "next-themes"
 import * as THREE from "three"
 
 /**
+ * Applies theme-dependent color/opacity to an already-built scene, so
+ * switching theme never needs to tear down and recreate the WebGL context —
+ * that's the single most expensive thing this component could do per click.
+ */
+function applyGridTheme(isDark: boolean, material: THREE.MeshBasicMaterial) {
+  material.color.setHex(isDark ? 0xf5f5f5 : 0x171717)
+  material.opacity = isDark ? 0.16 : 0.14
+}
+
+/**
  * Abstract 3D wireframe horizon, scoped to the hero section.
  * A tilted, undulating wireframe plane rendered with three.js — reads as a
  * stylized landscape rolling away from the viewer. Monochrome (uses
@@ -15,6 +25,11 @@ import * as THREE from "three"
 export function HeroWireframeGrid() {
   const mountRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
+  const applyThemeRef = useRef<(isDark: boolean) => void>(() => {})
+
+  useEffect(() => {
+    applyThemeRef.current(resolvedTheme === "dark")
+  }, [resolvedTheme])
 
   useEffect(() => {
     const mount = mountRef.current
@@ -93,6 +108,8 @@ export function HeroWireframeGrid() {
     const resizeObserver = new ResizeObserver(fit)
     resizeObserver.observe(mount)
 
+    applyThemeRef.current = (nextIsDark) => applyGridTheme(nextIsDark, material)
+
     const start = performance.now()
     function frame() {
       if (disposed) return
@@ -111,6 +128,7 @@ export function HeroWireframeGrid() {
 
     return () => {
       disposed = true
+      applyThemeRef.current = () => {}
       cancelAnimationFrame(rafId)
       resizeObserver.disconnect()
       geometry.dispose()
@@ -120,7 +138,11 @@ export function HeroWireframeGrid() {
         mount.removeChild(renderer.domElement)
       }
     }
-  }, [resolvedTheme])
+    // Deliberately mount-only: rebuilding the WebGL context on every theme
+    // change is the single most expensive thing this component could do.
+    // Color updates are handled by the applyThemeRef effect above instead.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div

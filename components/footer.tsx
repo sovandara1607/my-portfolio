@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Github, Linkedin, Mail } from "lucide-react"
+import { Github, Linkedin, Mail, Lock } from "lucide-react"
 
 const socialLinks = [
   {
@@ -60,6 +60,13 @@ export function Footer() {
                 <link.icon className="w-4 h-4" />
               </a>
             ))}
+            <Link
+              href="/admin/wallpapers"
+              className="w-9 h-9 rounded-full flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
+              aria-label="Admin"
+            >
+              <Lock className="w-4 h-4" />
+            </Link>
           </div>
         </div>
       </div>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { ArrowUpRight, ExternalLink, Github } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
@@ -7,11 +8,28 @@ import { SectionHeader } from "./section-header"
 import { OrganicBlobField } from "./ui/organic-blob-field"
 import { TiltCard } from "./ui/tilt-card"
 import { profile } from "@/lib/profile"
+import { CASE_STUDY_SLUGS, FEATURED_PROJECT_KEYS, projectSlugByName } from "@/lib/project-catalog"
+import { fetchProjectPhotosClient } from "@/lib/project-photos-client"
+import type { ProjectPhoto } from "@/lib/project-photos-data"
 
-const projectSlugByName: Record<string, string> = {
-  "Online Resume Builder Platform": "resume-builder",
-  "TaskFlow — Task Management Mobile App": "taskflow",
-  "MyFinance — Finance Tracking App": "myfinance",
+function ProjectLogo({ photo, size = "w-11 h-11" }: { photo?: ProjectPhoto; size?: string }) {
+  if (!photo || photo.imageType !== "logo") return null
+  return (
+    <div className={`${size} shrink-0 rounded-xl overflow-hidden border border-border bg-muted`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={photo.logoUrl} alt="" className="w-full h-full object-cover" />
+    </div>
+  )
+}
+
+function ProjectCover({ photo, className = "" }: { photo?: ProjectPhoto; className?: string }) {
+  if (!photo || photo.imageType !== "cover") return null
+  return (
+    <div className={`rounded-xl overflow-hidden border border-border aspect-video ${className}`}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={photo.coverUrl} alt="" className="w-full h-full object-cover" />
+    </div>
+  )
 }
 
 function Badge({
@@ -51,32 +69,40 @@ function TechPills({ items }: { items: readonly string[] }) {
 
 export function ProjectsSection() {
   const { t } = useLanguage()
+  const [photos, setPhotos] = useState<Record<string, ProjectPhoto>>({})
+
+  useEffect(() => {
+    fetchProjectPhotosClient().then(setPhotos)
+  }, [])
 
   const featured = [
     {
+      key: FEATURED_PROJECT_KEYS.jgdo,
       title: "JgDo",
       description:
-        "A lightweight macOS menu bar app for window management — instant snapping with 10+ layouts, a searchable app switcher, clipboard history, and saved workspaces.",
+        "A lightweight macOS menu bar app for window management with instant snapping with 10+ layouts, a searchable app switcher, clipboard history, and saved workspaces.",
       tech: ["Swift", "SwiftUI"],
       github: "https://github.com/sovandara1607/jgdo-app",
       demo: "https://jgdo.sovandara.lol/",
     },
     {
+      key: FEATURED_PROJECT_KEYS.fitnessApp,
       title: t("projects.fitnessTitle"),
       description: t("projects.fitnessDesc"),
-      tech: ["TypeScript", "React Native", "Expo"],
+      tech: ["React Native", "Expo"],
       github: "https://github.com/sovandara1607/Track-Your-Fitness",
       demo: "https://track-your-fitness-beta.vercel.app/",
       caseStudy: "/projects/fitness-app",
     },
     {
-      title: "Performative Detector",
+      key: FEATURED_PROJECT_KEYS.handDetector,
+      title: "Hand Detector, a Hand Gesture Recognition App",
       description:
-        "A fun Python project using MediaPipe and computer vision to detect when you're holding a cup and plays music on Spotify.",
+        "A fun Python project using MediaPipe and computer vision to detect hand gestures and perform actions like playing music on Spotify.",
       tech: ["Python", "MediaPipe", "OpenCV", "Spotify API"],
-      github: "https://github.com/sovandara1607/performative_detector",
+      github: "https://github.com/sovandara1607/Hand-Detector",
       demo: "https://youtu.be/dQw4w9WgXcQ",
-      caseStudy: "/projects/performative_detector",
+      caseStudy: "/projects/hand-detector",
     },
   ]
 
@@ -88,7 +114,8 @@ export function ProjectsSection() {
       period: p.period,
       tech: p.stack as readonly string[],
       description: p.bullets[0],
-      slug: projectSlugByName[p.name],
+      photoKey: projectSlugByName[p.name],
+      slug: CASE_STUDY_SLUGS.has(projectSlugByName[p.name]) ? projectSlugByName[p.name] : undefined,
       demo: p.demo,
     })),
     ...profile.personalProjects.map((p) => ({
@@ -98,7 +125,8 @@ export function ProjectsSection() {
       period: p.period,
       tech: p.stack as readonly string[],
       description: p.bullets[0],
-      slug: projectSlugByName[p.name],
+      photoKey: projectSlugByName[p.name],
+      slug: CASE_STUDY_SLUGS.has(projectSlugByName[p.name]) ? projectSlugByName[p.name] : undefined,
       demo: p.demo,
     })),
   ]
@@ -117,17 +145,24 @@ export function ProjectsSection() {
 
         {/* ── Featured ─────────────────────────────────────────────── */}
         <div className="space-y-10 mb-16">
-          {featured.map((project) => (
+          {featured.map((project) => {
+            const photo = photos[project.key]
+            return (
             <TiltCard key={project.title}>
               <article className="group border-l-4 border-sky-400 pl-6 sm:pl-8">
                 <div className="flex flex-wrap items-center gap-2 mb-3">
                   <Badge tone="featured">Featured</Badge>
                 </div>
 
+                <ProjectCover photo={photo} className="mb-5" />
+
                 <div className="flex items-start justify-between gap-4 mb-2">
-                  <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-center gap-3 min-w-0">
+                    <ProjectLogo photo={photo} />
+                    <h3 className="text-2xl sm:text-3xl font-extrabold text-foreground tracking-tight">
+                      {project.title}
+                    </h3>
+                  </div>
                   <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 text-sky-400 shrink-0 mt-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
                 </div>
 
@@ -170,7 +205,8 @@ export function ProjectsSection() {
                 </div>
               </article>
             </TiltCard>
-          ))}
+            )
+          })}
         </div>
 
         {/* ── Academic & Personal ──────────────────────────────────── */}
@@ -184,6 +220,7 @@ export function ProjectsSection() {
         <div className="space-y-8">
           {catalog.map((project) => {
             const isLinked = Boolean(project.slug || project.demo)
+            const photo = photos[project.photoKey]
             const inner = (
               <article
                 className={`border-l-2 pl-5 sm:pl-6 transition-colors ${
@@ -199,10 +236,15 @@ export function ProjectsSection() {
                   </span>
                 </div>
 
+                <ProjectCover photo={photo} className="mb-4" />
+
                 <div className="flex items-start justify-between gap-3 mb-1">
-                  <h4 className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
-                    {project.title}
-                  </h4>
+                  <div className="flex items-center gap-2.5 min-w-0">
+                    <ProjectLogo photo={photo} size="w-9 h-9" />
+                    <h4 className="text-lg sm:text-xl font-bold text-foreground tracking-tight">
+                      {project.title}
+                    </h4>
+                  </div>
                   {isLinked && (
                     <ArrowUpRight className="w-4 h-4 text-muted-foreground shrink-0 mt-1 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 group-hover:text-sky-400" />
                   )}

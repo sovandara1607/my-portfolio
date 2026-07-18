@@ -158,25 +158,15 @@ export default function NowPage() {
             </div>
           </Card>
 
-          {/* Music + Reading grid */}
-          <div className="grid sm:grid-cols-2 gap-6">
-            <Card delay={0.25}>
-              <Kicker>Music</Kicker>
-              <p className="text-sm text-muted-foreground mb-3 leading-relaxed">{nowData.music.playlist}</p>
-              <div className="flex flex-wrap gap-1.5">
-                {nowData.music.artists.map(a => <Tag key={a} label={a} />)}
-              </div>
-            </Card>
-
-            <Card delay={0.3}>
-              <Kicker>Reading</Kicker>
-              <ul className="space-y-2">
-                {nowData.reading.map(book => (
-                  <li key={book} className="text-sm text-foreground/80 leading-snug">{book}</li>
-                ))}
-              </ul>
-            </Card>
-          </div>
+          {/* Reading */}
+          <Card delay={0.25}>
+            <Kicker>Reading</Kicker>
+            <ul className="space-y-2">
+              {nowData.reading.map(book => (
+                <li key={book} className="text-sm text-foreground/80 leading-snug">{book}</li>
+              ))}
+            </ul>
+          </Card>
 
           {/* Goals */}
           <Card delay={0.35}>

@@ -61,7 +61,7 @@ const translations: Record<string, string> = {
   "projects.demo": "Demo",
   "projects.caseStudy": "Case Study →",
   "projects.pinned": "● pinned",
-  "projects.fitnessTitle": "Track Your Fitness",
+  "projects.fitnessTitle": "Tos Lift",
   "projects.fitnessDesc": "Fitness tracking app focused on usability, performance, and clean UI.",
   "projects.esp32Title": "ESP32 Web Server",
   "projects.esp32Desc": "Web-based controller to manage ESP32 hardware outputs via WiFi.",

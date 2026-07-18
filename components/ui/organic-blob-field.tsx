@@ -24,6 +24,32 @@ function pseudoNoise(x: number, y: number, z: number, t: number, seed: number) {
 }
 
 /**
+ * Applies theme-dependent colors/intensities to an already-built scene, so
+ * switching theme never needs to tear down and recreate the WebGL context —
+ * that's the single most expensive thing this component could do per click.
+ */
+function applyBlobTheme(
+  isDark: boolean,
+  ambient: THREE.AmbientLight,
+  key: THREE.DirectionalLight,
+  rim: THREE.PointLight,
+  blobs: Blob[]
+) {
+  const surfaceColor = isDark ? 0x3a3a3a : 0xffffff
+  ambient.intensity = isDark ? 0.5 : 0.7
+  key.intensity = isDark ? 1.1 : 1.4
+  rim.intensity = isDark ? 2.2 : 1.6
+
+  const opacities = [isDark ? 0.28 : 0.3, isDark ? 0.24 : 0.26]
+  blobs.forEach((blob, i) => {
+    if (i === 2) return // accent blob's color/opacity doesn't depend on theme
+    const material = blob.mesh.material as THREE.MeshStandardMaterial
+    material.color.setHex(surfaceColor)
+    material.opacity = opacities[i]
+  })
+}
+
+/**
  * Soft, lit, slowly breathing blobs — a natural counterpart to the hero's
  * angular wireframe grid, scoped to the top of the Projects section. Each
  * blob is a smooth noise-displaced sphere shaded with real lights (so it
@@ -34,6 +60,11 @@ function pseudoNoise(x: number, y: number, z: number, t: number, seed: number) {
 export function OrganicBlobField() {
   const mountRef = useRef<HTMLDivElement>(null)
   const { resolvedTheme } = useTheme()
+  const applyThemeRef = useRef<(isDark: boolean) => void>(() => {})
+
+  useEffect(() => {
+    applyThemeRef.current(resolvedTheme === "dark")
+  }, [resolvedTheme])
 
   useEffect(() => {
     const mount = mountRef.current
@@ -126,6 +157,8 @@ export function OrganicBlobField() {
     const resizeObserver = new ResizeObserver(fit)
     resizeObserver.observe(mount)
 
+    applyThemeRef.current = (nextIsDark) => applyBlobTheme(nextIsDark, ambient, key, rim, blobs)
+
     function breathe(t: number) {
       for (const blob of blobs) {
         const posAttr = blob.geometry.attributes.position as THREE.BufferAttribute
@@ -166,6 +199,7 @@ export function OrganicBlobField() {
 
     return () => {
       disposed = true
+      applyThemeRef.current = () => {}
       cancelAnimationFrame(rafId)
       resizeObserver.disconnect()
       for (const blob of blobs) {
@@ -177,7 +211,11 @@ export function OrganicBlobField() {
         mount.removeChild(renderer.domElement)
       }
     }
-  }, [resolvedTheme])
+    // Deliberately mount-only: rebuilding the WebGL context on every theme
+    // change is the single most expensive thing this component could do.
+    // Color updates are handled by the applyThemeRef effect above instead.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div

@@ -14,11 +14,13 @@ type Item =
   | { kind: "file"; name: string; href: string; download?: boolean; icon: typeof Folder; sub?: string }
 
 const PROJECTS: Item[] = [
-  { kind: "link", name: "Fitness App", href: "/projects/fitness-app", icon: Code2, sub: "React · Web" },
+  { kind: "link", name: "Tos Lift", href: "/projects/fitness-app", icon: Code2, sub: "React · Web" },
   { kind: "link", name: "MyFinance", href: "/projects/myfinance", icon: Code2, sub: "Swift · iOS" },
-  { kind: "link", name: "Performative Detector", href: "/projects/performative_detector", icon: Code2, sub: "MediaPipe" },
+  { kind: "link", name: "Hand Detector", href: "/projects/hand-detector", icon: Code2, sub: "MediaPipe" },
   { kind: "link", name: "Resume Builder", href: "/projects/resume-builder", icon: Code2, sub: "Laravel" },
   { kind: "link", name: "TaskFlow", href: "/projects/taskflow", icon: Code2, sub: "Flutter" },
+  { kind: "link", name: "MyLMS", href: "https://mylms.paragoniu.app/auth/login", icon: Code2, sub: "Go · Next.js" },
+  { kind: "link", name: "RAG AI Search", href: "https://rag-search.sovandara.lol/", icon: Code2, sub: "Streamlit" },
 ]
 
 const WALLPAPERS: Item[] = seedWallpapers.map(w => ({

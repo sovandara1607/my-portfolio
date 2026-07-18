@@ -2,12 +2,13 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { Image, Briefcase } from "lucide-react"
+import { Image, Briefcase, FolderKanban } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const ADMIN_LINKS = [
   { href: "/admin/wallpapers", label: "Wallpapers", icon: Image },
   { href: "/admin/experience-photos", label: "Experience Photos", icon: Briefcase },
+  { href: "/admin/project-photos", label: "Project Photos", icon: FolderKanban },
 ]
 
 export function AdminNav() {

@@ -5,7 +5,7 @@ import { profile } from "@/lib/profile"
 
 export default function MyfinanceCaseStudy() {
   const project = profile.personalProjects.find(
-    (p) => p.name === "MyFinance — Finance Tracking App",
+    (p) => p.name === "MyFinance, a Finance Tracking App for iOS",
   )!
 
   return (
