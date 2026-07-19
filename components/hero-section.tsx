@@ -5,11 +5,12 @@ import { ResumeDownload } from "./resume-download"
 import { TextRotator } from "@/components/ui/classy-hero"
 import { HeroWireframeGrid } from "@/components/ui/hero-wireframe-grid"
 import { AvatarParticles } from "@/components/ui/avatar-particles"
+import { CutoutText } from "@/components/ui/cutout-text"
+import { GinghamSwatch, FlowerCluster } from "@/components/ui/collage-accents"
 import Image from "next/image"
 import { useLanguage } from "@/lib/language-context"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail } from "lucide-react"
-import { cn } from "@/lib/utils"
 
 const EASE = [0.22, 1, 0.36, 1] as const
 
@@ -113,28 +114,27 @@ export function HeroSection() {
           </p>
         </FadeIn>
 
-        {/* Stat cards */}
+        {/* Stat cards — magazine-cutout collage: ransom-note lettering on a
+            paper card, with a gingham-fabric and pressed-flower corner accents */}
         <FadeIn delay={0.3} className="w-full">
-          <div className="mt-10 glass-card overflow-hidden">
-            <div className="grid grid-cols-2 sm:grid-cols-4">
-              {stats.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className={cn(
-                    "px-4 py-5 flex flex-col items-center gap-1",
-                    i % 2 === 0 && "border-r",
-                    i < 2 && "border-b sm:border-b-0",
-                    i === 1 && "sm:border-r"
-                  )}
-                >
-                  <span className="text-2xl font-bold text-foreground tracking-tight">
-                    {stat.value}
-                  </span>
-                  <span className="text-xs text-muted-foreground">
-                    {stat.label}
-                  </span>
-                </div>
-              ))}
+          <div className="relative mt-14 sm:mt-16">
+            <GinghamSwatch className="absolute -top-4 -left-4 w-16 h-16 sm:w-20 sm:h-20 -rotate-6 z-0" />
+            <FlowerCluster className="absolute -bottom-6 -right-4 w-16 h-16 sm:w-20 sm:h-20 rotate-6 z-0" />
+
+            <div className="relative z-10 bg-[#F3EDE3] border border-black/10 rounded-sm px-4 py-7 sm:px-8 shadow-[3px_5px_14px_rgba(0,0,0,0.3)]">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-y-7 gap-x-2">
+                {stats.map((stat, i) => (
+                  <div key={stat.label} className="flex flex-col items-center gap-2.5">
+                    <CutoutText text={stat.value} className="justify-center" letterClassName="text-xl sm:text-2xl" />
+                    <span
+                      className="font-[family-name:var(--font-caveat)] font-bold text-[#D9622B] text-lg sm:text-xl leading-tight text-center px-1 max-w-[9rem]"
+                      style={{ transform: `rotate(${i % 2 === 0 ? -2 : 2}deg)` }}
+                    >
+                      {stat.label}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
           </div>
         </FadeIn>

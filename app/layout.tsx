@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono, Unbounded } from "next/font/google"
+import { Epilogue, Inter, Space_Grotesk, JetBrains_Mono, Unbounded, Fraunces, Caveat } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/components/theme-provider"
 import { LanguageProvider } from "@/lib/language-context"
@@ -35,6 +35,19 @@ const unbounded = Unbounded({
   weight: ["600", "700", "800"],
 })
 
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+})
+
+const caveat = Caveat({
+  subsets: ["latin"],
+  variable: "--font-caveat",
+  weight: ["600", "700"],
+})
+
 export const metadata: Metadata = {
   title: "Sovandara Rith | Portfolio",
   description: "Year 3 Computer Science Student · Web & Mobile Developer",
@@ -46,7 +59,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${unbounded.variable}`}>
+    <html lang="en" suppressHydrationWarning className={`${epilogue.variable} ${inter.variable} ${spaceGrotesk.variable} ${jetbrainsMono.variable} ${unbounded.variable} ${fraunces.variable} ${caveat.variable}`}>
       <body className="antialiased">
         <ThemeProvider
           attribute="class"
