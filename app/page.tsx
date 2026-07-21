@@ -18,6 +18,7 @@ import { TvPreloader } from "@/components/tv-preloader"
 
 export default function Home() {
   const [desktopMode, setDesktopMode] = useState(false)
+  const [preloaderDone, setPreloaderDone] = useState(false)
 
   // Allow nav / command palette to trigger desktop mode via a custom event
   useEffect(() => {
@@ -32,7 +33,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-background relative">
-      <TvPreloader />
+      {/* Unmounted (not just hidden) once done, so its WebGL render loop
+          actually stops instead of rendering into a detached canvas forever. */}
+      {!preloaderDone && <TvPreloader onComplete={() => setPreloaderDone(true)} />}
       <div aria-hidden className="dot-grid fixed inset-0 pointer-events-none" />
       <FluidBackground />
       <MusicPlayer />

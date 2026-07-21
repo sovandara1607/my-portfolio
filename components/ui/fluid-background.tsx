@@ -393,9 +393,16 @@ export function FluidBackground() {
       color: splatColor(),
     }
 
+    // The sim (curl/vorticity/divergence/20 pressure iterations/advection)
+    // is the most expensive loop on the page — only run it while trails are
+    // actually settling, not forever with zero interaction.
+    const SETTLE_MS = 2500
+    let lastActive = performance.now()
+
     function onPointerMove(e: PointerEvent) {
       const x = e.clientX / window.innerWidth
       const y = 1 - e.clientY / window.innerHeight
+      lastActive = performance.now()
       if (!pointer.initialized) {
         pointer.initialized = true
         pointer.x = x
@@ -411,6 +418,7 @@ export function FluidBackground() {
 
     function onPointerDown() {
       pointer.color = splatColor()
+      lastActive = performance.now()
     }
 
     window.addEventListener("pointermove", onPointerMove, { passive: true })
@@ -506,6 +514,10 @@ export function FluidBackground() {
     let lastTime = performance.now()
     function frame() {
       if (destroyed) return
+      if (document.hidden) {
+        rafId = requestAnimationFrame(frame)
+        return
+      }
       const now = performance.now()
       const dt = Math.min((now - lastTime) / 1000, 0.016666)
       lastTime = now
@@ -517,8 +529,12 @@ export function FluidBackground() {
         splat(pointer.x, pointer.y, pointer.dx, pointer.dy, pointer.color)
       }
 
-      step(dt)
-      render()
+      // Idle: let existing trails settle for a bit, then stop stepping the
+      // sim entirely until the next interaction wakes it back up.
+      if (now - lastActive < SETTLE_MS) {
+        step(dt)
+        render()
+      }
       rafId = requestAnimationFrame(frame)
     }
     rafId = requestAnimationFrame(frame)

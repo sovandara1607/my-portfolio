@@ -110,9 +110,14 @@ export function HeroWireframeGrid() {
 
     applyThemeRef.current = (nextIsDark) => applyGridTheme(nextIsDark, material)
 
+    let visible = true
+
     const start = performance.now()
     function frame() {
-      if (disposed) return
+      if (disposed || !visible) {
+        rafId = 0
+        return
+      }
       const t = (performance.now() - start) / 1000
       wave(t)
       camera.position.y = 1.5 + Math.sin(t * 0.15) * 0.05
@@ -126,10 +131,24 @@ export function HeroWireframeGrid() {
       rafId = requestAnimationFrame(frame)
     }
 
+    // Scrolled off-screen for the rest of the session otherwise — this
+    // scene would keep recomputing every vertex every frame forever.
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible && !reduceMotion && rafId === 0) {
+          rafId = requestAnimationFrame(frame)
+        }
+      },
+      { threshold: 0 }
+    )
+    visibilityObserver.observe(mount)
+
     return () => {
       disposed = true
       applyThemeRef.current = () => {}
       cancelAnimationFrame(rafId)
+      visibilityObserver.disconnect()
       resizeObserver.disconnect()
       geometry.dispose()
       material.dispose()

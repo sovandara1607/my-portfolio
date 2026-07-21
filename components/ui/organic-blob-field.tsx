@@ -180,9 +180,14 @@ export function OrganicBlobField() {
       }
     }
 
+    let visible = true
+
     const start = performance.now()
     function frame() {
-      if (disposed) return
+      if (disposed || !visible) {
+        rafId = 0
+        return
+      }
       const t = (performance.now() - start) / 1000
       breathe(t)
       rim.position.x = -4 + Math.sin(t * 0.2) * 2
@@ -197,10 +202,25 @@ export function OrganicBlobField() {
       rafId = requestAnimationFrame(frame)
     }
 
+    // Scrolled off-screen (e.g. down at Contact) for the rest of the
+    // session otherwise — recomputing displaced geometry + vertex normals
+    // for 3 blobs every frame forever is the heaviest loop on the page.
+    const visibilityObserver = new IntersectionObserver(
+      ([entry]) => {
+        visible = entry.isIntersecting
+        if (visible && !reduceMotion && rafId === 0) {
+          rafId = requestAnimationFrame(frame)
+        }
+      },
+      { threshold: 0 }
+    )
+    visibilityObserver.observe(mount)
+
     return () => {
       disposed = true
       applyThemeRef.current = () => {}
       cancelAnimationFrame(rafId)
+      visibilityObserver.disconnect()
       resizeObserver.disconnect()
       for (const blob of blobs) {
         blob.geometry.dispose()
