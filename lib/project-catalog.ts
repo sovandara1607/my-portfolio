@@ -44,6 +44,7 @@ export const CASE_STUDY_SLUGS = new Set([
   "myfinance",
   "fitness-app",
   "hand-detector",
+  "rag-ai-search",
 ])
 
 export const CATALOG_PROJECT_ENTRIES: ProjectCatalogEntry[] = [

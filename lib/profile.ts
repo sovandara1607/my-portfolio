@@ -66,6 +66,7 @@ export const profile = {
         "Designed the database schema and user authentication flow.",
       ],
       demo: null as string | null,
+      github: null as string | null,
     },
     {
       name: "TaskFlow, a Flutter Task Management Mobile App",
@@ -79,6 +80,7 @@ export const profile = {
         "Clean, user-friendly interface built with Flutter and Laravel backend.",
       ],
       demo: null as string | null,
+      github: null as string | null,
     },
     {
       name: "MyLMS, a Paragon International University LMS for EPP Students",
@@ -90,6 +92,7 @@ export const profile = {
         "Built a learning management system for EPP students at Paragon International University.",
       ],
       demo: "https://mylms.paragoniu.app/auth/login" as string | null,
+      github: null as string | null,
     },
     {
       name: "Fan Monitoring IoT Dashboard, an ESP32-based IoT Control System",
@@ -102,6 +105,7 @@ export const profile = {
         "Integrated with Sinric Pro for voice control via Alexa and Google Assistant.",
       ],
       demo: "https://www.fanmonitoringiot.systems" as string | null,
+      github: null as string | null,
     },
   ],
   personalProjects: [
@@ -118,16 +122,19 @@ export const profile = {
         "Dashboard with recent transactions and budget alerts.",
       ],
       demo: null as string | null,
+      github: null as string | null,
     },
     {
       name: "RAG AI Search, a AI-powered retrieval-augmented generation (RAG) search app",
-      platform: "Web & Mobile",
+      platform: "Web",
       period: "2026 – Present",
-      stack: ["Streamlit", "Python", "Docker","HTML", "CSS", "JavaScript"],
+      stack: ["Python", "Streamlit", "FAISS", "Docker"],
       bullets: [
-        "AI-powered retrieval-augmented generation (RAG) search app.",
+        "Retrieval-augmented Q&A over indexed course lecture PDFs — FAISS vector search plus optional cross-encoder reranking, with citations and similarity scores.",
+        "Extractive mode needs no API key; an optional Gemini-grounded mode answers only from retrieved chunks, with an explicit \"nothing relevant found\" for off-topic queries.",
       ],
       demo: "https://rag-search.sovandara.lol/" as string | null,
+      github: "https://github.com/sovandara1607/rag-ai-search-" as string | null,
     },
   ],
   skills: {
