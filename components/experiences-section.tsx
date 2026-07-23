@@ -13,6 +13,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
+  HeartHandshake,
   type LucideIcon,
 } from "lucide-react"
 import { useLanguage } from "@/lib/language-context"
@@ -263,6 +264,49 @@ export function ExperiencesSection() {
                 </div>
               )
             })}
+          </div>
+        </div>
+
+        {/* ── Volunteering ─────────────────────────────────────────── */}
+        <div className="mb-16">
+          <GroupLabel label={t("experiences.volunteering")} />
+
+          <div className="space-y-10">
+            {profile.volunteering.map((role) => (
+              <div key={role.key} className="flex gap-4 sm:gap-5">
+                <div className="flex-shrink-0 w-11 h-11 rounded-xl bg-muted flex items-center justify-center text-foreground">
+                  <HeartHandshake className="w-4.5 h-4.5" />
+                </div>
+                <div className="flex-1 min-w-0">
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
+                    <h4 className="text-base sm:text-lg font-semibold text-foreground">
+                      {role.role}
+                    </h4>
+                    {role.period && (
+                      <span className="text-sm text-muted-foreground tabular-nums">
+                        {role.period}
+                      </span>
+                    )}
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-0.5">
+                    {role.org} · {role.cause}
+                  </p>
+                  {role.bullets.length > 0 && (
+                    <ul className="mt-3 space-y-1.5">
+                      {role.bullets.map((bullet, i) => (
+                        <li
+                          key={i}
+                          className="text-sm text-muted-foreground leading-relaxed flex gap-2.5"
+                        >
+                          <span className="text-muted-foreground/50 mt-[2px]">–</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </div>
+              </div>
+            ))}
           </div>
         </div>
 

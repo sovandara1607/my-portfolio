@@ -11,7 +11,7 @@ const socialLinks = [
   },
   {
     name: "LinkedIn",
-    href: "https://linkedin.com/in/sovandara1607",
+    href: "https://www.linkedin.com/in/sovandararith-b55abb3a5",
     icon: Linkedin,
   },
   {

@@ -18,12 +18,12 @@ const stats = [
   { value: "3rd", label: "Year CS student" },
   { value: "6+", label: "Projects built" },
   { value: "10+", label: "Adaptable To New Technologies" },
-  { value: "2", label: "Roles right now" },
+  { value: "1", label: "Role right now" },
 ]
 
 const socials = [
   { name: "GitHub", href: "https://github.com/sovandara1607", icon: Github },
-  { name: "LinkedIn", href: "https://linkedin.com/in/sovandara1607", icon: Linkedin },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/sovandararith-b55abb3a5", icon: Linkedin },
   { name: "Email", href: "mailto:rithsovandara83@gmail.com", icon: Mail },
 ]
 

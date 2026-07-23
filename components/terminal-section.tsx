@@ -60,7 +60,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
     <div className="space-y-1.5">
       <p><Span className="text-primary">Name     </Span> {profile.name}</p>
       <p><Span className="text-primary">Role     </Span> {profile.title}</p>
-      <p><Span className="text-primary">Location </Span> Phnom Penh, Cambodia</p>
+      <p><Span className="text-primary">Location </Span> Dangkao, Phnom Penh, Cambodia</p>
       <p><Span className="text-primary">Bio      </Span> {profile.bio}</p>
       <p><Span className="text-primary">Languages</Span> {profile.languages.join(", ")}</p>
       <p><Span className="text-primary">Interests</Span> {profile.interests.join(", ")}</p>
@@ -144,7 +144,7 @@ const COMMANDS: Record<string, () => React.ReactNode> = {
         <a href="https://github.com/sovandara1607" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">github.com/sovandara1607</a>
       </p>
       <p><Span className="text-primary w-[100px] inline-block">LinkedIn </Span>
-        <a href="https://linkedin.com/in/sovandara1607" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">linkedin.com/in/sovandara1607</a>
+        <a href="https://www.linkedin.com/in/sovandararith-b55abb3a5" target="_blank" rel="noopener noreferrer" className="underline underline-offset-2 hover:text-primary transition-colors">linkedin.com/in/sovandararith-b55abb3a5</a>
       </p>
       <p><Span className="text-primary w-[100px] inline-block">Email    </Span>
         <a href={`mailto:${profile.contact.email}`} className="underline underline-offset-2 hover:text-primary transition-colors">{profile.contact.email}</a>

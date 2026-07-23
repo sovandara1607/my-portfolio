@@ -1,20 +1,20 @@
 export const profile = {
   name: "Sovandara Rith",
-  title: "Year 3 Computer Science Student",
+  title: "Apprentice Software Engineer",
   tagline: "Full-stack developer & 3rd year Software Engineering Student",
   contact: {
     phone: "+855 99 944 923",
     email: "rithsovandara83@gmail.com",
-    website: "https://www.loy.sovandara.lol",
+    website: "https://me.sovandara.lol",
     handle: "@sovandara1607",
   },
-  bio: "Year 3 Computer Science student passionate about web and mobile development with AI integrated software. I'm currently studying at Paragon International University.",
+  bio: "Year 3 Computer Science student and Apprentice Software Engineer at Paragon International University, passionate about web and mobile development with AI integrated software. Previously the Computer Science Student Council Representative.",
   education: [
     {
       degree: "Bachelor of Computer Science",
       school: "Paragon International University",
       period: "2023 – Present",
-      note: "Year 3",
+      note: "Year 3 · Expected Jul 2027",
     },
     {
       degree: "BacII, High School Diploma",
@@ -25,15 +25,27 @@ export const profile = {
   ],
   experience: [
     {
+      key: "paragon-lms-engineer",
+      role: "UI/UX, Frontend & Backend Engineer",
+      org: "Paragon International University",
+      subtitle: "MyLMS — English Preparatory Program",
+      period: "Apr 2026 – Present",
+      link: "https://mylms.paragoniu.app/auth/login",
+      bullets: [
+        "Design and build the UI/UX, frontend, and backend for MyLMS, the learning management system used by Paragon's English Preparatory Program.",
+        "Own feature development end-to-end across the Next.js frontend and Go/FastAPI backend.",
+      ],
+    },
+    {
       key: "student-council",
       role: "Media & Technical Lead",
       org: "Student Council AY 2024–2025",
       subtitle: "Computer Science Student Council Representative",
-      period: "2024 – 2025",
+      period: "Feb 2025 – Apr 2026",
       link: "https://www.facebook.com/ParagonU.SC",
       bullets: [
         "Managed technical tasks and digital platforms for the student council.",
-        "Built and hosted an online election system used for electing new student council members.",
+        "Built and hosted an e-election voting system for the AY 2024–2025 Student Council elections at paragonu-studentcouncil.com.",
         "Lead and supported media and technical activities for student council events.",
       ],
     },
@@ -42,15 +54,32 @@ export const profile = {
       role: "Secretary & Media Lead",
       org: "Paragon International University Table Tennis Club",
       subtitle: "Secretary & Media Lead",
-      period: "2024 – 2025",
+      period: "Jan 2024 – Mar 2025",
       link: "https://www.facebook.com/paragon.tabletennis",
       bullets: [
         "Managed media content creation and tournament registration for the table tennis club.",
         "Supported media and technical activities for table tennis club tournaments.",
       ],
     },
+  ],
 
-
+  volunteering: [
+    {
+      key: "uyfc-logistics",
+      role: "Assistant Logistics Manager",
+      org: "Union of Youth Federations of Cambodia (UYFC)",
+      cause: "Social Services",
+      period: "Nov 2025 – Dec 2025",
+      bullets: [] as string[],
+    },
+    {
+      key: "paragon-career-center",
+      role: "Media & Technical Lead",
+      org: "Paragon International University Career Center",
+      cause: "Education",
+      period: null as string | null,
+      bullets: [] as string[],
+    },
   ],
 
   academicProjects: [

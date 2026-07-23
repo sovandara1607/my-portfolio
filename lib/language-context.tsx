@@ -73,6 +73,7 @@ const translations: Record<string, string> = {
 
   // Experiences extras
   "experiences.work": "Work",
+  "experiences.volunteering": "Volunteering",
   "experiences.education": "Education",
   "experiences.languages": "Languages",
   "experiences.interests": "Interests",
@@ -127,7 +128,7 @@ const translations: Record<string, string> = {
   "contact.email": "Email",
   "contact.github": "GitHub",
   "contact.location": "Location",
-  "contact.locationValue": "Phnom Penh, Cambodia",
+  "contact.locationValue": "Dangkao, Phnom Penh, Cambodia",
   "contact.quote": '"Always open to internships, collaboration, and building meaningful products."',
   "contact.buyMeCoffee": "Support My Work",
   "contact.buyMeCoffeeDesc": "If you enjoy my work or find it helpful, consider buying me a coffee! Your support helps me continue learning and creating.",

@@ -66,7 +66,7 @@ export default function NowPage() {
           </Link>
           <div className="flex items-center gap-4 text-[11px] text-muted-foreground font-mono">
             <span className="flex items-center gap-1.5">
-              <MapPin className="w-3 h-3" /> Phnom Penh, Cambodia
+              <MapPin className="w-3 h-3" /> Dangkao, Phnom Penh, Cambodia
             </span>
             <span className="flex items-center gap-1.5">
               <Calendar className="w-3 h-3" /> Updated {nowData.updatedAt}

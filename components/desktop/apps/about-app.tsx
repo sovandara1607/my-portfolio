@@ -21,7 +21,7 @@ export function AboutApp() {
         <p className="text-sm text-primary font-[family-name:var(--font-space-grotesk)]">{profile.title}</p>
 
         <div className="flex flex-wrap gap-3 mt-3 text-xs text-muted-foreground">
-          <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> Phnom Penh, Cambodia</span>
+          <span className="flex items-center gap-1"><MapPin className="w-3.5 h-3.5" /> Dangkao, Phnom Penh, Cambodia</span>
           <span className="flex items-center gap-1"><GraduationCap className="w-3.5 h-3.5" /> {profile.education[0].school}</span>
           <span className="flex items-center gap-1"><Globe className="w-3.5 h-3.5" /> {profile.languages.join(" · ")}</span>
         </div>
