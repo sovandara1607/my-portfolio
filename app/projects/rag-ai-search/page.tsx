@@ -127,6 +127,11 @@ export default function RagAiSearchCaseStudy() {
         links={[
           { label: "Live demo", href: "https://rag-search.sovandara.lol/", external: true },
           { label: "Source on GitHub", href: project.github ?? "", external: true },
+          {
+            label: "Project files (Drive)",
+            href: "https://drive.google.com/drive/folders/1c2gRyGhZeCKQ7vTeZcR1Wm-nmLNHRmVN?usp=sharing",
+            external: true,
+          },
         ]}
       />
 
